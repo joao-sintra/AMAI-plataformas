@@ -24,13 +24,23 @@ class SiteController extends Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['login', 'error','logout'],
+                        'actions' => ['login', 'error','logout','gestaoencomendas','gestaoprodutos'],
                         'allow' => true,
                     ],
                     [
                         'actions' => ['logout', 'index','teste'],
                         'allow' => true,
                         'roles' => ['admin'],
+                    ],
+                    [
+                        'actions' => ['gestaoencomendas'],
+                        'allow' => true,
+                        'roles' => ['gestaoEncomendas'],
+                    ],
+                    [
+                        'actions' => ['gestaoprodutos'],
+                        'allow' => true,
+                        'roles' => ['gestaoProdutos'],
                     ],
                 ],
             ],
@@ -64,10 +74,12 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
-    public function actionTeste(){
-        return $this->render('teste');
+    public function actionGestaoencomendas(){
+        return $this->render('funcionario');
     }
-
+    public function actionGestaoprodutos(){
+        return $this->render('gestor');
+    }
     /**
      * Login action.
      *

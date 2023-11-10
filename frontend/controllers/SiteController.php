@@ -29,7 +29,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['logout', 'signup','fazerencomendas','gestaoencomendas','gestaoprodutos'],
+                'only' => ['logout', 'signup','fazerencomendas'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
@@ -46,16 +46,6 @@ class SiteController extends Controller
                         'actions' => ['fazerencomendas'],
                         'allow' => true,
                         'roles' => ['fazerEncomendas'],
-                    ],
-                    [
-                        'actions' => ['gestaoencomendas'],
-                        'allow' => true,
-                        'roles' => ['gestaoEncomendas'],
-                    ],
-                    [
-                        'actions' => ['gestaoprodutos'],
-                        'allow' => true,
-                        'roles' => ['gestaoProdutos'],
                     ],
                 ],
             ],
@@ -93,24 +83,14 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
-    public function actionGestaoencomendas(){
-        return $this->render('funcionario');
-    }
-    public function actionGestaoprodutos(){
-        return $this->render('gestor');
-    }
-    public function actionFazerencomendas(){
-        return $this->render('cliente');
-    }
-
     public function actionAdmin(){
         if (yii->app->user->isGuest){
             return $this->goHome();
         }
 
     }
-    public function actionTeste(){
-        return $this->render('teste');
+    public function actionFazerencomendas(){
+        return $this->render('cliente');
     }
 
     /**
