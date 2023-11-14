@@ -1,5 +1,5 @@
-<?php
 
+<?php
 /** @var \yii\web\View $this */
 /** @var string $content */
 
@@ -22,32 +22,37 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="d-flex flex-column h-100">
+<body>
+
+
+
 <?php $this->beginBody() ?>
 
 <header>
+    <div class="container-fluid fixed-top shadow">
+        <div class="container px-0">
+
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
+            'class' => 'navbar navbar-light bg-white navbar-expand-xl    ',
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-        ['label' => 'cliente', 'url' => ['/site/fazerencomendas']],
-        ['label' => 'funcionario', 'url' => ['/site/gestaoencomendas']],
-        ['label' => 'gestor', 'url' => ['/site/gestaoprodutos']],
+        ['label' => 'Home', 'url' => ['/site/index'], ],
+        ['label' => 'Loja', 'url' => ['/site/index'], ],
+        ['label' => 'Sobre', 'url' => ['/site/index']],
+        ['label' => 'Contactos', 'url' => ['/site/contact']],
+
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
     }
 
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
+        'options' => ['class' => 'navbar-nav mx-auto bg-white'],
         'items' => $menuItems,
     ]);
     if (Yii::$app->user->isGuest) {
@@ -62,10 +67,14 @@ AppAsset::register($this);
     }
     NavBar::end();
     ?>
+
+        </div>
+    </div>
 </header>
 
+
 <main role="main" class="flex-shrink-0">
-    <div class="container">
+    <div class="">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
@@ -85,3 +94,4 @@ AppAsset::register($this);
 </body>
 </html>
 <?php $this->endPage();
+
