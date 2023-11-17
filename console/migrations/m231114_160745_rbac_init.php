@@ -3,16 +3,15 @@
 use yii\db\Migration;
 
 /**
- * Class m231023_114745_init_rbac
+ * Class m231114_160745_rbac_init
  */
-class m231023_114745_init_rbac extends Migration
+class m231114_160745_rbac_init extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-
         $auth = Yii::$app->authManager;
 
         $permission_fazerEncomendas = $auth->createPermission('fazerEncomendas');
@@ -55,7 +54,6 @@ class m231023_114745_init_rbac extends Migration
         $auth->assign($role_funcionario, 3);
         $auth->assign($role_cliente, 4);
 
-
     }
 
     /**
@@ -76,7 +74,7 @@ class m231023_114745_init_rbac extends Migration
 
     public function down()
     {
-        echo "m231023_114745_init_rbac cannot be reverted.\n";
+        echo "m231114_160745_rbac_init cannot be reverted.\n";
 
         return false;
     }
