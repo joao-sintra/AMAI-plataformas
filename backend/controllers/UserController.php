@@ -2,7 +2,10 @@
 
 namespace backend\controllers;
 
+use Carbon\Carbon;
 use common\models\User;
+use common\models\UserForm;
+use common\models\UsersData;
 use common\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -67,19 +70,16 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
-        $model = new User();
+        $modelUserForm = new UserForm();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($modelUserForm->load($this->request->post()) && $modelUserForm->createUser() ) {
+                return $this->redirect(['view', 'id' => $modelUserForm->id]);
+
             }
-        } else {
-            $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return $this->render('create', ['model' => $modelUserForm]);
     }
 
     /**

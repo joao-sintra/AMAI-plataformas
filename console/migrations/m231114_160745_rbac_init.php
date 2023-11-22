@@ -30,6 +30,8 @@ class m231114_160745_rbac_init extends Migration
         $auth->add($permission_gestaoEncomendas);
 
 
+
+
         $role_funcionario = $auth->createRole('funcionario');
         $auth->add($role_funcionario);
         $auth->addChild($role_funcionario, $permission_gestaoEncomendas);
