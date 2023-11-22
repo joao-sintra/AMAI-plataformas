@@ -80,10 +80,8 @@ class UserForm extends Model
         $userdata->telefone = $this->telefone;
         $userdata->genero = $this->genero;
         $userdata->salario = $this->salario;
-
         $user->username = $this->username;
         $user->email = $this->email;
-        $user->role = $this->role;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();

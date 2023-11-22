@@ -35,6 +35,19 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+
+            [['primeironome', 'apelido', 'codigopostal', 'localidade', 'rua', 'nif', 'dtanasc', 'dtaregisto', 'telefone', 'genero', 'salario', 'user_id'], 'required'],
+            [['dtanasc', 'dtaregisto'], 'safe'],
+            [['genero'], 'string'],
+            [['salario'], 'number'],
+            [['user_id'], 'integer'],
+            [['primeironome', 'apelido'], 'string', 'max' => 50],
+            [['codigopostal'], 'string', 'max' => 8],
+            [['localidade', 'rua'], 'string', 'max' => 100],
+            [['nif'], 'string', 'max' => 10],
+            [['telefone'], 'string', 'max' => 12],
+            [['nif'], 'unique'],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
