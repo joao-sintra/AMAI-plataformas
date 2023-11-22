@@ -28,9 +28,8 @@ use Carbon\Carbon;
     <?php //echo $form->field($model, 'dtanasc')->label('Data de Nascimento')->textInput() ?>
     <?= $form->field($model, 'telefone')->label('Telefone')->textInput() ?>
     <?= $form->field($model, 'genero')->label('Género')->dropDownList([
-
-        "M" => 'M',
-        "F" => 'F'
+        "M" => 'Masculino',
+        "F" => 'Feminino',
     ],
         ['prompt' => 'Selecione o género']
     );
@@ -40,7 +39,7 @@ use Carbon\Carbon;
         "gestor" => 'Gestor',
         "funcionario" => 'Funcionário',
     ],
-        ['prompt' => 'Selecione o tipo de role do User']
+        ['prompt' => 'Selecione o tipo de role do user']
     );
     ?>
 

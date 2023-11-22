@@ -8,6 +8,7 @@ use common\models\User;
 use common\models\UsersData;
 use Carbon\Carbon;
 
+
 class UserForm extends Model
 {
     public $id;
@@ -69,6 +70,7 @@ class UserForm extends Model
         $userdata = new UsersData();
         $user = new User();
 
+
         $userdata->primeironome = $this->primeironome;
         $userdata->apelido = $this->apelido;
         $userdata->codigopostal = $this->codigopostal;
@@ -86,9 +88,11 @@ class UserForm extends Model
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
 
+
+
         $user->save();
 
-        $userdata->user_id = $user->id;
+        /*$userdata->user_id = $user->id;
         $this->id = $user->id;
 
         var_dump($this->role);
@@ -96,7 +100,7 @@ class UserForm extends Model
 
         $auth = \Yii::$app->authManager;
         $userRole = $auth->getRole($this->role);
-        $auth->assign($userRole, $user->getId());
+        $auth->assign($userRole, $user->getId());*/
 
         return $userdata->save() && $this->sendEmail($user);
     }
