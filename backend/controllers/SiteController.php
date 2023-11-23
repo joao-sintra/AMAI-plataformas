@@ -28,9 +28,17 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index','teste'],
+                        'allow' => false,
+                        'roles' => ['cliente'],
+                        'denyCallback' => function ($rule, $action) {
+
+                            throw new \yii\web\ForbiddenHttpException('O cliente não pode aceder a esta Página.');
+                        },
+                    ],
+                    [
+                        'actions' => ['logout', 'index','create'],
                         'allow' => true,
-                        'roles' => ['admin'],
+                        'roles' => ['admin','gestor','funcionario'],
                     ],
                     [
                         'actions' => ['gestaoencomendas'],
@@ -115,5 +123,8 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+    public function actionUsername(){
+
     }
 }

@@ -1,6 +1,6 @@
-
 <?php
 /** @var \yii\web\View $this */
+
 /** @var string $content */
 
 use common\widgets\Alert;
@@ -25,48 +25,48 @@ AppAsset::register($this);
 <body>
 
 
-
 <?php $this->beginBody() ?>
 
 <header>
     <div class="container-fluid fixed-top shadow">
         <div class="container px-0">
 
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar navbar-light bg-white navbar-expand-xl    ',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index'], ],
-        ['label' => 'Loja', 'url' => ['/site/shop'], ],
-        ['label' => 'Sobre', 'url' => ['/site/about']],
-        ['label' => 'Contactos', 'url' => ['/site/contact']],
+            <?php
+            NavBar::begin([
+                'brandLabel' => Yii::$app->name,
+                'brandUrl' => Yii::$app->homeUrl,
+                'options' => [
+                    'class' => 'navbar navbar-light bg-white navbar-expand-xl    ',
+                ],
+            ]);
+            $menuItems = [
+                ['label' => 'Home', 'url' => ['/site/index'],],
+                ['label' => 'Loja', 'url' => ['/site/shop'],],
+                ['label' => 'Sobre', 'url' => ['/site/about']],
+                ['label' => 'Contactos', 'url' => ['/site/contact']],
+                ['label' => 'Encomendas', 'url' => ['/site/fazerencomendas']],
 
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-    }
+            ];
+            if (Yii::$app->user->isGuest) {
+                $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
+            }
 
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav mx-auto bg-white'],
-        'items' => $menuItems,
-    ]);
-    if (Yii::$app->user->isGuest) {
-        echo Html::tag('div',Html::a('Login',['/site/login'],['class' => ['btn btn-link login text-decoration-none']]),['class' => ['d-flex']]);
-    } else {
-        echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout text-decoration-none']
-            )
-            . Html::endForm();
-    }
-    NavBar::end();
-    ?>
+            echo Nav::widget([
+                'options' => ['class' => 'navbar-nav mx-auto bg-white'],
+                'items' => $menuItems,
+            ]);
+            if (Yii::$app->user->isGuest) {
+                echo Html::tag('div', Html::a('Login', ['/site/login'], ['class' => ['btn btn-link login text-decoration-none']]), ['class' => ['d-flex']]);
+            } else {
+                echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
+                    . Html::submitButton(
+                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        ['class' => 'btn btn-link logout text-decoration-none']
+                    )
+                    . Html::endForm();
+            }
+            NavBar::end();
+            ?>
 
         </div>
     </div>

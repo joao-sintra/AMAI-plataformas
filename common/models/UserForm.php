@@ -65,7 +65,7 @@ class UserForm extends Model
 
             ['localidade', 'trim'],
             ['localidade', 'required'],
-            ['localidade', 'rua', 'string', 'max' => 100],
+            [['localidade', 'rua'], 'string', 'max' => 100],
 
             ['rua', 'trim'],
             ['rua', 'required'],

@@ -5,6 +5,11 @@
              style="opacity: .8">
         <span class="brand-text font-weight-light">AMAI</span>
     </a>
+    <a href="index3.html" class="brand-link">
+        <img src="<?= $assetDir ?>/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+             style="opacity: .8">
+        <span class="brand-text font-weight-light"><?= ?></span>
+    </a>
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar Menu -->
@@ -16,7 +21,7 @@
                     ['label' => 'Dashboard', 'icon' => 'tachometer-alt', 'url' => ['/site/index']],
                     ['label' => 'Gestão de Dados', 'header' => true],
                     [
-                        'label' => 'Gestão de Dados','icon' => 'fas fa-file',
+                        'label' => 'Gestão de Dados', 'icon' => 'fas fa-file',
                         'items' => [
                             ['label' => 'Gerir Trabalhadores', 'icon' => 'users', 'url' => ['/user/index']],
                             ['label' => 'Gerir Clientes', 'icon' => 'user', 'url' => ['/clientes']],
