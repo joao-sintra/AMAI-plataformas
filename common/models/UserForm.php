@@ -130,16 +130,9 @@ class UserForm extends Model
 
         $user->save();
 
-
-        /*$userdata->user_id = $user->id;
+        $userdata->user_id = $user->id;
         $this->id = $user->id;
 
-        var_dump($this->role);
-        die();
-
-        $auth = \Yii::$app->authManager;
-        $userRole = $auth->getRole($this->role);
-        $auth->assign($userRole, $user->getId());*/
 
         return $userdata->save() && $this->sendEmail($user);
     }
@@ -161,5 +154,9 @@ class UserForm extends Model
             ->setTo($this->email)
             ->setSubject('Account registration at ' . Yii::$app->name)
             ->send();
+    }
+    public function getId()
+    {
+        return $this->getPrimaryKey();
     }
 }

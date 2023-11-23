@@ -5,7 +5,6 @@ namespace backend\controllers;
 use Carbon\Carbon;
 use common\models\User;
 use common\models\UserForm;
-use common\models\UsersData;
 use common\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -73,12 +72,16 @@ class UserController extends Controller
         $modelUserForm = new UserForm();
 
         if ($this->request->isPost) {
-            if ($modelUserForm->load($this->request->post()) && $modelUserForm->createUser() ) {
+            if ($modelUserForm->load($this->request->post()) && $modelUserForm->createUser()) {
+
+                $auth = \Yii::$app->authManager;
+                $userRole = $auth->getRole($this->role);
+                $auth->assign($userRole, $this->getId());
+
                 return $this->redirect(['view', 'id' => $modelUserForm->id]);
 
             }
         }
-
         return $this->render('create', ['model' => $modelUserForm]);
     }
 
