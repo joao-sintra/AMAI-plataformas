@@ -15,7 +15,13 @@ class UserForm extends Model
     public $username;
     public $email;
     public $password;
-    public $primeironome, $apelido, $codigopostal, $localidade, $rua, $nif, $dtaregisto, $telefone;
+    public $primeironome;
+    public $apelido;
+    public $codigopostal;
+    public $localidade;
+    public $rua;
+    public $nif;
+    public $telefone;
     public $user_id;
     public $dtanasc;
     public $genero;
@@ -45,16 +51,51 @@ class UserForm extends Model
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
             //rules user data
-            [['primeironome', 'apelido', 'codigopostal', 'localidade', 'rua', 'nif', 'dtanasc', 'dtaregisto', 'telefone', 'genero', 'user_id'], 'required'],
-            [['dtanasc', 'dtaregisto'], 'safe'],
-            [['genero'], 'string'],
-            [['salario'], 'number'],
-            [['user_id'], 'integer'],
-            [['primeironome', 'apelido'], 'string', 'max' => 50],
-            [['codigopostal'], 'string', 'max' => 8],
-            [['localidade', 'rua'], 'string', 'max' => 100],
-            [['nif'], 'string', 'max' => 10],
-            [['telefone'], 'string', 'max' => 12],
+            ['primeironome', 'trim'],
+            ['primeironome', 'required'],
+            ['primeironome', 'string', 'max' => 50],
+
+            ['apelido', 'trim'],
+            ['apelido', 'required'],
+            ['apelido', 'string', 'max' => 50],
+
+            ['codigopostal', 'trim'],
+            ['codigopostal', 'required'],
+            ['codigopostal', 'string', 'max' => 8],
+
+            ['localidade', 'trim'],
+            ['localidade', 'required'],
+            ['localidade', 'rua', 'string', 'max' => 100],
+
+            ['rua', 'trim'],
+            ['rua', 'required'],
+
+            ['nif', 'trim'],
+            ['nif', 'required'],
+            ['nif', 'string', 'max' => 9],
+
+            ['telefone', 'trim'],
+            ['telefone', 'required'],
+            ['telefone', 'string', 'max' => 9],
+
+            ['dtanasc', 'trim'],
+            ['dtanasc', 'required'],
+            ['dtanasc', 'safe'],
+
+            ['genero', 'trim'],
+            ['genero', 'required'],
+            ['genero', 'string'],
+
+            ['salario', 'trim'],
+            ['salario', 'required'],
+            ['salario', 'number'],
+
+            ['role', 'required'],
+            ['role', 'string', 'max' => 255],
+
+            ['dtaregisto', 'safe'],
+
+            ['user_id', 'integer'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -69,7 +110,6 @@ class UserForm extends Model
 
         $userdata = new UsersData();
         $user = new User();
-
 
         $userdata->primeironome = $this->primeironome;
         $userdata->apelido = $this->apelido;
@@ -88,9 +128,8 @@ class UserForm extends Model
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
 
-
-
         $user->save();
+
 
         /*$userdata->user_id = $user->id;
         $this->id = $user->id;
