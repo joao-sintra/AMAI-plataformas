@@ -73,13 +73,7 @@ class UserController extends Controller
 
         if ($this->request->isPost) {
             if ($modelUserForm->load($this->request->post()) && $modelUserForm->createUser()) {
-
-                $auth = \Yii::$app->authManager;
-                $userRole = $auth->getRole($this->role);
-                $auth->assign($userRole, $this->getId());
-
                 return $this->redirect(['view', 'id' => $modelUserForm->id]);
-
             }
         }
         return $this->render('create', ['model' => $modelUserForm]);

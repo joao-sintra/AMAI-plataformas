@@ -4,6 +4,8 @@ namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
+use Carbon\Carbon;
+use common\models\UsersData;
 use common\models\User;
 
 /**
@@ -11,10 +13,21 @@ use common\models\User;
  */
 class SignupForm extends Model
 {
+    public $id;
     public $username;
     public $email;
     public $password;
-
+    public $primeironome;
+    public $apelido;
+    public $codigopostal;
+    public $localidade;
+    public $rua;
+    public $nif;
+    public $telefone;
+    public $user_id;
+    public $dtanasc;
+    public $genero;
+    public $role;
 
     /**
      * {@inheritdoc}
@@ -36,18 +49,45 @@ class SignupForm extends Model
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
-            /*[['primeironome', 'apelido', 'codigopostal', 'localidade', 'rua', 'nif', 'dtanasc', 'dtaregisto', 'telefone', 'genero', 'salario', 'user_id'], 'required'],
-            [['dtanasc', 'dtaregisto'], 'safe'],
-            [['genero'], 'string'],
-            [['salario'], 'number'],
-            [['user_id'], 'integer'],
-            [['primeironome', 'apelido'], 'string', 'max' => 50],
-            [['codigopostal'], 'string', 'max' => 8],
+            //rules user data
+            ['primeironome', 'trim'],
+            ['primeironome', 'required'],
+            ['primeironome', 'string', 'max' => 50],
+
+            ['apelido', 'trim'],
+            ['apelido', 'required'],
+            ['apelido', 'string', 'max' => 50],
+
+            /*['codigopostal', 'trim'],
+            ['codigopostal', 'required'],
+            ['codigopostal', 'string', 'max' => 8],
+
+            ['localidade', 'trim'],
+            ['localidade', 'required'],
             [['localidade', 'rua'], 'string', 'max' => 100],
-            [['nif'], 'string', 'max' => 10],
-            [['telefone'], 'string', 'max' => 12],
-            [['nif'], 'unique'],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],*/
+
+            ['rua', 'trim'],
+            ['rua', 'required'],
+
+            ['nif', 'trim'],
+            ['nif', 'required'],
+            ['nif', 'string', 'max' => 9],
+
+            ['telefone', 'trim'],
+            ['telefone', 'required'],
+            ['telefone', 'string', 'max' => 9],*/
+
+            ['genero', 'trim'],
+            ['genero', 'required'],
+            ['genero', 'string'],
+
+            ['role', 'required'],
+            ['role', 'string', 'max' => 255],
+
+            ['dtaregisto', 'safe'],
+
+            ['user_id', 'integer'],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -61,15 +101,40 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
+
         $user = new User();
+        $userdata = new UsersData();
+
+        $userdata->primeironome = $this->primeironome;
+        $userdata->apelido = $this->apelido;
+        /* $userdata->codigopostal = $this->codigopostal;
+         $userdata->localidade = $this->localidade;
+         $userdata->rua = $this->rua;
+         $userdata->nif = $this->nif;*/
+        $userdata->dtanasc = Carbon::now(); //$this->dtanasc;
+        $userdata->dtaregisto = Carbon::now();//$this->dtaregisto;
+        /*$userdata->telefone = $this->telefone;*/
+        $userdata->genero = $this->genero;
+
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
 
-        return $user->save() && $this->sendEmail($user);
+        $user->save();
+
+        $this->id = $user->id;
+        $auth = \Yii::$app->authManager;
+        $userRole = $auth->getRole($this->role);
+        $auth->assign($userRole, $user->getId());
+
+        $userdata->user_id = $user->id;
+        $this->id = $user->id;
+
+        $userdata->save();
+
+        return $this->sendEmail($user);
     }
 
     /**

@@ -17,23 +17,23 @@ use Carbon\Carbon;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'username')->label('Username')->textInput() ?>
-    <?= $form->field($model, 'primeironome')->label('Nome')->textInput() ?>
-    <?= $form->field($model, 'apelido')->label('Apelido')->textInput() ?>
-    <?= $form->field($model, 'password')->label('Password')->textInput() ?>
     <?= $form->field($model, 'email')->label('Email')->textInput() ?>
-    <?= $form->field($model, 'codigopostal')->label('Código Postal')->textInput() ?>
-    <?= $form->field($model, 'localidade')->label('Localidade')->textInput() ?>
-    <?= $form->field($model, 'rua')->label('Rua')->textInput() ?>
-    <?= $form->field($model, 'nif')->label('NIF')->textInput() ?>
-    <?php //echo $form->field($model, 'dtanasc')->label('Data de Nascimento')->textInput() ?>
-    <?= $form->field($model, 'telefone')->label('Telefone')->textInput() ?>
-    <?= $form->field($model, 'genero')->label('Género')->dropDownList([
+    <?= $form->field($model, 'password')->label('Password')->textInput(['type' => 'password']) ?>
+    <?php /*= $form->field($model, 'primeironome')->label('Nome')->textInput() */?>
+    <?php /*= $form->field($model, 'apelido')->label('Apelido')->textInput() */?><!--
+    <?php /*= $form->field($model, 'codigopostal')->label('Código Postal')->textInput() */?>
+    <?php /*= $form->field($model, 'localidade')->label('Localidade')->textInput() */?>
+    <?php /*= $form->field($model, 'rua')->label('Rua')->textInput() */?>
+    <?php /*= $form->field($model, 'nif')->label('NIF')->textInput() */?>
+    <?php /*//echo $form->field($model, 'dtanasc')->label('Data de Nascimento')->textInput() */?>
+    <?php /*= $form->field($model, 'telefone')->label('Telefone')->textInput() */?>
+    --><?php /*= $form->field($model, 'genero')->label('Género')->dropDownList([
         "M" => 'Masculino',
         "F" => 'Feminino',
     ],
         ['prompt' => 'Selecione o género']
     );
-    ?>
+    */?>
     <?= $form->field($model, 'role')->label('Role')->dropDownList([
         "admin" => 'Administrador',
         "gestor" => 'Gestor',
@@ -42,11 +42,6 @@ use Carbon\Carbon;
         ['prompt' => 'Selecione o tipo de role do user']
     );
     ?>
-
-    <?= $form->field($model, 'salario')->label('Salário')->textInput([
-        'type' => 'number'
-    ]) ?>
-
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

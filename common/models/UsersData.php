@@ -18,7 +18,6 @@ use Yii;
  * @property string $dtaregisto
  * @property string $telefone
  * @property string $genero
- * @property float $salario
  * @property int $user_id
  *
  * @property User $user
@@ -42,7 +41,6 @@ class UsersData extends \yii\db\ActiveRecord
             [['primeironome', 'apelido', 'codigopostal', 'localidade', 'rua', 'nif', 'dtanasc', 'dtaregisto', 'telefone', 'genero', 'user_id'], 'required'],
             [['dtanasc', 'dtaregisto'], 'safe'],
             [['genero'], 'string'],
-            [['salario'], 'number'],
             [['user_id'], 'integer'],
             [['primeironome', 'apelido'], 'string', 'max' => 50],
             [['codigopostal'], 'string', 'max' => 8],
@@ -72,7 +70,6 @@ class UsersData extends \yii\db\ActiveRecord
             'dtaregisto' => 'Dtaregisto',
             'telefone' => 'Telefone',
             'genero' => 'Genero',
-            'salario' => 'Salario',
             'user_id' => 'User ID',
         ];
     }

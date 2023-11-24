@@ -15,17 +15,6 @@ class UserForm extends Model
     public $username;
     public $email;
     public $password;
-    public $primeironome;
-    public $apelido;
-    public $codigopostal;
-    public $localidade;
-    public $rua;
-    public $nif;
-    public $telefone;
-    public $user_id;
-    public $dtanasc;
-    public $genero;
-    public $salario;
     public $role;
 
 
@@ -50,7 +39,7 @@ class UserForm extends Model
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
-            //rules user data
+           /* //rules user data
             ['primeironome', 'trim'],
             ['primeironome', 'required'],
             ['primeironome', 'string', 'max' => 50],
@@ -96,7 +85,7 @@ class UserForm extends Model
             ['dtaregisto', 'safe'],
 
             ['user_id', 'integer'],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],*/
         ];
     }
 
@@ -108,10 +97,10 @@ class UserForm extends Model
     public function createUser()
     {
 
-        $userdata = new UsersData();
+        //$userdata = new UsersData();
         $user = new User();
 
-        $userdata->primeironome = $this->primeironome;
+       /* $userdata->primeironome = $this->primeironome;
         $userdata->apelido = $this->apelido;
         $userdata->codigopostal = $this->codigopostal;
         $userdata->localidade = $this->localidade;
@@ -121,7 +110,8 @@ class UserForm extends Model
         $userdata->dtaregisto = Carbon::now();//$this->dtaregisto;
         $userdata->telefone = $this->telefone;
         $userdata->genero = $this->genero;
-        $userdata->salario = $this->salario;
+        $userdata->salario = $this->salario;*/
+
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
@@ -130,11 +120,17 @@ class UserForm extends Model
 
         $user->save();
 
-        $userdata->user_id = $user->id;
         $this->id = $user->id;
+        $auth = \Yii::$app->authManager;
+        $userRole = $auth->getRole($this->role);
+        $auth->assign($userRole, $user->getId());
 
+        //$userdata->user_id = $user->id;
+        //$this->id = $user->id;
 
-        return $userdata->save() && $this->sendEmail($user);
+        //$userdata->save()
+
+        return $this->sendEmail($user);
     }
 
     /**
@@ -154,9 +150,5 @@ class UserForm extends Model
             ->setTo($this->email)
             ->setSubject('Account registration at ' . Yii::$app->name)
             ->send();
-    }
-    public function getId()
-    {
-        return $this->getPrimaryKey();
     }
 }

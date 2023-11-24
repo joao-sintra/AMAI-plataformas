@@ -24,9 +24,36 @@ $this->params['breadcrumbs'][] = $this->title;
 
                             <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
+                            <?= $form->field($model, 'primeironome')->label('Nome')->textInput() ?>
+
+                            <?= $form->field($model, 'apelido')->label('Apelido')->textInput() ?>
+
                             <?= $form->field($model, 'email') ?>
 
                             <?= $form->field($model, 'password')->passwordInput() ?>
+
+                            <?= $form->field($model, 'genero')->label('Género')->dropDownList([
+                                    "M" => 'Masculino',
+                                    "F" => 'Feminino',
+                                ],
+                                     ['prompt' => 'Selecione o género']
+                                );
+                            ?>
+                            <?= $form->field($model, 'role')->label('Role')->dropDownList([
+                                "cliente" => 'Cliente',
+                            ],
+                                [
+                                    'prompt' => 'Selecione o tipo de role do user'
+                            ]
+                            );
+                            ?>
+
+                            <?php /*= $form->field($model, 'codigopostal')->label('Código Postal')->textInput() */?>
+                            <?php /*= $form->field($model, 'localidade')->label('Localidade')->textInput() */?>
+                            <?php /*= $form->field($model, 'rua')->label('Rua')->textInput() */?>
+                            <?php /*= $form->field($model, 'nif')->label('NIF')->textInput() */?>
+                            <?php /*//echo $form->field($model, 'dtanasc')->label('Data de Nascimento')->textInput() */?>
+                            <?php /*= $form->field($model, 'telefone')->label('Telefone')->textInput() */?>
 
                             <div class="form-group">
                                 <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
