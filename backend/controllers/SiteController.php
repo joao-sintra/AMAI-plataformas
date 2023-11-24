@@ -30,10 +30,7 @@ class SiteController extends Controller
                     [
                         'allow' => false,
                         'roles' => ['cliente'],
-                        'denyCallback' => function ($rule, $action) {
 
-                            throw new \yii\web\ForbiddenHttpException('O cliente não pode aceder a esta Página.');
-                        },
                     ],
                     [
                         'actions' => ['logout', 'index','create'],
