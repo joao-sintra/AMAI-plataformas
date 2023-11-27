@@ -22,31 +22,29 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
+                'only' => ['login', 'error','logout','index'],
                 'rules' => [
                     [
-                        'actions' => ['login', 'error','logout','gestaoencomendas','gestaoprodutos'],
                         'allow' => true,
+                        'actions' => ['login', 'error','logout'],
                     ],
                     [
-                        'allow' => false,
-                        'roles' => ['cliente'],
+                        'allow' => true,
+                        'actions' => ['login'],
+                        'roles' => ['?'],
+                    ],
 
+                    [
+                        'allow' => true,
+                        'actions' => ['logout','error'],
+                        'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['logout', 'index','create'],
                         'allow' => true,
-                        'roles' => ['admin','gestor','funcionario'],
+                        'actions' => ['index'],
+                        'roles' => ['backendAccess'],
                     ],
-                    [
-                        'actions' => ['gestaoencomendas'],
-                        'allow' => true,
-                        'roles' => ['gestaoEncomendas'],
-                    ],
-                    [
-                        'actions' => ['gestaoprodutos'],
-                        'allow' => true,
-                        'roles' => ['gestaoProdutos'],
-                    ],
+
                 ],
             ],
             'verbs' => [
@@ -79,12 +77,7 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
-    public function actionGestaoencomendas(){
-        return $this->render('funcionario');
-    }
-    public function actionGestaoprodutos(){
-        return $this->render('gestor');
-    }
+
     /**
      * Login action.
      *
@@ -121,7 +114,5 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
-    public function actionUsername(){
 
-    }
 }

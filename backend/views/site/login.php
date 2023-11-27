@@ -1,39 +1,47 @@
 <?php
+
 use yii\helpers\Html;
+
 ?>
-<div class="card">
-    <div class="card-body login-card-body">
-        <p class="login-box-msg">Sign in to start your session</p>
 
-        <?php $form = \yii\bootstrap4\ActiveForm::begin(['id' => 'login-form']) ?>
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+            <div class="card px-5 py-5" id="form1">
+                <div class="card-body login-card-body site-login">
 
-        <?= $form->field($model,'username', [
-            'options' => ['class' => 'form-group has-feedback'],
-            'inputTemplate' => '{input}<div class="input-group-append"><div class="input-group-text"><span class="fas fa-envelope"></span></div></div>',
-            'template' => '{beginWrapper}{input}{error}{endWrapper}',
+                    <h3 class="login-box-msg text-center p-4"><b>Login Backend</b></h3>
 
-        ])
-            ->label(false)
-            ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
+                    <?php $form = \yii\bootstrap4\ActiveForm::begin(['id' => 'login-form']) ?>
 
-        <?= $form->field($model, 'password', [
-            'options' => ['class' => 'form-group has-feedback'],
-            'inputTemplate' => '{input}<div class="input-group-append"><div class="input-group-text"><span class="fas fa-lock"></span></div></div>',
-            'template' => '{beginWrapper}{input}{error}{endWrapper}',
+                    <?= $form->field($model, 'username', [
+                        'options' => ['class' => 'form-group has-feedback'],
+                        'inputTemplate' => '{input}<div class="input-group-append"><div class="py-2"><span class="fas fa-envelope"></span></div></div>',
+                        'template' => '{beginWrapper}{input}{error}{endWrapper}',
 
-        ])
-            ->label(false)
-            ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
+                    ])
+                        ->label(false)
+                        ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
 
-        <div class="row">
-            <div class="col-8">
-            </div>
-            <div class="col-4">
-                <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block']) ?>
+                    <?= $form->field($model, 'password', [
+                        'options' => ['class' => 'form-group has-feedback'],
+                        'inputTemplate' => '{input}<div class="input-group-append"><div class="py-2"><span class="fas fa-lock"></span></div></div>',
+                        'template' => '{beginWrapper}{input}{error}{endWrapper}',
+
+                    ])
+                        ->label(false)
+                        ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
+
+                    <div class="row py-5">
+
+                        <div class="col-12">
+                            <?= Html::submitButton('Login', ['class' => 'btn btn-primary w-100']) ?>
+                        </div>
+                    </div>
+
+                    <?php \yii\bootstrap4\ActiveForm::end(); ?>
+                </div>
             </div>
         </div>
-
-        <?php \yii\bootstrap4\ActiveForm::end(); ?>
     </div>
-    <!-- /.login-card-body -->
 </div>

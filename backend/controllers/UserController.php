@@ -6,9 +6,11 @@ use Carbon\Carbon;
 use common\models\User;
 use common\models\UserForm;
 use common\models\UserSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -29,6 +31,38 @@ class UserController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
+                'access' => [
+                    'class' => AccessControl::class,
+
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index'],
+                            'roles' => ['verUsers'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['verUsers'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['criarUsers'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update'],
+                            'roles' => ['editarUsers'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['apagarUsers'],
+                        ],
+
+                    ],
+                ],
             ]
         );
     }
@@ -40,12 +74,17 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
+
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+
+
+
         ]);
     }
 
@@ -129,4 +168,5 @@ class UserController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

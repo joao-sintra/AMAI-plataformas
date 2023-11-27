@@ -5,6 +5,8 @@ namespace common\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\User;
+use yii\db\Query;
+
 
 /**
  * UserSearch represents the model behind the search form of `common\models\User`.
@@ -73,4 +75,6 @@ class UserSearch extends User
 
         return $dataProvider;
     }
+    //search by role
+
 }

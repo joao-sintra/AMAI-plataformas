@@ -56,6 +56,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+
         ];
     }
 
@@ -185,13 +186,16 @@ class User extends ActiveRecord implements IdentityInterface
 
     }
 
-    public function getRole(){
+   /* public function getRole(){
         $auth = \Yii::$app->authManager;
         $roles = $auth->getRolesByUser($this->id);
         foreach ($roles as $role){
             return $role->name;
         }
-    }
+    }*/
+
+
+
 
     /**
      * Generates "remember me" authentication key

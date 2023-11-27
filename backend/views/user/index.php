@@ -6,9 +6,12 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
+
 /** @var yii\web\View $this */
 /** @var common\models\UserSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
+
+
 
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
@@ -23,14 +26,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
+    <?=
+
+     GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'username',
+            'role',
            /* 'auth_key',
             'password_hash',
             'password_reset_token',*/
@@ -46,7 +53,10 @@ $this->params['breadcrumbs'][] = $this->title;
                  }
             ],
         ],
-    ]); ?>
+
+    ]);
+
+      ?>
 
 
 </div>

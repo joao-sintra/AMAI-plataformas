@@ -39,6 +39,8 @@ class UserForm extends Model
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
+            ['role', 'required'],
+            ['role', 'string', 'max' => 255],
            /* //rules user data
             ['primeironome', 'trim'],
             ['primeironome', 'required'],
@@ -97,42 +99,48 @@ class UserForm extends Model
     public function createUser()
     {
 
-        //$userdata = new UsersData();
-        $user = new User();
+        if ($this->validate()) {
+            //$userdata = new UsersData();
+            $user = new User();
 
-       /* $userdata->primeironome = $this->primeironome;
-        $userdata->apelido = $this->apelido;
-        $userdata->codigopostal = $this->codigopostal;
-        $userdata->localidade = $this->localidade;
-        $userdata->rua = $this->rua;
-        $userdata->nif = $this->nif;
-        $userdata->dtanasc = Carbon::now(); //$this->dtanasc;
-        $userdata->dtaregisto = Carbon::now();//$this->dtaregisto;
-        $userdata->telefone = $this->telefone;
-        $userdata->genero = $this->genero;
-        $userdata->salario = $this->salario;*/
 
-        $user->username = $this->username;
-        $user->email = $this->email;
-        $user->setPassword($this->password);
-        $user->generateAuthKey();
-        $user->generateEmailVerificationToken();
+            /* $userdata->primeironome = $this->primeironome;
+             $userdata->apelido = $this->apelido;
+             $userdata->codigopostal = $this->codigopostal;
+             $userdata->localidade = $this->localidade;
+             $userdata->rua = $this->rua;
+             $userdata->nif = $this->nif;
+             $userdata->dtanasc = Carbon::now(); //$this->dtanasc;
+             $userdata->dtaregisto = Carbon::now();//$this->dtaregisto;
+             $userdata->telefone = $this->telefone;
+             $userdata->genero = $this->genero;
+             $userdata->salario = $this->salario;*/
 
-        $user->save();
+            $user->username = $this->username;
+            $user->email = $this->email;
+            $user->setPassword($this->password);
+            $user->generateAuthKey();
+            $user->generateEmailVerificationToken();
 
-        $this->id = $user->id;
-        $auth = \Yii::$app->authManager;
-        $userRole = $auth->getRole($this->role);
-        $auth->assign($userRole, $user->getId());
 
-        //$userdata->user_id = $user->id;
-        //$this->id = $user->id;
 
-        //$userdata->save()
+            $user->save();
 
-        return $this->sendEmail($user);
+            $this->id = $user->getId();
+
+            $auth = \Yii::$app->authManager;
+            $userRole = $auth->getRole($this->role);
+            $auth->assign($userRole, $this->id);
+
+            //$userdata->user_id = $user->id;
+            //$this->id = $user->id;
+
+            //$userdata->save()
+
+            return $this->sendEmail($user);
+        }
+        return null;
     }
-
     /**
      * Sends confirmation email to user
      * @param User $user user model to with email should be send
