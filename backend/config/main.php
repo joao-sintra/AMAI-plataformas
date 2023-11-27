@@ -37,14 +37,19 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
+
+      /* 'urlManager' => [
+            'enablePrettyUrl' => false,
             'showScriptName' => false,
             'rules' => [
             ],
+        ],*/
+        'urlManagerFrontend' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => 'http://localhost/amai/frontend/web/',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
         ],
-        */
     ],
     'params' => $params,
 ];

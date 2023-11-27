@@ -31,6 +31,8 @@ AppAsset::register($this);
     <div class="container-fluid fixed-top shadow">
         <div class="container px-0">
 
+
+
             <?php
             NavBar::begin([
                 'brandLabel' => Yii::$app->name,

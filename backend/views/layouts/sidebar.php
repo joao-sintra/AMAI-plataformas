@@ -20,11 +20,18 @@
                         'label' => 'Gestão de Dados', 'icon' => 'fas fa-file',
                         'items' => [
                             ['label' => 'Gerir Trabalhadores', 'icon' => 'users', 'url' => ['/user/index']],
-                            ['label' => 'Gerir Clientes', 'icon' => 'user', 'url' => ['/clientes']],
+                            ['label' => 'Gerir Clientes', 'icon' => 'user', 'url' => ['user-data/index']],
+                            ['label' => 'IVAS', 'icon' => 'user', 'url' => ['iva/index']],
+                            ['label' => 'Empresa', 'icon' => 'fa-solid fa-building', 'url' => ['empresas/index']],
+                            ['label' => 'Avaliações', 'icon' => 'fa-solid fa-star', 'url' => ['avaliacoes/index']],
+
+
                         ],
                     ],
                     ['label' => 'Produtos', 'header' => true],
-                    ['label' => 'Vendas de Produtos', 'icon' => 'shopping-cart', 'url' => ['/site/vendas']],
+                   /* ['label' => 'Vendas de Produtos', 'icon' => 'shopping-cart', 'url' => ['/site/vendas']],*/
+                    ['label' => 'Criação dos Produtos', 'icon' => 'fa-solid fa-box', 'url' => ['/produtos/index']],
+                    ['label' => 'Categorias dos Produtos', 'icon' => 'fa-solid fa-tag', 'url' => ['/categorias-produtos/index']],
                     ['label' => 'Debug Tools', 'header' => true],
                     ['label' => 'Gii', 'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
                     ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
