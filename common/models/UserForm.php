@@ -41,6 +41,7 @@ class UserForm extends Model
 
             ['role', 'required'],
             ['role', 'string', 'max' => 255],
+
            /* //rules user data
             ['primeironome', 'trim'],
             ['primeironome', 'required'],
