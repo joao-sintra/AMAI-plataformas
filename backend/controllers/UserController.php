@@ -82,9 +82,6 @@ class UserController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-
-
-
         ]);
     }
 
@@ -127,7 +124,19 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $user = User::find($id)->one();
+
+        if ($this->request->isPost) {
+                $user->username = $this->request->post('username');
+                $user->email = $this->request->post('email');
+
+                if($user->save()){
+                    return $this->redirect(['view', 'id' => $user->id]);
+                }
+        }
+        return $this->render('update', ['model' => $user]);
+
+        /*$model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -136,7 +145,7 @@ class UserController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-        ]);
+        ]);*/
     }
 
     /**

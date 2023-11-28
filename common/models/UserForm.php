@@ -99,7 +99,6 @@ class UserForm extends Model
      */
     public function createUser()
     {
-
         if ($this->validate()) {
             //$userdata = new UsersData();
             $user = new User();
@@ -122,8 +121,6 @@ class UserForm extends Model
             $user->setPassword($this->password);
             $user->generateAuthKey();
             $user->generateEmailVerificationToken();
-
-
 
             $user->save();
 
@@ -159,5 +156,32 @@ class UserForm extends Model
             ->setTo($this->email)
             ->setSubject('Account registration at ' . Yii::$app->name)
             ->send();
+    }
+
+    public function updateUser()
+    {
+
+        if ($this->validate()) {
+            $user = Yii::$app->user->identify();
+
+
+            $user->username = $this->username;
+            $user->email = $this->email;
+            /*$user->setPassword($this->password);
+            $user->generateAuthKey();*/
+            $user->generateEmailVerificationToken();
+
+            $user->save();
+
+            $this->id = $user->getId();
+
+            $auth = \Yii::$app->authManager;
+            $userRole = $auth->getRole($this->role);
+            $auth->assign($userRole, $this->id);
+            return $this->sendEmail($user);
+        }
+        var_dump($this->errors);
+        die();
+        return null;
     }
 }

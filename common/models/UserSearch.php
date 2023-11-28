@@ -43,7 +43,7 @@ class UserSearch extends User
     public function search($params, $roles)
     {
         $query = User::find()
-            ->select(['user.id', 'user.username', 'auth_assignment.item_name as role'])
+            ->select(['user.id', 'user.username','user.email', 'auth_assignment.item_name as role'])
             ->leftJoin('auth_assignment', 'user.id = auth_assignment.user_id')
             ->andWhere(['auth_assignment.item_name' => $roles]);
 
