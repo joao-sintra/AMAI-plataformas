@@ -1,3 +1,14 @@
+<?php
+
+/* @var $this \yii\web\View */
+/* @var $content string */
+/* @var $assetDir string */
+
+use backend\assets\AppAsset;
+use yii\bootstrap5\Html;
+
+AppAsset::register($this);
+?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index" class="brand-link">
@@ -5,6 +16,21 @@
              style="opacity: .8">
         <span class="brand-text font-weight-light">AMAI</span>
     </a>
+
+    <!--icon de terminar a sessão -> fas fa-sign-out-alt-->
+    <a class="brand-link">
+        <?php
+            if (!Yii::$app->user->isGuest) {
+                echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
+                    . Html::submitButton(
+                        '<i class="fas fa-sign-out-alt" style="opacity: .8"></i> Logout (' . Yii::$app->user->identity->username . ')',
+                        ['class' => 'btn btn-link logout font-weight-light']
+                    )
+                    . Html::endForm();
+            }
+            ?>
+    </a>
+
 
     <!-- Sidebar -->
     <div class="sidebar">
