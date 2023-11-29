@@ -7,6 +7,7 @@ use yii\base\Model;
 use common\models\User;
 use common\models\UsersData;
 use Carbon\Carbon;
+use yii\web\NotFoundHttpException;
 
 
 class UserForm extends Model
@@ -42,53 +43,53 @@ class UserForm extends Model
             ['role', 'required'],
             ['role', 'string', 'max' => 255],
 
-           /* //rules user data
-            ['primeironome', 'trim'],
-            ['primeironome', 'required'],
-            ['primeironome', 'string', 'max' => 50],
+            /* //rules user data
+             ['primeironome', 'trim'],
+             ['primeironome', 'required'],
+             ['primeironome', 'string', 'max' => 50],
 
-            ['apelido', 'trim'],
-            ['apelido', 'required'],
-            ['apelido', 'string', 'max' => 50],
+             ['apelido', 'trim'],
+             ['apelido', 'required'],
+             ['apelido', 'string', 'max' => 50],
 
-            ['codigopostal', 'trim'],
-            ['codigopostal', 'required'],
-            ['codigopostal', 'string', 'max' => 8],
+             ['codigopostal', 'trim'],
+             ['codigopostal', 'required'],
+             ['codigopostal', 'string', 'max' => 8],
 
-            ['localidade', 'trim'],
-            ['localidade', 'required'],
-            [['localidade', 'rua'], 'string', 'max' => 100],
+             ['localidade', 'trim'],
+             ['localidade', 'required'],
+             [['localidade', 'rua'], 'string', 'max' => 100],
 
-            ['rua', 'trim'],
-            ['rua', 'required'],
+             ['rua', 'trim'],
+             ['rua', 'required'],
 
-            ['nif', 'trim'],
-            ['nif', 'required'],
-            ['nif', 'string', 'max' => 9],
+             ['nif', 'trim'],
+             ['nif', 'required'],
+             ['nif', 'string', 'max' => 9],
 
-            ['telefone', 'trim'],
-            ['telefone', 'required'],
-            ['telefone', 'string', 'max' => 9],
+             ['telefone', 'trim'],
+             ['telefone', 'required'],
+             ['telefone', 'string', 'max' => 9],
 
-            ['dtanasc', 'trim'],
-            ['dtanasc', 'required'],
-            ['dtanasc', 'safe'],
+             ['dtanasc', 'trim'],
+             ['dtanasc', 'required'],
+             ['dtanasc', 'safe'],
 
-            ['genero', 'trim'],
-            ['genero', 'required'],
-            ['genero', 'string'],
+             ['genero', 'trim'],
+             ['genero', 'required'],
+             ['genero', 'string'],
 
-            ['salario', 'trim'],
-            ['salario', 'required'],
-            ['salario', 'number'],
+             ['salario', 'trim'],
+             ['salario', 'required'],
+             ['salario', 'number'],
 
-            ['role', 'required'],
-            ['role', 'string', 'max' => 255],
+             ['role', 'required'],
+             ['role', 'string', 'max' => 255],
 
-            ['dtaregisto', 'safe'],
+             ['dtaregisto', 'safe'],
 
-            ['user_id', 'integer'],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],*/
+             ['user_id', 'integer'],
+             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],*/
         ];
     }
 
@@ -102,19 +103,6 @@ class UserForm extends Model
         if ($this->validate()) {
             //$userdata = new UsersData();
             $user = new User();
-
-
-            /* $userdata->primeironome = $this->primeironome;
-             $userdata->apelido = $this->apelido;
-             $userdata->codigopostal = $this->codigopostal;
-             $userdata->localidade = $this->localidade;
-             $userdata->rua = $this->rua;
-             $userdata->nif = $this->nif;
-             $userdata->dtanasc = Carbon::now(); //$this->dtanasc;
-             $userdata->dtaregisto = Carbon::now();//$this->dtaregisto;
-             $userdata->telefone = $this->telefone;
-             $userdata->genero = $this->genero;
-             $userdata->salario = $this->salario;*/
 
             $user->username = $this->username;
             $user->email = $this->email;
@@ -139,6 +127,30 @@ class UserForm extends Model
         }
         return null;
     }
+
+    public function updateUser($id)
+    {
+
+        //$userdata = new UsersData();
+        $user = User::findOne(['id' => $this->id]);
+
+        $user->username = $this->username;
+
+        $user->email = $this->email;
+
+
+        $user->save();
+
+        $this->id = $user->getId();
+
+        $auth = Yii::$app->authManager;
+        $userRole = $auth->getRole($this->role);
+        $auth->revokeAll($this->id);
+        $auth->assign($userRole, $this->id);
+
+        return true;
+    }
+
     /**
      * Sends confirmation email to user
      * @param User $user user model to with email should be send
@@ -158,30 +170,12 @@ class UserForm extends Model
             ->send();
     }
 
-    public function updateUser()
+    protected function findModel($id)
     {
-
-        if ($this->validate()) {
-            $user = Yii::$app->user->identify();
-
-
-            $user->username = $this->username;
-            $user->email = $this->email;
-            /*$user->setPassword($this->password);
-            $user->generateAuthKey();*/
-            $user->generateEmailVerificationToken();
-
-            $user->save();
-
-            $this->id = $user->getId();
-
-            $auth = \Yii::$app->authManager;
-            $userRole = $auth->getRole($this->role);
-            $auth->assign($userRole, $this->id);
-            return $this->sendEmail($user);
+        if (($model = User::findOne(['id' => $id])) !== null) {
+            return $model;
         }
-        var_dump($this->errors);
-        die();
-        return null;
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

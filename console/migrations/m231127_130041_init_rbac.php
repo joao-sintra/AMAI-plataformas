@@ -176,6 +176,11 @@ class m231127_130041_init_rbac extends Migration
         $auth->addChild($role_cliente, $permission_fazerEncomendas);
         $auth->addChild($role_cliente, $permission_editarDadosPessoais);
 
+        $auth->assign($role_admin, 1);
+        $auth->assign($role_gestor, 2);
+        $auth->assign($role_funcionario, 3);
+        $auth->assign($role_cliente, 4);
+
     }
 
     /**
@@ -183,9 +188,8 @@ class m231127_130041_init_rbac extends Migration
      */
     public function safeDown()
     {
-        echo "m231127_130041_init_rbac cannot be reverted.\n";
-
-        return false;
+       $auth = Yii::$app->authManager;
+       $auth->removeAll();
     }
 
     /*

@@ -19,7 +19,6 @@ use Yii;
  * @property string $telefone
  * @property string $genero
  * @property int $user_id
- *
  * @property User $user
  */
 class UsersData extends \yii\db\ActiveRecord

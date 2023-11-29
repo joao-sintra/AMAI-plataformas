@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use common\models\User;
 use common\models\UserForm;
 use common\models\UserSearch;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -124,28 +125,33 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
-        $user = User::find($id)->one();
 
-        if ($this->request->isPost) {
-                $user->username = $this->request->post('username');
-                $user->email = $this->request->post('email');
+        $model = new UserForm();
 
-                if($user->save()){
-                    return $this->redirect(['view', 'id' => $user->id]);
-                }
+        $user = User::findOne(['id' => $id]);
+
+        $rolename = Yii::$app->authManager->getRolesByUser($id);
+
+        foreach ($rolename as $role) {
+            $roleName = $role->name;
+            $model->role = $roleName;
         }
-        return $this->render('update', ['model' => $user]);
 
-        /*$model = $this->findModel($id);
+        $model->username = $user->username;
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        $model->email = $user->email;
+
+
+        $model->id = $id;
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->updateUser($id)) {
             return $this->redirect(['view', 'id' => $model->id]);
-
         }
 
         return $this->render('update', [
             'model' => $model,
-        ]);*/
+        ]);
+
     }
 
     /**
