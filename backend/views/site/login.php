@@ -11,7 +11,12 @@ use yii\helpers\Html;
                 <div class="card-body login-card-body site-login">
 
                     <h3 class="login-box-msg text-center p-4"><b>Login Backend</b></h3>
-
+                    <?php
+                    //Mensagem de flash de erro
+                    if (Yii::$app->session->hasFlash('error')) {
+                        echo '<div class="alert alert-danger">' . Yii::$app->session->getFlash('error') . '</div>';
+                    }
+                    ?>
                     <?php $form = \yii\bootstrap4\ActiveForm::begin(['id' => 'login-form']) ?>
 
                     <?= $form->field($model, 'username', [

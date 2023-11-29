@@ -5,7 +5,7 @@ namespace backend\controllers;
 use Carbon\Carbon;
 use common\models\User;
 use common\models\UserForm;
-use common\models\UserSearch;
+use backend\models\UserSearch;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
