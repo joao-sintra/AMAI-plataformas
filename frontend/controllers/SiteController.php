@@ -83,13 +83,17 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
-    public function actionAdmin(){
-        if (yii->app->user->isGuest){
+
+    public function actionAdmin()
+    {
+        if (yii->app->user->isGuest) {
             return $this->goHome();
         }
 
     }
-    public function actionFazerencomendas(){
+
+    public function actionFazerencomendas()
+    {
         return $this->render('cliente');
     }
 
@@ -106,7 +110,16 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            if (!Yii::$app->user->can('backendAccess'))
+                return $this->goHome();
+
+            else {
+
+                Yii::$app->user->logout();
+                Yii::$app->session->setFlash('error', 'Só o cliente pode dar login!');
+
+                return $this->refresh();
+            }
         }
 
         $model->password = '';
@@ -160,6 +173,7 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
     public function actionShop()
     {
         return $this->render('shop');
@@ -175,8 +189,15 @@ class SiteController extends Controller
         $model = new SignupForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
-            return $this->goHome();
+            if (!Yii::$app->user->can('backendAccess'))
+                return $this->goHome();
+        }
+        else {
+
+            Yii::$app->user->logout();
+            Yii::$app->session->setFlash('error', 'Só o cliente pode aceder a esta área!');
+
+            return $this->refresh();
         }
 
         return $this->render('signup', [
@@ -237,8 +258,8 @@ class SiteController extends Controller
      * Verify email address
      *
      * @param string $token
-     * @throws BadRequestHttpException
      * @return yii\web\Response
+     * @throws BadRequestHttpException
      */
     public function actionVerifyEmail($token)
     {

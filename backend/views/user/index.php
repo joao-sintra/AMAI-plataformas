@@ -13,13 +13,13 @@ use yii\grid\GridView;
 
 
 
-$this->title = 'Users';
+$this->title = 'Criar Trabalhadores';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
     
     <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Trabalhador', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
         <?php /*$this->render('_search', ['model' => $searchModel]); */?>

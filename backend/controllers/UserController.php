@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use Carbon\Carbon;
 use common\models\User;
-use common\models\UserForm;
+use backend\models\UserForm;
 use backend\models\UserSearch;
 use Yii;
 use yii\filters\AccessControl;
@@ -80,6 +80,8 @@ class UserController extends Controller
         $dataProvider = $searchModel->search($this->request->queryParams, ['admin', 'gestor', 'funcionario']);
 
 
+
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -125,7 +127,6 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
-
         $model = new UserForm();
 
         $user = User::findOne(['id' => $id]);
@@ -144,7 +145,7 @@ class UserController extends Controller
 
         $model->id = $id;
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->updateUser($id)) {
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->updateUser()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

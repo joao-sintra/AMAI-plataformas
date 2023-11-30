@@ -5,7 +5,7 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use Carbon\Carbon;
-use common\models\UsersData;
+use common\models\ClientesForm;
 use common\models\User;
 
 /**
@@ -27,7 +27,9 @@ class SignupForm extends Model
     public $user_id;
     public $dtanasc;
     public $genero;
-    public $role;
+    public $role = 'cliente';
+
+
 
     /**
      * {@inheritdoc}
@@ -57,22 +59,23 @@ class SignupForm extends Model
             ['apelido', 'trim'],
             ['apelido', 'required'],
             ['apelido', 'string', 'max' => 50],
-
-            /*['codigopostal', 'trim'],
+/*
+            ['codigopostal', 'trim'],
             ['codigopostal', 'required'],
             ['codigopostal', 'string', 'max' => 8],
 
             ['localidade', 'trim'],
             ['localidade', 'required'],
-            [['localidade', 'rua'], 'string', 'max' => 100],
-
+            [['localidade', 'rua'], 'string', 'max' => 100],*/
+/*
             ['rua', 'trim'],
-            ['rua', 'required'],
+            ['rua', 'required'],*/
 
-            ['nif', 'trim'],
+            [['rua', 'nif'], 'default'],
+           /* ['nif', 'trim'],
             ['nif', 'required'],
-            ['nif', 'string', 'max' => 9],
-
+            ['nif', 'string', 'max' => 9],*/
+/*
             ['telefone', 'trim'],
             ['telefone', 'required'],
             ['telefone', 'string', 'max' => 9],*/
@@ -103,36 +106,39 @@ class SignupForm extends Model
         }
 
         $user = new User();
-        $userdata = new UsersData();
+        $userdata = new ClientesForm();
 
         $userdata->primeironome = $this->primeironome;
         $userdata->apelido = $this->apelido;
-        /* $userdata->codigopostal = $this->codigopostal;
-         $userdata->localidade = $this->localidade;
-         $userdata->rua = $this->rua;
-         $userdata->nif = $this->nif;*/
-        $userdata->dtanasc = Carbon::now(); //$this->dtanasc;
+       /* $userdata->codigopostal = "3080-275";
+        $userdata->localidade = "asdsa";*/
+        $userdata->dtanasc = Carbon::now();
         $userdata->dtaregisto = Carbon::now();//$this->dtaregisto;
-        /*$userdata->telefone = $this->telefone;*/
+      /*  $userdata->telefone = "912345678";*/
         $userdata->genero = $this->genero;
 
         $user->username = $this->username;
         $user->email = $this->email;
+        $user->created_at = Carbon::now();
+        $user->updated_at = Carbon::now();
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
 
         $user->save();
 
+
         $this->id = $user->id;
         $auth = \Yii::$app->authManager;
         $userRole = $auth->getRole($this->role);
-        $auth->assign($userRole, $user->getId());
+        $auth->assign($userRole, $user->id);
 
         $userdata->user_id = $user->id;
         $this->id = $user->id;
 
         $userdata->save();
+
+
 
         return $this->sendEmail($user);
     }

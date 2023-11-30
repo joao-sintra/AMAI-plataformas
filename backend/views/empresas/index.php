@@ -1,6 +1,6 @@
 <?php
 
-use backend\models\Empresas;
+use backend\models\Empresa;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -9,7 +9,7 @@ use yii\grid\GridView;
 /** @var yii\web\View $this */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Empresas';
+$this->title = 'Empresa';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="empresas-index">
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'capitalsocial',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Empresas $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Empresa $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

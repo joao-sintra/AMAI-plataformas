@@ -1,25 +1,21 @@
 <?php
 
-use common\models\UsersData;
+use common\models\ClientesForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var common\models\UsersDataSearch $searchModel */
+/** @var common\models\ClientesFormSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Users Datas';
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-data-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Users Data', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -43,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'user_id',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, UsersData $model, $key, $index, $column) {
+                'urlCreator' => function ($action, ClientesForm $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id, 'user_id' => $model->user_id]);
                  }
             ],

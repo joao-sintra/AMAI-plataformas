@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use Carbon\Carbon;
 use Yii;
 
 /**
@@ -21,7 +22,7 @@ use Yii;
  * @property int $user_id
  * @property User $user
  */
-class UsersData extends \yii\db\ActiveRecord
+class ClientesForm extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -37,7 +38,7 @@ class UsersData extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['primeironome', 'apelido', 'codigopostal', 'localidade', 'rua', 'nif', 'dtanasc', 'dtaregisto', 'telefone', 'genero', 'user_id'], 'required'],
+            [['primeironome', 'apelido', /*'codigopostal', 'localidade', 'rua', 'nif',*/ 'dtanasc', 'dtaregisto', /*'telefone',*/ 'genero', 'user_id'], 'required'],
             [['dtanasc', 'dtaregisto'], 'safe'],
             [['genero'], 'string'],
             [['user_id'], 'integer'],
@@ -73,6 +74,7 @@ class UsersData extends \yii\db\ActiveRecord
         ];
     }
 
+
     /**
      * Gets query for [[User]].
      *
@@ -82,4 +84,47 @@ class UsersData extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
+
+    public function createCliente()
+    {
+        if (!$this->validate()) {
+            return null;
+        }
+
+        $user = new User();
+        $userdata = new ClientesForm();
+
+        $userdata->primeironome = $this->primeironome;
+        $userdata->apelido = $this->apelido;
+        $userdata->codigopostal = $this->codigopostal;
+      /*  $userdata->localidade = $this->localidade;*/
+      /*  $userdata->rua = $this->rua;
+        $userdata->nif = $this->nif;*/
+        $userdata->dtanasc = Carbon::now();
+        $userdata->dtaregisto = Carbon::now();
+        $userdata->genero = $this->genero;
+
+
+
+        $user->username = $this->username;
+        $user->email = $this->email;
+        $user->setPassword($this->password);
+        $user->generateAuthKey();
+        $user->generateEmailVerificationToken();
+
+        $user->save();
+
+        $this->id = $user->id;
+        $auth = \Yii::$app->authManager;
+        $userRole = $auth->getRole($this->role);
+        $auth->assign($userRole, $user->getId());
+
+        $userdata->user_id = $user->id;
+        $this->id = $user->id;
+
+        $userdata->save();
+
+        return $this->sendEmail($user);
+    }
+
 }

@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 /** @var yii\web\View $this */
 /** @var common\models\User $model */
-/**  @var common\models\UsersData $modeluserdata */
+/**  @var common\models\ClientesForm $modeluserdata */
 /** @var yii\widgets\ActiveForm $form */
 
 ?>

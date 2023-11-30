@@ -20,6 +20,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <div class="row">
                     <div class="col-lg-5">
+                        <?php
+                        //Mensagem de flash de erro
+                        if (Yii::$app->session->hasFlash('error')) {
+                            echo '<div class="alert alert-danger">' . Yii::$app->session->getFlash('error') . '</div>';
+                        }
+                        ?>
                         <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
                             <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>

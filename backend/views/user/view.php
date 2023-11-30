@@ -13,9 +13,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
 
-<!--    <h1><?php /*= Html::encode($this->title) */?></h1> -->
+    <!--    <h1><?php /*= Html::encode($this->title) */ ?></h1> -->
 
     <p>
+        <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['index', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -32,13 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'username',
             'email',
-          /*  'auth_key',
-            'password_hash',
-            'password_reset_token',*/
-           /* 'status',
-            'created_at',
-            'updated_at',
-            'verification_token',*/
+            'role',
+            /*  'auth_key',
+              'password_hash',
+              'password_reset_token',*/
+            /* 'status',
+             'created_at',
+             'updated_at',
+             'verification_token',*/
         ],
     ]) ?>
 

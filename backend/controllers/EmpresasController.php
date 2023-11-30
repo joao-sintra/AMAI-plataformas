@@ -7,9 +7,10 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
- * EmpresasController implements the CRUD actions for Empresas model.
+ * EmpresasController implements the CRUD actions for Empresa model.
  */
 class EmpresasController extends Controller
 {
@@ -32,7 +33,7 @@ class EmpresasController extends Controller
     }
 
     /**
-     * Lists all Empresas models.
+     * Lists all Empresa models.
      *
      * @return string
      */
@@ -58,7 +59,7 @@ class EmpresasController extends Controller
     }
 
     /**
-     * Displays a single Empresas model.
+     * Displays a single Empresa model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -71,9 +72,9 @@ class EmpresasController extends Controller
     }
 
     /**
-     * Creates a new Empresas model.
+     * Creates a new Empresa model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
+     * @return string|Response
      */
     public function actionCreate()
     {
@@ -93,10 +94,10 @@ class EmpresasController extends Controller
     }
 
     /**
-     * Updates an existing Empresas model.
+     * Updates an existing Empresa model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
-     * @return string|\yii\web\Response
+     * @return string|Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
@@ -113,10 +114,10 @@ class EmpresasController extends Controller
     }
 
     /**
-     * Deletes an existing Empresas model.
+     * Deletes an existing Empresa model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
-     * @return \yii\web\Response
+     * @return Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
@@ -127,7 +128,7 @@ class EmpresasController extends Controller
     }
 
     /**
-     * Finds the Empresas model based on its primary key value.
+     * Finds the Empresa model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
      * @return Empresas the loaded model
@@ -136,6 +137,7 @@ class EmpresasController extends Controller
     protected function findModel($id)
     {
         if (($model = Empresas::findOne(['id' => $id])) !== null) {
+
             return $model;
         }
 

@@ -3,10 +3,10 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var backend\models\Empresas $model */
+/** @var backend\models\Empresa $model */
 
-$this->title = 'Update Empresas: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Empresas', 'url' => ['index']];
+$this->title = 'Update Empresa: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Empresa', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

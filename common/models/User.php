@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use backend\models\Avaliacoes;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -22,6 +23,10 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ *
+ * @property Avaliacoes[] $avaliacoes
+ * @property Carrinhos[] $carrinhos
+ * @property ClientesForm[] $usersDatas
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -56,7 +61,28 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-
+            [['username', 'auth_key', 'password_hash', 'email', 'status', 'created_at', 'updated_at'], 'required'],
+            /*[['status', 'created_at', 'updated_at'], 'integer'],*/
+            [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'string', 'max' => 255],
+            [['auth_key'], 'string', 'max' => 32],
+            [['username'], 'unique'],
+            [['email'], 'unique'],
+            [['password_reset_token'], 'unique'],
+        ];
+    }
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'username' => 'Username',
+            'auth_key' => 'Auth Key',
+            'password_hash' => 'Password Hash',
+            'password_reset_token' => 'Password Reset Token',
+            'email' => 'Email',
+            'status' => 'Status',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'verification_token' => 'Verification Token',
         ];
     }
 
@@ -111,7 +137,8 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $token verify email token
      * @return static|null
      */
-    public static function findByVerificationToken($token) {
+    public static function findByVerificationToken($token)
+    {
         return static::findOne([
             'verification_token' => $token,
             'status' => self::STATUS_INACTIVE
@@ -130,7 +157,7 @@ class User extends ActiveRecord implements IdentityInterface
             return false;
         }
 
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $timestamp = (int)substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }
@@ -180,18 +207,20 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
 
-    public function getPassword(){
+    public function getPassword()
+    {
 
         return Yii::$app->security->decryptByKey($this->password_hash, $this->auth_key);
 
     }
 
-   public function getRole(){
+    public function getRole()
+    {
         $auth = \Yii::$app->authManager;
         $roles = $auth->getRolesByUser($this->id);
-        foreach ($roles as $role){
-            if($role->name != 'cliente')
-            return $role->name;
+        foreach ($roles as $role) {
+            if ($role->name != 'cliente')
+                return $role->name;
         }
         return null;
     }
@@ -228,9 +257,30 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
-    public function updateUser(){
-
-
+    public function getAvaliacoes()
+    {
+        return $this->hasMany(Avaliacoes::class, ['user_id' => 'id']);
     }
+
+    /**
+     * Gets query for [[Carrinhos]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    /*public function getCarrinhos()
+    {
+        return $this->hasMany(Carrinhos::class, ['user_id' => 'id']);
+    }*/
+
+    /**
+     * Gets query for [[UsersDatas]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getClientes()
+    {
+        return $this->hasMany(ClientesForm::class, ['user_id' => 'id']);
+    }
+
 
 }

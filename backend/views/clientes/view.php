@@ -4,9 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var common\models\UsersData $model */
+/** @var common\models\ClientesForm $model */
+/** @var common\models\User $modeluser */
 
-$this->title = $model->id;
+$this->title = $modeluser->username;
 $this->params['breadcrumbs'][] = ['label' => 'Users Datas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -16,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+        <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['index', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
         <?= Html::a('Update', ['update', 'id' => $model->id, 'user_id' => $model->user_id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id, 'user_id' => $model->user_id], [
             'class' => 'btn btn-danger',
@@ -32,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'primeironome',
             'apelido',
+            'email',
             'codigopostal',
             'localidade',
             'rua',

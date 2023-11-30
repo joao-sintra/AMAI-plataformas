@@ -2,6 +2,7 @@
 
 /* @var $this \yii\web\View */
 /* @var $content string */
+
 /* @var $assetDir string */
 
 use backend\assets\AppAsset;
@@ -20,15 +21,15 @@ AppAsset::register($this);
     <!--icon de terminar a sessão -> fas fa-sign-out-alt-->
     <a class="brand-link">
         <?php
-            if (!Yii::$app->user->isGuest) {
-                echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
-                    . Html::submitButton(
-                        '<i class="fas fa-sign-out-alt" style="opacity: .8"></i> Logout (' . Yii::$app->user->identity->username . ')',
-                        ['class' => 'btn btn-link logout font-weight-light']
-                    )
-                    . Html::endForm();
-            }
-            ?>
+        if (!Yii::$app->user->isGuest) {
+            echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
+                . Html::submitButton(
+                    '<i class="fas fa-sign-out-alt" style="opacity: .8"></i> Logout (' . Yii::$app->user->identity->username . ')',
+                    ['class' => 'btn btn-link logout font-weight-light']
+                )
+                . Html::endForm();
+        }
+        ?>
     </a>
 
 
@@ -46,16 +47,14 @@ AppAsset::register($this);
                         'label' => 'Gestão de Dados', 'icon' => 'fas fa-file',
                         'items' => [
                             ['label' => 'Gerir Trabalhadores', 'icon' => 'users', 'url' => ['/user/index']],
-                            ['label' => 'Gerir Clientes', 'icon' => 'user', 'url' => ['user-data/index']],
-                            ['label' => 'IVAS', 'icon' => 'user', 'url' => ['iva/index']],
+                            ['label' => 'Gerir Clientes', 'icon' => 'user', 'url' => ['clientes/index']],
+                            ['label' => 'IVAS', 'icon' => 'fa-solid fa-percent', 'url' => ['iva/index']],
                             ['label' => 'Empresa', 'icon' => 'fa-solid fa-building', 'url' => ['empresas/index']],
                             ['label' => 'Avaliações', 'icon' => 'fa-solid fa-star', 'url' => ['avaliacoes/index']],
-
-
                         ],
                     ],
                     ['label' => 'Produtos', 'header' => true],
-                   /* ['label' => 'Vendas de Produtos', 'icon' => 'shopping-cart', 'url' => ['/site/vendas']],*/
+                    /* ['label' => 'Vendas de Produtos', 'icon' => 'shopping-cart', 'url' => ['/site/vendas']],*/
                     ['label' => 'Criação dos Produtos', 'icon' => 'fa-solid fa-box', 'url' => ['/produtos/index']],
                     ['label' => 'Categorias dos Produtos', 'icon' => 'fa-solid fa-tag', 'url' => ['/categorias-produtos/index']],
                     ['label' => 'Debug Tools', 'header' => true],

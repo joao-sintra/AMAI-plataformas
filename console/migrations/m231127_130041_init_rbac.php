@@ -24,7 +24,7 @@ class m231127_130041_init_rbac extends Migration
                  *  - Ver, Editar, Criar e Apagar encomendas
                  *  - Ver, Editar (editar o estado da fatura) faturas
                  *  - Ver, Editar, Criar e Apagar ivas
-                 *  - Ver, Editar, Criar empresa
+                 *  - Ver, Editar, Criar empresas
                  *
                  * Permissões de Gestor
                  *  - Ver, Editar, Criar e Apagar produtos
@@ -108,7 +108,7 @@ class m231127_130041_init_rbac extends Migration
         $permission_apagarIvas = $auth->createPermission('apagarIvas');
         $auth->add($permission_apagarIvas);
 
-        //Permissões para editar dados de empresa
+        //Permissões para editar dados de empresas
         $permission_editarEmpresa = $auth->createPermission('editarEmpresa');
         $auth->add($permission_editarEmpresa);
 

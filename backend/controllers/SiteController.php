@@ -99,7 +99,7 @@ class SiteController extends Controller
             else {
 
                 Yii::$app->user->logout();
-                Yii::$app->session->setFlash('error', 'O cliente não pode acessar a esta área!');
+                Yii::$app->session->setFlash('error', 'O cliente não pode aceder a esta área!');
 
                 return $this->refresh();
             }

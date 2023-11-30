@@ -1,11 +1,11 @@
 <?php
 
-namespace common\models;
+namespace backend\models;
 
 use Yii;
 use yii\base\Model;
 use common\models\User;
-use common\models\UsersData;
+use common\models\ClientesForm;
 use Carbon\Carbon;
 use yii\web\NotFoundHttpException;
 
@@ -101,37 +101,33 @@ class UserForm extends Model
     public function createUser()
     {
         if ($this->validate()) {
-            //$userdata = new UsersData();
+
             $user = new User();
 
             $user->username = $this->username;
             $user->email = $this->email;
+            $user->created_at = Carbon::now();
+            $user->updated_at = Carbon::now();
             $user->setPassword($this->password);
             $user->generateAuthKey();
             $user->generateEmailVerificationToken();
 
             $user->save();
 
-            $this->id = $user->getId();
+
 
             $auth = \Yii::$app->authManager;
             $userRole = $auth->getRole($this->role);
-            $auth->assign($userRole, $this->id);
-
-            //$userdata->user_id = $user->id;
-            //$this->id = $user->id;
-
-            //$userdata->save()
+            $auth->assign($userRole, $user->id);
 
             return $this->sendEmail($user);
         }
         return null;
     }
 
-    public function updateUser($id)
+    public function updateUser()
     {
 
-        //$userdata = new UsersData();
         $user = User::findOne(['id' => $this->id]);
 
         $user->username = $this->username;
@@ -141,12 +137,12 @@ class UserForm extends Model
 
         $user->save();
 
-        $this->id = $user->getId();
+
 
         $auth = Yii::$app->authManager;
         $userRole = $auth->getRole($this->role);
-        $auth->revokeAll($this->id);
-        $auth->assign($userRole, $this->id);
+        $auth->revokeAll($user->id);
+        $auth->assign($userRole, $user->id);
 
         return true;
     }

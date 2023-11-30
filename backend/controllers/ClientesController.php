@@ -2,16 +2,18 @@
 
 namespace backend\controllers;
 
-use common\models\UsersData;
-use common\models\UsersDataSearch;
+use backend\models\UserForm;
+use common\models\ClientesForm;
+use common\models\ClientesFormSearch;
+use common\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UserDataController implements the CRUD actions for UsersData model.
+ * ClientesController implements the CRUD actions for ClientesForm model.
  */
-class UserDataController extends Controller
+class ClientesController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +34,13 @@ class UserDataController extends Controller
     }
 
     /**
-     * Lists all UsersData models.
+     * Lists all ClientesForm models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new UsersDataSearch();
+        $searchModel = new ClientesFormSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +50,7 @@ class UserDataController extends Controller
     }
 
     /**
-     * Displays a single UsersData model.
+     * Displays a single ClientesForm model.
      * @param int $id ID
      * @param int $user_id User ID
      * @return string
@@ -56,22 +58,26 @@ class UserDataController extends Controller
      */
     public function actionView($id, $user_id)
     {
+        $modeluser = User::findOne(['id' => $user_id]);
+
         return $this->render('view', [
             'model' => $this->findModel($id, $user_id),
+            'modeluser' => $modeluser,
         ]);
     }
 
     /**
-     * Creates a new UsersData model.
+     * Creates a new ClientesForm model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new UsersData();
+        $model = new ClientesForm();
+        $modeluser = new UserForm();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load($this->request->post()) && $model->save() && $model->createCliente()) {
                 return $this->redirect(['view', 'id' => $model->id, 'user_id' => $model->user_id]);
             }
         } else {
@@ -80,11 +86,12 @@ class UserDataController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'modeluser' => $modeluser,
         ]);
     }
 
     /**
-     * Updates an existing UsersData model.
+     * Updates an existing ClientesForm model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @param int $user_id User ID
@@ -93,6 +100,8 @@ class UserDataController extends Controller
      */
     public function actionUpdate($id, $user_id)
     {
+        $modeluser = User::findOne(['id' => $user_id]);
+
         $model = $this->findModel($id, $user_id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -101,11 +110,12 @@ class UserDataController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'modeluser' => $modeluser,
         ]);
     }
 
     /**
-     * Deletes an existing UsersData model.
+     * Deletes an existing ClientesForm model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @param int $user_id User ID
@@ -120,16 +130,16 @@ class UserDataController extends Controller
     }
 
     /**
-     * Finds the UsersData model based on its primary key value.
+     * Finds the ClientesForm model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
      * @param int $user_id User ID
-     * @return UsersData the loaded model
+     * @return ClientesForm the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id, $user_id)
     {
-        if (($model = UsersData::findOne(['id' => $id, 'user_id' => $user_id])) !== null) {
+        if (($model = ClientesForm::findOne(['id' => $id, 'user_id' => $user_id])) !== null) {
             return $model;
         }
 

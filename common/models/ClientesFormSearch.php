@@ -4,12 +4,12 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\UsersData;
+use common\models\ClientesForm;
 
 /**
- * UsersDataSearch represents the model behind the search form of `common\models\UsersData`.
+ * ClientesFormSearch represents the model behind the search form of `common\models\ClientesForm`.
  */
-class UsersDataSearch extends UsersData
+class ClientesFormSearch extends ClientesForm
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class UsersDataSearch extends UsersData
      */
     public function search($params)
     {
-        $query = UsersData::find();
+        $query = ClientesForm::find();
 
         // add conditions that should always apply here
 
