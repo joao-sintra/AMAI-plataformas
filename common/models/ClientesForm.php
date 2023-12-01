@@ -4,6 +4,7 @@ namespace common\models;
 
 use Carbon\Carbon;
 use Yii;
+use backend\models\AuthAssignment;
 
 /**
  * This is the model class for table "users_data".
@@ -71,6 +72,7 @@ class ClientesForm extends \yii\db\ActiveRecord
             'telefone' => 'Telefone',
             'genero' => 'Genero',
             'user_id' => 'User ID',
+            'email' => 'Email',
         ];
     }
 
@@ -84,6 +86,11 @@ class ClientesForm extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
+    public function getAuth()
+    {
+        return $this->hasOne(AuthAssignment::class, ['user_id' => 'user_id']);
+    }
+
 
     public function createCliente()
     {
@@ -103,8 +110,6 @@ class ClientesForm extends \yii\db\ActiveRecord
         $userdata->dtanasc = Carbon::now();
         $userdata->dtaregisto = Carbon::now();
         $userdata->genero = $this->genero;
-
-
 
         $user->username = $this->username;
         $user->email = $this->email;

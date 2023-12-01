@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use backend\models\AuthAssignment;
 use backend\models\Avaliacoes;
 use Yii;
 use yii\base\NotSupportedException;
@@ -214,16 +215,6 @@ class User extends ActiveRecord implements IdentityInterface
 
     }
 
-    public function getRole()
-    {
-        $auth = \Yii::$app->authManager;
-        $roles = $auth->getRolesByUser($this->id);
-        foreach ($roles as $role) {
-            if ($role->name != 'cliente')
-                return $role->name;
-        }
-        return null;
-    }
 
     /**
      * Generates "remember me" authentication key
@@ -279,8 +270,13 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getClientes()
     {
-        return $this->hasMany(ClientesForm::class, ['user_id' => 'id']);
+        return $this->hasMany(ClientesForm::class, ['id' => 'user_id']);
     }
 
+    public function getAuth()
+    {
+        return $this->hasOne(AuthAssignment::class, ['user_id' => 'id']);
+    }
+    //make a function to get the user username
 
 }

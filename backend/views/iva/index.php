@@ -10,15 +10,14 @@ use yii\grid\GridView;
 /** @var backend\models\IvaSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Ivas';
+$this->title = 'Registo de Ivas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="iva-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
+<!-- <h1><?php /*= Html::encode($this->title) */?></h1> -->
     <p>
-        <?= Html::a('Create Iva', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Iva <i class="fas fa-plus"></i>', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -27,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            /*['class' => 'yii\grid\SerialColumn'],*/
 
             'id',
             'percentagem',

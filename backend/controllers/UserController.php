@@ -79,9 +79,6 @@ class UserController extends Controller
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search($this->request->queryParams, ['admin', 'gestor', 'funcionario']);
 
-
-
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -108,14 +105,15 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
-        $modelUserForm = new UserForm();
+        $model = new UserForm();
 
         if ($this->request->isPost) {
-            if ($modelUserForm->load($this->request->post()) && $modelUserForm->createUser()) {
-                return $this->redirect(['view', 'id' => $modelUserForm->id]);
+            if ($model->load($this->request->post()) && $model->createUser()) {
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         }
-        return $this->render('create', ['model' => $modelUserForm]);
+
+        return $this->render('create', ['model' => $model]);
     }
 
     /**
@@ -141,7 +139,6 @@ class UserController extends Controller
         $model->username = $user->username;
 
         $model->email = $user->email;
-
 
         $model->id = $id;
 

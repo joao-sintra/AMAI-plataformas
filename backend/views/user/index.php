@@ -12,14 +12,13 @@ use yii\grid\GridView;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 
-
-$this->title = 'Criar Trabalhadores';
+$this->title = 'Registo de Trabalhadores';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
-    
+
     <p>
-        <?= Html::a('Criar Trabalhador', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Trabalhador <i class="fas fa-plus"></i>', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
         <?php /*$this->render('_search', ['model' => $searchModel]); */?>
@@ -31,19 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
 
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            /*['class' => 'yii\grid\SerialColumn'],*/
 
-            'id',
+            /*'id',*/
             'username',
             'email',
-            'role',
-           /* 'auth_key',
-            'password_hash',
-            'password_reset_token',*/
-            //'status',
-            //'created_at',
-            //'updated_at',
-            //'verification_token',
+            'auth.item_name:text:Role',
+
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, User $model, $key, $index, $column) {

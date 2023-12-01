@@ -10,26 +10,30 @@ use yii\grid\GridView;
 /** @var common\models\ClientesFormSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-
+$this->title = 'Registo de Clientes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-data-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!-- <h1><?php /*= Html::encode($this->title) */?></h1> -->
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+        'columns' => [
+            /*['class' => 'yii\grid\SerialColumn'],*/
+
+            /*'id',*/
+            'user.username',
             'primeironome',
             'apelido',
-            'codigopostal',
-            'localidade',
+            'user.email',
+            'auth.item_name:text:Role',
+            /*'codigopostal',
+            'localidade',*/
             //'rua',
             //'nif',
             //'dtanasc',

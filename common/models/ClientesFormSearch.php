@@ -42,6 +42,7 @@ class ClientesFormSearch extends ClientesForm
     {
         $query = ClientesForm::find();
 
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

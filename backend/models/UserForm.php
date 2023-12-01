@@ -11,6 +11,7 @@ use yii\web\NotFoundHttpException;
 
 
 class UserForm extends Model
+
 {
     public $id;
     public $username;
@@ -114,8 +115,6 @@ class UserForm extends Model
 
             $user->save();
 
-
-
             $auth = \Yii::$app->authManager;
             $userRole = $auth->getRole($this->role);
             $auth->assign($userRole, $user->id);
@@ -127,17 +126,13 @@ class UserForm extends Model
 
     public function updateUser()
     {
-
         $user = User::findOne(['id' => $this->id]);
 
         $user->username = $this->username;
 
         $user->email = $this->email;
 
-
         $user->save();
-
-
 
         $auth = Yii::$app->authManager;
         $userRole = $auth->getRole($this->role);

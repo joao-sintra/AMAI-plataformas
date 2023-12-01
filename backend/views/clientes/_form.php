@@ -12,6 +12,7 @@ use yii\widgets\ActiveForm;
 <div class="users-data-form">
 
     <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+
     <?= $form->field($modeluser, 'username')->textInput(['autofocus' => true]) ?>
 
     <?= $form->field($model, 'primeironome')->label('Nome')->textInput() ?>
@@ -19,8 +20,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'apelido')->label('Apelido')->textInput() ?>
 
     <?= $form->field($modeluser, 'email') ?>
-
-    <?= $form->field($modeluser, 'password')->label('Password')->textInput(['type' => 'password']) ?>
 
     <?=  $form->field($model, 'codigopostal')->label('Código Postal')->textInput() ?>
 
@@ -45,7 +44,7 @@ use yii\widgets\ActiveForm;
 
 
     <div class="form-group">
-        <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+        <?= Html::submitButton('Atualizar dados', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
