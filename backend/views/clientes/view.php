@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-data-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!--<h1><?php /*= Html::encode($this->title) */?></h1>-->
 
     <p>
         <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['index', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
@@ -33,18 +33,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'user.username',
-            'primeironome',
+            'primeironome:text:Nome',
             'apelido',
             'user.email',
-            'codigopostal',
+            'codigopostal:text:Código Postal',
             'localidade',
             'rua',
-            'nif',
-            'dtanasc',
-            'dtaregisto',
+            'nif:text:NIF',
+            'dtanasc:text:Data de Nascimento',
+            'dtaregisto:text:Data de Registo',
             'telefone',
-            'genero',
-            'user_id',
+            'genero:text:Género',
+            /*'user_id',*/
         ],
     ]) ?>
 

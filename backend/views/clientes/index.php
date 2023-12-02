@@ -28,10 +28,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
             /*'id',*/
             'user.username',
-            'primeironome',
+            'primeironome:text:Nome',
             'apelido',
             'user.email',
-            'auth.item_name:text:Role',
+            /*'auth.item_name:text:Role',*/
+            [
+                'attribute' => 'auth.item_name',
+                'label' => 'Role',
+                'value' => function ($model) {
+                    return $model->auth['item_name'] === 'cliente' ? 'Cliente' : $model->auth['item_name'];
+                },
+            ],
             /*'codigopostal',
             'localidade',*/
             //'rua',

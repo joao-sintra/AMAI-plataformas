@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="empresas-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!--<h1><?php /*= Html::encode($this->title) */?></h1>-->
 
     <p>
         <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['index', 'id' => $model->id], ['class' => 'btn btn-info']) ?>

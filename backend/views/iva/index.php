@@ -29,9 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
             /*['class' => 'yii\grid\SerialColumn'],*/
 
             'id',
-            'percentagem',
-            'descricao',
-            'vigor',
+            'percentagem:text:Percentagem(%)',
+            'descricao:text:Descrição',
+            [
+                'attribute' => 'vigor',
+                'value' => function ($model) {
+                    return $model->vigor == 1 ? 'SIM' : 'NÃO';
+                },
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Iva $model, $key, $index, $column) {

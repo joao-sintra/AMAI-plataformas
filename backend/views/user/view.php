@@ -30,10 +30,25 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            /*'id',*/
             'username',
             'email',
-            'auth.item_name',
+            [
+                'attribute' => 'auth.item_name',
+                'label' => 'Role',
+                'value' => function ($model) {
+                    switch ($model->auth['item_name']) {
+                        case 'admin':
+                            return 'Administrador';
+                        case 'gestor':
+                            return 'Gestor';
+                        case 'funcionario':
+                            return 'Funcionário';
+                        default:
+                            return $model->auth['item_name'];
+                    }
+                },
+            ],
             /*  'auth_key',
               'password_hash',
               'password_reset_token',*/

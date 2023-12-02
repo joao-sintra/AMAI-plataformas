@@ -24,7 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php /*$this->render('_search', ['model' => $searchModel]); */?>
 
     <?=
-
      GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -35,7 +34,22 @@ $this->params['breadcrumbs'][] = $this->title;
             /*'id',*/
             'username',
             'email',
-            'auth.item_name:text:Role',
+            [
+                'attribute' => 'auth.item_name',
+                'label' => 'Role',
+                'value' => function ($model) {
+                    switch ($model->auth['item_name']) {
+                        case 'admin':
+                            return 'Administrador';
+                        case 'gestor':
+                            return 'Gestor';
+                        case 'funcionario':
+                            return 'Funcionário';
+                        default:
+                            return $model->auth['item_name'];
+                    }
+                },
+            ],
 
             [
                 'class' => ActionColumn::className(),

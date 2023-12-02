@@ -6,14 +6,15 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var backend\models\Iva $model */
 
-$this->title = $model->id;
+$this->title = $model->descricao;
 $this->params['breadcrumbs'][] = ['label' => 'Ivas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="iva-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+   <!-- <h1><?php /*= Html::encode($this->title) */?></h1>-->
 
     <p>
         <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['index', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
@@ -33,7 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'percentagem',
             'descricao',
-            'vigor',
+            [
+                'attribute' => 'vigor',
+                'value' => function ($model) {
+                    return $model->vigor == 1 ? 'SIM' : 'NÃO';
+                },
+            ],
         ],
     ]) ?>
 

@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /** @var common\models\ClientesForm $model */
 /** @var common\models\User $modeluser */
 
-$this->title = 'Update User data: ' . $modeluser->username;
+$this->title = 'Alteração dos Dados do Cliente: ' . $modeluser->username;
 $this->params['breadcrumbs'][] = ['label' => 'Users Datas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $modeluser->username, 'url' => ['view', 'id' => $model->id, 'user_id' => $model->user_id]];
 $this->params['breadcrumbs'][] = 'Update';

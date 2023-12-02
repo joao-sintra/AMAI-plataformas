@@ -20,10 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'designacaosocial',
+            'designacaosocial:text:Designação Social',
             'email:email',
             'telefone',
-            'nif',
+            'nif:text:NIF',
             //'rua',
             //'codigopostal',
             //'localidade',

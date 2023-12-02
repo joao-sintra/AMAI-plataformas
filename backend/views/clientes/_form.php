@@ -40,10 +40,8 @@ use yii\widgets\ActiveForm;
     );
     ?>
 
-
-
     <div class="form-group">
-        <?= Html::submitButton('Atualizar dados', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
