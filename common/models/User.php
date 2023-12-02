@@ -258,10 +258,10 @@ class User extends ActiveRecord implements IdentityInterface
      *
      * @return \yii\db\ActiveQuery
      */
-    /*public function getCarrinhos()
+    public function getCarrinhos()
     {
         return $this->hasMany(Carrinhos::class, ['user_id' => 'id']);
-    }*/
+    }
 
     /**
      * Gets query for [[UsersDatas]].

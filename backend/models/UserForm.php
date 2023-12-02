@@ -115,6 +115,9 @@ class UserForm extends Model
 
             $user->save();
 
+            $this->id = $user->id;
+
+
             $auth = \Yii::$app->authManager;
             $userRole = $auth->getRole($this->role);
             $auth->assign($userRole, $user->id);

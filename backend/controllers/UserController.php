@@ -108,7 +108,7 @@ class UserController extends Controller
         $model = new UserForm();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->createUser()) {
+            if ($model->load ($this->request->post()) && $model->createUser()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }

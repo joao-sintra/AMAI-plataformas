@@ -104,7 +104,7 @@ class ClientesController extends Controller
 
         $model = $this->findModel($id, $user_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save() && $model->updateCliente()) {
             return $this->redirect(['view', 'id' => $model->id, 'user_id' => $model->user_id]);
         }
 

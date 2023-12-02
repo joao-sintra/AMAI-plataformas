@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use backend\models\UserForm;
 use Carbon\Carbon;
 use Yii;
 use backend\models\AuthAssignment;
@@ -86,6 +87,7 @@ class ClientesForm extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
+
     public function getAuth()
     {
         return $this->hasOne(AuthAssignment::class, ['user_id' => 'user_id']);
@@ -99,17 +101,18 @@ class ClientesForm extends \yii\db\ActiveRecord
         }
 
         $user = new User();
-        $userdata = new ClientesForm();
+        $cliente = new ClientesForm();
 
-        $userdata->primeironome = $this->primeironome;
-        $userdata->apelido = $this->apelido;
-        $userdata->codigopostal = $this->codigopostal;
-      /*  $userdata->localidade = $this->localidade;*/
-      /*  $userdata->rua = $this->rua;
-        $userdata->nif = $this->nif;*/
-        $userdata->dtanasc = Carbon::now();
-        $userdata->dtaregisto = Carbon::now();
-        $userdata->genero = $this->genero;
+        $cliente->primeironome = $this->primeironome;
+        $cliente->apelido = $this->apelido;
+        $cliente->codigopostal = $this->codigopostal;
+        /*  $userdata->localidade = $this->localidade;*/
+        /*  $userdata->rua = $this->rua;
+          $userdata->nif = $this->nif;*/
+        $cliente->dtanasc = Carbon::now();
+        $cliente->dtaregisto = Carbon::now();
+        $cliente->genero = $this->genero;
+
 
         $user->username = $this->username;
         $user->email = $this->email;
@@ -124,12 +127,39 @@ class ClientesForm extends \yii\db\ActiveRecord
         $userRole = $auth->getRole($this->role);
         $auth->assign($userRole, $user->getId());
 
-        $userdata->user_id = $user->id;
+        $cliente->user_id = $user->id;
         $this->id = $user->id;
 
-        $userdata->save();
+        $cliente->save();
 
         return $this->sendEmail($user);
+    }
+
+    public function updateCliente()
+    {
+
+        $user = User::findOne(['id' => $this->user_id]);
+        $cliente = ClientesForm::findOne(['id' => $this->id]);
+
+
+        /*$this->getUser()->one()->username
+        $this->getUser()->one()->email */
+
+        $user->save();
+
+
+
+        $cliente->primeironome = $this->primeironome;
+
+        $cliente->apelido = $this->apelido;
+        $cliente->codigopostal = $this->codigopostal;
+        $cliente->dtanasc = Carbon::now();
+        $cliente->dtaregisto = Carbon::now();
+        $cliente->genero = $this->genero;
+
+        $cliente->save();
+
+        return true;
     }
 
 }
