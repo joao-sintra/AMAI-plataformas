@@ -1,6 +1,6 @@
 <?php
 
-use backend\models\Empresa;
+use backend\models\Empresas;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -9,10 +9,14 @@ use yii\grid\GridView;
 /** @var yii\web\View $this */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Empresa';
+$this->title = 'Registo da Empresa';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="empresas-index">
+
+    <?php if ($dataProvider->getCount() === 0): ?>
+        <?= Html::a('Criar Empresa', ['create'], ['class' => 'btn btn-success']) ?>
+    <?php endif; ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -21,16 +25,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'designacaosocial:text:Designação Social',
-            'email:email',
+            'email',
             'telefone',
-            'nif:text:NIF',
+            //'nif:text:NIF',
             //'rua',
             //'codigopostal',
             //'localidade',
-            //'capitalsocial',
+            'capitalsocial:text:Capital Social',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Empresa $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Empresas $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

@@ -4,9 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var backend\models\Empresa $model */
+/** @var backend\models\Empresas $model */
 
-$this->title = $model->id;
+$this->title = $model->designacaosocial;
 $this->params['breadcrumbs'][] = ['label' => 'Empresa', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -31,14 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'designacaosocial',
-            'email:email',
+            'designacaosocial:text:Designação Social',
+            'email',
             'telefone',
-            'nif',
+            'nif:text:NIF',
             'rua',
-            'codigopostal',
+            'codigopostal:text:Código Postal',
             'localidade',
-            'capitalsocial',
+            'capitalsocial:text:Capital Social',
         ],
     ]) ?>
 

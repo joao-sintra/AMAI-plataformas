@@ -2,6 +2,7 @@
 
 namespace backend\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\User;
@@ -40,25 +41,23 @@ class UserSearch extends User
      *
      * @return ActiveDataProvider
      */
-    public function search($params, $roles)
+    public function search($params, $rolesToExclude = [])
     {
-        $query = User::find()
-            ->select(['user.id', 'user.username','user.email', 'auth_assignment.item_name as role'])
-            ->leftJoin('auth_assignment', 'user.id = auth_assignment.user_id')
-            ->andWhere(['auth_assignment.item_name' => $roles]);
+        $query = User::find();
 
+        $query->andWhere(['<>', 'id', Yii::$app->user->identity->id]);
 
-        // add conditions that should always apply here
+        $query->leftJoin('auth_assignment', 'auth_assignment.user_id = user.id');
+
+        if (!empty($rolesToExclude)) {
+            $query->andWhere(['NOT IN', 'auth_assignment.item_name', $rolesToExclude]);
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+        if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
 
@@ -78,7 +77,6 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'verification_token', $this->verification_token]);
 
         return $dataProvider;
+
     }
-
-
 }
