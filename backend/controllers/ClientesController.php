@@ -98,19 +98,24 @@ class ClientesController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
+
     public function actionUpdate($id, $user_id)
     {
-        $modeluser = User::findOne(['id' => $user_id]);
+        $modelUser = User::findOne(['id' => $user_id]);
 
         $model = $this->findModel($id, $user_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save() && $model->updateCliente()) {
-            return $this->redirect(['view', 'id' => $model->id, 'user_id' => $model->user_id]);
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->updateCliente() && $modelUser->load($this->request->post()) && $modelUser->save()) {
+            return $this->redirect(['view', 'id' => $model->id, 'user_id' => $modelUser->id]);
         }
+
+        /*if ($this->request->isPost && $model->load($this->request->post()) && $model->save() && $model->updateCliente()) {
+            return $this->redirect(['view', 'id' => $model->id, 'user_id' => $model->user_id]);
+        }*/
 
         return $this->render('update', [
             'model' => $model,
-            'modeluser' => $modeluser,
+            'modeluser' => $modelUser,
         ]);
     }
 

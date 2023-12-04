@@ -138,28 +138,24 @@ class ClientesForm extends \yii\db\ActiveRecord
     public function updateCliente()
     {
 
-        $user = User::findOne(['id' => $this->user_id]);
+        /*$user = User::findOne(['id' => $this->user_id]);*/
+
+       /* $user->username = $this->username;
+        $user->email = $this->email;
+        $user->save();*/
+
         $cliente = ClientesForm::findOne(['id' => $this->id]);
 
-
-        /*$this->getUser()->one()->username
-        $this->getUser()->one()->email */
-
-        $user->save();
-
-
-
         $cliente->primeironome = $this->primeironome;
-
         $cliente->apelido = $this->apelido;
         $cliente->codigopostal = $this->codigopostal;
         $cliente->dtanasc = Carbon::now();
         $cliente->dtaregisto = Carbon::now();
         $cliente->genero = $this->genero;
 
-        $cliente->save();
+        /*$cliente->save();*/
 
-        return true;
+        return $cliente->save();
     }
 
 }
