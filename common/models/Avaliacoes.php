@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use common\models\AvaliacoesProdutos;
+use Yii;
 use backend\models\Produtos;
 
 
@@ -14,8 +14,9 @@ use backend\models\Produtos;
  * @property string $dtarating
  * @property int $rating
  * @property int $user_id
+ * @property int $produto_id
  *
- * @property AvaliacoesProdutos[] $avaliacoesProdutos
+ * @property Produtos $produtos
  * @property User $user
  */
 class Avaliacoes extends \yii\db\ActiveRecord
@@ -34,11 +35,12 @@ class Avaliacoes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['comentario', 'dtarating', 'rating', 'user_id'], 'required'],
+            [['comentario', 'dtarating', 'rating', 'user_id', 'produtos_id'], 'required'],
             [['dtarating'], 'safe'],
-            [['rating', 'user_id'], 'integer'],
+            [['rating', 'user_id', 'produtos_id'], 'integer'],
             [['comentario'], 'string', 'max' => 200],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['produto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Produtos::class, 'targetAttribute' => ['produto_id' => 'id']],
         ];
     }
 
@@ -53,17 +55,19 @@ class Avaliacoes extends \yii\db\ActiveRecord
             'dtarating' => 'Dtarating',
             'rating' => 'Rating',
             'user_id' => 'User ID',
+            'produto_id' => 'Produto ID',
         ];
     }
 
     /**
-     * Gets query for [[AvaliacoesProdutos]].
+     * Gets query for [[Produtos]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getAvaliacoesProdutos()
+
+    public function getProduto()
     {
-        return $this->hasMany(AvaliacoesProdutos::class, ['avaliacao_id' => 'id']);
+        return $this->hasOne(Produtos::class, ['id' => 'produto_id']);
     }
 
     /**
@@ -74,11 +78,5 @@ class Avaliacoes extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
-    }
-
-    public function getProdutos()
-    {
-        return $this->hasMany(Produtos::class, ['id' => 'produto_id'])
-            ->viaTable('avaliacoes_produtos', ['avaliacao_id' => 'id']);
     }
 }

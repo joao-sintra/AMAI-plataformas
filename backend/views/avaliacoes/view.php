@@ -6,8 +6,7 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var \common\models\Avaliacoes $model */
 
-/*$this->title = $model->id;*/
-$this->title = $model->produtos[0]->nome ?? 'Avaliacao Details';
+$this->title = $model->produto->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Registo de Avaliações', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -33,16 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             /*'id',*/
             [
+                'attribute' => 'produto_id',
                 'label' => 'Produto',
                 'value' => function ($model) {
-                    $produtos = $model->produtos;
-                    $produtoNames = [];
-
-                    foreach ($produtos as $produto) {
-                        $produtoNames[] = $produto->nome;
-                    }
-
-                    return implode(', ', $produtoNames);
+                    return $model->produto->nome;
                 },
             ],
             'comentario:text:Comentário',

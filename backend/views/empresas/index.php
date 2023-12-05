@@ -14,9 +14,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="empresas-index">
 
-    <?php if ($dataProvider->getCount() === 0): ?>
-        <?= Html::a('Criar Empresa <i class="fas fa-plus"></i>', ['create'], ['class' => 'btn btn-success']) ?>
-    <?php endif; ?>
+    <p>
+        <?php if ($dataProvider->getCount() === 0): ?>
+            <?= Html::a('Criar Empresa <i class="fas fa-plus"></i>', ['create'], ['class' => 'btn btn-success']) ?>
+        <?php endif; ?>
+    </p>
+
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

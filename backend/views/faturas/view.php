@@ -4,19 +4,18 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var backend\models\CategoriasProdutos $model */
+/** @var common\models\Faturas $model */
 
-$this->title = $model->nome;
-$this->params['breadcrumbs'][] = ['label' => 'Categorias de Produtos', 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Registo de Faturas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="categorias-produtos-view">
+<div class="faturas-view">
 
-   <!-- <h1><?php /*= Html::encode($this->title) */?></h1>-->
+    <!--<h1><?php /*= Html::encode($this->title) */?></h1>-->
 
     <p>
-        <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['index', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -30,9 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            /*'id',*/
-            'nome',
-            'obs',
+            'id',
+            'data',
+            'valortotal',
+            'status',
         ],
     ]) ?>
 

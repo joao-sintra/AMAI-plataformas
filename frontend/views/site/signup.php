@@ -2,11 +2,18 @@
 
 /** @var yii\web\View $this */
 /** @var yii\bootstrap5\ActiveForm $form */
-
-/** @var \frontend\models\SignupForm $model */
+/** @var frontend\models\SignupForm $model */
 
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
+use yii\jui\DatePicker;
+use yii\web\JqueryAsset;
+use yii\web\YiiAsset;
+use yii\jui\JuiAsset;
+
+YiiAsset::register($this);
+JuiAsset::register($this);
+JqueryAsset::register($this);
 
 $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
@@ -30,7 +37,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <?= $form->field($model, 'apelido')->label('Apelido')->textInput() ?>
 
-                        <?= $form->field($model, 'dtanasc')->label('Data de Nascimento')->textInput() ?>
+                        <?= $form->field($model, 'dtanasc')->label('Data de Nascimento')->widget(DatePicker::class, [
+                            'language' => 'pt',
+                            'dateFormat' => 'yyyy-MM-dd',
+                            'options' => ['class' => 'form-control'],
+                        ])  ?>
 
                         <?= $form->field($model, 'email') ?>
 
@@ -42,6 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                             ['prompt' => 'Selecione o género']
                         );
+
                         ?>
 
                         <?php /*= $form->field($model, 'codigopostal')->label('Código Postal')->textInput() */ ?>

@@ -4,6 +4,7 @@ use common\models\Avaliacoes;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 /** @var yii\web\View $this */
 /** @var backend\models\AvaliacoesSearch $searchModel */
@@ -16,7 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
    <!-- <h1><?php /*= Html::encode($this->title) */?></h1>-->
 
-   <!-- --><?php /*= Html::a('Criar Avaliações', ['create'], ['class' => 'btn btn-success']) */?>
+    <!--<p>
+        <?php /*= Html::a('Criar Avaliações', ['create'], ['class' => 'btn btn-success']) */?>
+    </p>-->
+
 
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,16 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
             /*'id',*/
             [
+                'attribute' => 'produto_id',
                 'label' => 'Produto',
                 'value' => function ($model) {
-                    $produtos = $model->produtos;
-                    $produtoNames = [];
-
-                    foreach ($produtos as $produto) {
-                        $produtoNames[] = $produto->nome;
-                    }
-
-                    return implode(', ', $produtoNames);
+                    return $model->produto->nome;
                 },
             ],
             'comentario:text:Comentário',

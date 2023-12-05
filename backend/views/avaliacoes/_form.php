@@ -25,6 +25,8 @@ use yii\widgets\ActiveForm;
         ['prompt' => 'Select User']
     ) ?>
 
+    <?= $form->field($model, 'produto_id')->textInput() ?>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

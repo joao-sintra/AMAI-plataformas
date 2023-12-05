@@ -5,8 +5,6 @@ use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
 use yii\web\JqueryAsset;
 
-
-
 /** @var yii\web\View $this */
 /** @var common\models\ClientesForm $model *//** @var common\models\User $modeluser */
 /** @var yii\widgets\ActiveForm $form */
@@ -35,9 +33,9 @@ JqueryAsset::register($this);
     <?= $form->field($model, 'nif')->label('NIF')->textInput() ?>
 
     <?= $form->field($model, 'dtanasc')->label('Data de Nascimento')->widget(DatePicker::class, [
-        'language' => 'pt', // set the language of the datepicker
-        'dateFormat' => 'yyyy-MM-dd', // set the format of the date
-        'options' => ['class' => 'form-control'], // set any other options for the text input
+        'language' => 'pt',
+        'dateFormat' => 'yyyy-MM-dd',
+        'options' => ['class' => 'form-control'],
     ]) ?>
 
     <?= $form->field($model, 'telefone')->label('Telefone')->textInput() ?>

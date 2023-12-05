@@ -42,6 +42,8 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => 'Dashboard', 'header' => true],
                     ['label' => 'Dashboard', 'icon' => 'tachometer-alt', 'url' => ['/site/index']],
+                    ['label' => 'Faturas', 'header' => true],
+                    ['label' => 'Faturas', 'icon' => 'fas fa-file-invoice-dollar', 'url' => ['/faturas/index']],
                     ['label' => 'Gestão de Dados', 'header' => true],
                     [
                         'label' => 'Gestão de Dados', 'icon' => 'fas fa-file',
