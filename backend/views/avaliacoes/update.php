@@ -1,13 +1,11 @@
 <?php
 
-use yii\helpers\Html;
-
 /** @var yii\web\View $this */
-/** @var backend\models\Avaliacoes $model */
+/** @var \common\models\Avaliacoes $model */
 
-$this->title = 'Alterações na Avaliação ao Produto: ' . $model->id;
+$this->title = 'Alterações na Avaliação ao Produto: ' . $this->title = $model->produtos[0]->nome ?? 'Avaliacao Details';
 $this->params['breadcrumbs'][] = ['label' => 'Avaliacoes', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->produtos[0]->nome, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="avaliacoes-update">

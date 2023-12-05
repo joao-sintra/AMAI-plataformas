@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
 /** @var common\models\User $modeluser */
 
 $this->title = $model->user->username;
-$this->params['breadcrumbs'][] = ['label' => 'Users Datas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Registo de Clientes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            /*'id',*/
             'user.username',
             'primeironome:text:Nome',
             'apelido',

@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="empresas-index">
 
     <?php if ($dataProvider->getCount() === 0): ?>
-        <?= Html::a('Criar Empresa', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Empresa <i class="fas fa-plus"></i>', ['create'], ['class' => 'btn btn-success']) ?>
     <?php endif; ?>
 
     <?= GridView::widget([
@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             /*['class' => 'yii\grid\SerialColumn'],*/
 
-            'id',
+            /*'id',*/
             'designacaosocial:text:Designação Social',
             'email',
             'telefone',

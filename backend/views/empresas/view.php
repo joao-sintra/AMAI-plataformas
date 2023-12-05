@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /** @var backend\models\Empresas $model */
 
 $this->title = $model->designacaosocial;
-$this->params['breadcrumbs'][] = ['label' => 'Empresa', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Registo da Empresa', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            /*'id',*/
             'designacaosocial:text:Designação Social',
             'email',
             'telefone',

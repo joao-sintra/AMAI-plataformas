@@ -3,7 +3,6 @@
 namespace common\models;
 
 use backend\models\AuthAssignment;
-use backend\models\Avaliacoes;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;

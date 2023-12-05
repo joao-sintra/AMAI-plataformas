@@ -4,10 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var backend\models\Avaliacoes $model */
+/** @var \common\models\Avaliacoes $model */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Avaliacoes', 'url' => ['index']];
+/*$this->title = $model->id;*/
+$this->title = $model->produtos[0]->nome ?? 'Avaliacao Details';
+$this->params['breadcrumbs'][] = ['label' => 'Registo de Avaliações', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -17,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['index', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php /*= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) */?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -30,7 +31,20 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            /*'id',*/
+            [
+                'label' => 'Produto',
+                'value' => function ($model) {
+                    $produtos = $model->produtos;
+                    $produtoNames = [];
+
+                    foreach ($produtos as $produto) {
+                        $produtoNames[] = $produto->nome;
+                    }
+
+                    return implode(', ', $produtoNames);
+                },
+            ],
             'comentario:text:Comentário',
             'dtarating:text:Data de Avaliação',
             'rating:text:Avaliação',

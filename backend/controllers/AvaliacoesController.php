@@ -2,11 +2,11 @@
 
 namespace backend\controllers;
 
-use backend\models\Avaliacoes;
 use backend\models\AvaliacoesSearch;
+use common\models\Avaliacoes;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * AvaliacoesController implements the CRUD actions for Avaliacoes model.
@@ -55,9 +55,20 @@ class AvaliacoesController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+
+        // Use the first related product's name as the page title
+        $produto = $model->produtos[0] ?? null;
+        $this->view->title = $produto ? $produto->nome : 'Avaliacao Details';
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
+
+
+        /*return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);*/
     }
 
     /**
@@ -131,4 +142,5 @@ class AvaliacoesController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

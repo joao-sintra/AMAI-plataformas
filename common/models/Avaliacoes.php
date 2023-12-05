@@ -1,10 +1,9 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
-use Yii;
-use common\models\User;
-
+use common\models\AvaliacoesProdutos;
+use backend\models\Produtos;
 
 
 /**
@@ -75,5 +74,11 @@ class Avaliacoes extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
+    }
+
+    public function getProdutos()
+    {
+        return $this->hasMany(Produtos::class, ['id' => 'produto_id'])
+            ->viaTable('avaliacoes_produtos', ['avaliacao_id' => 'id']);
     }
 }

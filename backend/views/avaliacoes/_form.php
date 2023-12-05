@@ -1,12 +1,12 @@
 <?php
 
+use common\models\User;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-use common\models\User;
 
 /** @var yii\web\View $this */
-/** @var backend\models\Avaliacoes $model */
+/** @var \common\models\Avaliacoes $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 

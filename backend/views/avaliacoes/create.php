@@ -1,9 +1,7 @@
 <?php
 
-use yii\helpers\Html;
-
 /** @var yii\web\View $this */
-/** @var backend\models\Avaliacoes $model */
+/** @var \common\models\Avaliacoes $model */
 
 $this->title = 'Create Avaliacoes';
 $this->params['breadcrumbs'][] = ['label' => 'Avaliacoes', 'url' => ['index']];

@@ -1,10 +1,9 @@
 <?php
 
-use backend\models\Avaliacoes;
-use yii\helpers\Html;
-use yii\helpers\Url;
+use common\models\Avaliacoes;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 /** @var backend\models\AvaliacoesSearch $searchModel */
@@ -28,14 +27,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             /*['class' => 'yii\grid\SerialColumn'],*/
 
-            'id',
-            /*[
-                'attribute' => 'produto_id', // Adjust the attribute name based on your actual attribute
+            /*'id',*/
+            [
                 'label' => 'Produto',
                 'value' => function ($model) {
-                    return $model->produto->nome; // Assuming 'nome' is the attribute in the Produto model representing the name of the produto
+                    $produtos = $model->produtos;
+                    $produtoNames = [];
+
+                    foreach ($produtos as $produto) {
+                        $produtoNames[] = $produto->nome;
+                    }
+
+                    return implode(', ', $produtoNames);
                 },
-            ],*/
+            ],
             'comentario:text:Comentário',
             'dtarating:text:Data de Avaliação',
             'rating:text:Avaliação',
@@ -49,17 +54,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Avaliacoes $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-            /*[
-                'class' => ActionColumn::className(),
                 'template' => '{view} {delete}',
                 'urlCreator' => function ($action, Avaliacoes $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                 }
-            ],*/
+            ],
         ],
     ]); ?>
 

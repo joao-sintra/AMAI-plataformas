@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /** @var backend\models\Empresas $model */
 
 $this->title = 'Alteração dos Dados da Empresa: ' . $model->designacaosocial;
-$this->params['breadcrumbs'][] = ['label' => 'Empresa', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => 'Registo da Empresa', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->designacaosocial, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="empresas-update">

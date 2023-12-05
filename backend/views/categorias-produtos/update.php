@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /** @var backend\models\CategoriasProdutos $model */
 
 $this->title = 'Alteração dos Dados da Categoria: ' . $model->nome;
-$this->params['breadcrumbs'][] = ['label' => 'Categorias Produtos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Categorias de Produtos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->nome, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

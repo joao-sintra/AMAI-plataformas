@@ -19,7 +19,8 @@
         "yiisoft/yii2-bootstrap5": "~2.0.2",
         "yiisoft/yii2-symfonymailer": "~2.0.3",
         "hail812/yii2-adminlte3": "~1.1",
-        "nesbot/carbon": "^2.71"
+        "nesbot/carbon": "^2.71",
+        "yiisoft/yii2-jui": "^2.0"
         
     },
     "require-dev": {

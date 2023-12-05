@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /** @var backend\models\Iva $model */
 
 $this->title = $model->descricao;
-$this->params['breadcrumbs'][] = ['label' => 'Ivas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Registo de Ivas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 \yii\web\YiiAsset::register($this);
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            /*'id',*/
             'percentagem',
             'descricao',
             [

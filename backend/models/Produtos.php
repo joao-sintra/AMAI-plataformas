@@ -2,7 +2,7 @@
 
 namespace backend\models;
 
-use Yii;
+use common\models\AvaliacoesProdutos;
 
 /**
  * This is the model class for table "produtos".

@@ -2,9 +2,9 @@
 
 namespace backend\models;
 
+use common\models\Avaliacoes;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Avaliacoes;
 
 /**
  * AvaliacoesSearch represents the model behind the search form of `backend\models\Avaliacoes`.
