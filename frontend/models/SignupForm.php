@@ -110,11 +110,8 @@ class SignupForm extends Model
 
         $userdata->primeironome = $this->primeironome;
         $userdata->apelido = $this->apelido;
-       /* $userdata->codigopostal = "3080-275";
-        $userdata->localidade = "asdsa";*/
-        $userdata->dtanasc = Carbon::now();
-        $userdata->dtaregisto = Carbon::now();//$this->dtaregisto;
-      /*  $userdata->telefone = "912345678";*/
+        $userdata->dtanasc = $this->dtanasc;
+        $userdata->dtaregisto = Carbon::now();
         $userdata->genero = $this->genero;
 
         $user->username = $this->username;
@@ -137,6 +134,7 @@ class SignupForm extends Model
         $this->id = $user->id;
 
         $userdata->save();
+
 
 
 

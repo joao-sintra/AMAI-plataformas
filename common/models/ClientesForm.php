@@ -41,16 +41,18 @@ class ClientesForm extends \yii\db\ActiveRecord
     {
         return [
             [['primeironome', 'apelido', /*'codigopostal', 'localidade', 'rua', 'nif',*/ 'dtanasc', 'dtaregisto', /*'telefone',*/ 'genero', 'user_id'], 'required'],
+            [['primeironome', 'apelido'], 'string', 'max' => 50],
             [['dtanasc', 'dtaregisto'], 'safe'],
             [['genero'], 'string'],
-            [['user_id'], 'integer'],
-            [['primeironome', 'apelido'], 'string', 'max' => 50],
             [['codigopostal'], 'string', 'max' => 8],
             [['localidade', 'rua'], 'string', 'max' => 100],
-            [['nif'], 'string', 'max' => 10],
+            [['nif'], 'string', 'max' => 10,'min' => 9, 'tooShort' => 'Precisa no mínimo 9 digitos', 'tooLong' => 'Não pode ter mais de 9 digitos'],
             [['nif'], 'unique'],
-            [['telefone'], 'string', 'max' => 12],
+            [['nif'], 'match', 'pattern' => '/^\d+$/i', 'message' => 'Só são aceites números.'],
+            [['telefone'], 'string', 'max' => 9, 'min' => 9, 'tooShort' => 'Precisa no mínimo 9 digitos', 'tooLong' => 'Não pode ter mais de 9 digitos'],
+            [['telefone'], 'unique'],
             [['telefone'], 'match', 'pattern' => '/^\d+$/i', 'message' => 'Só são aceites números .'],
+            [['user_id'], 'integer'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -93,67 +95,22 @@ class ClientesForm extends \yii\db\ActiveRecord
         return $this->hasOne(AuthAssignment::class, ['user_id' => 'user_id']);
     }
 
-
-    public function createCliente()
-    {
-        if (!$this->validate()) {
-            return null;
-        }
-
-        $user = new User();
-        $cliente = new ClientesForm();
-
-        $cliente->primeironome = $this->primeironome;
-        $cliente->apelido = $this->apelido;
-        $cliente->codigopostal = $this->codigopostal;
-        /*  $userdata->localidade = $this->localidade;*/
-        /*  $userdata->rua = $this->rua;
-          $userdata->nif = $this->nif;*/
-        $cliente->dtanasc = Carbon::now();
-        $cliente->dtaregisto = Carbon::now();
-        $cliente->genero = $this->genero;
-
-
-        $user->username = $this->username;
-        $user->email = $this->email;
-        $user->setPassword($this->password);
-        $user->generateAuthKey();
-        $user->generateEmailVerificationToken();
-
-        $user->save();
-
-        $this->id = $user->id;
-        $auth = \Yii::$app->authManager;
-        $userRole = $auth->getRole($this->role);
-        $auth->assign($userRole, $user->getId());
-
-        $cliente->user_id = $user->id;
-        $this->id = $user->id;
-
-        $cliente->save();
-
-        return $this->sendEmail($user);
-    }
-
     public function updateCliente()
     {
-
-        /*$user = User::findOne(['id' => $this->user_id]);*/
-
-       /* $user->username = $this->username;
-        $user->email = $this->email;
-        $user->save();*/
 
         $cliente = ClientesForm::findOne(['id' => $this->id]);
 
         $cliente->primeironome = $this->primeironome;
         $cliente->apelido = $this->apelido;
         $cliente->codigopostal = $this->codigopostal;
-        $cliente->dtanasc = Carbon::now();
+        $cliente->localidade = $this->localidade;
+        $cliente->rua = $this->rua;
+        $cliente->nif = $this->nif;
+        $cliente->dtanasc = $this->dtanasc;
         $cliente->dtaregisto = Carbon::now();
         $cliente->genero = $this->genero;
+        $cliente->telefone = $this->telefone;
 
-        /*$cliente->save();*/
 
         return $cliente->save();
     }

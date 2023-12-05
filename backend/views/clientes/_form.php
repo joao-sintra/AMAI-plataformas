@@ -1,15 +1,21 @@
 <?php
 
 use yii\helpers\Html;
+use yii\jui\JuiAsset;
+use yii\web\YiiAsset;
 use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
 use yii\web\JqueryAsset;
 
 /** @var yii\web\View $this */
-/** @var common\models\ClientesForm $model *//** @var common\models\User $modeluser */
+/** @var common\models\ClientesForm $model */
+/** @var common\models\User $modeluser */
 /** @var yii\widgets\ActiveForm $form */
 
 JqueryAsset::register($this);
+YiiAsset::register($this);
+JuiAsset::register($this);
+
 ?>
 
 <div class="users-data-form">
@@ -24,7 +30,7 @@ JqueryAsset::register($this);
 
     <?= $form->field($modeluser, 'email') ?>
 
-    <?=  $form->field($model, 'codigopostal')->label('Código Postal')->textInput() ?>
+    <?= $form->field($model, 'codigopostal')->label('Código Postal')->textInput() ?>
 
     <?= $form->field($model, 'localidade')->label('Localidade')->textInput() ?>
 

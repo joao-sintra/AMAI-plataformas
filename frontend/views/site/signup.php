@@ -55,14 +55,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         );
 
                         ?>
-
-                        <?php /*= $form->field($model, 'codigopostal')->label('Código Postal')->textInput() */ ?>
-                        <?php /*= $form->field($model, 'localidade')->label('Localidade')->textInput() */ ?>
-                        <?php /*= $form->field($model, 'rua')->label('Rua')->textInput() */ ?>
-                        <?php /*= $form->field($model, 'nif')->label('NIF')->textInput() */ ?>
-                        <?php /*//echo $form->field($model, 'dtanasc')->label('Data de Nascimento')->textInput() */ ?>
-                        <?php /*= $form->field($model, 'telefone')->label('Telefone')->textInput() */ ?>
-
                         <div class="form-group">
                             <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
                         </div>
@@ -74,3 +66,4 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+<script src="https://github.com/jquery/jquery-ui/blob/2de8604b67983a53fd42b24610a59e140a1425e9/ui/i18n/datepicker-pt.js"></script>
