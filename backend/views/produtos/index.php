@@ -10,15 +10,15 @@ use yii\grid\GridView;
 /** @var backend\models\ProdutosSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Produtos';
+$this->title = 'Registo de Produtos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="produtos-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!--<h1><?php /*= Html::encode($this->title) */?></h1>-->
 
     <p>
-        <?= Html::a('Create Produtos', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Produto', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -27,15 +27,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            /*['class' => 'yii\grid\SerialColumn'],*/
 
-            'id',
+            /*'id',*/
             'nome',
-            'descricao',
-            'preco',
+            'descricao:text:Descrição',
+            'preco:text:Preço',
             'obs',
-            //'categoria_produto_id',
-            //'iva_id',
+            [
+                'attribute' => 'categoria_produto_id',
+                'label' => 'Categoria',
+                'value' => function ($model) {
+                    return $model->categoriaProduto->nome;
+                },
+            ],
+            [
+                'attribute' => 'iva_id',
+                'label' => 'IVA(%)',
+                'value' => function ($model) {
+                    return $model->iva->percentagem;
+                },
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Produtos $model, $key, $index, $column) {

@@ -77,6 +77,5 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'verification_token', $this->verification_token]);
 
         return $dataProvider;
-
     }
 }

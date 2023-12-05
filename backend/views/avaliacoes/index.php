@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
    <!-- <h1><?php /*= Html::encode($this->title) */?></h1>-->
 
-    <?php /*= Html::a('Criar Avaliações', ['create'], ['class' => 'btn btn-success']) */?>
+   <!-- --><?php /*= Html::a('Criar Avaliações', ['create'], ['class' => 'btn btn-success']) */?>
 
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,17 +26,25 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            /*['class' => 'yii\grid\SerialColumn'],*/
 
             'id',
+            /*[
+                'attribute' => 'produto_id', // Adjust the attribute name based on your actual attribute
+                'label' => 'Produto',
+                'value' => function ($model) {
+                    return $model->produto->nome; // Assuming 'nome' is the attribute in the Produto model representing the name of the produto
+                },
+            ],*/
             'comentario:text:Comentário',
             'dtarating:text:Data de Avaliação',
-            'rating:text:Avaliação em Estrelas',
-            /*'user_id:text:Cliente',*/
+            'rating:text:Avaliação',
             [
                 'attribute' => 'user_id',
                 'label' => 'Cliente',
-                'value' => 'user.username', // Assuming 'username' is the attribute in the User model that represents the user's name
+                'value' => function ($model) {
+                    return $model->user->username; // Access the username through the relationship
+                },
             ],
 
             [
@@ -45,6 +53,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
+            /*[
+                'class' => ActionColumn::className(),
+                'template' => '{view} {delete}',
+                'urlCreator' => function ($action, Avaliacoes $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
+                }
+            ],*/
         ],
     ]); ?>
 

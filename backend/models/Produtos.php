@@ -18,7 +18,7 @@ use Yii;
  * @property AvaliacoesProdutos[] $avaliacoesProdutos
  * @property CategoriasProdutos $categoriaProduto
  * @property Imagens[] $imagens
- * @property Ivas $iva
+ * @property Iva $iva
  * @property ProdutosCarrinhos[] $produtosCarrinhos
  */
 class Produtos extends \yii\db\ActiveRecord
@@ -45,7 +45,7 @@ class Produtos extends \yii\db\ActiveRecord
             [['obs'], 'string', 'max' => 100],
             [['nome'], 'unique'],
             [['categoria_produto_id'], 'exist', 'skipOnError' => true, 'targetClass' => CategoriasProdutos::class, 'targetAttribute' => ['categoria_produto_id' => 'id']],
-            [['iva_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ivas::class, 'targetAttribute' => ['iva_id' => 'id']],
+            [['iva_id'], 'exist', 'skipOnError' => true, 'targetClass' => Iva::class, 'targetAttribute' => ['iva_id' => 'id']],
         ];
     }
 
@@ -102,7 +102,7 @@ class Produtos extends \yii\db\ActiveRecord
      */
     public function getIva()
     {
-        return $this->hasOne(Ivas::class, ['id' => 'iva_id']);
+        return $this->hasOne(Iva::class, ['id' => 'iva_id']);
     }
 
     /**

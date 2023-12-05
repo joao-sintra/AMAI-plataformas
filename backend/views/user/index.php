@@ -8,7 +8,7 @@ use yii\grid\GridView;
 
 
 /** @var yii\web\View $this */
-/** @var common\models\UserSearch $searchModel */
+/** @var backend\models\UserSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 

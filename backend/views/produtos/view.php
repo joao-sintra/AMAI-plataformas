@@ -6,14 +6,14 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var backend\models\Produtos $model */
 
-$this->title = $model->id;
+$this->title = $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Produtos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="produtos-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!--<h1><?php /*= Html::encode($this->title) */?></h1>-->
 
     <p>
         <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['index', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
@@ -32,11 +32,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nome',
-            'descricao',
-            'preco',
+            'descricao:text:Descrição',
+            'preco:text:Preço',
             'obs',
-            'categoria_produto_id',
-            'iva_id',
+            [
+                'attribute' => 'categoria_produto_id',
+                'label' => 'Categoria',
+                'value' => function ($model) {
+                    return $model->categoriaProduto->nome;
+                },
+            ],
+            [
+                'attribute' => 'iva_id',
+                'label' => 'IVA(%)',
+                'value' => function ($model) {
+                    return $model->iva->percentagem;
+                },
+            ],
         ],
     ]) ?>
 

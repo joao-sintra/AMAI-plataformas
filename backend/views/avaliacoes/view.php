@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="avaliacoes-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!--<h1><?php /*= Html::encode($this->title) */?></h1>-->
 
     <p>
         <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['index', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
@@ -31,10 +31,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'comentario',
-            'dtarating',
-            'rating',
-            'user_id',
+            'comentario:text:Comentário',
+            'dtarating:text:Data de Avaliação',
+            'rating:text:Avaliação',
+            [
+                'attribute' => 'user_id',
+                'label' => 'Cliente',
+                'value' => function ($model) {
+                    return $model->user->username; // Access the username through the relationship
+                },
+            ],
         ],
     ]) ?>
 
