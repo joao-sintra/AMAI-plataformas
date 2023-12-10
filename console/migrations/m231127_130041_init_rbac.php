@@ -176,6 +176,12 @@ class m231127_130041_init_rbac extends Migration
         $auth->addChild($role_cliente, $permission_fazerEncomendas);
         $auth->addChild($role_cliente, $permission_editarDadosPessoais);
 
+
+
+        //Role apenas para acesso à aplicação móvel
+        $role_estafeta = $auth->createRole('estafeta');
+        $auth->add($role_estafeta);
+
         $auth->assign($role_admin, 1);
         $auth->assign($role_gestor, 2);
         $auth->assign($role_funcionario, 3);

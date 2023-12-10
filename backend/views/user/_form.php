@@ -38,6 +38,7 @@ use Carbon\Carbon;
         "admin" => 'Administrador',
         "gestor" => 'Gestor',
         "funcionario" => 'Funcionário',
+        "estafeta" => 'Estafeta',
     ],
         ['prompt' => 'Selecione o tipo de role do user']
     );
