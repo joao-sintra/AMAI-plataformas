@@ -21,7 +21,6 @@
         "hail812/yii2-adminlte3": "~1.1",
         "nesbot/carbon": "^2.71",
         "yiisoft/yii2-jui": "^2.0"
-        
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

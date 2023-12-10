@@ -65,6 +65,8 @@ AppAsset::register($this);
 
                     ['label' => 'Sobre Nós', 'header' => true],
                     ['label' => 'Contactos', 'icon' => 'address-book', 'url' => ['/site/contactos']],
+                    ['label' => 'Perfil', 'header' => true],
+                    ['label' => 'Perfil', 'icon' => 'fas fa-user', 'url' => ['/perfil/index']],
                 ],
             ]);
             ?>

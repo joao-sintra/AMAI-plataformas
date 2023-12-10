@@ -34,6 +34,12 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
+    public $currentPassword;
+    public $newPassword;
+    public $confirmPassword;
+
+    const SCENARIO_PASSWORD = 'password';
+
 
     /**
      * {@inheritdoc}
@@ -68,8 +74,43 @@ class User extends ActiveRecord implements IdentityInterface
             [['username'], 'unique'],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],
+
+            [['newPassword', 'currentPassword', 'confirmPassword'], 'required', 'on' => self::SCENARIO_PASSWORD],
+            [['currentPassword'], 'validateCurrentPassword', 'on' => self::SCENARIO_PASSWORD],
+            [['newPassword', 'confirmPassword'], 'string', 'min' => 6, 'on' => self::SCENARIO_PASSWORD],
+            [['newPassword', 'confirmPassword'], 'filter', 'filter' => 'trim', 'on' => self::SCENARIO_PASSWORD],
+            [['confirmPassword'], 'compare', 'compareAttribute' => 'newPassword', 'message' => 'Passwords do not match', 'on' => self::SCENARIO_PASSWORD],
+
+           /*[['newPassword', 'currentPassword', 'confirmPassword'], 'required'],
+            [['currentPassword'], 'validateCurrentPassword'],
+
+            [['newPassword', 'confirmPassword'], 'string', 'min' => 6],
+            [['newPassword', 'confirmPassword'], 'filter', 'filter' => 'trim'],
+            [['confirmPassword'], 'compare', 'compareAttribute' => 'newPassword', 'message' => 'Passwords do not match'],*/
         ];
     }
+
+    public function validateCurrentPassword()
+    {
+        if (!$this->verifyPassword($this->currentPassword)) {
+            $this->addError("currentPassword", 'Current password is incorrect');
+        }
+    }
+
+    public function verifyPassword($password)
+    {
+        $dbpassword = static::findOne(['username' => Yii::$app->user->identity->username])->password_hash;
+        return Yii::$app->security->validatePassword($password, $dbpassword);
+    }
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        // Define a scenario for the password-related actions
+        $scenarios[self::SCENARIO_PASSWORD] = ['newPassword', 'currentPassword', 'confirmPassword'];
+        return $scenarios;
+    }
+
     public function attributeLabels()
     {
         return [
@@ -204,7 +245,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function setPassword($password)
     {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+       $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
 
     public function getPassword()
@@ -276,6 +317,5 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasOne(AuthAssignment::class, ['user_id' => 'id']);
     }
-    //make a function to get the user username
 
 }
