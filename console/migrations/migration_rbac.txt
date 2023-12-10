@@ -1,26 +1,40 @@
-/*
-         * Permissões de todos
-         *  - Ver, Editar os seus dados pessoais
-         *
-         * Permissões de admin
-         *  - Ver, Editar, Criar e Apagar utilizadores
-         *  - Ver, Editar, Criar e Apagar produtos
-         *  - Ver, Editar, Criar e Apagar categorias
-         *  - Ver, Apagar avaliações
-         *  - Ver, Editar, Criar e Apagar encomendas
-         *  - Ver, Editar (editar o estado da fatura) faturas
-         *  - Ver, Editar, Criar e Apagar ivas
-         *  - Ver, Editar, Criar empresa
-         *
-         * Permissões de Gestor
-         *  - Ver, Editar, Criar e Apagar produtos
-         *  - Ver, Editar, Criar e Apagar categorias
-         *  - Ver, Apagar avaliações
-         *  - Ver, Editar encomendas
-         *
-         * Permissões de Funcionário
-         *  - Ver, Editar encomendas
-         */
+<?php
+
+use yii\db\Migration;
+
+/**
+ * Class m231127_130041_init_rbac
+ */
+class m231127_130041_init_rbac extends Migration
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function safeUp()
+    {
+        /*
+                 * Permissões de todos
+                 *  - Ver, Editar os seus dados pessoais
+                 *
+                 * Permissões de admin
+                 *  - Ver, Editar, Criar e Apagar utilizadores
+                 *  - Ver, Editar, Criar e Apagar produtos
+                 *  - Ver, Editar, Criar e Apagar categorias
+                 *  - Ver, Apagar avaliações
+                 *  - Ver, Editar, Criar e Apagar encomendas
+                 *  - Ver, Editar (editar o estado da fatura) faturas
+                 *  - Ver, Editar, Criar e Apagar ivas
+                 *  - Ver, Editar, Criar empresas
+                 *
+                 * Permissões de Gestor
+                 *  - Ver, Editar, Criar e Apagar produtos
+                 *  - Ver, Editar, Criar e Apagar categorias
+                 *  - Ver, Apagar avaliações
+                 *  - Ver, Editar encomendas
+                 *
+                 * Permissões de Funcionário
+                 *  - Ver, Editar encomendas
+                 */
 
 
 
@@ -94,7 +108,7 @@
         $permission_apagarIvas = $auth->createPermission('apagarIvas');
         $auth->add($permission_apagarIvas);
 
-        //Permissões para editar dados de empresa
+        //Permissões para editar dados de empresas
         $permission_editarEmpresa = $auth->createPermission('editarEmpresa');
         $auth->add($permission_editarEmpresa);
 
@@ -164,4 +178,38 @@
 
 
 
+        //Role apenas para acesso à aplicação móvel
+        $role_estafeta = $auth->createRole('estafeta');
+        $auth->add($role_estafeta);
 
+        $auth->assign($role_admin, 1);
+        $auth->assign($role_gestor, 2);
+        $auth->assign($role_funcionario, 3);
+        $auth->assign($role_cliente, 4);
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function safeDown()
+    {
+       $auth = Yii::$app->authManager;
+       $auth->removeAll();
+    }
+
+    /*
+    // Use up()/down() to run migration code without a transaction.
+    public function up()
+    {
+
+    }
+
+    public function down()
+    {
+        echo "m231127_130041_init_rbac cannot be reverted.\n";
+
+        return false;
+    }
+    */
+}
