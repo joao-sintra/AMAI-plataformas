@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use app\models\UploadForm;
-use backend\models\Produto;
-use backend\models\ProdutoSearch;
+use common\models\Produto;
+use common\models\ProdutoSearch;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

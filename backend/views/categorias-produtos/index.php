@@ -1,6 +1,6 @@
 <?php
 
-use backend\models\CategoriaProduto;
+use common\models\CategoriaProduto;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;

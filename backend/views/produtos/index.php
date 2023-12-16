@@ -1,6 +1,6 @@
 <?php
 
-use backend\models\Produto;
+use common\models\Produto;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
