@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'auth.item_name',
                 'label' => 'Role',
-                'value' => function ($model) {
+               /* 'value' => function ($model) {
                     switch ($model->auth['item_name']) {
                         case 'admin':
                             return 'Administrador';
@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         default:
                             return $model->auth['item_name'];
                     }
-                },
+                },*/
             ],
             /*  'auth_key',
               'password_hash',

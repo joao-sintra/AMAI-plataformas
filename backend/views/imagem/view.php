@@ -4,21 +4,21 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var backend\models\CategoriaProduto $model */
+/** @var common\models\Imagem $model */
 
-$this->title = $model->nome;
-$this->params['breadcrumbs'][] = ['label' => 'Categorias de Produto', 'url' => ['index']];
+$this->title = $model->produto->nome;
+$this->params['breadcrumbs'][] = ['label' => 'Imagems', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="categorias-produtos-view">
+<div class="imagem-view">
 
-   <!-- <h1><?php /*= Html::encode($this->title) */?></h1>-->
+
 
     <p>
         <?= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['index', 'id' => $model->id], ['class' => 'btn btn-info']) ?>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Update', ['update', 'id' => $model->id, 'produto_id' => $model->produto_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->id, 'produto_id' => $model->produto_id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -30,9 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            /*'id',*/
-            'nome',
-            'obs',
+            'fileName',
+            'produto.nome',
         ],
     ]) ?>
 

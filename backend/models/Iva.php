@@ -2,7 +2,7 @@
 
 namespace backend\models;
 
-use common\models\Produtos;
+use Yii;
 
 /**
  * This is the model class for table "ivas".
@@ -12,7 +12,7 @@ use common\models\Produtos;
  * @property string $descricao
  * @property int $vigor
  *
- * @property \common\models\Produtos[] $produtos
+ * @property Produto[] $produtos
  */
 class Iva extends \yii\db\ActiveRecord
 {
@@ -50,12 +50,12 @@ class Iva extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Produtos]].
+     * Gets query for [[Produto]].
      *
      * @return \yii\db\ActiveQuery
      */
     public function getProdutos()
     {
-        return $this->hasMany(Produtos::class, ['iva_id' => 'id']);
+        return $this->hasMany(Produto::class, ['iva_id' => 'id']);
     }
 }

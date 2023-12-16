@@ -1,16 +1,16 @@
 <?php
 
-use common\models\Produtos;
-use yii\grid\ActionColumn;
-use yii\grid\GridView;
+use backend\models\Produto;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\grid\ActionColumn;
+use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var \common\models\ProdutosSearch $searchModel */
+/** @var backend\models\ProdutoSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Registo de Produtos';
+$this->title = 'Registo de Produto';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="produtos-index">
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Produtos $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Produto $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id, 'categoria_produto_id' => $model->categoria_produto_id, 'iva_id' => $model->iva_id]);
                  }
             ],

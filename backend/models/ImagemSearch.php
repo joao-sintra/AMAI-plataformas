@@ -1,28 +1,24 @@
 <?php
 
-namespace common\models;
+namespace backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use common\models\Imagem;
 
 /**
- * ProdutosSearch represents the model behind the search form of `common\models\Produtos`.
+ * ImagemSearch represents the model behind the search form of `common\models\Imagem`.
  */
-class ProdutosSearch extends Produtos
+class ImagemSearch extends Imagem
 {
-
-    public $search;
-
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'categoria_produto_id', 'iva_id'], 'integer'],
-            [['nome', 'descricao', 'obs'], 'safe'],
-            [['preco'], 'number'],
-            [['search'], 'safe'],
+            [['id', 'produto_id'], 'integer'],
+            [['fileName'], 'safe'],
         ];
     }
 
@@ -44,7 +40,7 @@ class ProdutosSearch extends Produtos
      */
     public function search($params)
     {
-        $query = \common\models\Produtos::find();
+        $query = Imagem::find();
 
         // add conditions that should always apply here
 
@@ -63,14 +59,10 @@ class ProdutosSearch extends Produtos
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'preco' => $this->preco,
-            'categoria_produto_id' => $this->categoria_produto_id,
-            'iva_id' => $this->iva_id,
+            'produto_id' => $this->produto_id,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome])
-            ->andFilterWhere(['like', 'descricao', $this->descricao])
-            ->andFilterWhere(['like', 'obs', $this->obs]);
+        $query->andFilterWhere(['like', 'fileName', $this->fileName]);
 
         return $dataProvider;
     }

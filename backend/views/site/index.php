@@ -23,7 +23,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         <div class="col-lg-4 col-md-6 col-sm-6 col-12">
             <?= \hail812\adminlte\widgets\SmallBox::widget([
                 'title' => '44',
-                'text' => 'Produtos Mais Vendidos',
+                'text' => 'Produto Mais Vendidos',
                 'icon' => 'fas fa-user-plus',
                 'theme' => 'gradient-success',
             ]) ?>

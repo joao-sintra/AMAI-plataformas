@@ -51,7 +51,6 @@ class SignupForm extends Model
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
-            //rules user data
             ['primeironome', 'trim'],
             ['primeironome', 'required'],
             ['primeironome', 'string', 'max' => 50],
@@ -59,26 +58,26 @@ class SignupForm extends Model
             ['apelido', 'trim'],
             ['apelido', 'required'],
             ['apelido', 'string', 'max' => 50],
-/*
-            ['codigopostal', 'trim'],
-            ['codigopostal', 'required'],
-            ['codigopostal', 'string', 'max' => 8],
+            /*
+                        ['codigopostal', 'trim'],
+                        ['codigopostal', 'required'],
+                        ['codigopostal', 'string', 'max' => 8],
 
-            ['localidade', 'trim'],
-            ['localidade', 'required'],
-            [['localidade', 'rua'], 'string', 'max' => 100],*/
-/*
-            ['rua', 'trim'],
-            ['rua', 'required'],*/
+                        ['localidade', 'trim'],
+                        ['localidade', 'required'],
+                        [['localidade', 'rua'], 'string', 'max' => 100],*/
+            /*
+                        ['rua', 'trim'],
+                        ['rua', 'required'],*/
 
             [['rua', 'nif'], 'default'],
-           /* ['nif', 'trim'],
-            ['nif', 'required'],
-            ['nif', 'string', 'max' => 9],*/
-/*
-            ['telefone', 'trim'],
-            ['telefone', 'required'],
-            ['telefone', 'string', 'max' => 9],*/
+            /* ['nif', 'trim'],
+             ['nif', 'required'],
+             ['nif', 'string', 'max' => 9],*/
+            /*
+                        ['telefone', 'trim'],
+                        ['telefone', 'required'],
+                        ['telefone', 'string', 'max' => 9],*/
 
             ['genero', 'trim'],
             ['genero', 'required'],
@@ -87,11 +86,15 @@ class SignupForm extends Model
             ['role', 'required'],
             ['role', 'string', 'max' => 255],
 
-            ['dtaregisto', 'safe'],
+            ['dtanasc', 'safe'],
+            ['dtanasc', 'required'],
+            ['dtanasc', 'date', 'format' => 'yyyy-MM-dd'],
 
             ['user_id', 'integer'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+
         ];
+
     }
 
     /**
@@ -122,6 +125,7 @@ class SignupForm extends Model
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
 
+
         $user->save();
 
 
@@ -133,8 +137,8 @@ class SignupForm extends Model
         $userdata->user_id = $user->id;
         $this->id = $user->id;
 
-        $userdata->save();
 
+        $userdata->save();
 
 
 
