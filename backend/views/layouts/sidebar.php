@@ -42,31 +42,33 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => 'Dashboard', 'header' => true],
                     ['label' => 'Dashboard', 'icon' => 'tachometer-alt', 'url' => ['/site/index']],
+
                     ['label' => 'Faturas', 'header' => true],
                     ['label' => 'Faturas', 'icon' => 'fas fa-file-invoice-dollar', 'url' => ['/faturas/index']],
                     ['label' => 'Gestão de Dados', 'header' => true],
+
                     [
                         'label' => 'Gestão de Dados', 'icon' => 'fas fa-file',
                         'items' => [
                             ['label' => 'Gerir Trabalhadores', 'icon' => 'users', 'url' => ['/user/index']],
                             ['label' => 'Gerir Clientes', 'icon' => 'user', 'url' => ['clientes/index']],
+                            ['label' => 'Avaliações', 'icon' => 'fa-solid fa-star', 'url' => ['avaliacoes/index']],
                             ['label' => 'IVAS', 'icon' => 'fa-solid fa-percent', 'url' => ['iva/index']],
                             ['label' => 'Empresa', 'icon' => 'fa-solid fa-building', 'url' => ['empresas/index']],
-                            ['label' => 'Avaliações', 'icon' => 'fa-solid fa-star', 'url' => ['avaliacoes/index']],
                         ],
                     ],
                     ['label' => 'Produtos', 'header' => true],
                     /* ['label' => 'Vendas de Produtos', 'icon' => 'shopping-cart', 'url' => ['/site/vendas']],*/
                     ['label' => 'Cat. dos Produtos', 'icon' => 'fa-solid fa-tag', 'url' => ['/categorias-produtos/index']],
                     ['label' => 'Criação dos Produtos', 'icon' => 'fa-solid fa-box', 'url' => ['/produtos/index']],
+
+                    ['label' => 'Perfil', 'header' => true],
+                    ['label' => 'Perfil', 'icon' => 'fas fa-user', 'url' => ['/perfil/index']],
+
                     ['label' => 'Debug Tools', 'header' => true],
                     ['label' => 'Gii', 'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
                     ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
 
-                    ['label' => 'Sobre Nós', 'header' => true],
-                    ['label' => 'Contactos', 'icon' => 'address-book', 'url' => ['/site/contactos']],
-                    ['label' => 'Perfil', 'header' => true],
-                    ['label' => 'Perfil', 'icon' => 'fas fa-user', 'url' => ['/perfil/index']],
                 ],
             ]);
             ?>

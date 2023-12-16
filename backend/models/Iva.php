@@ -2,7 +2,7 @@
 
 namespace backend\models;
 
-use Yii;
+use common\models\Produtos;
 
 /**
  * This is the model class for table "ivas".
@@ -12,7 +12,7 @@ use Yii;
  * @property string $descricao
  * @property int $vigor
  *
- * @property Produtos[] $produtos
+ * @property \common\models\Produtos[] $produtos
  */
 class Iva extends \yii\db\ActiveRecord
 {

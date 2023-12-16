@@ -1,8 +1,6 @@
 <?php
 
-namespace backend\models;
-
-use Yii;
+namespace common\models;
 
 /**
  * This is the model class for table "categorias_produtos".
@@ -11,7 +9,7 @@ use Yii;
  * @property string $nome
  * @property string|null $obs
  *
- * @property Produtos[] $produtos
+ * @property \common\models\Produtos[] $produtos
  */
 class CategoriasProdutos extends \yii\db\ActiveRecord
 {
@@ -54,6 +52,6 @@ class CategoriasProdutos extends \yii\db\ActiveRecord
      */
     public function getProdutos()
     {
-        return $this->hasMany(Produtos::class, ['categoria_produto_id' => 'id']);
+        return $this->hasMany(\common\models\Produtos::class, ['categoria_produto_id' => 'id']);
     }
 }

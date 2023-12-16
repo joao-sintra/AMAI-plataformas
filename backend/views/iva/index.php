@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var backend\models\IvaSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Registo de Ivas';
+$this->title = 'Registo dos Ivas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="iva-index">

@@ -1,12 +1,10 @@
 <?php
 
-use yii\helpers\Html;
-
 /** @var yii\web\View $this */
-/** @var backend\models\CategoriasProdutos $model */
+/** @var \common\models\CategoriasProdutos $model */
 
 $this->title = 'Alteração dos Dados da Categoria: ' . $model->nome;
-$this->params['breadcrumbs'][] = ['label' => 'Categorias de Produtos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Categorias dos Produtos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->nome, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

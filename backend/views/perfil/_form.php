@@ -8,7 +8,6 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-
 <div class="perfil-form">
 
     <?php $form = ActiveForm::begin(); ?>
@@ -18,8 +17,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Alterar', ['class' => 'btn btn-success']) ?>
         <?= Html::a('Alterar Password', ['changepassword'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Alterar', ['class' => 'btn btn-success']) ?>
     </div>
 
 

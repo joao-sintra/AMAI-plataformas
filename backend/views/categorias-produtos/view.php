@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var backend\models\CategoriasProdutos $model */
+/** @var \common\models\CategoriasProdutos $model */
 
 $this->title = $model->nome;
-$this->params['breadcrumbs'][] = ['label' => 'Categorias de Produtos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Categorias dos Produtos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

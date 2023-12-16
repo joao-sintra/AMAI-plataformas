@@ -2,11 +2,11 @@
 
 namespace backend\controllers;
 
-use backend\models\CategoriasProdutos;
-use backend\models\CategoriasProdutosSearch;
+use common\models\CategoriasProdutos;
+use common\models\CategoriasProdutosSearch;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * CategoriasProdutosController implements the CRUD actions for CategoriasProdutos model.

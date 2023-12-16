@@ -10,7 +10,7 @@ use yii\helpers\Html;
 /** @var backend\models\AvaliacoesSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Registo de Avaliações';
+$this->title = 'Registo das Avaliações';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="avaliacoes-index">

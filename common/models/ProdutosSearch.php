@@ -1,16 +1,18 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Produtos;
 
 /**
- * ProdutosSearch represents the model behind the search form of `backend\models\Produtos`.
+ * ProdutosSearch represents the model behind the search form of `common\models\Produtos`.
  */
 class ProdutosSearch extends Produtos
 {
+
+    public $search;
+
     /**
      * {@inheritdoc}
      */
@@ -20,6 +22,7 @@ class ProdutosSearch extends Produtos
             [['id', 'categoria_produto_id', 'iva_id'], 'integer'],
             [['nome', 'descricao', 'obs'], 'safe'],
             [['preco'], 'number'],
+            [['search'], 'safe'],
         ];
     }
 
@@ -41,7 +44,7 @@ class ProdutosSearch extends Produtos
      */
     public function search($params)
     {
-        $query = Produtos::find();
+        $query = \common\models\Produtos::find();
 
         // add conditions that should always apply here
 

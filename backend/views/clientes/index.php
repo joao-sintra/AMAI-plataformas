@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var common\models\ClientesFormSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Registo de Clientes';
+$this->title = 'Registo dos Clientes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="users-data-index">

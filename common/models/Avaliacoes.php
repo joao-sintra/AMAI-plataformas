@@ -2,9 +2,6 @@
 
 namespace common\models;
 
-use Yii;
-use backend\models\Produtos;
-
 
 /**
  * This is the model class for table "avaliacoes".
@@ -16,7 +13,7 @@ use backend\models\Produtos;
  * @property int $user_id
  * @property int $produto_id
  *
- * @property Produtos $produtos
+ * @property \frontend\models\Produtos $produtos
  * @property User $user
  */
 class Avaliacoes extends \yii\db\ActiveRecord
@@ -40,7 +37,7 @@ class Avaliacoes extends \yii\db\ActiveRecord
             [['rating', 'user_id', 'produtos_id'], 'integer'],
             [['comentario'], 'string', 'max' => 200],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
-            [['produto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Produtos::class, 'targetAttribute' => ['produto_id' => 'id']],
+            [['produto_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Produtos::class, 'targetAttribute' => ['produto_id' => 'id']],
         ];
     }
 

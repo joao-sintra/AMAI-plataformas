@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\CategoriasProdutos;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -15,6 +16,10 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\Produtos;
+use yii\web\NotFoundHttpException;
+use yii\data\ActiveDataProvider;
+use common\models\ProdutosSearch;
 
 /**
  * Site controller
@@ -174,9 +179,46 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionShop()
+    public function actionShop($categoria = null, $search = null)
     {
-        return $this->render('shop');
+        $categorias = CategoriasProdutos::find()->all();
+
+        $searchModel = new ProdutosSearch();
+        $searchModel->search = $search;
+
+        $query = Produtos::find();
+
+        $searchModel = new ProdutosSearch();
+        $searchModel->search = $search;
+
+        if ($searchModel->load(Yii::$app->request->get()) && $searchModel->validate()) {
+            // Form submitted with valid data
+            $query->andFilterWhere(['like', 'nome', $searchModel->search]);
+        }
+
+        if ($categoria !== null) {
+            $query->andWhere(['categoria_produto_id' => $categoria]);
+        }
+
+        // Update search condition to only search for product names
+        $query->andFilterWhere(['like', 'nome', $searchModel->search]);
+
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 9, // Set the number of items per page
+            ],
+        ]);
+
+
+        return $this->render('shop', [
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+            'categorias' => $categorias,
+        ]);
+
+
     }
 
     /**
@@ -289,5 +331,10 @@ class SiteController extends Controller
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+
+    public function getProdutos()
+    {
+        return $this->hasMany(Produtos::class, ['categoria_produto_id' => 'id']);
     }
 }

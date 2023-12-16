@@ -2,11 +2,11 @@
 
 namespace backend\controllers;
 
-use backend\models\Produtos;
-use backend\models\ProdutosSearch;
+use common\models\Produtos;
+use common\models\ProdutosSearch;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ProdutosController implements the CRUD actions for Produtos model.
@@ -128,7 +128,7 @@ class ProdutosController extends Controller
      * @param int $id ID
      * @param int $categoria_produto_id Categoria Produto ID
      * @param int $iva_id Iva ID
-     * @return Produtos the loaded model
+     * @return \frontend\models\\common\models\Produtos the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id, $categoria_produto_id, $iva_id)

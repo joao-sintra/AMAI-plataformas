@@ -12,7 +12,7 @@ use yii\grid\GridView;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 
-$this->title = 'Registo de Trabalhadores';
+$this->title = 'Registo dos Trabalhadores';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">

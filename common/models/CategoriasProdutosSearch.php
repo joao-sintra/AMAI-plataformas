@@ -1,13 +1,12 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\CategoriasProdutos;
 
 /**
- * CategoriasProdutosSearch represents the model behind the search form of `backend\models\CategoriasProdutos`.
+ * CategoriasProdutosSearch represents the model behind the search form of `common\models\CategoriasProdutos`.
  */
 class CategoriasProdutosSearch extends CategoriasProdutos
 {
@@ -40,7 +39,7 @@ class CategoriasProdutosSearch extends CategoriasProdutos
      */
     public function search($params)
     {
-        $query = CategoriasProdutos::find();
+        $query = \common\models\CategoriasProdutos::find();
 
         // add conditions that should always apply here
 

@@ -1,9 +1,7 @@
 <?php
 
-use yii\helpers\Html;
-
 /** @var yii\web\View $this */
-/** @var backend\models\Produtos $model */
+/** @var \common\models\Produtos $model */
 
 $this->title = 'Alteração dos Dados do Produto: '. $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Registo de Produtos', 'url' => ['index']];

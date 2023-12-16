@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'percentagem')->textInput() ?>
 
-    <?= $form->field($model, 'descricao')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'descricao')->label('Descrição')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'vigor')->label('Vigor')->dropDownList([
         "1" => 'SIM',

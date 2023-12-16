@@ -1,13 +1,13 @@
 <?php
 
-use backend\models\Produtos;
-use yii\helpers\Html;
-use yii\helpers\Url;
+use common\models\Produtos;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
-/** @var backend\models\ProdutosSearch $searchModel */
+/** @var \common\models\ProdutosSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Registo de Produtos';

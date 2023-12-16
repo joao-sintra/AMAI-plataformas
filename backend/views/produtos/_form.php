@@ -1,13 +1,13 @@
 <?php
 
+use backend\models\Iva;
+use common\models\CategoriasProdutos;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
-use backend\models\CategoriasProdutos;
-use backend\models\Iva;
 
 /** @var yii\web\View $this */
-/** @var backend\models\Produtos $model */
+/** @var \common\models\Produtos $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 

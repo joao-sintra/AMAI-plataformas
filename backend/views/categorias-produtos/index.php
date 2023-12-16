@@ -1,16 +1,16 @@
 <?php
 
-use backend\models\CategoriasProdutos;
-use yii\helpers\Html;
-use yii\helpers\Url;
+use common\models\CategoriasProdutos;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
-/** @var backend\models\CategoriasProdutosSearch $searchModel */
+/** @var \common\models\CategoriasProdutosSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Categorias de Produtos';
+$this->title = 'Categorias dos Produtos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="categorias-produtos-index">

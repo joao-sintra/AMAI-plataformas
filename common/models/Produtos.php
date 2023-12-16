@@ -1,8 +1,10 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
-use common\models\AvaliacoesProdutos;
+use backend\models\Imagens;
+use backend\models\Iva;
+use backend\models\ProdutosCarrinhos;
 
 /**
  * This is the model class for table "produtos".
