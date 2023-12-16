@@ -12,10 +12,6 @@ use yii\widgets\LinkPager;
 ?>
 
 <style>
-    .custom-input-field {
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-    }
 
     .pagination-container {
         display: inline-block;
@@ -44,15 +40,13 @@ use yii\widgets\LinkPager;
                     <div class="input-group">
                         <?= $form->field($searchModel, 'search', ['inputOptions' => [
                             'placeholder' => 'Pesquisar...',
-                            'class' => 'form-control p-3 custom-input-field',
+                            'class' => 'form-control p-3',
                             'style' => 'border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 0; border-bottom-right-radius: 0;',
                         ]])                            ->label(false)
                             ->textInput(['aria-describedby' => 'search-icon-1', 'name' => 'ProdutosSearch[search]', 'id' => 'search-input']); ?>
-                        <span class="input-group-text p-1" id="search-icon">
-                            <button type="submit" class="btn" style="border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
+                        <button type="submit" class="btn btn-outline p-3" style="border-color: #ced4da; background-color: #e9ecef;">
+                            <i class="fa fa-search" style="color: #6c757d;"></i>
+                        </button>
                     </div>
                     <?php ActiveForm::end(); ?>
                 </div>
