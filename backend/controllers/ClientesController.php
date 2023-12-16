@@ -62,7 +62,6 @@ class ClientesController extends Controller
 
         return $this->render('view', [
             'model' => $this->findModel($id, $user_id),
-            'modeluser' => $modeluser,
         ]);
     }
 
@@ -97,7 +96,7 @@ class ClientesController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'modeluser' => $modelUser,
+
         ]);
     }
 

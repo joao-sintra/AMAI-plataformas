@@ -44,53 +44,7 @@ class UserForm extends Model
             ['role', 'required'],
             ['role', 'string', 'max' => 255],
 
-            /* //rules user data
-             ['primeironome', 'trim'],
-             ['primeironome', 'required'],
-             ['primeironome', 'string', 'max' => 50],
 
-             ['apelido', 'trim'],
-             ['apelido', 'required'],
-             ['apelido', 'string', 'max' => 50],
-
-             ['codigopostal', 'trim'],
-             ['codigopostal', 'required'],
-             ['codigopostal', 'string', 'max' => 8],
-
-             ['localidade', 'trim'],
-             ['localidade', 'required'],
-             [['localidade', 'rua'], 'string', 'max' => 100],
-
-             ['rua', 'trim'],
-             ['rua', 'required'],
-
-             ['nif', 'trim'],
-             ['nif', 'required'],
-             ['nif', 'string', 'max' => 9],
-
-             ['telefone', 'trim'],
-             ['telefone', 'required'],
-             ['telefone', 'string', 'max' => 9],
-
-             ['dtanasc', 'trim'],
-             ['dtanasc', 'required'],
-             ['dtanasc', 'safe'],
-
-             ['genero', 'trim'],
-             ['genero', 'required'],
-             ['genero', 'string'],
-
-             ['salario', 'trim'],
-             ['salario', 'required'],
-             ['salario', 'number'],
-
-             ['role', 'required'],
-             ['role', 'string', 'max' => 255],
-
-             ['dtaregisto', 'safe'],
-
-             ['user_id', 'integer'],
-             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],*/
         ];
     }
 
