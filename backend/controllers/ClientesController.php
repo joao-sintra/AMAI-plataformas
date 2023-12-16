@@ -62,7 +62,6 @@ class ClientesController extends Controller
 
         return $this->render('view', [
             'model' => $this->findModel($id, $user_id),
-            'modeluser' => $modeluser,
         ]);
     }
 
@@ -71,24 +70,6 @@ class ClientesController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
-    {
-        $model = new ClientesForm();
-        $modeluser = new UserForm();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save() && $model->createCliente()) {
-                return $this->redirect(['view', 'id' => $model->id, 'user_id' => $model->user_id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-            'modeluser' => $modeluser,
-        ]);
-    }
 
     /**
      * Updates an existing ClientesForm model.
@@ -115,7 +96,7 @@ class ClientesController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'modeluser' => $modelUser,
+
         ]);
     }
 

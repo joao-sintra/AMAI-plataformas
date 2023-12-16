@@ -5,7 +5,7 @@ use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
 /** @var common\models\ClientesForm $model */
-/** @var common\models\User $modeluser */
+
 
 $this->title = $model->user->username;
 $this->params['breadcrumbs'][] = ['label' => 'Registo dos Clientes', 'url' => ['index']];
@@ -44,7 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'dtaregisto:text:Data de Registo',
             'telefone',
             'genero:text:Género',
-            /*'user_id',*/
         ],
     ]) ?>
 

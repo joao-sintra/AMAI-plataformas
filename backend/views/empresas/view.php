@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var backend\models\Empresas $model */
+/** @var backend\models\Empresa $model */
 
 $this->title = $model->designacaosocial;
 $this->params['breadcrumbs'][] = ['label' => 'Registo da Empresa', 'url' => ['index']];

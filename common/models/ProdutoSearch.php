@@ -6,18 +6,23 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * CategoriasProdutosSearch represents the model behind the search form of `common\models\CategoriasProdutos`.
+ * ProdutoSearch represents the model behind the search form of `common\models\Produto`.
  */
-class CategoriasProdutosSearch extends CategoriasProdutos
+class ProdutoSearch extends Produto
 {
+
+    public $search;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['nome', 'obs'], 'safe'],
+            [['id', 'categoria_produto_id', 'iva_id'], 'integer'],
+            [['nome', 'descricao', 'obs'], 'safe'],
+            [['preco'], 'number'],
+            [['search'], 'safe'],
         ];
     }
 
@@ -39,7 +44,7 @@ class CategoriasProdutosSearch extends CategoriasProdutos
      */
     public function search($params)
     {
-        $query = \common\models\CategoriasProdutos::find();
+        $query = \common\models\Produto::find();
 
         // add conditions that should always apply here
 
@@ -58,9 +63,13 @@ class CategoriasProdutosSearch extends CategoriasProdutos
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'preco' => $this->preco,
+            'categoria_produto_id' => $this->categoria_produto_id,
+            'iva_id' => $this->iva_id,
         ]);
 
         $query->andFilterWhere(['like', 'nome', $this->nome])
+            ->andFilterWhere(['like', 'descricao', $this->descricao])
             ->andFilterWhere(['like', 'obs', $this->obs]);
 
         return $dataProvider;

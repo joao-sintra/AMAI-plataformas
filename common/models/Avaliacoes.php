@@ -2,6 +2,9 @@
 
 namespace common\models;
 
+use Yii;
+use backend\models\Produto;
+
 
 /**
  * This is the model class for table "avaliacoes".
@@ -13,7 +16,7 @@ namespace common\models;
  * @property int $user_id
  * @property int $produto_id
  *
- * @property \frontend\models\Produtos $produtos
+ * @property Produto $produtos
  * @property User $user
  */
 class Avaliacoes extends \yii\db\ActiveRecord
@@ -37,7 +40,7 @@ class Avaliacoes extends \yii\db\ActiveRecord
             [['rating', 'user_id', 'produtos_id'], 'integer'],
             [['comentario'], 'string', 'max' => 200],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
-            [['produto_id'], 'exist', 'skipOnError' => true, 'targetClass' => \common\models\Produtos::class, 'targetAttribute' => ['produto_id' => 'id']],
+            [['produto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Produto::class, 'targetAttribute' => ['produto_id' => 'id']],
         ];
     }
 
@@ -57,14 +60,14 @@ class Avaliacoes extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Produtos]].
+     * Gets query for [[Produto]].
      *
      * @return \yii\db\ActiveQuery
      */
 
     public function getProduto()
     {
-        return $this->hasOne(Produtos::class, ['id' => 'produto_id']);
+        return $this->hasOne(Produto::class, ['id' => 'produto_id']);
     }
 
     /**

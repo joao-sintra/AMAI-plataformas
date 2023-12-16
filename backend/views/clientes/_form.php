@@ -22,13 +22,13 @@ JuiAsset::register($this);
 
     <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
 
-    <?= $form->field($modeluser, 'username')->textInput(['autofocus' => true]) ?>
+    <?= $form->field($model->user, 'username')->textInput(['autofocus' => true]) ?>
 
     <?= $form->field($model, 'primeironome')->label('Nome')->textInput() ?>
 
     <?= $form->field($model, 'apelido')->label('Apelido')->textInput() ?>
 
-    <?= $form->field($modeluser, 'email') ?>
+    <?= $form->field($model->user, 'email') ?>
 
     <?= $form->field($model, 'codigopostal')->label('Código Postal')->textInput() ?>
 

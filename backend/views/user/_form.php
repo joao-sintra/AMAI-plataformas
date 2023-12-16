@@ -18,8 +18,7 @@ use Carbon\Carbon;
 
     <?= $form->field($model, 'username')->label('Username')->textInput() ?>
     <?= $form->field($model, 'email')->label('Email')->textInput() ?>
-    <?= $form->field($model, 'password')->label('Password')->textInput(['type' => 'password']) ?>
-
+    <?= $form->field($model, 'password')->label('Password')->passwordInput(['type' => 'password']) ?>
     <?= $form->field($model, 'role')->label('Role')->dropDownList([
         "admin" => 'Administrador',
         "gestor" => 'Gestor',

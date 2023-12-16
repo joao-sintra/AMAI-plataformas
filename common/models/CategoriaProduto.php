@@ -9,9 +9,9 @@ namespace common\models;
  * @property string $nome
  * @property string|null $obs
  *
- * @property \common\models\Produtos[] $produtos
+ * @property \common\models\Produto[] $produtos
  */
-class CategoriasProdutos extends \yii\db\ActiveRecord
+class CategoriaProduto extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -46,12 +46,12 @@ class CategoriasProdutos extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Produtos]].
+     * Gets query for [[Produto]].
      *
      * @return \yii\db\ActiveQuery
      */
     public function getProdutos()
     {
-        return $this->hasMany(\common\models\Produtos::class, ['categoria_produto_id' => 'id']);
+        return $this->hasMany(\common\models\Produto::class, ['categoria_produto_id' => 'id']);
     }
 }

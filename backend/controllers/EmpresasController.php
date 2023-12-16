@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-use backend\models\Empresas;
+use backend\models\Empresa;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -40,7 +40,7 @@ class EmpresasController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Empresas::find(),
+            'query' => Empresa::find(),
             /*
             'pagination' => [
                 'pageSize' => 50
@@ -78,7 +78,7 @@ class EmpresasController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Empresas();
+        $model = new Empresa();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -131,12 +131,12 @@ class EmpresasController extends Controller
      * Finds the Empresa model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Empresas the loaded model
+     * @return Empresa the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Empresas::findOne(['id' => $id])) !== null) {
+        if (($model = Empresa::findOne(['id' => $id])) !== null) {
 
             return $model;
         }

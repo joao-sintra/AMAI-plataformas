@@ -17,7 +17,7 @@ use Yii;
  * @property string $localidade
  * @property float $capitalsocial
  */
-class Empresas extends \yii\db\ActiveRecord
+class Empresa extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}

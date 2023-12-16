@@ -1,13 +1,13 @@
 <?php
 
 use backend\models\Iva;
-use common\models\CategoriasProdutos;
+use common\models\CategoriaProduto;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var \common\models\Produtos $model */
+/** @var \common\models\Produto $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
     <?php /*= $form->field($model, 'categoria_produto_id')->label('Categoria')->textInput() */?>
 
     <?= $form->field($model, 'categoria_produto_id')->label('Categoria')->dropDownList(
-        ArrayHelper::map(CategoriasProdutos::find()->all(), 'id', 'nome'),
+        ArrayHelper::map(CategoriaProduto::find()->all(), 'id', 'nome'),
         ['prompt' => 'Selecione o tipo de categoria do produto']
     ) ?>
 

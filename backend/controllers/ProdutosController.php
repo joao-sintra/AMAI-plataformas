@@ -2,14 +2,17 @@
 
 namespace backend\controllers;
 
-use common\models\Produtos;
-use common\models\ProdutosSearch;
-use yii\filters\VerbFilter;
+use app\models\UploadForm;
+use common\models\Produto;
+use common\models\ProdutoSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
- * ProdutosController implements the CRUD actions for Produtos model.
+ * ProdutosController implements the CRUD actions for Produto model.
  */
 class ProdutosController extends Controller
 {
@@ -32,13 +35,13 @@ class ProdutosController extends Controller
     }
 
     /**
-     * Lists all Produtos models.
+     * Lists all Produto models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new ProdutosSearch();
+        $searchModel = new ProdutoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +51,7 @@ class ProdutosController extends Controller
     }
 
     /**
-     * Displays a single Produtos model.
+     * Displays a single Produto model.
      * @param int $id ID
      * @param int $categoria_produto_id Categoria Produto ID
      * @param int $iva_id Iva ID
@@ -63,13 +66,13 @@ class ProdutosController extends Controller
     }
 
     /**
-     * Creates a new Produtos model.
+     * Creates a new Produto model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Produtos();
+        $model = new Produto();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -85,7 +88,7 @@ class ProdutosController extends Controller
     }
 
     /**
-     * Updates an existing Produtos model.
+     * Updates an existing Produto model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @param int $categoria_produto_id Categoria Produto ID
@@ -107,7 +110,7 @@ class ProdutosController extends Controller
     }
 
     /**
-     * Deletes an existing Produtos model.
+     * Deletes an existing Produto model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @param int $categoria_produto_id Categoria Produto ID
@@ -121,22 +124,22 @@ class ProdutosController extends Controller
 
         return $this->redirect(['index']);
     }
-
     /**
-     * Finds the Produtos model based on its primary key value.
+     * Finds the Produto model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
      * @param int $categoria_produto_id Categoria Produto ID
      * @param int $iva_id Iva ID
-     * @return \frontend\models\\common\models\Produtos the loaded model
+     * @return Produto the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id, $categoria_produto_id, $iva_id)
     {
-        if (($model = Produtos::findOne(['id' => $id, 'categoria_produto_id' => $categoria_produto_id, 'iva_id' => $iva_id])) !== null) {
+        if (($model = Produto::findOne(['id' => $id, 'categoria_produto_id' => $categoria_produto_id, 'iva_id' => $iva_id])) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

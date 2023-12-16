@@ -1,6 +1,6 @@
 <?php
 
-use backend\models\Empresas;
+use backend\models\Empresa;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'capitalsocial:text:Capital Social',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Empresas $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Empresa $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
