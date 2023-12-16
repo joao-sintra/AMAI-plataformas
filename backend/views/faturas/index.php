@@ -33,6 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'data',
             'valortotal:text:Valor Total(€)',
             'status',
+            /*'user_id',*/
+            [
+                'attribute' => 'user_id',
+                'value' => 'user.username',
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Faturas $model, $key, $index, $column) {

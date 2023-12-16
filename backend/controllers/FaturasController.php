@@ -50,13 +50,14 @@ class FaturasController extends Controller
     /**
      * Displays a single Faturas model.
      * @param int $id ID
+     * @param int $user_id User ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id, $user_id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id, $user_id),
         ]);
     }
 
@@ -71,7 +72,7 @@ class FaturasController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'id' => $model->id, 'user_id' => $model->user_id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -86,15 +87,16 @@ class FaturasController extends Controller
      * Updates an existing Faturas model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
+     * @param int $user_id User ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $user_id)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($id, $user_id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id, 'user_id' => $model->user_id]);
         }
 
         return $this->render('update', [
@@ -106,12 +108,13 @@ class FaturasController extends Controller
      * Deletes an existing Faturas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
+     * @param int $user_id User ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($id, $user_id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($id, $user_id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -120,12 +123,13 @@ class FaturasController extends Controller
      * Finds the Faturas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
+     * @param int $user_id User ID
      * @return Faturas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
-        if (($model = Faturas::findOne(['id' => $id])) !== null) {
+
+    protected function findModel($id, $user_id)    {
+        if (($model = Faturas::findOne(['id' => $id, 'user_id' => $user_id])) !== null) {
             return $model;
         }
 
