@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             /*['class' => 'yii\grid\SerialColumn'],*/
 
-            /*'id',*/
+            'id',
             'data',
             'valortotal:text:Valor Total(€)',
             'status',
@@ -40,8 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => ActionColumn::className(),
+                'template' => '{view} {update}',
                 'urlCreator' => function ($action, Faturas $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
+                    return Url::toRoute([$action, 'id' => $model->id, 'user_id' => $model->user_id]);
                  }
             ],
         ],

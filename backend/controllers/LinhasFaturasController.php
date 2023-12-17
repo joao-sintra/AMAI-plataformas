@@ -2,8 +2,6 @@
 
 namespace backend\controllers;
 
-use common\models\Faturas;
-use common\models\FaturasSearch;
 use common\models\LinhasFaturas;
 use common\models\LinhasFaturasSearch;
 use yii\web\Controller;
@@ -11,9 +9,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * FaturasController implements the CRUD actions for Faturas model.
+ * LinhasFaturasController implements the CRUD actions for LinhasFaturas model.
  */
-class FaturasController extends Controller
+class LinhasFaturasController extends Controller
 {
     /**
      * @inheritDoc
@@ -34,13 +32,13 @@ class FaturasController extends Controller
     }
 
     /**
-     * Lists all Faturas models.
+     * Lists all LinhasFaturas models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new FaturasSearch();
+        $searchModel = new LinhasFaturasSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -50,37 +48,32 @@ class FaturasController extends Controller
     }
 
     /**
-     * Displays a single Faturas model.
+     * Displays a single LinhasFaturas model.
      * @param int $id ID
-     * @param int $user_id User ID
+     * @param int $fatura_id Fatura ID
+     * @param int $produtos_carrinhos_id Produtos Carrinhos ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id, $user_id)
+    public function actionView($id, $fatura_id, $produtos_carrinhos_id)
     {
-
-        $searchModel = new LinhasFaturasSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams, $id);
-
         return $this->render('view', [
-            'model' => $this->findModel($id, $user_id),
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'model' => $this->findModel($id, $fatura_id, $produtos_carrinhos_id),
         ]);
     }
 
     /**
-     * Creates a new Faturas model.
+     * Creates a new LinhasFaturas model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Faturas();
+        $model = new LinhasFaturas();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id, 'user_id' => $model->user_id]);
+                return $this->redirect(['view', 'id' => $model->id, 'fatura_id' => $model->fatura_id, 'produtos_carrinhos_id' => $model->produtos_carrinhos_id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -92,19 +85,20 @@ class FaturasController extends Controller
     }
 
     /**
-     * Updates an existing Faturas model.
+     * Updates an existing LinhasFaturas model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
-     * @param int $user_id User ID
+     * @param int $fatura_id Fatura ID
+     * @param int $produtos_carrinhos_id Produtos Carrinhos ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id, $user_id)
+    public function actionUpdate($id, $fatura_id, $produtos_carrinhos_id)
     {
-        $model = $this->findModel($id, $user_id);
+        $model = $this->findModel($id, $fatura_id, $produtos_carrinhos_id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'user_id' => $model->user_id]);
+            return $this->redirect(['view', 'id' => $model->id, 'fatura_id' => $model->fatura_id, 'produtos_carrinhos_id' => $model->produtos_carrinhos_id]);
         }
 
         return $this->render('update', [
@@ -113,31 +107,33 @@ class FaturasController extends Controller
     }
 
     /**
-     * Deletes an existing Faturas model.
+     * Deletes an existing LinhasFaturas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
-     * @param int $user_id User ID
+     * @param int $fatura_id Fatura ID
+     * @param int $produtos_carrinhos_id Produtos Carrinhos ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id, $user_id)
+    public function actionDelete($id, $fatura_id, $produtos_carrinhos_id)
     {
-        $this->findModel($id, $user_id)->delete();
+        $this->findModel($id, $fatura_id, $produtos_carrinhos_id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Faturas model based on its primary key value.
+     * Finds the LinhasFaturas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @param int $user_id User ID
-     * @return Faturas the loaded model
+     * @param int $fatura_id Fatura ID
+     * @param int $produtos_carrinhos_id Produtos Carrinhos ID
+     * @return LinhasFaturas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-
-    protected function findModel($id, $user_id)    {
-        if (($model = Faturas::findOne(['id' => $id, 'user_id' => $user_id])) !== null) {
+    protected function findModel($id, $fatura_id, $produtos_carrinhos_id)
+    {
+        if (($model = LinhasFaturas::findOne(['id' => $id, 'fatura_id' => $fatura_id, 'produtos_carrinhos_id' => $produtos_carrinhos_id])) !== null) {
             return $model;
         }
 
