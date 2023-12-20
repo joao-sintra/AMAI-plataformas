@@ -3,6 +3,7 @@
 namespace common\models;
 
 use common\models\Produto;
+use Yii;
 
 /**
  * This is the model class for table "imagem".
@@ -46,7 +47,7 @@ class Imagem extends \yii\db\ActiveRecord
 
         if ($this->validate()) {
 
-            $uploadPath = 'public/imagens/produtos/' . $this->imageFile->baseName . uniqid() . '.' . $this->imageFile->extension;
+            $uploadPath = Yii::getAlias('@frontend/web/public/imagens/produtos/') . $this->imageFile->baseName . uniqid() . '.' . $this->imageFile->extension;
 
             $this->imageFile->saveAs($uploadPath, false);
 

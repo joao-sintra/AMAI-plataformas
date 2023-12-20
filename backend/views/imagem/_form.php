@@ -1,7 +1,7 @@
 <?php
 
-use backend\models\CategoriaProduto;
-use backend\models\Produto;
+use common\models\CategoriaProduto;
+use common\models\Produto;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
