@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var backend\models\Produto $model */
 
-$this->title = 'Criar Produto';
-$this->params['breadcrumbs'][] = ['label' => 'Registo de Produto', 'url' => ['index']];
+$this->title = 'Criar Produtos';
+$this->params['breadcrumbs'][] = ['label' => 'Registo de Produtos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="produtos-create">

@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var common\models\Imagem $model */
+/** @var common\models\Imagens $model */
 
-$this->title = 'Upload da Imagem';
+$this->title = 'Upload da Imagens';
 $this->params['breadcrumbs'][] = ['label' => 'Imagems', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -2,7 +2,7 @@
 
 namespace frontend\controllers;
 
-use common\models\CategoriaProduto;
+use common\models\CategoriasProdutos;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -16,10 +16,10 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-use common\models\Produto;
+use common\models\Produtos;
 use yii\web\NotFoundHttpException;
 use yii\data\ActiveDataProvider;
-use common\models\ProdutoSearch;
+use common\models\ProdutosSearch;
 
 /**
  * Site controller
@@ -181,14 +181,14 @@ class SiteController extends Controller
 
     public function actionShop($categoria = null, $search = null)
     {
-        $categorias = CategoriaProduto::find()->all();
+        $categorias = CategoriasProdutos::find()->all();
 
-        $searchModel = new ProdutoSearch();
+        $searchModel = new ProdutosSearch();
         $searchModel->search = $search;
 
-        $query = Produto::find();
+        $query = Produtos::find();
 
-        $searchModel = new ProdutoSearch();
+        $searchModel = new ProdutosSearch();
         $searchModel->search = $search;
 
         if ($searchModel->load(Yii::$app->request->get()) && $searchModel->validate()) {
@@ -335,6 +335,6 @@ class SiteController extends Controller
 
     public function getProdutos()
     {
-        return $this->hasMany(Produto::class, ['categoria_produto_id' => 'id']);
+        return $this->hasMany(Produtos::class, ['categoria_produto_id' => 'id']);
     }
 }

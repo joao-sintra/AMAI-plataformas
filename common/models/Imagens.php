@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use common\models\Produto;
+use common\models\Produtos;
 use Yii;
 
 /**
@@ -12,9 +12,9 @@ use Yii;
  * @property string $fileName
  * @property int $produto_id
  *
- * @property Produto $produto
+ * @property Produtos $produto
  */
-class Imagem extends \yii\db\ActiveRecord
+class Imagens extends \yii\db\ActiveRecord
 {
     public $imageFile;
 
@@ -35,7 +35,7 @@ class Imagem extends \yii\db\ActiveRecord
             [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
             [['produto_id'], 'required'],
             [['produto_id'], 'integer'],
-            [['produto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Produto::class, 'targetAttribute' => ['produto_id' => 'id']],
+            [['produto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Produtos::class, 'targetAttribute' => ['produto_id' => 'id']],
         ];
     }
 
@@ -61,18 +61,18 @@ class Imagem extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'fileName' => 'Imagem',
-            'produto_id' => 'Produto Associado',
+            'fileName' => 'Imagens',
+            'produto_id' => 'Produtos Associado',
         ];
     }
 
     /**
-     * Gets query for [[Produto]].
+     * Gets query for [[Produtos]].
      *
      * @return \yii\db\ActiveQuery
      */
     public function getProduto()
     {
-        return $this->hasOne(Produto::class, ['id' => 'produto_id']);
+        return $this->hasOne(Produtos::class, ['id' => 'produto_id']);
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-use backend\models\Iva;
-use common\models\CategoriaProduto;
+use common\models\Ivas;
+use common\models\CategoriasProdutos;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var \common\models\Produto $model */
+/** @var \common\models\Produtos $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
@@ -26,14 +26,14 @@ use yii\widgets\ActiveForm;
     <?php /*= $form->field($model, 'categoria_produto_id')->label('Categoria')->textInput() */?>
 
     <?= $form->field($model, 'categoria_produto_id')->label('Categoria')->dropDownList(
-        ArrayHelper::map(CategoriaProduto::find()->all(), 'id', 'nome'),
+        ArrayHelper::map(CategoriasProdutos::find()->all(), 'id', 'nome'),
         ['prompt' => 'Selecione o tipo de categoria do produto']
     ) ?>
 
     <?php /*= $form->field($model, 'iva_id')->label('IVA')->textInput() */?>
 
     <?= $form->field($model, 'iva_id')->label('IVA')->dropDownList(
-        ArrayHelper::map(Iva::find()->where(['vigor' => '1'])->all(), 'id', 'percentagem'),
+        ArrayHelper::map(Ivas::find()->where(['vigor' => '1'])->all(), 'id', 'percentagem'),
         ['prompt' => 'Selecione o IVA do produto']
     ) ?>
 

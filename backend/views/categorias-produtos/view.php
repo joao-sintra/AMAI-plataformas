@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /** @var backend\models\CategoriaProduto $model */
 
 $this->title = $model->nome;
-$this->params['breadcrumbs'][] = ['label' => 'Categorias de Produto', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Categorias de Produtos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

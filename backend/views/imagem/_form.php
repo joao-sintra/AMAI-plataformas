@@ -1,13 +1,13 @@
 <?php
 
-use common\models\CategoriaProduto;
-use common\models\Produto;
+use common\models\CategoriasProdutos;
+use common\models\Produtos;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var common\models\Imagem $model */
+/** @var common\models\Imagens $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
@@ -15,8 +15,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
-    <?= $form->field($model, 'produto_id')->label('Produto')->dropDownList(
-        ArrayHelper::map(Produto::find()->all(), 'id', 'nome'),
+    <?= $form->field($model, 'produto_id')->label('Produtos')->dropDownList(
+        ArrayHelper::map(Produtos::find()->all(), 'id', 'nome'),
         ['prompt' => 'Selecione o produto para associar à imagem']
     ) ?>
     <?= $form->field($model, 'imageFile')->fileInput() ?>

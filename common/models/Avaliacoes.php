@@ -3,7 +3,7 @@
 namespace common\models;
 
 use Yii;
-use backend\models\Produto;
+use common\models\Produtos;
 
 
 /**
@@ -16,7 +16,7 @@ use backend\models\Produto;
  * @property int $user_id
  * @property int $produto_id
  *
- * @property Produto $produtos
+ * @property Produtos $produtos
  * @property User $user
  */
 class Avaliacoes extends \yii\db\ActiveRecord
@@ -40,7 +40,7 @@ class Avaliacoes extends \yii\db\ActiveRecord
             [['rating', 'user_id', 'produtos_id'], 'integer'],
             [['comentario'], 'string', 'max' => 200],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
-            [['produto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Produto::class, 'targetAttribute' => ['produto_id' => 'id']],
+            [['produto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Produtos::class, 'targetAttribute' => ['produto_id' => 'id']],
         ];
     }
 
@@ -55,19 +55,19 @@ class Avaliacoes extends \yii\db\ActiveRecord
             'dtarating' => 'Dtarating',
             'rating' => 'Rating',
             'user_id' => 'User ID',
-            'produto_id' => 'Produto ID',
+            'produto_id' => 'Produtos ID',
         ];
     }
 
     /**
-     * Gets query for [[Produto]].
+     * Gets query for [[Produtos]].
      *
      * @return \yii\db\ActiveQuery
      */
 
     public function getProduto()
     {
-        return $this->hasOne(Produto::class, ['id' => 'produto_id']);
+        return $this->hasOne(Produtos::class, ['id' => 'produto_id']);
     }
 
     /**

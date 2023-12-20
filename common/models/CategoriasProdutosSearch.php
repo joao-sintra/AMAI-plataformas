@@ -1,15 +1,14 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\Iva;
 
 /**
- * IvaSearch represents the model behind the search form of `backend\models\Iva`.
+ * CategoriasProdutosSearch represents the model behind the search form of `common\models\CategoriasProdutos`.
  */
-class IvaSearch extends Iva
+class CategoriasProdutosSearch extends CategoriasProdutos
 {
     /**
      * {@inheritdoc}
@@ -17,8 +16,8 @@ class IvaSearch extends Iva
     public function rules()
     {
         return [
-            [['id', 'percentagem', 'vigor'], 'integer'],
-            [['descricao'], 'safe'],
+            [['id'], 'integer'],
+            [['nome', 'obs'], 'safe'],
         ];
     }
 
@@ -40,7 +39,7 @@ class IvaSearch extends Iva
      */
     public function search($params)
     {
-        $query = Iva::find();
+        $query = \common\models\CategoriasProdutos::find();
 
         // add conditions that should always apply here
 
@@ -59,11 +58,10 @@ class IvaSearch extends Iva
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'percentagem' => $this->percentagem,
-            'vigor' => $this->vigor,
         ]);
 
-        $query->andFilterWhere(['like', 'descricao', $this->descricao]);
+        $query->andFilterWhere(['like', 'nome', $this->nome])
+            ->andFilterWhere(['like', 'obs', $this->obs]);
 
         return $dataProvider;
     }

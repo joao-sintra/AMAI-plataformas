@@ -1,13 +1,13 @@
 <?php
 
-use backend\models\Iva;
+use common\models\Ivas;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var backend\models\IvaSearch $searchModel */
+/** @var backend\models\IvasSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Registo dos Ivas';
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <!-- <h1><?php /*= Html::encode($this->title) */?></h1> -->
     <p>
-        <?= Html::a('Criar Iva <i class="fas fa-plus"></i>', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Ivas <i class="fas fa-plus"></i>', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Iva $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Ivas $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

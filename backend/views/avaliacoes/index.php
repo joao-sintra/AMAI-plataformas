@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             /*'id',*/
             [
                 'attribute' => 'produto_id',
-                'label' => 'Produto',
+                'label' => 'Produtos',
                 'value' => function ($model) {
                     return $model->produto->nome;
                 },

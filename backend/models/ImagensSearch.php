@@ -1,14 +1,15 @@
 <?php
 
-namespace common\models;
+namespace backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use common\models\Imagens;
 
 /**
- * CategoriasProdutosSearch represents the model behind the search form of `common\models\CategoriasProdutos`.
+ * ImagensSearch represents the model behind the search form of `common\models\Imagens`.
  */
-class CategoriaProdutoSearch extends CategoriaProduto
+class ImagensSearch extends Imagens
 {
     /**
      * {@inheritdoc}
@@ -16,8 +17,8 @@ class CategoriaProdutoSearch extends CategoriaProduto
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['nome', 'obs'], 'safe'],
+            [['id', 'produto_id'], 'integer'],
+            [['fileName'], 'safe'],
         ];
     }
 
@@ -39,7 +40,7 @@ class CategoriaProdutoSearch extends CategoriaProduto
      */
     public function search($params)
     {
-        $query = \common\models\CategoriaProduto::find();
+        $query = Imagens::find();
 
         // add conditions that should always apply here
 
@@ -58,10 +59,10 @@ class CategoriaProdutoSearch extends CategoriaProduto
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'produto_id' => $this->produto_id,
         ]);
 
-        $query->andFilterWhere(['like', 'nome', $this->nome])
-            ->andFilterWhere(['like', 'obs', $this->obs]);
+        $query->andFilterWhere(['like', 'fileName', $this->fileName]);
 
         return $dataProvider;
     }
