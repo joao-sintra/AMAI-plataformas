@@ -5,26 +5,26 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "faturas".
+ * This is the model class for table "carrinhos".
  *
  * @property int $id
- * @property string $data
- * @property float $valortotal
+ * @property string $dtapedido
+ * @property string $metodo_envio
  * @property string $status
+ * @property float $valortotal
  * @property int $user_id
  *
- * @property LinhasFaturas[] $linhasFaturas
- * @property Pagamentos[] $pagamentos
+ * @property ProdutosCarrinhos[] $produtosCarrinhos
  * @property User $user
  */
-class Faturas extends \yii\db\ActiveRecord
+class Carrinhos extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'faturas';
+        return 'carrinhos';
     }
 
     /**
@@ -33,10 +33,11 @@ class Faturas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['data', 'valortotal', 'status', 'user_id'], 'required'],
-            [['data'], 'safe'],
+            [['dtapedido', 'metodo_envio', 'status', 'valortotal', 'user_id'], 'required'],
+            [['dtapedido'], 'safe'],
             [['valortotal'], 'number'],
             [['user_id'], 'integer'],
+            [['metodo_envio'], 'string', 'max' => 45],
             [['status'], 'string', 'max' => 50],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -49,32 +50,24 @@ class Faturas extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'data' => 'Data',
-            'valortotal' => 'Valortotal',
+            'dtapedido' => 'Dtapedido',
+            'metodo_envio' => 'Metodo Envio',
             'status' => 'Status',
+            'valortotal' => 'Valortotal',
             'user_id' => 'User ID',
         ];
     }
 
     /**
-     * Gets query for [[LinhasFaturas]].
+     * Gets query for [[ProdutosCarrinhos]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getLinhasFaturas()
+    public function getProdutosCarrinhos()
     {
-        return $this->hasMany(LinhasFaturas::class, ['fatura_id' => 'id']);
+        return $this->hasMany(ProdutosCarrinhos::class, ['carrinho_id' => 'id']);
     }
 
-    /**
-     * Gets query for [[Pagamentos]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPagamentos()
-    {
-        return $this->hasMany(Pagamentos::class, ['fatura_id' => 'id']);
-    }
     /**
      * Gets query for [[User]].
      *
