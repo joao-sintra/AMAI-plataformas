@@ -8,6 +8,7 @@ main > .container {
     height: 60px;
 }
 
+
 .footer > .container {
     padding-right: 15px;
     padding-left: 15px;
@@ -70,9 +71,9 @@ a.desc:after {
     color: rgba(255, 255, 255, 0.5);
 }
 
-@media(max-width:767px) {
+@media (max-width: 767px) {
     .nav li > form > button.logout {
-        display:block;
+        display: block;
         text-align: left;
         width: 100%;
         padding: 10px 0;
