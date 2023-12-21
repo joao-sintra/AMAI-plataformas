@@ -1,166 +1,198 @@
 <?php
 
+use common\models\ClientesForm;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use common\models\Faturas;
 use yii\grid\ActionColumn;
+use Carbon\Carbon;
 
 
 /** @var yii\web\View $this */
 /** @var common\models\Faturas $model */
-/** @var common\models\LinhasFaturas $modelLinhasFaturas */
+/** @var common\models\LinhasFaturas $linhasFaturas */
 /** @var common\models\LinhasFaturasSearch $searchModel */
-
 /** @var yii\data\ActiveDataProvider $dataProvider */
+/** @var backend\models\Empresa $empresa */
+/** @var common\models\ClientesForm $cliente */
+/** @var common\models\Pagamentos $pagamento */
+/** @var common\models\ProdutosCarrinhos $produtosCarrinhos */
 
-$this->title = $model->id;
+
+
+
+$this->title = 'Fatura ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Registo de Faturas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="faturas-view">
+<div id="faturas-view">
 
-    <!--<h1><?php /*= Html::encode($this->title) */?></h1>-->
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <!--<h1><?php /*= Html::encode($this->title) */ ?></h1>-->
 
 
-    <div class="invoice p-3 mb-3">
-        <!-- title row -->
-        <div class="row">
-            <div class="col-12">
-                <h4>
-                    <i class="fas fa-globe"></i> WSGest
-                    <small class="float-right">Date: 27/05/2023</small>
-                </h4>
-            </div>
-            <!-- /.col -->
+
+    <!-- title row -->
+
+    <!-- info row -->
+    <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+
+            <?= '<p>De: <strong>' . $empresa->designacaosocial . '</strong><br>'. $empresa->email
+            . '<br>' . $empresa->rua . '<br>' . $empresa->codigopostal . ' ' . $empresa->localidade .
+            '<br>'.$empresa->nif . '<br></p>'?>
+
+
         </div>
-        <!-- info row -->
-        <div class="row invoice-info">
-            <div class="col-sm-4 invoice-col">
-                From
-                <address>
-                    <strong>Oficina do Mecânico</strong><br>
-                    Rua das Empresas, 2400-200, Leiria<br>
-                    NIF: 123456789<br>
-                    Telefone: (351) 916 773 888<br>
-                    Email: oficina.mecanico@mail.com
-                </address>
-            </div>
-            <!-- /.col -->
-            <div class="col-sm-4 invoice-col">
-                To
-                <address>
-                    <strong>John Doe</strong><br>
-                    Rua das Flores, 2400-100, Leiria<br>
-                    NIF: 647838333<br>
-                    Telefone: (351) 916 234 567<br>
-                    Email: John@email.com
-                </address>
-            </div>
-            <!-- /.col -->
-            <div class="col-sm-4 invoice-col">
-                <b>Folha de obra #101</b><br>
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+            To
+            <address>
+                <?=
+                '<strong>' . $cliente->primeironome . ' ' . $cliente->apelido . '</strong><br>' . $model->user->email . '<br>' . $cliente->rua . '<br>' . $cliente->codigopostal . ' ' . $cliente->localidade . '<br>' . $cliente->nif
+                ?>
 
-
-                <b>Pagamento até:</b> 10/06/2023<br>
-
-            </div>
-            <!-- /.col -->
+            </address>
         </div>
-        <!-- /.row -->
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+            <?= '<strong>FATURA ' . $model->id . '</strong><br>' . number_format((float)$model->valortotal, 2, '.', ',') . ' EUR<br>Data de emissão ' .
 
-        <!-- Table row -->
-        <div class="row">
-            <div class="col-12 table-responsive">
-                <table class="table table-striped">
-
-                    <?= GridView::widget([
-                        'dataProvider' => $dataProvider,
-                        'filterModel' => $searchModel,
-                        'columns' => [
-                            ['class' => 'yii\grid\SerialColumn'],
-
-                            'id',
-                            'fatura_id',
-                            'produtos_carrinhos_id',
-                            [
-                                'attribute' => 'produtos_carrinhos_id',
-                                'label' => 'Carrinho',
-                                'value' => function ($model) {
-                                    return $model->produtosCarrinhos->subtotal;
-                                },
-                            ],
-                            /*'user_id',*/
+            Carbon::parse($model->data)->format('Y/m/d') ?>
 
 
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-12 table-responsive">
+            <table class="table table-striped">
+
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                    'filterModel' => $searchModel,
+                    'columns' => [
+                        ['class' => 'yii\grid\SerialColumn'],
+
+                        [
+                            'attribute' => 'nome',
+                            'label' => 'Nome',
+                            'value' => function ($model) {
+                                return $model->produtosCarrinhos->produto->nome;
+                            },
                         ],
-                    ]); ?>
+                        [
+                            'attribute' => 'iva',
+                            'label' => 'Impostos (%)',
+                            'value' => function ($model) {
+                                return $model->produtosCarrinhos->produto->iva->percentagem. '%';
+                            },
+                        ],
+                        [
+                            'attribute' => 'iva',
+                            'label' => 'Impostos (valor)',
+                            'value' => function ($model) {
+                                return number_format((float)$model->produtosCarrinhos->valor_iva, 2, ',', ',');
+                            },
+                        ],
+                        [
+                            'attribute' => 'quantidade',
+                            'label' => 'Quantidade',
+                            'value' => function ($model) {
+                                return $model->produtosCarrinhos->quantidade;
+                            },
+                        ],
+                        [
+                            'attribute' => 'total',
+                            'label' => 'Total',
+                            'value' => function ($model) {
+                                return number_format((float)$model->produtosCarrinhos->subtotal, 2, '.', ',');;
+                            },
+                        ],
 
 
+                    ],
+                ]); ?>
 
+
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+
+    <!-- /.row -->
+    <div class="row">
+        <!-- /.col -->
+        <div class="col-6">
+            <?= '<p>Metodo de Pagamento: ' . $model->pagamentos[0]->metodopag . '<br>Data: ' . $model->pagamentos[0]->data ?>
+
+
+        </div>
+        <div class="col-6">
+
+
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th style="width:50%">Subtotal:</th>
+                        <?php
+                        $subtotal=0;
+                        foreach ($linhasFaturas as $linhaFatura)
+                            $subtotal+=$linhaFatura->produtosCarrinhos->preco_venda;
+
+                        echo '<td>' . number_format((float)$subtotal, 2, ',', ',') . ' €' . '</td>'
+                        ?>
+                    </tr>
+                    <tr>
+                        <th>IVA</th>
+                        <?php
+                        $iva=0;
+                        foreach ($linhasFaturas as $linhaFatura)
+                          $iva+=$linhaFatura->produtosCarrinhos->valor_iva;
+
+                        echo '<td>' . number_format((float)$iva, 2, ',', ',') . ' €' . '</td>'
+                        ?>
+
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <th>Total:</th>
+                        <td><?= number_format((float)$model->valortotal, 2, ',', ',') . ' €' ?></td>
+                    </tr>
                 </table>
             </div>
-            <!-- /.col -->
         </div>
-        <!-- /.row -->
+        <!-- /.col -->
 
-        <div class="row">
-            <!-- accepted payments column -->
-            <div class="col-6">
-                <p class="lead">Payment Methods:</p>
-
-
-
-            </div>
-            <!-- /.col -->
-            <div class="col-6">
-
-
-                <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <th style="width:50%">Subtotal:</th>
-                            <td>100.00 €</td>
-                        </tr>
-                        <tr>
-                            <th>IVA (23%)</th>
-                            <td>23.00 €</td>
-                        </tr>
-
-                        <tr>
-                            <th>Total:</th>
-                            <td>123.00 €</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <!-- /.col -->
-        </div>
-        <!-- /.row -->
-
-        <!-- this row will not appear when printing -->
-        <div class="row no-print">
-            <div class="col-12">
-                <H5>Funcionário: André Alves</H5>
-                <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submeter
-                </button>
-                <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                    <i class="fas fa-download"></i> Gerar PDF
-                </button>
-            </div>
-        </div>
     </div>
-    <!-- /.invoice -->
-</div><!-- /.col -->
-<!-- /.row -->
-<!-- /.container-fluid -->
+    <div class="row no-print">
+
+        <div class="col-12">
+            <button type="button" onclick="window.print()" class="btn btn-primary float-right" style="margin-right: 5px;">
+                <i class="fas fa-print"></i> Imprimir
+            </button>
+        </div>
+</div>
+</div>
+<p>
+    <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+    <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-success']) ?>
+</p>
+    <!-- /.row -->
+
+    <!-- this row will not appear when printing -->
+
+
+
+
+
+
 
 
 

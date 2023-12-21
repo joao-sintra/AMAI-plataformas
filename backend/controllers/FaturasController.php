@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\ClientesForm;
 use common\models\Faturas;
 use common\models\FaturasSearch;
 use common\models\LinhasFaturas;
@@ -9,6 +10,9 @@ use common\models\LinhasFaturasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\models\Empresa;
+use common\models\Pagamentos;
+
 
 /**
  * FaturasController implements the CRUD actions for Faturas model.
@@ -61,11 +65,21 @@ class FaturasController extends Controller
 
         $searchModel = new LinhasFaturasSearch();
         $dataProvider = $searchModel->search($this->request->queryParams, $id);
-
+        $faturas = Faturas::find()->where(['id' => $id])->one();
+        $pagamento = Pagamentos::find()->where(['fatura_id' => $id])->one();
+        $empresa = Empresa::find()->one();
+        $cliente = ClientesForm::find()->where(['user_id' => $user_id])->one();
+        $linhasFaturas = LinhasFaturas::find()->where(['fatura_id' => $id])->all();
         return $this->render('view', [
+            'empresa' => $empresa,
             'model' => $this->findModel($id, $user_id),
+            'faturas' => $faturas,
+            'cliente' => $cliente,
+            'pagamento' => $pagamento,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'linhasFaturas' => $linhasFaturas,
+
         ]);
     }
 

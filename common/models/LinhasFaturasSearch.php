@@ -37,9 +37,10 @@ class LinhasFaturasSearch extends LinhasFaturas
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $id)
     {
-        $query = LinhasFaturas::find();
+         $query = LinhasFaturas::find()->where(['fatura_id' => $id]);
+        //$query = LinhasFaturas::find();
 
         // add conditions that should always apply here
 
