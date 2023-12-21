@@ -2,9 +2,10 @@
 
 namespace common\models;
 
-use backend\models\Imagens;
-use backend\models\Iva;
-use backend\models\ProdutosCarrinhos;
+
+use common\models\Imagens;
+use common\models\Ivas;
+use common\models\ProdutosCarrinhos;
 
 /**
  * This is the model class for table "produtos".
@@ -18,12 +19,12 @@ use backend\models\ProdutosCarrinhos;
  * @property int $iva_id
  *
  * @property AvaliacoesProdutos[] $avaliacoesProdutos
- * @property CategoriaProduto $categoriaProduto
+ * @property CategoriasProdutos $categoriaProduto
  * @property Imagens[] $imagens
  * @property Iva $iva
  * @property ProdutosCarrinhos[] $produtosCarrinhos
  */
-class Produto extends \yii\db\ActiveRecord
+class Produtos extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -46,7 +47,7 @@ class Produto extends \yii\db\ActiveRecord
             [['descricao'], 'string', 'max' => 200],
             [['obs'], 'string', 'max' => 100],
             [['nome'], 'unique'],
-            [['categoria_produto_id'], 'exist', 'skipOnError' => true, 'targetClass' => CategoriaProduto::class, 'targetAttribute' => ['categoria_produto_id' => 'id']],
+            [['categoria_produto_id'], 'exist', 'skipOnError' => true, 'targetClass' => CategoriasProdutos::class, 'targetAttribute' => ['categoria_produto_id' => 'id']],
             [['iva_id'], 'exist', 'skipOnError' => true, 'targetClass' => Iva::class, 'targetAttribute' => ['iva_id' => 'id']],
         ];
     }
@@ -62,7 +63,7 @@ class Produto extends \yii\db\ActiveRecord
             'descricao' => 'Descricao',
             'preco' => 'Preco',
             'obs' => 'Obs',
-            'categoria_produto_id' => 'Categoria Produto ID',
+            'categoria_produto_id' => 'Categoria Produtos ID',
             'iva_id' => 'Iva ID',
         ];
     }
@@ -74,17 +75,17 @@ class Produto extends \yii\db\ActiveRecord
      */
     public function getAvaliacoesProdutos()
     {
-        return $this->hasMany(AvaliacoesProdutos::class, ['produto_id' => 'id']);
+        return $this->hasMany(Avaliacoes::class, ['produto_id' => 'id']);
     }
 
     /**
-     * Gets query for [[CategoriaProduto]].
+     * Gets query for [[CategoriasProdutos]].
      *
      * @return \yii\db\ActiveQuery
      */
     public function getCategoriaProduto()
     {
-        return $this->hasOne(CategoriaProduto::class, ['id' => 'categoria_produto_id']);
+        return $this->hasOne(CategoriasProdutos::class, ['id' => 'categoria_produto_id']);
     }
 
     /**
@@ -104,7 +105,7 @@ class Produto extends \yii\db\ActiveRecord
      */
     public function getIva()
     {
-        return $this->hasOne(Iva::class, ['id' => 'iva_id']);
+        return $this->hasOne(Ivas::class, ['id' => 'iva_id']);
     }
 
     /**

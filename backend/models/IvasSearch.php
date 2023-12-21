@@ -4,12 +4,12 @@ namespace backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Imagem;
+use common\models\Ivas;
 
 /**
- * ImagemSearch represents the model behind the search form of `common\models\Imagem`.
+ * IvasSearch represents the model behind the search form of `backend\models\Ivas`.
  */
-class ImagemSearch extends Imagem
+class IvasSearch extends Ivas
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class ImagemSearch extends Imagem
     public function rules()
     {
         return [
-            [['id', 'produto_id'], 'integer'],
-            [['fileName'], 'safe'],
+            [['id', 'percentagem', 'vigor'], 'integer'],
+            [['descricao'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class ImagemSearch extends Imagem
      */
     public function search($params)
     {
-        $query = Imagem::find();
+        $query = Ivas::find();
 
         // add conditions that should always apply here
 
@@ -59,10 +59,11 @@ class ImagemSearch extends Imagem
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'produto_id' => $this->produto_id,
+            'percentagem' => $this->percentagem,
+            'vigor' => $this->vigor,
         ]);
 
-        $query->andFilterWhere(['like', 'fileName', $this->fileName]);
+        $query->andFilterWhere(['like', 'descricao', $this->descricao]);
 
         return $dataProvider;
     }

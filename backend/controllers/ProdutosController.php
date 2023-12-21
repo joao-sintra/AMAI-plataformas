@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use app\models\UploadForm;
-use common\models\Produto;
-use common\models\ProdutoSearch;
+use common\models\Produtos;
+use common\models\ProdutosSearch;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
 /**
- * ProdutosController implements the CRUD actions for Produto model.
+ * ProdutosController implements the CRUD actions for Produtos model.
  */
 class ProdutosController extends Controller
 {
@@ -35,13 +35,13 @@ class ProdutosController extends Controller
     }
 
     /**
-     * Lists all Produto models.
+     * Lists all Produtos models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new ProdutoSearch();
+        $searchModel = new ProdutosSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -51,9 +51,9 @@ class ProdutosController extends Controller
     }
 
     /**
-     * Displays a single Produto model.
+     * Displays a single Produtos model.
      * @param int $id ID
-     * @param int $categoria_produto_id Categoria Produto ID
+     * @param int $categoria_produto_id Categoria Produtos ID
      * @param int $iva_id Iva ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -66,13 +66,13 @@ class ProdutosController extends Controller
     }
 
     /**
-     * Creates a new Produto model.
+     * Creates a new Produtos model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Produto();
+        $model = new Produtos();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -88,10 +88,10 @@ class ProdutosController extends Controller
     }
 
     /**
-     * Updates an existing Produto model.
+     * Updates an existing Produtos model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
-     * @param int $categoria_produto_id Categoria Produto ID
+     * @param int $categoria_produto_id Categoria Produtos ID
      * @param int $iva_id Iva ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
@@ -110,10 +110,10 @@ class ProdutosController extends Controller
     }
 
     /**
-     * Deletes an existing Produto model.
+     * Deletes an existing Produtos model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
-     * @param int $categoria_produto_id Categoria Produto ID
+     * @param int $categoria_produto_id Categoria Produtos ID
      * @param int $iva_id Iva ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
@@ -125,17 +125,17 @@ class ProdutosController extends Controller
         return $this->redirect(['index']);
     }
     /**
-     * Finds the Produto model based on its primary key value.
+     * Finds the Produtos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @param int $categoria_produto_id Categoria Produto ID
+     * @param int $categoria_produto_id Categoria Produtos ID
      * @param int $iva_id Iva ID
-     * @return Produto the loaded model
+     * @return Produtos the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id, $categoria_produto_id, $iva_id)
     {
-        if (($model = Produto::findOne(['id' => $id, 'categoria_produto_id' => $categoria_produto_id, 'iva_id' => $iva_id])) !== null) {
+        if (($model = Produtos::findOne(['id' => $id, 'categoria_produto_id' => $categoria_produto_id, 'iva_id' => $iva_id])) !== null) {
             return $model;
         }
 

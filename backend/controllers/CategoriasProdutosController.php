@@ -2,14 +2,14 @@
 
 namespace backend\controllers;
 
-use common\models\CategoriaProduto;
-use common\models\CategoriaProdutoSearch;
+use common\models\CategoriasProdutos;
+use common\models\CategoriasProdutosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CategoriasProdutosController implements the CRUD actions for CategoriaProduto model.
+ * CategoriasProdutosController implements the CRUD actions for CategoriasProdutos model.
  */
 class CategoriasProdutosController extends Controller
 {
@@ -32,13 +32,13 @@ class CategoriasProdutosController extends Controller
     }
 
     /**
-     * Lists all CategoriaProduto models.
+     * Lists all CategoriasProdutos models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new CategoriaProdutoSearch();
+        $searchModel = new CategoriasProdutosSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class CategoriasProdutosController extends Controller
     }
 
     /**
-     * Displays a single CategoriaProduto model.
+     * Displays a single CategoriasProdutos model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,13 +61,13 @@ class CategoriasProdutosController extends Controller
     }
 
     /**
-     * Creates a new CategoriaProduto model.
+     * Creates a new CategoriasProdutos model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new CategoriaProduto();
+        $model = new CategoriasProdutos();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -83,7 +83,7 @@ class CategoriasProdutosController extends Controller
     }
 
     /**
-     * Updates an existing CategoriaProduto model.
+     * Updates an existing CategoriasProdutos model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -103,7 +103,7 @@ class CategoriasProdutosController extends Controller
     }
 
     /**
-     * Deletes an existing CategoriaProduto model.
+     * Deletes an existing CategoriasProdutos model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -117,15 +117,15 @@ class CategoriasProdutosController extends Controller
     }
 
     /**
-     * Finds the CategoriaProduto model based on its primary key value.
+     * Finds the CategoriasProdutos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return CategoriaProduto the loaded model
+     * @return CategoriasProdutos the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = CategoriaProduto::findOne(['id' => $id])) !== null) {
+        if (($model = CategoriasProdutos::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

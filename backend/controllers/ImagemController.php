@@ -4,15 +4,15 @@ namespace backend\controllers;
 
 use app\models\UploadForm;
 use backend\models\Produto;
-use common\models\Imagem;
-use backend\models\ImagemSearch;
+use common\models\Imagens;
+use backend\models\ImagensSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
 /**
- * ImagemController implements the CRUD actions for Imagem model.
+ * ImagemController implements the CRUD actions for Imagens model.
  */
 class ImagemController extends Controller
 {
@@ -35,13 +35,13 @@ class ImagemController extends Controller
     }
 
     /**
-     * Lists all Imagem models.
+     * Lists all Imagens models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new ImagemSearch();
+        $searchModel = new ImagensSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -51,9 +51,9 @@ class ImagemController extends Controller
     }
 
     /**
-     * Displays a single Imagem model.
+     * Displays a single Imagens model.
      * @param int $id ID
-     * @param int $produto_id Produto ID
+     * @param int $produto_id Produtos ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -65,13 +65,13 @@ class ImagemController extends Controller
     }
 
     /**
-     * Creates a new Imagem model.
+     * Creates a new Imagens model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Imagem();
+        $model = new Imagens();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
@@ -100,10 +100,10 @@ class ImagemController extends Controller
     }
 
     /**
-     * Updates an existing Imagem model.
+     * Updates an existing Imagens model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
-     * @param int $produto_id Produto ID
+     * @param int $produto_id Produtos ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -132,10 +132,10 @@ class ImagemController extends Controller
     }
 
     /**
-     * Deletes an existing Imagem model.
+     * Deletes an existing Imagens model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
-     * @param int $produto_id Produto ID
+     * @param int $produto_id Produtos ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -147,16 +147,16 @@ class ImagemController extends Controller
     }
 
     /**
-     * Finds the Imagem model based on its primary key value.
+     * Finds the Imagens model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @param int $produto_id Produto ID
-     * @return Imagem the loaded model
+     * @param int $produto_id Produtos ID
+     * @return Imagens the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id, $produto_id)
     {
-        if (($model = Imagem::findOne(['id' => $id, 'produto_id' => $produto_id])) !== null) {
+        if (($model = Imagens::findOne(['id' => $id, 'produto_id' => $produto_id])) !== null) {
             return $model;
         }
 

@@ -55,10 +55,10 @@ AppAsset::register($this);
                             ['label' => 'Avaliações', 'icon' => 'fa-solid fa-star', 'url' => ['avaliacoes/index']],
                         ],
                     ],
-                    ['label' => 'Produto', 'header' => true],
-                    /* ['label' => 'Vendas de Produto', 'icon' => 'shopping-cart', 'url' => ['/site/vendas']],*/
-                    ['label' => 'Cat. dos Produto', 'icon' => 'fa-solid fa-tag', 'url' => ['/categorias-produtos/index']],
-                    ['label' => 'Criação dos Produto', 'icon' => 'fa-solid fa-box', 'url' => ['/produtos/index']],
+                    ['label' => 'Produtos', 'header' => true],
+                    /* ['label' => 'Vendas de Produtos', 'icon' => 'shopping-cart', 'url' => ['/site/vendas']],*/
+                    ['label' => 'Cat. dos Produtos', 'icon' => 'fa-solid fa-tag', 'url' => ['/categorias-produtos/index']],
+                    ['label' => 'Criação dos Produtos', 'icon' => 'fa-solid fa-box', 'url' => ['/produtos/index']],
                     ['label'=>'Imagens','icon'=>'fa-regular fa-image', 'url'=>['imagem/index']],
                     ['label' => 'Debug Tools', 'header' => true],
                     ['label' => 'Gii', 'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],

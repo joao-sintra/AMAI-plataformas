@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /** @var backend\models\CategoriaProduto $model */
 
 $this->title = 'Criar Categoria';
-$this->params['breadcrumbs'][] = ['label' => 'Categorias de Produto', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Categorias de Produtos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="categorias-produtos-create">

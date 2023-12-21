@@ -5,9 +5,9 @@ use yii\widgets\ActiveForm;
 use yii\widgets\ListView;
 use yii\widgets\LinkPager;
 
-/** @var common\models\CategoriaProduto $categorias */
-/** @var common\models\Produto $produtos */
-/** @var common\models\ProdutoSearch $searchModel */
+/** @var common\models\CategoriasProdutos $categorias */
+/** @var common\models\Produtos $produtos */
+/** @var common\models\ProdutosSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 ?>
 
@@ -43,7 +43,7 @@ use yii\widgets\LinkPager;
                             'class' => 'form-control p-3',
                             'style' => 'border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 0; border-bottom-right-radius: 0;',
                         ]])                            ->label(false)
-                            ->textInput(['aria-describedby' => 'search-icon-1', 'name' => 'ProdutoSearch[search]', 'id' => 'search-input']); ?>
+                            ->textInput(['aria-describedby' => 'search-icon-1', 'name' => 'ProdutosSearch[search]', 'id' => 'search-input']); ?>
                         <button type="submit" class="btn btn-outline p-3" style="border-color: #ced4da; background-color: #e9ecef;">
                             <i class="fa fa-search" style="color: #6c757d;"></i>
                         </button>

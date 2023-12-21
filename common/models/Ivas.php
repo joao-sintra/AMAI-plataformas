@@ -1,7 +1,8 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
+use common\models\Produtos;
 use Yii;
 
 /**
@@ -12,9 +13,9 @@ use Yii;
  * @property string $descricao
  * @property int $vigor
  *
- * @property Produto[] $produtos
+ * @property Produtos[] $produtos
  */
-class Iva extends \yii\db\ActiveRecord
+class Ivas extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -50,12 +51,12 @@ class Iva extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Produto]].
+     * Gets query for [[Produtos]].
      *
      * @return \yii\db\ActiveQuery
      */
     public function getProdutos()
     {
-        return $this->hasMany(Produto::class, ['iva_id' => 'id']);
+        return $this->hasMany(Produtos::class, ['iva_id' => 'id']);
     }
 }
