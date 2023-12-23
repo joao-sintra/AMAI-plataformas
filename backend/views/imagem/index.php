@@ -26,9 +26,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
+            [
+                'label' => 'Imagens',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    $imagePath = '../../common/public/imagens/produtos/' . $model->fileName;
 
-
-            'fileName',
+                    return Html::img($imagePath, ['alt' => 'Imagens', 'style' => 'max-width:100px;']);
+                },
+            ],
             [
                 'attribute' => 'produto_id',
                 'label' => 'produto associado',

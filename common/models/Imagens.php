@@ -16,7 +16,7 @@ use Yii;
  */
 class Imagens extends \yii\db\ActiveRecord
 {
-    public $imageFile;
+    public $imageFiles;
 
     /**
      * {@inheritdoc}
@@ -32,7 +32,8 @@ class Imagens extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            [['id'],'safe'],
+            [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 10],
             [['produto_id'], 'required'],
             [['produto_id'], 'integer'],
             [['produto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Produtos::class, 'targetAttribute' => ['produto_id' => 'id']],
@@ -45,13 +46,17 @@ class Imagens extends \yii\db\ActiveRecord
     public function upload()
     {
 
+        $uploadPaths = [];
+
         if ($this->validate()) {
 
-            $uploadPath = Yii::getAlias('@frontend/web/public/imagens/produtos/') . $this->imageFile->baseName . uniqid() . '.' . $this->imageFile->extension;
+            foreach ($this->imageFiles as $file) {
+                $uploadPath = Yii::getAlias('@common') . '/public/imagens/produtos/' . uniqid() . $file->baseName . '.' . $file->extension;
+                $file->saveAs($uploadPath, false);
+                $uploadPaths[] = $uploadPath;
 
-            $this->imageFile->saveAs($uploadPath, false);
-
-            return true;
+            }
+            return $uploadPaths;
         } else {
             return false;
         }

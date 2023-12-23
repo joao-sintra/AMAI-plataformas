@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
         ArrayHelper::map(Produtos::find()->all(), 'id', 'nome'),
         ['prompt' => 'Selecione o produto para associar à imagem']
     ) ?>
-    <?= $form->field($model, 'imageFile')->fileInput() ?>
+    <?= $form->field($model, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

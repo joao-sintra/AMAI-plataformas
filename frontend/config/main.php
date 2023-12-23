@@ -36,16 +36,6 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-
-      /*  'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-                // Define your URL rules here if needed
-            ],
-        ],*/
-
-
     ],
     'params' => $params,
 ];
