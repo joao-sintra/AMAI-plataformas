@@ -26,7 +26,7 @@ use yii\widgets\LinkPager;
 <!-- Fruits Shop Start-->
 <div class="container-fluid fruite py-5">
     <div class="container py-5">
-        <h1 class="mb-4 mt-4">Fresh fruits shop</h1>
+        <h1 class="mb-4 mt-4">Loja de Produtos</h1>
         <div class="row g-4">
             <div class="col-lg-12">
                 <div class="col-xl-3">
@@ -62,7 +62,7 @@ use yii\widgets\LinkPager;
                                             <li>
                                                 <div class="d-flex justify-content-between fruite-name">
                                                     <a href="<?= Url::to(['site/shop', 'categoria' => $categoria->id]) ?>">
-                                                        <i class="fas fa-apple-alt me-2"></i>
+                                                        <i class="fas fa-cookie"></i>
                                                         <?= Html::encode($categoria->nome) ?>
                                                     </a>
                                                     <span>(<?= $categoria->getProdutos()->count() ?>)</span>

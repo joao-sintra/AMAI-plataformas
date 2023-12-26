@@ -84,9 +84,20 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($categoria = null)
     {
-        return $this->render('index');
+        // Fetch products based on the selected category
+        $produtos = Produtos::find()->all();
+
+        if ($categoria) {
+            $categoriaModel = CategoriasProdutos::findOne(['nome' => $categoria]);
+
+            if ($categoriaModel) {
+                $produtos = Produtos::find()->where(['categoria_produto_id' => $categoriaModel->id])->all();
+            }
+        }
+
+        return $this->render('index', ['produtos' => $produtos]);
     }
 
     public function actionAdmin()
@@ -182,14 +193,10 @@ class SiteController extends Controller
     public function actionShop($categoria = null, $search = null)
     {
         $categorias = CategoriasProdutos::find()->all();
-
         $searchModel = new ProdutosSearch();
         $searchModel->search = $search;
 
         $query = Produtos::find();
-
-        $searchModel = new ProdutosSearch();
-        $searchModel->search = $search;
 
         if ($searchModel->load(Yii::$app->request->get()) && $searchModel->validate()) {
             // Form submitted with valid data
@@ -200,9 +207,10 @@ class SiteController extends Controller
             $query->andWhere(['categoria_produto_id' => $categoria]);
         }
 
-        // Update search condition to only search for product names
-        $query->andFilterWhere(['like', 'nome', $searchModel->search]);
-
+        if (!empty($search)) {
+            // Redirect to site/shop with search parameter
+            return $this->redirect(['site/shop', 'search' => $search]);
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

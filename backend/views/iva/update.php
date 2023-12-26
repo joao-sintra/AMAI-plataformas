@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var backend\models\Ivas $model */
+/** @var common\models\Ivas $model */
 
 $this->title = 'Alteração dos Dados do IVA: ' . $model->descricao;
 $this->params['breadcrumbs'][] = ['label' => 'Registo dos Ivas', 'url' => ['index']];
