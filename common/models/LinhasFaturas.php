@@ -12,7 +12,7 @@ use Yii;
  * @property int $produtos_carrinhos_id
  *
  * @property Faturas $fatura
- * @property ProdutosCarrinhos $produtosCarrinhos
+ * @property ProdutosCarrinhos $produtos-carrinhos
  */
 class LinhasFaturas extends \yii\db\ActiveRecord
 {

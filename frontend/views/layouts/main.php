@@ -46,7 +46,7 @@ AppAsset::register($this);
                 ['label' => 'Loja', 'url' => ['/site/shop'],],
                 ['label' => 'Sobre', 'url' => ['/site/about']],
                 ['label' => 'Contactos', 'url' => ['/site/contact']],
-                ['label' => 'Encomendas', 'url' => ['/site/fazerencomendas']],
+                ['label' => 'Carrinho', 'url' => ['/carrinhos/index']],
 
             ];
             if (Yii::$app->user->isGuest) {

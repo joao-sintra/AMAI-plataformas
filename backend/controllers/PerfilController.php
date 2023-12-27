@@ -70,6 +70,8 @@ class PerfilController extends Controller
 
         $user = Yii::$app->user->identity;
 
+
+
         if ($user->load(Yii::$app->request->post()) && $user->save()) {
             Yii::$app->session->setFlash('success', 'Profile updated successfully');
             return $this->refresh();

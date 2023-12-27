@@ -42,6 +42,7 @@ class ImagensSearch extends Imagens
     {
         $query = Imagens::find();
 
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

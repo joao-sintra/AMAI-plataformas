@@ -1,12 +1,16 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\controllers;
 
 use common\models\Carrinhos;
 use common\models\CarrinhosSearch;
+use common\models\ClientesForm;
+use common\models\ProdutosCarrinhos;
+use common\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * CarrinhosController implements the CRUD actions for Carrinhos model.
@@ -39,6 +43,7 @@ class CarrinhosController extends Controller
     public function actionIndex()
     {
         $searchModel = new CarrinhosSearch();
+        $searchModel->user_id = Yii::$app->user->id;
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -46,6 +51,40 @@ class CarrinhosController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+    public function actionAumentaqtd($id)
+    {
+        $linha = ProdutosCarrinhos::findOne($id);
+        $carrinho = Carrinhos::findOne($linha->carrinho_id);
+
+        if ($linha) {
+            $linha->quantidade = (intval($linha->quantidade) + 1) . '';
+            $linha->subtotal = $linha->quantidade * ($linha->preco_venda + $linha->valor_iva);
+            $carrinho->valortotal = $carrinho->valortotal + ($linha->preco_venda + $linha->valor_iva);
+
+            $linha->save();
+            $carrinho->save();
+        }
+
+        return $this->redirect(['index']);
+    }
+
+    public function actionDiminuiqtd($id)
+    {
+        $linha = ProdutosCarrinhos::findOne($id);
+        $carrinho = Carrinhos::findOne($linha->carrinho_id);
+        if ($linha && $linha->quantidade != '1') {
+            $linha->quantidade = (intval($linha->quantidade) - 1) . '';
+            $linha->subtotal = $linha->quantidade * ($linha->preco_venda + $linha->valor_iva);
+            $carrinho->valortotal = $carrinho->valortotal - ($linha->preco_venda + $linha->valor_iva);
+            $linha->save();
+            $carrinho->save();
+
+        }
+
+        return $this->redirect(['index']);
+    }
+
 
     /**
      * Displays a single Carrinhos model.
@@ -69,6 +108,7 @@ class CarrinhosController extends Controller
     public function actionCreate()
     {
         $model = new Carrinhos();
+        $userData = ClientesForm::findOne(['user_id' => Yii::$app->user->id]);
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -80,6 +120,8 @@ class CarrinhosController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'userData' => $userData,
+
         ]);
     }
 

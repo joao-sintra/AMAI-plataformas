@@ -1,12 +1,14 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\controllers;
 
 use common\models\ProdutosCarrinhos;
 use common\models\ProdutosCarrinhosSearch;
+use yii\helpers\Console;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * ProdutosCarrinhosController implements the CRUD actions for ProdutosCarrinhos model.
@@ -38,7 +40,14 @@ class ProdutosCarrinhosController extends Controller
      */
     public function actionIndex()
     {
+
+
         $searchModel = new ProdutosCarrinhosSearch();
+      //
+       // $carrinho_id = Yii::$app->user->identity->carrinho->id;
+        //make a varaible that gets the user id and get the carrinho of it
+
+        //var_dump($carrinho_id);
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -46,6 +55,8 @@ class ProdutosCarrinhosController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+
 
     /**
      * Displays a single ProdutosCarrinhos model.

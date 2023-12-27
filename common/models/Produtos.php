@@ -22,7 +22,7 @@ use common\models\ProdutosCarrinhos;
  * @property CategoriasProdutos $categoriaProduto
  * @property Imagens[] $imagens
  * @property Iva $iva
- * @property ProdutosCarrinhos[] $produtosCarrinhos
+ * @property ProdutosCarrinhos[] $produtos-carrinhos
  */
 class Produtos extends \yii\db\ActiveRecord
 {

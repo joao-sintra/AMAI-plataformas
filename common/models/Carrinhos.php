@@ -14,7 +14,7 @@ use Yii;
  * @property float $valortotal
  * @property int $user_id
  *
- * @property ProdutosCarrinhos[] $produtosCarrinhos
+ * @property ProdutosCarrinhos[] $produtos-carrinhos
  * @property User $user
  */
 class Carrinhos extends \yii\db\ActiveRecord

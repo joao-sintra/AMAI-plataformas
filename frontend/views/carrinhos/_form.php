@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use Carbon\Carbon;
+
 
 /** @var yii\web\View $this */
 /** @var common\models\Carrinhos $model */
@@ -12,15 +14,18 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'dtapedido')->textInput() ?>
 
-    <?= $form->field($model, 'metodo_envio')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'metodo_envio')->label('Método de Envio')->dropDownList([
+                            "cobranca" => 'Cobrança',
+                            "transportadora" => 'Transposrtadora',
+                        ],
+                            ['prompt' => 'Selecione o Método de Envio']
+                        );
+    ?>
 
-    <?= $form->field($model, 'valortotal')->textInput() ?>
 
-    <?= $form->field($model, 'user_id')->textInput() ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

@@ -5,6 +5,7 @@ namespace common\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\ProdutosCarrinhos;
+use common\models\Carrinhos;
 
 /**
  * ProdutosCarrinhosSearch represents the model behind the search form of `common\models\ProdutosCarrinhos`.
@@ -41,7 +42,13 @@ class ProdutosCarrinhosSearch extends ProdutosCarrinhos
      */
     public function search($params)
     {
-        $query = ProdutosCarrinhos::find();
+        //make a query that gets the user id of the carrinho with status ativo
+        //$queryProcuraCarrinho = Carrinhos::find()->where(['user_id' => $userId])->andWhere(['status' => 'ativo'])->one();
+        $query = ProdutosCarrinhos::find()->joinWith('carrinho');
+        $query->andFilterWhere(['=', 'carrinhos.id', $this->getAttribute('carrinhos.id')]);
+
+        //$query = ProdutosCarrinhos::find()->where(['carrinho_id' => $queryProcuraCarrinho->id])->all();
+       // $query = ProdutosCarrinhos::find();
 
         // add conditions that should always apply here
 
