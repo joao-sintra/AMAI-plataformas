@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var \common\models\Avaliacoes $model */
+/** @var common\models\Avaliacoes $model */
 
 $this->title = $model->produto->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Registo das Avaliações', 'url' => ['index']];

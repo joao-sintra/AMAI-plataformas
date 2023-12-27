@@ -15,16 +15,27 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
-    <?= $form->field($model, 'produto_id')->label('Produto')->dropDownList(
+    <?= $form->field($model, 'produto_id')->label('Produtos')->dropDownList(
         ArrayHelper::map(Produtos::find()->all(), 'id', 'nome'),
         ['prompt' => 'Selecione o produto para associar à imagem']
     ) ?>
-    <?= $form->field($model, 'imageFiles[]')->label('Selecionar Imagem')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
+
+
+    <h2>Imagem Atual</h2>
+    <?php $imagePath = 'http://projeto-common.test/public/imagens/produtos/' . $model->fileName; ?>
+
+    <?= Html::img($imagePath, ['alt' => 'Imagens', 'style' => 'max-width:250px;']); ?>
+
+    <br><br>
+
+    <?= $form->field($model, 'imageFile')->fileInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+
     </div>
 
     <?php ActiveForm::end(); ?>
+
 
 </div>

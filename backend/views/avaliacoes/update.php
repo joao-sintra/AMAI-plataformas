@@ -1,7 +1,7 @@
 <?php
 
 /** @var yii\web\View $this */
-/** @var \common\models\Avaliacoes $model */
+/** @var common\models\Avaliacoes $model */
 
 $this->title = 'Alterações na Avaliação ao Produtos: ' . $this->title = $model->produtos[0]->nome ?? 'Avaliacao Details';
 $this->params['breadcrumbs'][] = ['label' => 'Avaliacoes', 'url' => ['index']];

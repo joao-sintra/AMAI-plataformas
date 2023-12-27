@@ -76,18 +76,23 @@ class ImagemController extends Controller
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
 
-                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
 
+                if ($uploadPaths = $model->upload()) {
 
-                if ($model->upload()) {
+                    foreach ($uploadPaths as $file) {
+                        $newModel = new Imagens();
 
-                    $model->fileName = $model->imageFile->baseName;
-                    $model->save();
+                        $newModel->imageFiles = UploadedFile::getInstances($newModel, 'imageFiles');
 
-                    return $this->redirect(['view', 'id' => $model->id, 'produto_id' => $model->produto_id]);
+                        $filename = pathinfo($file, PATHINFO_FILENAME);
+                        $newModel->fileName = $filename;
+                        $newModel->produto_id = $model->produto_id;
+                        $newModel->save();
+
+                    }
+                    return $this->redirect(['index', 'id' => $model->id, 'produto_id' => $model->produto_id]);
                 }
-
-
             }
         } else {
             $model->loadDefaultValues();
@@ -95,7 +100,6 @@ class ImagemController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-
         ]);
     }
 
@@ -111,16 +115,17 @@ class ImagemController extends Controller
     {
         $model = $this->findModel($id, $produto_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) ) {
+        if ($this->request->isPost && $model->load($this->request->post())) {
 
-            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            $model->imageFiles = UploadedFile::getInstances($model, 'imageFile');
 
+            if ($uploadPaths = $model->upload()) {
 
-            if ($model->upload()) {
-
-                $model->fileName = $model->imageFile->baseName;
-                $model->save();
-
+                foreach ($uploadPaths as $file) {
+                    $filename = pathinfo($file, PATHINFO_FILENAME);
+                    $model->fileName = $filename;
+                    $model->save();
+                }
                 return $this->redirect(['view', 'id' => $model->id, 'produto_id' => $model->produto_id]);
             }
         }
