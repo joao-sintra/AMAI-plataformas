@@ -27,8 +27,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
     </p>
 
-    <?= DetailView::widget(['model' => $model,
-        'attributes' => ['fileName',
-            'produto.nome',],]) ?>
 
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'fileName:text:Nome do Ficheiro',
+            'produto.nome:text:Nome do Produto',
+        ],
+
+    ]) ?>
+
+    <?php $imagePath = 'http://projeto-common.test/public/imagens/produtos/' . $model->fileName; ?>
+
+    <?= Html::img($imagePath, ['alt' => 'Imagens', 'style' => 'max-width:400px;']); ?>
 </div>

@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'fileName') ?>
 
-    <?= $form->field($model, 'produto_id') ?>
+    <?= $form->field($model->produto->nome, 'nome') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

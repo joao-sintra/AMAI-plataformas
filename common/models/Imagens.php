@@ -17,6 +17,7 @@ use Yii;
 class Imagens extends \yii\db\ActiveRecord
 {
     public $imageFiles;
+    public $imageFile;
 
     /**
      * {@inheritdoc}
@@ -32,9 +33,9 @@ class Imagens extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'],'safe'],
-            [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 10],
-            [['produto_id'], 'required'],
+            [['id'], 'safe'],
+            [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 10],
+            [['produto_id'], 'required', 'message' => 'Tem de selecionar um produto para associar à imagem'],
             [['produto_id'], 'integer'],
             [['produto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Produtos::class, 'targetAttribute' => ['produto_id' => 'id']],
         ];

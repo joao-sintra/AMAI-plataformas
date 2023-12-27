@@ -11,14 +11,15 @@ use common\models\Imagens;
  */
 class ImagensSearch extends Imagens
 {
-    /**
-     * {@inheritdoc}
-     */
+    public $nomeProduto;
+
     public function rules()
     {
         return [
             [['id', 'produto_id'], 'integer'],
             [['fileName'], 'safe'],
+            [['nomeProduto'], 'safe'],
+
         ];
     }
 
@@ -27,7 +28,6 @@ class ImagensSearch extends Imagens
      */
     public function scenarios()
     {
-        // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
@@ -40,9 +40,8 @@ class ImagensSearch extends Imagens
      */
     public function search($params)
     {
-        $query = Imagens::find();
 
-        // add conditions that should always apply here
+        $query = Imagens::find()->joinWith('produto');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -51,18 +50,11 @@ class ImagensSearch extends Imagens
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'produto_id' => $this->produto_id,
-        ]);
+        $query->andFilterWhere(['like', 'produtos.nome', $this->nomeProduto]);
 
-        $query->andFilterWhere(['like', 'fileName', $this->fileName]);
 
         return $dataProvider;
     }

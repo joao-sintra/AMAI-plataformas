@@ -44,7 +44,6 @@ class ImagemController extends Controller
         $searchModel = new ImagensSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -118,8 +117,7 @@ class ImagemController extends Controller
 
         if ($this->request->isPost && $model->load($this->request->post())) {
 
-            $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
-
+            $model->imageFiles = UploadedFile::getInstances($model, 'imageFile');
 
             if ($uploadPaths = $model->upload()) {
 
@@ -128,7 +126,6 @@ class ImagemController extends Controller
                     $model->fileName = $filename;
                     $model->save();
                 }
-
                 return $this->redirect(['view', 'id' => $model->id, 'produto_id' => $model->produto_id]);
             }
         }

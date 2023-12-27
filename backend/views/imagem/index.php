@@ -26,18 +26,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
+
             [
                 'label' => 'Imagens',
                 'format' => 'raw',
                 'value' => function ($model) {
-                    $imagePath = 'http://amai-common.test/public/imagens/produtos/' . $model->fileName;
+                    $imagePath = 'http://projeto-common.test/public/imagens/produtos/' . $model->fileName;
 
                     return Html::img($imagePath, ['alt' => 'Imagens', 'style' => 'max-width:100px;']);
                 },
             ],
             [
-                'attribute' => 'produto_id',
-                'label' => 'Produto Associado',
+                'attribute' => 'nomeProduto',
+                'label' => 'Produto',
                 'value' => function ($model) {
                     return $model->produto->nome;
                 },
