@@ -52,9 +52,13 @@ class Imagens extends \yii\db\ActiveRecord
         if ($this->validate()) {
 
             foreach ($this->imageFiles as $file) {
-                $uploadPath = Yii::getAlias('@common') . '/public/imagens/produtos/' . uniqid() . $file->baseName . '.' . $file->extension;
-                $file->saveAs($uploadPath, false);
-                $uploadPaths[] = $uploadPath;
+                $uid = uniqid();
+                $uploadPathBack = Yii::getAlias('@backend/web/imagens/') . $uid . $file->baseName . '.' . $file->extension;
+                $uploadPathFront = Yii::getAlias('@frontend/web/imagens/') . $uid . $file->baseName . '.' . $file->extension;
+
+                $file->saveAs($uploadPathBack, false);
+                $file->saveAs($uploadPathFront, false);
+                $uploadPaths[] = $uploadPathBack;
 
             }
             return $uploadPaths;

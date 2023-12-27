@@ -6,6 +6,8 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
+
+
 /** @var yii\web\View $this */
 /** @var backend\models\ImagensSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
@@ -31,7 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Imagens',
                 'format' => 'raw',
                 'value' => function ($model) {
-                    $imagePath = 'http://projeto-common.test/public/imagens/produtos/' . $model->fileName;
+
+                   $imagePath = '@web/imagens/' . $model->fileName;
+
+
+
 
                     return Html::img($imagePath, ['alt' => 'Imagens', 'style' => 'max-width:100px;']);
                 },

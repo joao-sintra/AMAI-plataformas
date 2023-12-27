@@ -85,8 +85,9 @@ class ImagemController extends Controller
 
                         $newModel->imageFiles = UploadedFile::getInstances($newModel, 'imageFiles');
 
-                        $filename = pathinfo($file, PATHINFO_FILENAME);
-                        $newModel->fileName = $filename;
+                        $fileImagem = pathinfo($file);
+
+                        $newModel->fileName = $fileImagem['basename'];
                         $newModel->produto_id = $model->produto_id;
                         $newModel->save();
 

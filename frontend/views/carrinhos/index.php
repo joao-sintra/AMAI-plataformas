@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <table class="table table-striped">
                             <thead>
                             <tr>
+                                <th>Imagem</th>
                                 <th>Nome</th>
                                 <th>Descrição</th>
                                 <th>IVA (%)</th>
@@ -45,8 +46,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             $iva = 0;
                             foreach ($carrinho->produtosCarrinhos as $linha):
                                 $iva += $linha->valor_iva * $linha->quantidade;
+
                                 ?>
                                 <tr>
+                                    <td><?= Html::img(Url::to( '@web/imagens/' . $linha->produto->imagens[0]->fileName), ['width' => '100px', 'height' => '100px']) ?></td>
                                     <td><?= Html::encode($linha->produto->nome) ?></td>
                                     <td><?= Html::encode($linha->produto->descricao) ?></td>
                                     <td><?= Html::encode($linha->produto->iva->percentagem) . '%' ?></td>
