@@ -6,6 +6,7 @@ use app\models\UploadForm;
 use common\models\Produtos;
 use common\models\ProdutosSearch;
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -30,7 +31,18 @@ class ProdutosController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
-            ]
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                            'roles' => ['admin','gestor'],
+                        ],
+
+                    ],
+                ],
+            ],
         );
     }
 
@@ -124,6 +136,7 @@ class ProdutosController extends Controller
 
         return $this->redirect(['index']);
     }
+
     /**
      * Finds the Produtos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

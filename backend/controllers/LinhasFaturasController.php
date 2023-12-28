@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\LinhasFaturas;
 use common\models\LinhasFaturasSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -27,7 +28,17 @@ class LinhasFaturasController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
-            ]
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index', 'view', 'update',],
+                            'roles' => ['admin'],
+                        ],
+                    ],
+                ],
+            ],
         );
     }
 

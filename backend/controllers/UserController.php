@@ -38,30 +38,9 @@ class UserController extends Controller
                     'rules' => [
                         [
                             'allow' => true,
-                            'actions' => ['index'],
-                            'roles' => ['verUsers'],
+                            'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                            'roles' => ['admin'],
                         ],
-                        [
-                            'allow' => true,
-                            'actions' => ['view'],
-                            'roles' => ['verUsers'],
-                        ],
-                        [
-                            'allow' => true,
-                            'actions' => ['create'],
-                            'roles' => ['criarUsers'],
-                        ],
-                        [
-                            'allow' => true,
-                            'actions' => ['update'],
-                            'roles' => ['editarUsers'],
-                        ],
-                        [
-                            'allow' => true,
-                            'actions' => ['delete'],
-                            'roles' => ['apagarUsers'],
-                        ],
-
                     ],
                 ],
             ]
@@ -110,7 +89,7 @@ class UserController extends Controller
         $model = new UserForm();
 
         if ($this->request->isPost) {
-            if ($model->load ($this->request->post()) && $model->createUser()) {
+            if ($model->load($this->request->post()) && $model->createUser()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }

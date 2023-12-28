@@ -38,20 +38,8 @@ class PerfilController extends Controller
                     'rules' => [
                         [
                             'allow' => true,
-                            'actions' => ['index'],
-                            'roles' => ['verUsers'],
-                        ],
-
-                        [
-                            'allow' => true,
-                            'actions' => ['changepassword'],
-                            'roles' => ['admin'],
-                        ],
-
-                        [
-                            'allow' => true,
-                            'actions' => ['update'],
-                            'roles' => ['admin'],
+                            'actions' => ['index', 'changepassword', 'update'],
+                            'roles' => ['@'],
                         ],
                     ],
                 ],
@@ -88,10 +76,10 @@ class PerfilController extends Controller
         $loadedPost = $user->load(Yii::$app->request->post());
 
         if ($loadedPost && $user->validate()) {
-           $user->password = $user->newPassword;
-           $user->save(false);
-           Yii::$app->session->setFlash('success', 'You have sucessfuly changed your password');
-           return $this->redirect(['index']);
+            $user->password = $user->newPassword;
+            $user->save(false);
+            Yii::$app->session->setFlash('success', 'You have sucessfuly changed your password');
+            return $this->redirect(['index']);
         }
 
         return $this->render('changepassword', [

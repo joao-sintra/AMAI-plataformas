@@ -6,6 +6,7 @@ use app\models\UploadForm;
 use backend\models\Produto;
 use common\models\Imagens;
 use backend\models\ImagensSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -30,7 +31,17 @@ class ImagemController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
-            ]
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index', 'view', 'delete', 'create', 'update'],
+                            'roles' => ['gestor'],
+                        ],
+                    ],
+                ],
+            ],
         );
     }
 

@@ -7,6 +7,7 @@ use common\models\Faturas;
 use common\models\FaturasSearch;
 use common\models\LinhasFaturas;
 use common\models\LinhasFaturasSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -33,7 +34,17 @@ class FaturasController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
-            ]
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index', 'view', 'update',],
+                            'roles' => ['admin'],
+                        ],
+                    ],
+                ],
+            ],
         );
     }
 
@@ -150,7 +161,8 @@ class FaturasController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
 
-    protected function findModel($id, $user_id)    {
+    protected function findModel($id, $user_id)
+    {
         if (($model = Faturas::findOne(['id' => $id, 'user_id' => $user_id])) !== null) {
             return $model;
         }

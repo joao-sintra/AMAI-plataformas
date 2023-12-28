@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\Empresa;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -28,7 +29,17 @@ class EmpresasController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
-            ]
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index', 'view', 'create', 'update'],
+                            'roles' => ['admin'],
+                        ],
+                    ],
+                ],
+            ],
         );
     }
 

@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\CategoriasProdutos;
 use common\models\CategoriasProdutosSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -27,7 +28,17 @@ class CategoriasProdutosController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
-            ]
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index', 'view', 'delete', 'create', 'update'],
+                            'roles' => ['admin', 'gestor'],
+                        ],
+                    ],
+                ],
+            ],
         );
     }
 

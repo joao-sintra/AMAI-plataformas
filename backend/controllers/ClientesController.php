@@ -6,6 +6,7 @@ use backend\models\UserForm;
 use common\models\ClientesForm;
 use common\models\ClientesFormSearch;
 use common\models\User;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -27,6 +28,17 @@ class ClientesController extends Controller
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
+                    ],
+                ],
+                'access' => [
+                    'class' => AccessControl::class,
+
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index', 'view', 'update', 'delete'],
+                            'roles' => ['admin'],
+                        ],
                     ],
                 ],
             ]
