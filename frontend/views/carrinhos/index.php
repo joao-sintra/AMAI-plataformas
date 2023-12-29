@@ -11,6 +11,7 @@ use yii\grid\GridView;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 
+
 $this->title = 'Carrinhos';
 $this->params['breadcrumbs'][] = $this->title;
 ?><BR><BR><BR>
@@ -38,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <th>Quantidade</th>
                                 <th>Operações Qtd</th>
                                 <th>Total</th>
+                                <th></th>
                                 <!-- Add more headers for other columns -->
                             </tr>
                             </thead>
@@ -58,6 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td><?= Html::a('<span class="fas fa-minus"> &nbsp</span>', ['carrinhos/diminuiqtd', 'id' => $linha->id]); ?>
                                         <?= Html::a('<span class="fas fa-plus"></span>', ['carrinhos/aumentaqtd', 'id' => $linha->id]); ?></td>
                                     <td><?= Html::encode($linha->subtotal) . ' €' ?></td>
+                                    <td><?= Html::a('<span class="fas fa-trash"></span>', ['produtos-carrinhos/delete', 'id' => $linha->id, 'carrinho_id'=>$carrinho->id, 'produto_id'=>$linha->produto->id], ['data' => ['confirm' => 'Tem a certeza que pretende remover este produto do carrinho?','method' => 'post',]]); ?></td>
                                     <!-- Add more cells for other columns -->
                                 </tr>
                             <?php endforeach; ?>

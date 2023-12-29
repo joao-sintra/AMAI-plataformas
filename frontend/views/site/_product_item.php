@@ -1,3 +1,8 @@
+<?php
+use common\models\Carrinhos;
+use yii\helpers\Html;
+
+?>
 <div class="rounded position-relative fruite-item d-flex flex-column">
     <div class="fruite-img">
         <!-- Assuming you have an attribute 'image' in your Product model -->
@@ -12,9 +17,14 @@
             <!-- Use mt-auto to push the content to the bottom -->
             <p class="text-dark fs-5 fw-bold mb-0"><?= Yii::$app->formatter->asCurrency($model->preco, 'EUR') ?> /
                 kg</p>
-            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
-                <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
-            </a>
+
+            <?= Html::a('Add to Cart', ['produtos-carrinhos/create', 'produto_id' => $model->id], [
+                'class' => 'btn btn-primary add-to-cart',
+                'data' => [
+                    'confirm' => 'Are you sure you want to add this product to the cart?',
+                    'method' => 'post',
+                ],
+            ]) ?>
         </div>
     </div>
 </div>

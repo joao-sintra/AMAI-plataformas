@@ -4,11 +4,14 @@ namespace frontend\controllers;
 
 use common\models\ProdutosCarrinhos;
 use common\models\ProdutosCarrinhosSearch;
+use common\models\Produtos;
+use common\models\Carrinhos;
 use yii\helpers\Console;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
+
 
 /**
  * ProdutosCarrinhosController implements the CRUD actions for ProdutosCarrinhos model.
@@ -78,10 +81,11 @@ class ProdutosCarrinhosController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+   /* public function actionCreate()
     {
         $model = new ProdutosCarrinhos();
-
+        var_dump($this->request->post());
+        die();
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id, 'carrinho_id' => $model->carrinho_id, 'produto_id' => $model->produto_id]);
@@ -90,9 +94,44 @@ class ProdutosCarrinhosController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+       return $this->redirect(['carrinhos/index']);
+    }*/
+    public function actionCreate($produto_id)
+    {
+        $model = new ProdutosCarrinhos();
+        $modelProduto = Produtos::findOne(['id' => $produto_id]);
+        $modelCarrinho = Carrinhos::find()->where(['user_id' => Yii::$app->user->id])->one();
+        $model->carrinho_id = $modelCarrinho->id;
+        $produtoCarrinhoProduto = ProdutosCarrinhos::find()->where(['carrinho_id' => $modelCarrinho->id, 'produto_id' => $produto_id])->one();
+        // Set other attributes and validation as needed
+        $model->produto_id = $produto_id;
+
+        if($produtoCarrinhoProduto != null){
+            $produtoCarrinhoProduto->quantidade = (intval($produtoCarrinhoProduto->quantidade) + 1) . '';
+            $produtoCarrinhoProduto->subtotal = $produtoCarrinhoProduto->subtotal + $modelProduto->preco;
+            $produtoCarrinhoProduto->save();
+            $modelCarrinho->valortotal = $modelCarrinho->valortotal + $modelProduto->preco;
+            $modelCarrinho->save();
+            $produtoCarrinhoProduto->save();
+
+            return $this->redirect(['carrinhos/index']);
+        }
+
+        $model->quantidade = "1";
+        $model->valor_iva = $modelProduto->preco * ($modelProduto->iva->percentagem / 100);
+        $model->subtotal = $model->valor_iva+$modelProduto->preco * $model->quantidade;
+        $model->preco_venda = $modelProduto->preco;
+
+        $modelCarrinho->valortotal = $modelCarrinho->valortotal + $model->subtotal;
+
+        if ($model->save() && $modelCarrinho->save()) {
+            return $this->redirect(['carrinhos/index']);
+        } else {
+
+            Yii::$app->session->setFlash('error', 'Error adding the product to the cart.');
+        }
+
+        return $this->redirect(['carrinhos/index']);
     }
 
     /**
@@ -128,9 +167,15 @@ class ProdutosCarrinhosController extends Controller
      */
     public function actionDelete($id, $carrinho_id, $produto_id)
     {
-        $this->findModel($id, $carrinho_id, $produto_id)->delete();
 
-        return $this->redirect(['index']);
+        $modelCarrinho = Carrinhos::find()->where(['id' => $carrinho_id])->one();
+        $model = $this->findModel($id, $carrinho_id, $produto_id);
+        $modelCarrinho->valortotal = $modelCarrinho->valortotal - $model->subtotal;
+        $modelCarrinho->save();
+
+        $model->delete();
+
+        return $this->redirect(['carrinhos/index']);
     }
 
     /**
