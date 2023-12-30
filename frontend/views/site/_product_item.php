@@ -27,7 +27,7 @@ use yii\widgets\ListView;
             <?= Html::a('Add to Cart', ['produtos-carrinhos/create', 'produto_id' => $model->id], [
                 'class' => 'btn btn-primary add-to-cart',
                 'data' => [
-                    'confirm' => 'Are you sure you want to add this product to the cart?',
+
                     'method' => 'post',
                 ],
             ]) ?>

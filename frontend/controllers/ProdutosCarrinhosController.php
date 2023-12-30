@@ -11,6 +11,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
+use Carbon\Carbon;
 
 
 /**
@@ -100,7 +101,17 @@ class ProdutosCarrinhosController extends Controller
     {
         $model = new ProdutosCarrinhos();
         $modelProduto = Produtos::findOne(['id' => $produto_id]);
-        $modelCarrinho = Carrinhos::find()->where(['user_id' => Yii::$app->user->id])->one();
+        $modelCarrinho = Carrinhos::find()->where(['user_id' => Yii::$app->user->id, 'status' => 'Ativo'])->one();
+        if($modelCarrinho == null){
+            $modelCarrinho = new Carrinhos();
+            $modelCarrinho->user_id = Yii::$app->user->id;
+            $modelCarrinho->status = 'Ativo';
+            $modelCarrinho->valortotal = 0;
+            $modelCarrinho->dtapedido = Carbon::now();
+            $modelCarrinho->metodo_envio = 'a definir';
+            $modelCarrinho->save();
+
+        }
         $model->carrinho_id = $modelCarrinho->id;
         $produtoCarrinhoProduto = ProdutosCarrinhos::find()->where(['carrinho_id' => $modelCarrinho->id, 'produto_id' => $produto_id])->one();
         // Set other attributes and validation as needed

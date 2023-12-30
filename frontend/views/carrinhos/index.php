@@ -12,6 +12,7 @@ use yii\grid\GridView;
 
 
 
+
 $this->title = 'Carrinhos';
 $this->params['breadcrumbs'][] = $this->title;
 ?><BR><BR><BR>
@@ -30,6 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="d-inline-block mr-3">
                         <table class="table table-striped">
                             <thead>
+                            <?php if(empty($carrinho->produtosCarrinhos)){ ?>
+                                <h2>Carinho Vazio</h2>
+                            <?php }?>
                             <tr>
                                 <th>Imagem</th>
                                 <th>Nome</th>
@@ -89,11 +93,19 @@ $this->params['breadcrumbs'][] = $this->title;
                         </table>
                     </div>
 
+
                 <?php endforeach; ?>
             </div>
-        </div>
-        <?= Html::a(' Continuar a comprar', ['site/shop'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(' Finalizar compra', ['carrinhos/create'], ['class' => 'btn btn-warning']) ?>
+        </div> <?= Html::a(' Continuar a comprar', ['site/shop'], ['class' => 'btn btn-success']) ?>
+
+        <?php if(empty($carrinho->produtosCarrinhos)){ ?>
+        <?=
+        Html::a(' Finalizar compra', ['carrinhos/update', 'id'=>$carrinho->id, 'user_id'=>$carrinho->user_id], ['class' => 'btn btn-warning disabled']) ?>
+        <?php }else{ ?>
+        <?=
+            Html::a(' Finalizar compra', ['carrinhos/update', 'id'=>$carrinho->id, 'user_id'=>$carrinho->user_id], ['class' => 'btn btn-warning ']) ?>
+        <?php } ?>
+
 
     </div>
 

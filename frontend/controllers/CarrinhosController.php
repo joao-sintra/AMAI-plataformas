@@ -7,10 +7,12 @@ use common\models\CarrinhosSearch;
 use common\models\ClientesForm;
 use common\models\ProdutosCarrinhos;
 use common\models\User;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
+use Carbon\Carbon;
 
 /**
  * CarrinhosController implements the CRUD actions for Carrinhos model.
@@ -25,11 +27,26 @@ class CarrinhosController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                'access' => [
+                    'class' => AccessControl::class,
+                    'only' => ['index', 'create', 'update', 'delete', 'aumentaqtd', 'diminuiqtd', 'view'],
+                    'rules' => [
+                        [
+                            'actions' => ['index', 'create', 'update', 'delete', 'aumentaqtd', 'diminuiqtd', 'view'],
+                            'allow' => true,
+                            'roles' => ['cliente'],
+                        ],
+
+
+
+                    ],
+                ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
                     ],
+
                 ],
             ]
         );
@@ -45,7 +62,13 @@ class CarrinhosController extends Controller
         $searchModel = new CarrinhosSearch();
         $searchModel->user_id = Yii::$app->user->id;
         $dataProvider = $searchModel->search($this->request->queryParams);
+        if($dataProvider->getModels() == null){
+            $this->actionCreate();
 
+            $searchModel = new CarrinhosSearch();
+            $searchModel->user_id = Yii::$app->user->id;
+            $dataProvider = $searchModel->search($this->request->queryParams);
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -108,21 +131,17 @@ class CarrinhosController extends Controller
     public function actionCreate()
     {
         $model = new Carrinhos();
-        $userData = ClientesForm::findOne(['user_id' => Yii::$app->user->id]);
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id, 'user_id' => $model->user_id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
+        $model->user_id = Yii::$app->user->id;
+        $model->status = 'Ativo';
+        $model->valortotal = 0;
+        $model->dtapedido = carbon::now();
+        $model->metodo_envio='a definir';
+        $model->save();
 
-        return $this->render('create', [
-            'model' => $model,
-            'userData' => $userData,
+        return $this->actionIndex();
 
-        ]);
+
     }
 
     /**
@@ -136,13 +155,16 @@ class CarrinhosController extends Controller
     public function actionUpdate($id, $user_id)
     {
         $model = $this->findModel($id, $user_id);
+        $userData = ClientesForm::findOne(['user_id' => Yii::$app->user->id]);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'user_id' => $model->user_id]);
+            var_dump($model->errors);
+            return $this->redirect(['pagamentos/create', 'id' => $model->id, 'user_id' => $model->user_id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'userData' => $userData,
         ]);
     }
 

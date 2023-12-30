@@ -47,11 +47,7 @@ class SiteController extends Controller
                         'roles' => ['@'],
                     ],
 
-                    [
-                        'actions' => ['fazerencomendas'],
-                        'allow' => true,
-                        'roles' => ['fazerEncomendas'],
-                    ],
+
                 ],
             ],
             'verbs' => [
@@ -108,10 +104,7 @@ class SiteController extends Controller
 
     }
 
-    public function actionFazerencomendas()
-    {
-        return $this->render('cliente');
-    }
+
 
     /**
      * Logs in a user.

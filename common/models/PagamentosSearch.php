@@ -4,12 +4,12 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Carrinhos;
+use common\models\Pagamentos;
 
 /**
- * CarrinhosSearch represents the model behind the search form of `common\models\Carrinhos`.
+ * PagamentosSearch represents the model behind the search form of `common\models\Pagamentos`.
  */
-class CarrinhosSearch extends Carrinhos
+class PagamentosSearch extends Pagamentos
 {
     /**
      * {@inheritdoc}
@@ -17,9 +17,9 @@ class CarrinhosSearch extends Carrinhos
     public function rules()
     {
         return [
-            [['id', 'user_id'], 'integer'],
-            [['dtapedido', 'metodo_envio', 'status'], 'safe'],
-            [['valortotal'], 'number'],
+            [['id', 'fatura_id'], 'integer'],
+            [['metodopag', 'data'], 'safe'],
+            [['valor'], 'number'],
         ];
     }
 
@@ -41,17 +41,9 @@ class CarrinhosSearch extends Carrinhos
      */
     public function search($params)
     {
-        //$query = Carrinhos::find();
-        //make a query that gets the user id of the carrinho with status ativo
+        $query = Pagamentos::find();
 
-        //$query = Carrinhos::find()->where(['user_id' => $this->user_id]);
-        $query = Carrinhos::find()->where(['user_id' => $this->user_id, 'status' => 'Ativo']);
-        //$query = Carrinhos::find()->where(['user_id' => $this->user_id && 'status' => 'Ativo']);
-
-
-
-        // adicionar uma cena de que se nao existir um carrinho Criar um novo
-
+        // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -65,17 +57,15 @@ class CarrinhosSearch extends Carrinhos
             return $dataProvider;
         }
 
-
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'dtapedido' => $this->dtapedido,
-            'valortotal' => $this->valortotal,
-            'user_id' => $this->user_id,
+            'valor' => $this->valor,
+            'data' => $this->data,
+            'fatura_id' => $this->fatura_id,
         ]);
 
-        $query->andFilterWhere(['like', 'metodo_envio', $this->metodo_envio])
-            ->andFilterWhere(['like', 'status', $this->status]);
+        $query->andFilterWhere(['like', 'metodopag', $this->metodopag]);
 
         return $dataProvider;
     }

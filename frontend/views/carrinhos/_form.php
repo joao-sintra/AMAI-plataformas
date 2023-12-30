@@ -17,8 +17,8 @@ use Carbon\Carbon;
 
 
     <?= $form->field($model, 'metodo_envio')->label('Método de Envio')->dropDownList([
-                            "cobranca" => 'Cobrança',
-                            "transportadora" => 'Transposrtadora',
+                            "Recolha" => 'Recolha na Loja',
+                            "Transportadora" => 'Transportadora',
                         ],
                             ['prompt' => 'Selecione o Método de Envio']
                         );
@@ -27,8 +27,8 @@ use Carbon\Carbon;
 
 
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    <div class="form-group mt-3">
+        <?= Html::submitButton('Seguinte', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
