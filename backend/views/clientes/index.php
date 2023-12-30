@@ -39,15 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->auth['item_name'] === 'cliente' ? 'Cliente' : $model->auth['item_name'];
                 },
             ],
-            /*'codigopostal',
-            'localidade',*/
-            //'rua',
-            //'nif',
-            //'dtanasc',
-            //'dtaregisto',
-            //'telefone',
-            //'genero',
-            //'user_id',
+
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, ClientesForm $model, $key, $index, $column) {

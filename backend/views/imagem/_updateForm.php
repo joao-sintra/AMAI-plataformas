@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
 
     <h2>Imagem Atual</h2>
-    <?php $imagePath = 'http://projeto-common.test/public/imagens/produtos/' . $model->fileName; ?>
+    <?php $imagePath = '@web/imagens/' . $model->fileName; ?>
 
     <?= Html::img($imagePath, ['alt' => 'Imagens', 'style' => 'max-width:250px;']); ?>
 
@@ -32,7 +32,6 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-
     </div>
 
     <?php ActiveForm::end(); ?>

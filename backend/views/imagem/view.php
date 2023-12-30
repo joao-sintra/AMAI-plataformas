@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /** @var common\models\Imagens $model */
 
 $this->title = $model->produto->nome;
-$this->params['breadcrumbs'][] = ['label' => 'Imagems', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Imagens', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     ]) ?>
 
-    <?php $imagePath = 'http://projeto-common.test/public/imagens/produtos/' . $model->fileName; ?>
+    <?php $imagePath = '@web/imagens/' . $model->fileName; ?>
 
     <?= Html::img($imagePath, ['alt' => 'Imagens', 'style' => 'max-width:400px;']); ?>
 </div>

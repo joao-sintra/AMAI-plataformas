@@ -42,6 +42,10 @@ class ClientesFormSearch extends ClientesForm
     {
         $query = ClientesForm::find();
 
+        $query->joinWith(['user.auth']);
+
+        // Add condition to filter by role 'cliente'
+        $query->andWhere(['auth_assignment.item_name' => 'cliente']);  // Use the correct alias 'auth_assignment'
 
         // add conditions that should always apply here
 
