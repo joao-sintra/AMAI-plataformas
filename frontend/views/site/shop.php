@@ -26,7 +26,7 @@ use yii\widgets\LinkPager;
 <!-- Fruits Shop Start-->
 <div class="container-fluid fruite py-5">
     <div class="container py-5">
-        <h1 class="mb-4 mt-4">Loja de Produtos</h1>
+        <h1 class="mb-4 mt-5">Loja de Produtos</h1>
         <div class="row g-4">
             <div class="col-lg-12">
                 <div class="col-xl-3">

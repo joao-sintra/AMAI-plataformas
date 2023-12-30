@@ -80,13 +80,6 @@ class User extends ActiveRecord implements IdentityInterface
             [['newPassword', 'confirmPassword'], 'string', 'min' => 6, 'on' => self::SCENARIO_PASSWORD],
             [['newPassword', 'confirmPassword'], 'filter', 'filter' => 'trim', 'on' => self::SCENARIO_PASSWORD],
             [['confirmPassword'], 'compare', 'compareAttribute' => 'newPassword', 'message' => 'Passwords do not match', 'on' => self::SCENARIO_PASSWORD],
-
-           /*[['newPassword', 'currentPassword', 'confirmPassword'], 'required'],
-            [['currentPassword'], 'validateCurrentPassword'],
-
-            [['newPassword', 'confirmPassword'], 'string', 'min' => 6],
-            [['newPassword', 'confirmPassword'], 'filter', 'filter' => 'trim'],
-            [['confirmPassword'], 'compare', 'compareAttribute' => 'newPassword', 'message' => 'Passwords do not match'],*/
         ];
     }
 

@@ -47,10 +47,12 @@ AppAsset::register($this);
                 ['label' => 'Sobre', 'url' => ['/site/about']],
                 ['label' => 'Contactos', 'url' => ['/site/contact']],
                 ['label' => 'Carrinho', 'url' => ['/carrinhos/index']],
-
             ];
+
             if (Yii::$app->user->isGuest) {
                 $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
+            } else {
+                $menuItems[] = ['label' => 'Perfil', 'url' => ['/site/perfil']];
             }
 
             echo Nav::widget([
