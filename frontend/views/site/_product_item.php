@@ -1,4 +1,5 @@
 <?php
+
 use common\models\Carrinhos;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -10,17 +11,31 @@ use yii\widgets\ListView;
 
 ?>
 <div class="rounded position-relative fruite-item d-flex flex-column">
-    <div class="fruite-img">
-        <!-- Assuming you have an attribute 'image' in your Product model -->
-        <!--<img src="<?php /*= $model->image */ ?>" class="img-fluid w-100 rounded-top" alt="">-->
-        <td><?= Html::img(Url::to( '@web/imagens/' . $model->imagens[0]->fileName), ['class' => 'img-fluid w-100 rounded-top']) ?></td>
+    <div class="product-img">
+        <?php if (!empty($model->imagens)) : ?>
+            <td>
+                <?= Html::img(
+                    Url::to('@web/imagens/' . $model->imagens[0]->fileName),
+                    ['class' => 'img-fluid w-100 rounded-top']
+                ) ?>
+            </td>
+        <?php else : ?>
+            <td>
+                <?= Html::img(
+                    Url::to('@web/public/imagens/produtos/no_image.jpg'),
+                    ['class' => 'img-fluid rounded-top placeholder-image', 'alt' => 'imagem inexistente']
 
+                ) ?>
+                <p class="image-placeholder-text">Não Existe Imagens nos Produtos!</p>
+            </td>
+        <?php endif; ?>
     </div>
+
     <div class="p-4 border border-secondary border-top-0 rounded-bottom flex-grow-1r">
+        <?= $model = null; ?>
         <h4><?= $model->nome ?></h4>
         <p style="height: 50px"><?= $model->descricao ?></p>
         <div class="d-flex justify-content-between flex-lg-wrap mt-auto">
-            <!-- Use mt-auto to push the content to the bottom -->
             <p class="text-dark fs-5 fw-bold mb-0"><?= Yii::$app->formatter->asCurrency($model->preco, 'EUR') ?> /
                 kg</p>
 
