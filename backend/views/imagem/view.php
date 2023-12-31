@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     ]) ?>
 
-    <?php $imagePath = '@web/imagens/' . $model->fileName; ?>
+    <?php $imagePath = '@web/public/imagens/produtos/' . $model->fileName; ?>
 
     <?= Html::img($imagePath, ['alt' => 'Imagens', 'style' => 'max-width:400px;']); ?>
 </div>

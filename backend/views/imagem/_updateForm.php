@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
 
     <h2>Imagem Atual</h2>
-    <?php $imagePath = '@web/imagens/' . $model->fileName; ?>
+    <?php $imagePath = '@web/public/imagens/produtos/' . $model->fileName; ?>
 
     <?= Html::img($imagePath, ['alt' => 'Imagens', 'style' => 'max-width:250px;']); ?>
 

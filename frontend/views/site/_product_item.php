@@ -15,7 +15,7 @@ use yii\widgets\ListView;
         <?php if (!empty($model->imagens)) : ?>
             <td>
                 <?= Html::img(
-                    Url::to('@web/imagens/' . $model->imagens[0]->fileName),
+                    Url::to('@web/public/imagens/produtos/' . $model->imagens[0]->fileName),
                     ['class' => 'img-fluid w-100 rounded-top']
                 ) ?>
             </td>
@@ -32,7 +32,6 @@ use yii\widgets\ListView;
     </div>
 
     <div class="p-4 border border-secondary border-top-0 rounded-bottom flex-grow-1r">
-        <?= $model = null; ?>
         <h4><?= $model->nome ?></h4>
         <p style="height: 50px"><?= $model->descricao ?></p>
         <div class="d-flex justify-content-between flex-lg-wrap mt-auto">

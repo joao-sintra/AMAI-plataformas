@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'value' => function ($model) {
 
-                   $imagePath = '@web/imagens/' . $model->fileName;
+                   $imagePath = '@web/public/imagens/produtos/' . $model->fileName;
 
 
 

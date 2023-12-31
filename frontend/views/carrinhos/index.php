@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 ?>
                                 <tr>
-                                    <td><?= Html::img(Url::to( '@web/imagens/' . $linha->produto->imagens[0]->fileName), ['width' => '100px', 'height' => '100px']) ?></td>
+                                    <td><?= Html::img(Url::to( '@web/public/imagens/produtos/' . $linha->produto->imagens[0]->fileName), ['width' => '100px', 'height' => '100px']) ?></td>
                                     <td><?= Html::encode($linha->produto->nome) ?></td>
                                     <td><?= Html::encode($linha->produto->descricao) ?></td>
                                     <td><?= Html::encode($linha->produto->iva->percentagem) . '%' ?></td>
