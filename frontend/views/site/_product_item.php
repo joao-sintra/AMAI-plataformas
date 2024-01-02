@@ -10,7 +10,7 @@ use yii\widgets\ListView;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 ?>
-<div class="rounded position-relative fruite-item d-flex flex-column">
+<div class="rounded position-relative fruite-item d-flex flex-column mb-3">
     <div class="product-img">
         <?php if (!empty($model->imagens)) : ?>
             <td>
