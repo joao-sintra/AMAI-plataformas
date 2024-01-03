@@ -21,6 +21,16 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+
+    <style>
+        .custom-bg-color {
+            color: #39cd66;
+        }
+
+        .custom-bg-color:hover {
+            color: #0a0a0a;
+        }
+    </style>
 </head>
 <body>
 
@@ -66,7 +76,7 @@ AppAsset::register($this);
                 echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
                     . Html::submitButton(
                         'Logout (' . Yii::$app->user->identity->username . ')',
-                        ['class' => 'btn btn-link logout text-decoration-none bg-red']
+                        ['class' => 'btn btn-link text-decoration-none custom-bg-color'] // Use the custom class here
                     )
                     . Html::endForm();
             }
