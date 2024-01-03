@@ -17,11 +17,11 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use common\models\Produtos;
-use yii\web\NotFoundHttpException;
 use yii\data\ActiveDataProvider;
 use common\models\ProdutosSearch;
 use common\models\User;
 use common\models\ClientesForm;
+use yii\web\ForbiddenHttpException;
 
 /**
  * Site controller
@@ -36,26 +36,29 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['logout', 'signup'],
+                'only' => ['logout', 'signup', 'edit-profile', 'perfil'],
                 'rules' => [
                     [
                         'actions' => ['signup'],
                         'allow' => true,
-                        'roles' => ['?'],
+                        'roles' => ['?'], // allow guests (unauthenticated users)
                     ],
                     [
-                        'actions' => ['edit-profile'],
+                        'actions' => ['edit-profile', 'perfil', 'logout'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['@'], // allow only authenticated users
                     ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-
-
                 ],
+                'denyCallback' => function ($rule, $action) {
+                    if (Yii::$app->user->isGuest) {
+                        // Redirect unauthenticated users to the login page
+                        Yii::$app->getResponse()->redirect(['site/login'])->send();
+                        Yii::$app->end();
+                    } else {
+                        // Show an access denied message for authenticated users
+                        throw new ForbiddenHttpException('You are not allowed to perform this action.');
+                    }
+                },
             ],
             'verbs' => [
                 'class' => VerbFilter::class,
@@ -102,15 +105,6 @@ class SiteController extends Controller
 
         return $this->render('index', ['produtos' => $produtos]);
     }
-
-    public function actionAdmin()
-    {
-        if (yii->app->user->isGuest) {
-            return $this->goHome();
-        }
-
-    }
-
 
 
     /**
