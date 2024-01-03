@@ -1,3 +1,47 @@
+/*** Layouts Main Start ***/
+
+.custom-bg-color {
+    color: #39cd66;
+}
+
+.custom-bg-color:hover {
+    color: #0a0a0a;
+}
+
+/*** Layouts Main End ***/
+
+
+/*** Perfil Start ***/
+
+.vertical-bar {
+    position: absolute;
+    left: 43%;
+    transform: translateX(-40%);
+    width: 1px;
+    background-color: #404b53;
+    height: 97%; /* Vertical bar spanning the full height of the container */
+    z-index: 1; /* Make sure the bar is above the content */
+}
+.card {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
+}
+
+/*** Perfil End ***/
+
+
+/*** Shop Start ***/
+
+.pagination-container {
+    display: inline-block;
+}
+
+.pagination li {
+    display: inline;
+    margin-right: 5px;
+}
+
+/*** Shop End ***/
+
 
 /*** Spinner Start ***/
 #spinner {

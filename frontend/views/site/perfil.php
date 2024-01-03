@@ -11,6 +11,14 @@ use yii\jui\DatePicker;
 /** @var bool $userDataEditMode */
 /** @var bool $userMoradaDataEditMode */
 
+
+$baseUrl = "../img/";
+
+// Assuming you want to dynamically set the image filename
+$imageFilename = "user.png";
+
+// Generating the complete image URL
+$imageUrl = $baseUrl . $imageFilename;
 ?>
 
 <div class="container-fluid profile py-4">
@@ -33,7 +41,7 @@ use yii\jui\DatePicker;
                         <div class="card">
                             <div class="card-body d-flex align-items-center position-relative">
                                 <div class="col-md-5">
-                                    <img src="../img/bolos.jpg" alt="Profile Image" class="img-fluid rounded-circle mb-3 mb-md-0">
+                                    <img src="<?php echo $imageUrl; ?>" alt="Profile Image" class="img-fluid rounded-circle mb-3 mb-md-0">
                                 </div>
                                 <div class="vertical-bar"></div>
                                 <div class="col-md-7 ps-md-4">
@@ -211,18 +219,3 @@ use yii\jui\DatePicker;
         </div>
     </div>
 </div>
-
-<style>
-    .vertical-bar {
-        position: absolute;
-        left: 43%;
-        transform: translateX(-40%);
-        width: 1px;
-        background-color: #404b53;
-        height: 97%; /* Vertical bar spanning the full height of the container */
-        z-index: 1; /* Make sure the bar is above the content */
-    }
-    .card {
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adjust the shadow values as needed */
-    }
-</style>

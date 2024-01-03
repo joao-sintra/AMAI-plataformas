@@ -26,7 +26,6 @@ use yii\widgets\ListView;
                     ['class' => 'img-fluid rounded-top placeholder-image', 'alt' => 'imagem inexistente']
 
                 ) ?>
-                <p class="image-placeholder-text">Não Existe Imagens nos Produtos!</p>
             </td>
         <?php endif; ?>
     </div>

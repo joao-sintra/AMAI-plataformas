@@ -66,4 +66,3 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
-<script src="https://github.com/jquery/jquery-ui/blob/2de8604b67983a53fd42b24610a59e140a1425e9/ui/i18n/datepicker-pt.js"></script>

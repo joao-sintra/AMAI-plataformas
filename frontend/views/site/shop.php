@@ -11,18 +11,6 @@ use yii\widgets\LinkPager;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 ?>
 
-<style>
-
-    .pagination-container {
-        display: inline-block;
-    }
-
-    .pagination li {
-        display: inline;
-        margin-right: 5px;
-    }
-
-</style>
 <!-- Fruits Shop Start-->
 <div class="container-fluid fruite py-5">
     <div class="container py-5">

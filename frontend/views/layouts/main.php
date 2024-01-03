@@ -21,16 +21,6 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
-
-    <style>
-        .custom-bg-color {
-            color: #39cd66;
-        }
-
-        .custom-bg-color:hover {
-            color: #0a0a0a;
-        }
-    </style>
 </head>
 <body>
 
@@ -45,12 +35,24 @@ AppAsset::register($this);
 
             <?php
             NavBar::begin([
-                'brandLabel' => Yii::$app->name,
-                'brandUrl' => Yii::$app->homeUrl,
+                'brandLabel' => false,
+                'brandOptions' => [
+                    'class' => 'navbar-brand',
+                ],
                 'options' => [
                     'class' => 'navbar navbar-light bg-white navbar-expand-xl    ',
                 ],
             ]);
+
+            // Brand image at the beginning
+            echo '<a class="navbar-brand" href="' . Yii::$app->homeUrl . '">';
+            echo Html::img(Yii::getAlias('@web') . '../img/logo.jpg', [
+                'alt' => 'Your Brand Alt Text',
+                'class' => 'img-responsive', // Add any additional classes if needed
+                'style' => 'width: 100px; height: auto;', // Adjust width and height as needed
+            ]);
+            echo '</a>';
+
             $menuItems = [
                 ['label' => 'Home', 'url' => ['/site/index'],],
                 ['label' => 'Loja', 'url' => ['/site/shop'],],
@@ -70,7 +72,7 @@ AppAsset::register($this);
                 'items' => $menuItems,
             ]);
             if (Yii::$app->user->isGuest) {
-                echo Html::tag('div', Html::a('Login', ['/site/login'], ['class' => ['btn btn-link login text-decoration-none']]), ['class' => ['d-flex']]);
+                echo Html::tag('div', Html::a('Login', ['/site/login'], ['class' => ['btn btn-link text-decoration-none custom-bg-color']]), ['class' => ['d-flex']]);
             } else {
 
                 echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
