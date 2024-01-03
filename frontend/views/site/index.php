@@ -191,9 +191,14 @@ $imageFilenames = array("bolos.jpg", "sobremesas.jpg");
                                 <p><?= $produto->descricao ?></p>
                                 <div class="d-flex justify-content-between flex-lg-wrap">
                                     <p class="text-dark fs-5 fw-bold mb-0"><?= Yii::$app->formatter->asCurrency($produto->preco, 'EUR') ?> / kg</p>
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary">
-                                        <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
-                                    </a>
+
+                                    <?= Html::a('Add to Cart', ['produtos-carrinhos/create', 'produto_id' => $produto->id], [
+                                        'class' => 'btn btn-primary add-to-cart',
+                                        'data' => [
+
+                                            'method' => 'post',
+                                        ],
+                                    ]) ?>
                                 </div>
                             </div>
                         </div>

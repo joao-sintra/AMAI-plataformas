@@ -55,7 +55,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
                                 ?>
                                 <tr>
-                                    <td><?= Html::img(Url::to( '@web/public/imagens/produtos/' . $linha->produto->imagens[0]->fileName), ['width' => '100px', 'height' => '100px']) ?></td>
+                                    <?php if (!empty($model->imagens)) : ?>
+                                        <td>
+                                            <?= Html::img(
+                                                Url::to('@web/public/imagens/produtos/' . $model->imagens[0]->fileName),
+                                                ['class' => 'img-fluid w-100 rounded-top']
+                                            ) ?>
+                                        </td>
+                                    <?php else : ?>
+                                        <td>
+                                            <?= Html::img(
+                                                Url::to('@web/public/imagens/produtos/no_image.jpg'),
+                                                ['class' => 'img-fluid rounded-top placeholder-image', 'alt' => 'imagem inexistente'] + ['width' => '100px', 'height' => '100px']
+
+                                            ) ?>
+                                        </td>
+                                    <?php endif; ?>
                                     <td><?= Html::encode($linha->produto->nome) ?></td>
                                     <td><?= Html::encode($linha->produto->descricao) ?></td>
                                     <td><?= Html::encode($linha->produto->iva->percentagem) . '%' ?></td>
@@ -75,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <!-- Second Table -->
 
                         <table class="table table-primary m-5">
-                            <th class="text-center  " colspan="2">Sumário</th>
+                            <th class="text-center" colspan="2">Sumário</th>
 
                             <tr>
                                 <th>IVA</th>

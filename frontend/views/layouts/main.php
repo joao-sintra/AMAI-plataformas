@@ -31,8 +31,6 @@ AppAsset::register($this);
     <div class="container-fluid fixed-top shadow">
         <div class="container px-0">
 
-
-
             <?php
             NavBar::begin([
                 'brandLabel' => false,
@@ -95,7 +93,7 @@ AppAsset::register($this);
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?= Alert::widget() ?>
+      <!--  --><?php /*= Alert::widget() */?>
         <?= $content ?>
     </div>
 </main>
