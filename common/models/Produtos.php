@@ -64,7 +64,7 @@ class Produtos extends \yii\db\ActiveRecord
             'preco' => 'Preco',
             'obs' => 'Obs',
             'categoria_produto_id' => 'Categoria Produtos ID',
-            'iva_id' => 'Iva ID',
+            'iva_id' => 'Ivas ID',
         ];
     }
 
@@ -99,7 +99,7 @@ class Produtos extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Iva]].
+     * Gets query for [[Ivas]].
      *
      * @return \yii\db\ActiveQuery
      */

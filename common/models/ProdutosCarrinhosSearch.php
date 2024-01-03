@@ -5,7 +5,6 @@ namespace common\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\ProdutosCarrinhos;
-use common\models\Carrinhos;
 
 /**
  * ProdutosCarrinhosSearch represents the model behind the search form of `common\models\ProdutosCarrinhos`.
@@ -15,12 +14,15 @@ class ProdutosCarrinhosSearch extends ProdutosCarrinhos
     /**
      * {@inheritdoc}
      */
+    public $nomeProduto;
+
     public function rules()
     {
         return [
             [['id', 'carrinho_id', 'produto_id'], 'integer'],
             [['quantidade'], 'safe'],
             [['preco_venda', 'valor_iva', 'subtotal'], 'number'],
+            [['nomeProduto'], 'safe'],
         ];
     }
 
@@ -42,13 +44,8 @@ class ProdutosCarrinhosSearch extends ProdutosCarrinhos
      */
     public function search($params)
     {
-        //make a query that gets the user id of the carrinho with status ativo
-        //$queryProcuraCarrinho = Carrinhos::find()->where(['user_id' => $userId])->andWhere(['status' => 'ativo'])->one();
-        $query = ProdutosCarrinhos::find()->joinWith('carrinho');
-        $query->andFilterWhere(['=', 'carrinhos.id', $this->getAttribute('carrinhos.id')]);
-
-        //$query = ProdutosCarrinhos::find()->where(['carrinho_id' => $queryProcuraCarrinho->id])->all();
-       // $query = ProdutosCarrinhos::find();
+        /*$query = ProdutosCarrinhos::find();*/
+        $query = ProdutosCarrinhos::find()->joinWith('produto');
 
         // add conditions that should always apply here
 
@@ -75,6 +72,7 @@ class ProdutosCarrinhosSearch extends ProdutosCarrinhos
         ]);
 
         $query->andFilterWhere(['like', 'quantidade', $this->quantidade]);
+        $query->andFilterWhere(['like', 'produtos.nome', $this->nomeProduto]);
 
         return $dataProvider;
     }

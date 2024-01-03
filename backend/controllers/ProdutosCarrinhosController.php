@@ -1,22 +1,17 @@
 <?php
 
-namespace frontend\controllers;
+namespace backend\controllers;
 
-use backend\models\Empresa;
-use common\models\ClientesForm;
-use common\models\Faturas;
-use common\models\FaturasSearch;
-use common\models\LinhasFaturas;
-use common\models\LinhasFaturasSearch;
-use common\models\Pagamentos;
+use common\models\ProdutosCarrinhos;
+use common\models\ProdutosCarrinhosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * FaturasController implements the CRUD actions for Faturas model.
+ * ProdutosCarrinhosController implements the CRUD actions for ProdutosCarrinhos model.
  */
-class FaturasController extends Controller
+class ProdutosCarrinhosController extends Controller
 {
     /**
      * @inheritDoc
@@ -37,13 +32,13 @@ class FaturasController extends Controller
     }
 
     /**
-     * Lists all Faturas models.
+     * Lists all ProdutosCarrinhos models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new FaturasSearch();
+        $searchModel = new ProdutosCarrinhosSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -53,48 +48,32 @@ class FaturasController extends Controller
     }
 
     /**
-     * Displays a single Faturas model.
+     * Displays a single ProdutosCarrinhos model.
      * @param int $id ID
-     * @param int $user_id User ID
+     * @param int $carrinho_id Carrinho ID
+     * @param int $produto_id Produtos ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id, $user_id)
+    public function actionView($id, $carrinho_id, $produto_id)
     {
-
-        $searchModel = new LinhasFaturasSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams, $id);
-        $faturas = Faturas::find()->where(['id' => $id])->one();
-        $pagamento = Pagamentos::find()->where(['fatura_id' => $id])->one();
-        $empresa = Empresa::find()->one();
-        $cliente = ClientesForm::find()->where(['user_id' => $user_id])->one();
-        $linhasFaturas = LinhasFaturas::find()->where(['fatura_id' => $id])->all();
-
         return $this->render('view', [
-            'empresa' => $empresa,
-            'model' => $this->findModel($id, $user_id),
-            'faturas' => $faturas,
-            'cliente' => $cliente,
-            'pagamento' => $pagamento,
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'linhasFaturas' => $linhasFaturas,
-
+            'model' => $this->findModel($id, $carrinho_id, $produto_id),
         ]);
     }
 
     /**
-     * Creates a new Faturas model.
+     * Creates a new ProdutosCarrinhos model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Faturas();
+        $model = new ProdutosCarrinhos();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id, 'user_id' => $model->user_id]);
+                return $this->redirect(['view', 'id' => $model->id, 'carrinho_id' => $model->carrinho_id, 'produto_id' => $model->produto_id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -106,19 +85,20 @@ class FaturasController extends Controller
     }
 
     /**
-     * Updates an existing Faturas model.
+     * Updates an existing ProdutosCarrinhos model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
-     * @param int $user_id User ID
+     * @param int $carrinho_id Carrinho ID
+     * @param int $produto_id Produtos ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id, $user_id)
+    public function actionUpdate($id, $carrinho_id, $produto_id)
     {
-        $model = $this->findModel($id, $user_id);
+        $model = $this->findModel($id, $carrinho_id, $produto_id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'user_id' => $model->user_id]);
+            return $this->redirect(['view', 'id' => $model->id, 'carrinho_id' => $model->carrinho_id, 'produto_id' => $model->produto_id]);
         }
 
         return $this->render('update', [
@@ -127,31 +107,33 @@ class FaturasController extends Controller
     }
 
     /**
-     * Deletes an existing Faturas model.
+     * Deletes an existing ProdutosCarrinhos model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
-     * @param int $user_id User ID
+     * @param int $carrinho_id Carrinho ID
+     * @param int $produto_id Produtos ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id, $user_id)
+    public function actionDelete($id, $carrinho_id, $produto_id)
     {
-        $this->findModel($id, $user_id)->delete();
+        $this->findModel($id, $carrinho_id, $produto_id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Faturas model based on its primary key value.
+     * Finds the ProdutosCarrinhos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @param int $user_id User ID
-     * @return Faturas the loaded model
+     * @param int $carrinho_id Carrinho ID
+     * @param int $produto_id Produtos ID
+     * @return ProdutosCarrinhos the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id, $user_id)
+    protected function findModel($id, $carrinho_id, $produto_id)
     {
-        if (($model = Faturas::findOne(['id' => $id, 'user_id' => $user_id])) !== null) {
+        if (($model = ProdutosCarrinhos::findOne(['id' => $id, 'carrinho_id' => $carrinho_id, 'produto_id' => $produto_id])) !== null) {
             return $model;
         }
 

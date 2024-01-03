@@ -56,9 +56,9 @@ AppAsset::register($this);
                         ],
                     ],
                     ['label' => 'Produtos', 'header' => true],
-                    /* ['label' => 'Vendas de Produtos', 'icon' => 'shopping-cart', 'url' => ['/site/vendas']],*/
                     ['label' => 'Cat. dos Produtos', 'icon' => 'fa-solid fa-tag', 'url' => ['/categorias-produtos/index']],
                     ['label' => 'Criação dos Produtos', 'icon' => 'fa-solid fa-box', 'url' => ['/produtos/index']],
+                    ['label'=> 'Encomendas','icon'=>'fas  fa-boxes','url'=>['/produtos-carrinhos/index']],
                     ['label'=>'Imagens','icon'=>'fa-regular fa-image', 'url'=>['imagem/index']],
                     ['label' => 'Debug Tools', 'header' => true],
                     ['label' => 'Gii', 'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],

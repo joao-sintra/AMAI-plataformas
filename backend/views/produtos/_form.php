@@ -17,11 +17,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nome')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'descricao')->label('Descrição')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'descricao')->label('Descrição')->textarea(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'preco')->label('Preço')->textInput() ?>
 
-    <?= $form->field($model, 'obs')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'obs')->textarea(['maxlength' => true]) ?>
 
     <?php /*= $form->field($model, 'categoria_produto_id')->label('Categoria')->textInput() */?>
 

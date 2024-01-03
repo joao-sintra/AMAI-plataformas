@@ -72,7 +72,7 @@ class Imagens extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'fileName' => 'Imagens',
-            'produto_id' => 'Produtos Associado',
+            'produto_id' => 'Produtos Associados',
         ];
     }
 
