@@ -45,8 +45,10 @@ AppAsset::register($this);
                 'items' => [
                     ['label' => 'Dashboard', 'header' => true],
                     ['label' => 'Dashboard', 'icon' => 'tachometer-alt', 'url' => ['/site/index']],
-                    ['label' => 'Faturas', 'header' => true],
+
+                    ['label' => 'Faturas', 'header' => true, 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
                     ['label' => 'Faturas', 'icon' => 'fas fa-file-invoice-dollar', 'url' => ['/faturas/index'], 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
+
                     ['label' => 'Gestão de Dados', 'header' => true, 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
                     [
                         'label' => 'Gestão de Dados', 'icon' => 'fas fa-file',
@@ -61,7 +63,11 @@ AppAsset::register($this);
                     ['label' => 'Produtos', 'header' => true, 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
                     ['label' => 'Cat. dos Produtos', 'icon' => 'fa-solid fa-tag', 'url' => ['/categorias-produtos/index'], 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
                     ['label' => 'Criação dos Produtos', 'icon' => 'fa-solid fa-box', 'url' => ['/produtos/index'] , 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
+
+                    ['label' => 'Encomendas', 'header' => true],
                     ['label'=> 'Encomendas','icon'=>'fas  fa-boxes','url'=>['/produtos-carrinhos/index']],
+
+                    ['label' => 'Imagens', 'header' => true, 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
                     ['label'=>'Imagens','icon'=>'fa-regular fa-image', 'url'=>['imagem/index'], 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
 
                     ['label' => 'Debug Tools', 'header' => true, 'visible' => ($userRole == 'admin')],
@@ -71,6 +77,7 @@ AppAsset::register($this);
 
                     ['label' => 'Sobre Nós', 'header' => true],
                     ['label' => 'Contactos', 'icon' => 'address-book', 'url' => ['/site/contactos']],
+
                     ['label' => 'Perfil', 'header' => true],
                     ['label' => 'Perfil', 'icon' => 'fas fa-user', 'url' => ['/perfil/index']],
                 ],
