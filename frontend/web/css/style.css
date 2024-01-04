@@ -1,5 +1,7 @@
 /*** Layouts Main Start ***/
-
+.body{
+    overflow-x: hidden;
+}
 .custom-bg-color {
     color: #39cd66;
 }
@@ -28,6 +30,23 @@
 
 /*** Perfil End ***/
 
+/*** Detalhes do produto start***/
+.product-item {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.product-item:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-item img {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+/*** Detalhes do produto end ***/
 
 /*** Shop Start ***/
 
@@ -263,7 +282,7 @@
 
 .page-header {
     position: relative;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/cart-page-header-img.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/sobremesas.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

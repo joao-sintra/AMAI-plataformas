@@ -1,129 +1,150 @@
 <?php
 
-use common\models\Carrinhos;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\grid\ActionColumn;
-use yii\grid\GridView;
 
 /** @var yii\web\View $this */
 /** @var common\models\CarrinhosSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 
-
-
 $this->title = 'Carrinhos';
 $this->params['breadcrumbs'][] = $this->title;
-?><BR><BR><BR>
-<div class="container-fluid">
-    <div class="carrinhos-index mx-auto">
-
-        <h1>Carrinho</h1>
+?>
 
 
-        <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-5">Carrinho</h1>
+
+</div>
+
+
+<div class="container-fluid py-5">
+    <div class="container py-5">
         <div class="row">
             <div class="col-12 table-responsive">
                 <?php foreach ($dataProvider->getModels() as $carrinho): ?>
 
-                    <!-- First Table -->
-                    <div class="d-inline-block mr-3">
-                        <table class="table table-striped">
-                            <thead>
-                            <?php if(empty($carrinho->produtosCarrinhos)){ ?>
-                                <h2>Carinho Vazio</h2>
-                            <?php }?>
-                            <tr>
-                                <th>Imagem</th>
-                                <th>Nome</th>
-                                <th>Descrição</th>
-                                <th>IVA (%)</th>
-                                <th>Preço c/IVA</th>
-                                <th>Quantidade</th>
-                                <th>Operações Qtd</th>
-                                <th>Total</th>
-                                <th></th>
-                                <!-- Add more headers for other columns -->
-                            </tr>
-                            </thead>
-                            <tbody>
+                    <table class="table">
+                        <thead>
+                        <?php if (empty($carrinho->produtosCarrinhos)) { ?>
+                            <h2>Carinho Vazio</h2>
+                        <?php } ?>
+                        <tr>
+
+                            <th scope="col" colspan="2">Produto</th>
+                            <th scope="col">Descição</th>
+                            <th scope="col">IVA (%)</th>
+                            <th scope="col">Preço c/IVA</th>
+                            <th scope="col">Quatidade</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Handle</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
                             <?php
                             $iva = 0;
                             foreach ($carrinho->produtosCarrinhos as $linha):
-                                $iva += $linha->valor_iva * $linha->quantidade;
+                            $iva += $linha->valor_iva * $linha->quantidade;
+                            if (!empty($linha->produto->imagens)) : ?>
 
-                                ?>
-                                <tr>
-                                    <?php if (!empty($model->imagens)) : ?>
-                                        <td>
-                                            <?= Html::img(
-                                                Url::to('@web/public/imagens/produtos/' . $model->imagens[0]->fileName),
-                                                ['class' => 'img-fluid w-100 rounded-top']
-                                            ) ?>
-                                        </td>
-                                    <?php else : ?>
-                                        <td>
-                                            <?= Html::img(
-                                                Url::to('@web/public/imagens/produtos/no_image.jpg'),
-                                                ['class' => 'img-fluid rounded-top placeholder-image', 'alt' => 'imagem inexistente'] + ['width' => '100px', 'height' => '100px']
+                            <div class="d-flex align-items-center">
 
-                                            ) ?>
-                                        </td>
-                                    <?php endif; ?>
-                                    <td><?= Html::encode($linha->produto->nome) ?></td>
-                                    <td><?= Html::encode($linha->produto->descricao) ?></td>
-                                    <td><?= Html::encode($linha->produto->iva->percentagem) . '%' ?></td>
-                                    <td><?= Html::encode($linha->produto->preco * ($linha->produto->iva->percentagem / 100) + $linha->produto->preco) . '€' ?></td>
-                                    <td><?= Html::encode($linha->quantidade) ?></td>
-                                    <td><?= Html::a('<span class="fas fa-minus"> &nbsp</span>', ['carrinhos/diminuiqtd', 'id' => $linha->id]); ?>
-                                        <?= Html::a('<span class="fas fa-plus"></span>', ['carrinhos/aumentaqtd', 'id' => $linha->id]); ?></td>
-                                    <td><?= Html::encode($linha->subtotal) . ' €' ?></td>
-                                    <td><?= Html::a('<span class="fas fa-trash"></span>', ['produtos-carrinhos/delete', 'id' => $linha->id, 'carrinho_id'=>$carrinho->id, 'produto_id'=>$linha->produto->id], ['data' => ['confirm' => 'Tem a certeza que pretende remover este produto do carrinho?','method' => 'post',]]); ?></td>
-                                    <!-- Add more cells for other columns -->
-                                </tr>
-                            <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                                <td> <?= Html::img(
+                                        Url::to('@web/public/imagens/produtos/' . $linha->produto->imagens[0]->fileName),
+                                        ['class' => 'img-fluid me-5'] + ['width' => '150px', 'height' => '150px']
+                                    ) ?></td>
+
+                                <?php else : ?>
+
+                                    <td><?= Html::img(
+                                            Url::to('@web/public/imagens/produtos/no_image.jpg'),
+                                            ['class' => 'img-fluid me-5'] + ['width' => '150px', 'height' => '150px']
+                                        ) ?></td>
+
+
+                                <?php endif; ?>
+                            </div>
+
+                            <td><?= Html::encode($linha->produto->nome) ?></td>
+                            <td><?= Html::encode($linha->produto->descricao) ?></td>
+                            <td><?= Html::encode($linha->produto->iva->percentagem) . '%' ?></td>
+                            <td><?= Html::encode($linha->produto->preco * ($linha->produto->iva->percentagem / 100) + $linha->produto->preco) . '€' ?></td>
+                            <td>
+                                <div class="input-group quantity mt-4" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                            <?= Html::a('<span class="fas fa-minus"></span>', ['carrinhos/diminuiqtd', 'id' => $linha->id]); ?>
+                                        </button>
+                                    </div>
+                                    <?= Html::input('text', 'quantidade', $linha->quantidade, ['class' => 'form-control form-control-sm text-center border-0']) ?>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                            <?= Html::a('<span class="fas fa-plus"></span>', ['carrinhos/aumentaqtd', 'id' => $linha->id]); ?>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+
+
+                            <td><?= Html::encode($linha->subtotal) . ' €' ?></td>
+                            <td><?= Html::a('<span class="fas fa-trash"></span>', ['produtos-carrinhos/delete', 'id' => $linha->id, 'carrinho_id' => $carrinho->id, 'produto_id' => $linha->produto->id], ['data' => ['confirm' => 'Tem a certeza que pretende remover este produto do carrinho?', 'method' => 'post',]]); ?></td>
+                            <!-- Add more cells for other columns -->
+                        </tr>
+                        <?php endforeach; ?>
+
+
+                        </tbody>
+                    </table>
+                    <div class="row g-4 justify-content-end">
+                        <div class="col-8"></div>
+                        <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
+                            <div class="bg-light rounded">
+                                <div class="p-4">
+                                    <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <h5 class="mb-0 me-4">Subtotal:</h5>
+                                        <p class="mb-0"><?= Html::encode($carrinho->valortotal - $iva) . '€' ?></p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-0 me-4">IVA</h5>
+                                        <div class="">
+                                            <p class="mb-0"><?= Html::encode($iva) . '€' ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
+                                    <h5 class="mb-0 ps-4 me-4">Total</h5>
+                                    <p class="mb-0 pe-4"><?= Html::encode($carrinho->valortotal) . '€' ?></p>
+                                </div>
+                                <?php if (empty($carrinho->produtosCarrinhos)) { ?>
+                                <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4 disabled"
+                                        type="button">
+                                    <?=
+                                    Html::a(' Finalizar compra', ['carrinhos/update', 'id' => $carrinho->id, 'user_id' => $carrinho->user_id], ['class' => 'disabled']) ?>
+
+
+                                    <?php } else { ?>
+                                        <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4 "
+                                                type="button">
+                                            <?=
+                                            Html::a(' Finalizar compra', ['carrinhos/update', 'id' => $carrinho->id, 'user_id' => $carrinho->user_id]) ?>
+                                        </button>
+                                    <?php } ?>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="d-inline-block">
-                        <!-- Second Table -->
-
-                        <table class="table table-primary m-5">
-                            <th class="text-center" colspan="2">Sumário</th>
-
-                            <tr>
-                                <th>IVA</th>
-                                <td><?= Html::encode($iva) . '€' ?></td>
-                                <!-- Add more headers for other columns -->
-                            </tr>
-                            <tr>
-                                <th>Valor Total</th>
-                                <td><?= Html::encode($carrinho->valortotal) . '€' ?></td>
-                                <!-- Add more headers for other columns -->
-
-                            </tr>
-
-
-                        </table>
-                    </div>
-
-
-                <?php endforeach; ?>
             </div>
-        </div> <?= Html::a(' Continuar a comprar', ['site/shop'], ['class' => 'btn btn-success']) ?>
-
-        <?php if(empty($carrinho->produtosCarrinhos)){ ?>
-        <?=
-        Html::a(' Finalizar compra', ['carrinhos/update', 'id'=>$carrinho->id, 'user_id'=>$carrinho->user_id], ['class' => 'btn btn-warning disabled']) ?>
-        <?php }else{ ?>
-        <?=
-            Html::a(' Finalizar compra', ['carrinhos/update', 'id'=>$carrinho->id, 'user_id'=>$carrinho->user_id], ['class' => 'btn btn-warning ']) ?>
-        <?php } ?>
-
-
+        </div>
+        <?= Html::a(' Continuar a comprar', ['site/shop'], ['class' => 'btn btn-success']) ?>
     </div>
 
 </div>
 
 
+
+<?php endforeach; ?>

@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
                     <!-- Add more user attributes as needed -->
                 </ul>
-                <?= Html::a('Editar', ['user/update', 'produto_id' => $model->id], [
+                <?= Html::a('Editar', ['site/perfil', 'editUserMoradaData' => true], [
                     'class' => 'btn btn-primary mt-3',
                     'data' => [
                         'method' => 'post',
@@ -43,17 +43,17 @@ $this->params['breadcrumbs'][] = 'Update';
 
         </div>
         <br>
-        <?php if ( empty($userData->codigopostal)|| empty($userData->telefone)): ?>
+        <?php if ( empty($userData->codigopostal) || empty($userData->telefone) || empty($userData->rua) || empty($userData->nif) || empty($userData->primeironome) || empty($userData->apelido) || empty($userData->localidade)): ?>
             <div class="form-group">
                 <p class="warning">Falta preencher dados!</p>
             </div>
         <?php else: ?>
-
+            <?= $this->render('_form', [
+                'model' => $model,
+            ]) ?>
 
         <?php endif; ?>
-        <?= $this->render('_form', [
-            'model' => $model,
-        ]) ?>
+
 
     </div>
 </div>

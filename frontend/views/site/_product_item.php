@@ -11,11 +11,14 @@ use yii\widgets\ListView;
 
 ?>
 <div class="rounded position-relative fruite-item d-flex flex-column">
+
+
     <div class="product-img">
+        <div class="product-item" onclick="window.location='<?= Url::to(['produtos/view', 'id' => $model->id]) ?>';">
         <?php if (!empty($model->imagens)) : ?>
             <td>
                 <?= Html::img(
-                    Url::to('@web/imagens/' . $model->imagens[0]->fileName),
+                    Url::to('@web/public/imagens/produtos/' . $model->imagens[0]->fileName),
                     [
                         'class' => 'img-fluid w-100 rounded-top',
                         'style' => 'height: 245px',
@@ -29,7 +32,6 @@ use yii\widgets\ListView;
                     ['class' => 'img-fluid rounded-top placeholder-image', 'alt' => 'imagem inexistente']
 
                 ) ?>
-                <p class="image-placeholder-text">Não Existe Imagens nos Produtos!</p>
             </td>
         <?php endif; ?>
     </div>
@@ -37,9 +39,10 @@ use yii\widgets\ListView;
     <div class="p-4 border border-secondary border-top-0 rounded-bottom flex-grow-1r">
         <h4><?= $model->nome ?></h4>
 
+
         <!--Checka se a descrição é maior que 50 caracteres, se for, corta e adiciona "..." no fim-->
-        <?= $descricao = strlen($model->descricao) > 50 ? substr($model->descricao, 0, 50) . "..." : $model->descricao; ?>
-        <p style="height: 50px"><?= $descricao ?></p>
+
+
         <div class="d-flex justify-content-between flex-lg-wrap mt-auto">
             <p class="text-dark fs-5 fw-bold mb-0"><?= Yii::$app->formatter->asCurrency($model->preco, 'EUR') ?> /
                 kg</p>
@@ -52,5 +55,6 @@ use yii\widgets\ListView;
                 ],
             ]) ?>
         </div>
+    </div>
     </div>
 </div>

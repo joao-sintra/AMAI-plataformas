@@ -95,7 +95,7 @@ $imageUrl = $baseUrl . $imageFilename;
                                         <br>
                                         <?= Html::submitButton('Atualizar', ['class' => 'btn btn-primary']) ?>
                                         <?php if ($userDataEditMode): ?>
-                                            <?= Html::a('Visualizar', ['site/perfil', 'editUserData' => 'false'], ['class' => 'btn btn-secondary']) ?>
+                                            <?= Html::a('Cancelar', ['site/perfil', 'editUserData' => 'false'], ['class' => 'btn btn-secondary']) ?>
                                         <?php endif; ?>
                                         <?php ActiveForm::end(); ?>
                                     <?php else: ?>
@@ -151,7 +151,7 @@ $imageUrl = $baseUrl . $imageFilename;
                                         <br>
                                         <?= Html::submitButton('Atualizar', ['class' => 'btn btn-primary']) ?>
                                         <?php if ($userMoradaDataEditMode): ?>
-                                            <?= Html::a('Visualizar', ['site/perfil', 'editUserMoradaData' => 'false'], ['class' => 'btn btn-secondary']) ?>
+                                            <?= Html::a('Cancelar', ['site/perfil', 'editUserMoradaData' => 'false'], ['class' => 'btn btn-secondary']) ?>
                                         <?php endif; ?>
                                         <?php ActiveForm::end(); ?>
                                     <?php else: ?>
