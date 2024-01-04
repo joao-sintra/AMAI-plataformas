@@ -8,15 +8,16 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="faturas-form">
+<div class="encomendas-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'status')->label('Estado')->dropDownList([
-        "Paga" => 'Paga',
-        "Anulada" => 'Anulada',
+        "Em processamneto" => 'Em processamento',
+        "A entregar" => 'A entregar',
+        "Entregue" => "Entregue"
     ],
-        ['prompt' => 'Atualize o estado da fatura']
+        ['prompt' => 'Atualize o estado da Encomenda']
     );
     ?>
 

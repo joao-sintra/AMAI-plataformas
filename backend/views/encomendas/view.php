@@ -57,8 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-sm-4 invoice-col">
             <?= '<strong>FATURA ' . $model->id . '</strong><br>' . number_format((float)$model->valortotal, 2, '.', ',') . ' EUR<br>Data de emissão ' .
 
-            Carbon::parse($model->data)->format('Y/m/d') .
-            '<strong><br> Estado da fatura: </strong>' . $model->status ?>
+            Carbon::parse($model->data)->format('Y/m/d') ?>
 
 
         </div>
@@ -127,7 +126,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <!-- /.col -->
         <div class="col-6">
-            <?= '<p>Metodo de Pagamento: ' . $model->pagamentos[0]->metodopag . '<br>Data: ' . $model->pagamentos[0]->data ?>
+            <?= '<p><strong>Metodo de Pagamento: </strong> ' . $model->pagamentos[0]->metodopag . '<strong><br>Data: </strong> ' . $model->pagamentos[0]->data . '<strong><br>Estado da Encomenda: </strong>' . $model->status ?>
 
 
         </div>
@@ -142,7 +141,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         $subtotal = 0;
                         foreach ($linhasFaturas as $linhaFatura)
                             $subtotal += $linhaFatura->produtosCarrinhos->preco_venda;
-
 
                         echo '<td>' . number_format((float)$subtotal, 2, ',', ',') . ' €' . '</td>'
                         ?>

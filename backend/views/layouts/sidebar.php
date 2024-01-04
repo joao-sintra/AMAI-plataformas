@@ -65,7 +65,7 @@ AppAsset::register($this);
                     ['label' => 'Criação dos Produtos', 'icon' => 'fa-solid fa-box', 'url' => ['/produtos/index'] , 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
 
                     ['label' => 'Encomendas', 'header' => true],
-                    ['label'=> 'Encomendas','icon'=>'fas  fa-boxes','url'=>['/produtos-carrinhos/index']],
+                    ['label'=> 'Encomendas','icon'=>'fas  fa-boxes','url'=>['/encomendas/index','visible' => ($userRole == 'admin' || $userRole == 'funcionario')]],
 
                     ['label' => 'Imagens', 'header' => true, 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
                     ['label'=>'Imagens','icon'=>'fa-regular fa-image', 'url'=>['imagem/index'], 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],

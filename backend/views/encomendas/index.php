@@ -10,15 +10,15 @@ use yii\grid\GridView;
 /** @var common\models\FaturasSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Registo de Faturas';
+$this->title = 'Registo de Encomendas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="faturas-index">
 
-    <!-- <h1><?php /*= Html::encode($this->title) */ ?></h1>-->
+   <!-- <h1><?php /*= Html::encode($this->title) */?></h1>-->
 
     <!--<p>
-        <?php /*= Html::a('Criar Faturas', ['create'], ['class' => 'btn btn-success']) */ ?>
+        <?php /*= Html::a('Criar Faturas', ['create'], ['class' => 'btn btn-success']) */?>
     </p>-->
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,11 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'rowOptions' => function ($model) {
-            if ($model->status === 'Anulada') {
-                return ['style' => 'text-decoration: line-through;'];
-            }
-        },
         'columns' => [
             /*['class' => 'yii\grid\SerialColumn'],*/
 
@@ -48,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{view} {update}',
                 'urlCreator' => function ($action, Faturas $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id, 'user_id' => $model->user_id]);
-                }
+                 }
             ],
         ],
     ]); ?>

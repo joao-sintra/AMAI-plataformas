@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'username',
             'email',
             [
+
                 'attribute' => 'auth.item_name',
                 'label' => 'Role',
                 'value' => function ($model) {
