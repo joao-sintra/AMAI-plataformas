@@ -24,11 +24,11 @@ $this->params['breadcrumbs'][] = 'Update';
             </div>
             <div class="card-body">
                 <ul class="list-group">
-                    <li class="list-group-item"> <?= Html::encode($userData->primeironome.' '.$userData->apelido) ?></li>
-                    <li class="list-group-item"> <?= Html::encode($userData->rua) ?></li>
-                    <li class="list-group-item"><?= Html::encode($userData->codigopostal.' '.$userData->localidade) ?></li>
-                    <li class="list-group-item"><?= Html::encode('T: '.$userData->telefone) ?></li>
-                    <li class="list-group-item"><?= Html::encode('NIF: '.$userData->nif) ?></li>
+                    <li class="list-group-item"><span style="font-weight:bold;">Nome Completo:</span> <?= Html::encode($userData->primeironome.' '.$userData->apelido) ?></li>
+                    <li class="list-group-item"><span style="font-weight:bold;">Rua:</span> <?= Html::encode($userData->rua) ?></li>
+                    <li class="list-group-item"><span style="font-weight:bold;">Código Postal e Localidade:</span> <?= Html::encode($userData->codigopostal.' '.$userData->localidade) ?></li>
+                    <li class="list-group-item"><span style="font-weight:bold;">Telefone:</span> <?= Html::encode($userData->telefone) ?></li>
+                    <li class="list-group-item"><span style="font-weight:bold;">NIF:</span> <?= Html::encode($userData->nif) ?></li>
 
 
                     <!-- Add more user attributes as needed -->

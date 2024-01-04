@@ -21,8 +21,8 @@ use Carbon\Carbon;
 /** @var common\models\ProdutosCarrinhos $produtosCarrinhos */
 
 
-$this->title = 'Fatura ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Registo de Faturas', 'url' => ['index']];
+$this->title = 'Encomenda ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Encomendas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
-            <?= '<strong>FATURA ' . $model->id . '</strong><br>' . number_format((float)$model->valortotal, 2, '.', ',') . ' EUR<br>Data de emissão ' .
+            <?= '<strong>ENCOMENDA ' . $model->id . '</strong><br>' . number_format((float)$model->valortotal, 2, '.', ',') . ' EUR<br>Data de emissão ' .
 
             Carbon::parse($model->data)->format('Y/m/d') ?>
 

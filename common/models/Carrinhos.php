@@ -50,7 +50,7 @@ class Carrinhos extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'dtapedido' => 'Dtapedido',
+            'dtapedido' => 'Data do Pedido',
             'metodo_envio' => 'Metodo Envio',
             'status' => 'Status',
             'valortotal' => 'Valortotal',

@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
@@ -29,7 +30,7 @@ $imageFilenames = array("bolos.jpg", "sobremesas.jpg");
                 <h4 class="mb-3 text-secondary">Bolos e Sobremesas 100% Caseiros</h4>
                 <h1 class="mb-5 display-3 text-primary">Bolos & Sobremesas que surpreendem.</h1>
                 <!--<div class="position-relative mx-auto">
-                    <form action="<?php /*= Yii::$app->urlManager->createUrl(['index/shop']) */?>" method="get">
+                    <form action="<?php /*= Yii::$app->urlManager->createUrl(['index/shop']) */ ?>" method="get">
                         <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="text" name="search" placeholder="Pesquisar...">
                         <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100" style="top: 0; right: 25%;">Procurar</button>
                     </form>
@@ -39,12 +40,14 @@ $imageFilenames = array("bolos.jpg", "sobremesas.jpg");
                 <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active rounded">
-                            <img src="<?php echo $baseUrl . $imageFilenames[0]; ?>" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
+                            <img src="<?php echo $baseUrl . $imageFilenames[0]; ?>"
+                                 class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
                             <a href="#" class="btn px-4 py-2 text-white rounded">Bolos</a>
                         </div>
 
                         <div class="carousel-item rounded">
-                            <img src="<?php echo $baseUrl . $imageFilenames[1]; ?>" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+                            <img src="<?php echo $baseUrl . $imageFilenames[1]; ?>"
+                                 class="img-fluid w-100 h-100 rounded" alt="Second slide">
                             <a href="#" class="btn px-4 py-2 text-white rounded">Sobremesas</a>
                         </div>
                     </div>
@@ -131,17 +134,20 @@ $imageFilenames = array("bolos.jpg", "sobremesas.jpg");
                 <div class="col-lg-8 text-end">
                     <ul class="nav nav-pills d-inline-flex text-center mb-5" id="produtoTabs">
                         <li class="nav-item">
-                            <a class="d-flex m-2 py-2 bg-light rounded-pill produtos-link" href="<?= Url::to(['site/index']) ?>">
+                            <a class="d-flex m-2 py-2 bg-light rounded-pill produtos-link"
+                               href="<?= Url::to(['site/index']) ?>">
                                 <span class="text-dark" style="width: 130px;">Produtos</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="d-flex py-2 m-2 bg-light rounded-pill" href="<?= Url::to(['site/index', 'categoria' => 'Bolo']) ?>">
+                            <a class="d-flex py-2 m-2 bg-light rounded-pill"
+                               href="<?= Url::to(['site/index', 'categoria' => 'Bolo']) ?>">
                                 <span class="text-dark" style="width: 130px;">Bolos</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="d-flex m-2 py-2 bg-light rounded-pill" href="<?= Url::to(['site/index', 'categoria' => 'Sobremesas']) ?>">
+                            <a class="d-flex m-2 py-2 bg-light rounded-pill"
+                               href="<?= Url::to(['site/index', 'categoria' => 'Sobremesas']) ?>">
                                 <span class="text-dark" style="width: 130px;">Sobremesas</span>
                             </a>
                         </li>
@@ -162,43 +168,49 @@ $imageFilenames = array("bolos.jpg", "sobremesas.jpg");
                         echo '<div class="row g-4 mb-4">';
                     endif;
                     ?>
-                    <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="col-md-6 col-lg-4 col-xl-3"
+                         onclick="window.location='<?= Url::to(['produtos/view', 'id' => $produto->id]) ?>';">
                         <div class="rounded position-relative fruite-item">
-                            <div class="fruite-img">
-                                <?php if (!empty($model->imagens)) : ?>
-                                    <td>
-                                        <?= Html::img(
-                                            Url::to('@web/public/imagens/produtos/' . $model->imagens[0]->fileName),
-                                            ['class' => 'img-fluid w-100 rounded-top']
-                                        ) ?>
-                                    </td>
-                                <?php else : ?>
-                                    <td>
-                                        <?= Html::img(
-                                            Url::to('@web/public/imagens/produtos/no_image.jpg'),
-                                            ['class' => 'img-fluid rounded-top placeholder-image', 'alt' => 'imagem inexistente']
+                            <?php if (!empty($model->imagens)) : ?>
+                                <td>
+                                    <?= Html::img(
+                                        Url::to('@web/public/imagens/produtos/' . $model->imagens[0]->fileName),
+                                        ['class' => 'img-fluid w-100 rounded-top']
+                                    ) ?>
+                                </td>
+                            <?php else : ?>
+                                <td>
+                                    <?= Html::img(
+                                        Url::to('@web/public/imagens/produtos/no_image.jpg'),
+                                        ['class' => 'img-fluid rounded-top placeholder-image', 'alt' => 'imagem inexistente']
 
-                                        ) ?>
-                                    </td>
-                                <?php endif; ?>
-                            </div>
-
-                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
+                                    ) ?>
+                                </td>
+                            <?php endif; ?>
+                            <div class=" text-white bg-secondary px-3 py-1 rounded position-absolute
+                        " style="top: 10px; left: 10px;">
                                 <?= $produto->categoriaProduto->nome ?? 'Sem Categoria' ?>
                             </div>
-                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                            <div class="p-4 border border-secondary border-top-0 rounded-bottom flex-grow-1 d-flex flex-column">
                                 <h4><?= $produto->nome ?></h4>
-                                <p><?= $produto->descricao ?></p>
-                                <div class="d-flex justify-content-between flex-lg-wrap">
-                                    <p class="text-dark fs-5 fw-bold mb-0"><?= Yii::$app->formatter->asCurrency($produto->preco, 'EUR') ?> / kg</p>
+                                <p class="text-obs" style="height: 50px"><?= $produto->obs ?></p>
 
-                                    <?= Html::a('Add to Cart', ['produtos-carrinhos/create', 'produto_id' => $produto->id], [
-                                        'class' => 'btn btn-primary add-to-cart',
-                                        'data' => [
+                                <div class="mt-auto">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="text-dark fs-5 fw-bold mb-0"><?= Yii::$app->formatter->asCurrency($produto->preco, 'EUR') ?>
+                                            / kg</p>
 
-                                            'method' => 'post',
-                                        ],
-                                    ]) ?>
+                                        <?= Html::a(
+                                            '<i class="fa fa-shopping-bag me-2 text-primary"></i> Add to Cart',
+                                            ['produtos-carrinhos/create', 'produto_id' => $produto->id],
+                                            [
+                                                'class' => 'btn border border-secondary rounded-pill px-2 py-2 text-primary align-self-start',
+                                                'data' => [
+                                                    'method' => 'post',
+                                                ],
+                                            ]
+                                        ) ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -223,7 +235,8 @@ $imageFilenames = array("bolos.jpg", "sobremesas.jpg");
 <!-- Fruits Shop End-->
 
 <!-- Back to Top -->
-<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
+            class="fa fa-arrow-up"></i></a>
 
 <script>
     var tabs = document.querySelectorAll("#produtoTabs a");

@@ -74,10 +74,6 @@ AppAsset::register($this);
                     ['label' => 'Gii', 'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank', 'visible' => ($userRole == 'admin')],
                     ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank', 'visible' => ($userRole == 'admin')],
 
-
-                    ['label' => 'Sobre Nós', 'header' => true],
-                    ['label' => 'Contactos', 'icon' => 'address-book', 'url' => ['/site/contactos']],
-
                     ['label' => 'Perfil', 'header' => true],
                     ['label' => 'Perfil', 'icon' => 'fas fa-user', 'url' => ['/perfil/index']],
                 ],

@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
             /*'user_id',*/
             [
+                    'label' => 'Cliente',
                 'attribute' => 'user_id',
                 'value' => 'user.username',
             ],

@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /** @var common\models\Faturas $model */
 
 $this->title = 'Atualizar Estado da Encomenda: ' . $model->user->username;
-$this->params['breadcrumbs'][] = ['label' => 'Faturas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Encomendas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
