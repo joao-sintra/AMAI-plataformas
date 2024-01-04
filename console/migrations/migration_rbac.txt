@@ -29,6 +29,7 @@ class m231127_130041_init_rbac extends Migration
                  * Permissões de Gestor
                  *  - Ver, Editar, Criar e Apagar produtos
                  *  - Ver, Editar, Criar e Apagar categorias
+                 *  - Ver, Editar faturas
                  *  - Ver, Apagar avaliações
                  *  - Ver, Editar encomendas
                  *
