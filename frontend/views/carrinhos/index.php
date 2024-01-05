@@ -121,26 +121,32 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <p class="mb-0 pe-4"><?= Html::encode($carrinho->valortotal) . '€' ?></p>
                                 </div>
                                 <?php if (empty($carrinho->produtosCarrinhos)) { ?>
-                                <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4 disabled"
-                                        type="button">
-                                    <?=
-                                    Html::a(' Finalizar compra', ['carrinhos/update', 'id' => $carrinho->id, 'user_id' => $carrinho->user_id], ['class' => 'disabled']) ?>
+                                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4 disabled"
+                                            type="button">
+                                        <?= Html::a(' Finalizar compra', ['carrinhos/update', 'id' => $carrinho->id, 'user_id' => $carrinho->user_id], ['class' => 'disabled']) ?>
+                                    </button>
 
-
-                                    <?php } else { ?>
+                                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4 "
+                                            type="button">
+                                        <?= Html::a('Voltar para a loja', ['site/shop'], ['class' => 'text-decoration-none']) ?>
+                                    </button>
+                                <?php } else { ?>
                                         <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4 "
                                                 type="button">
-                                            <?=
-                                            Html::a(' Finalizar compra', ['carrinhos/update', 'id' => $carrinho->id, 'user_id' => $carrinho->user_id]) ?>
+                                            <?= Html::a(' Finalizar compra', ['carrinhos/update', 'id' => $carrinho->id, 'user_id' => $carrinho->user_id]) ?>
                                         </button>
-                                    <?php } ?>
+
+                                        <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4 "
+                                                type="button">
+                                            <?= Html::a(' Continuar a comprar', ['site/shop'], ['class' => 'text-decoration-none']) ?>
+                                        </button>
+                                <?php } ?>
                             </div>
                         </div>
-
                     </div>
             </div>
         </div>
-        <?= Html::a(' Continuar a comprar', ['site/shop'], ['class' => 'btn btn-success']) ?>
+<!--        --><?php /*= Html::a('Continuar a comprar', ['site/shop'], ['class' => 'btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4']) */?>
     </div>
 
 </div>
