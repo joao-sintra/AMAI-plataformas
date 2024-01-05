@@ -80,7 +80,6 @@ AppAsset::register($this);
             }
             NavBar::end();
             ?>
-
         </div>
     </div>
 </header>
