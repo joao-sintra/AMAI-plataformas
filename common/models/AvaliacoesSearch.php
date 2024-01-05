@@ -1,10 +1,10 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
-use common\models\Avaliacoes;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use common\models\Avaliacoes;
 
 /**
  * AvaliacoesSearch represents the model behind the search form of `common\models\Avaliacoes`.

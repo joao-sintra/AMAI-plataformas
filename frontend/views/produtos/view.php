@@ -2,12 +2,17 @@
 
 <?php
 
+use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
 
-/* @var $this yii\web\View */
-/* @var $model common\models\Produtos */
+/** @var $this yii\web\View */
+/** @var $model common\models\Produtos $produtos */
+/** @var $avaliacoes common\models\Avaliacoes $avaliacoes */
+/** @var common\models\CategoriasProdutos $categorias */
+/** @var common\models\ProdutosSearch $searchModel */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 
 $this->title = $model->nome;
@@ -17,10 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="container-fluid product-view">
     <div class="product-list-view">
-
-
         <div class="product-list">
-
             <div class="product-item">
                 <div class="row">
                     <div class="col-md-8 mx-auto">
@@ -64,20 +66,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     <i class="fa fa-star"></i>
                                                 </div>
                                                 <p class="mb-4"><?= $model->descricao ?></p>
-                                                <div class="input-group quantity mt-4" style="width: 100px;">
-                                                    <!-- <div class="input-group-btn">
-                                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                                            foreach ($carrinho->produtosCarrinhos as $linha):
-                                                            <?php /*= Html::a('<span class="fas fa-minus"></span>', ['carrinhos/diminuiqtd', 'id' => $model->produtosCarrinhos->id]); */ ?>
-                                                        </button>
-                                                    </div>
-                                                    <?php /*= Html::input('text', 'quantidade', $linha->quantidade, ['class' => 'form-control form-control-sm text-center border-0']) */ ?>
-                                                    <div class="input-group-btn">
-                                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                                            <?php /*= Html::a('<span class="fas fa-plus"></span>', ['carrinhos/aumentaqtd', 'id' => $model->produtosCarrinhos->id]); */ ?>
-                                                        </button>
-                                                    </div>-->
-                                                </div>
                                                 <?= Html::a(
                                                     '<i class="fa fa-shopping-bag me-2 text-primary"></i> Add to Cart',
                                                     ['produtos-carrinhos/create', 'produto_id' => $model->id],
@@ -112,52 +100,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     <div class="tab-pane active" id="nav-about" role="tabpanel"
                                                          aria-labelledby="nav-about-tab">
                                                         <?= '<p>' . $model->descricao . '</p>' ?>
-                                                        <div class="px-2">
-                                                            <div class="row g-4">
-                                                                <div class="col-6">
-                                                                    <div class="row bg-light align-items-center text-center justify-content-center py-2">
-                                                                        <div class="col-6">
-                                                                            <p class="mb-0">Weight</p>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <p class="mb-0">1 kg</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row text-center align-items-center justify-content-center py-2">
-                                                                        <div class="col-6">
-                                                                            <p class="mb-0">Country of Origin</p>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <p class="mb-0">Agro Farm</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row bg-light text-center align-items-center justify-content-center py-2">
-                                                                        <div class="col-6">
-                                                                            <p class="mb-0">Quality</p>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <p class="mb-0">Organic</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row text-center align-items-center justify-content-center py-2">
-                                                                        <div class="col-6">
-                                                                            <p class="mb-0">Сheck</p>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <p class="mb-0">Healthy</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row bg-light text-center align-items-center justify-content-center py-2">
-                                                                        <div class="col-6">
-                                                                            <p class="mb-0">Min Weight</p>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <p class="mb-0">250 Kg</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                     <div class="tab-pane" id="nav-mission" role="tabpanel"
                                                          aria-labelledby="nav-mission-tab">
@@ -169,7 +111,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                                                 <p class="mb-2" style="font-size: 14px;">April 12,
                                                                     2024</p>
                                                                 <div class="d-flex justify-content-between">
-                                                                    <h5>Jason Smith</h5>
+                                                                    <h5><?php /*=  */?></h5>
                                                                     <div class="d-flex mb-3">
                                                                         <i class="fa fa-star text-secondary"></i>
                                                                         <i class="fa fa-star text-secondary"></i>
@@ -220,104 +162,109 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     </div>
                                                 </div>
                                             </div>
-                                            <form action="#">
-                                                <h4 class="mb-5 fw-bold">Leave a Reply</h4>
-                                                <div class="row g-4">
-                                                    <div class="col-lg-6">
-                                                        <div class="border-bottom rounded">
-                                                            <input type="text" class="form-control border-0 me-4"
-                                                                   placeholder="Yur Name *">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="border-bottom rounded">
-                                                            <input type="email" class="form-control border-0"
-                                                                   placeholder="Your Email *">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="border-bottom rounded my-4">
-                                                            <textarea name="" id="" class="form-control border-0"
-                                                                      cols="30" rows="8" placeholder="Your Review *"
-                                                                      spellcheck="false"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="d-flex justify-content-between py-3 mb-5">
-                                                            <div class="d-flex align-items-center">
-                                                                <p class="mb-0 me-3">Please rate:</p>
-                                                                <div class="d-flex align-items-center"
-                                                                     style="font-size: 12px;">
-                                                                    <i class="fa fa-star text-muted"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                    <i class="fa fa-star"></i>
-                                                                </div>
+                                            <?php $form = ActiveForm::begin(['action' => [
+                                                'avaliacoes/create'],
+                                                'method' => 'post'
+                                            ]); ?>
+                                            <h4 class="mb-5 fw-bold">Deixa a tua Avaliação</h4>
+                                            <div class="row g-4">
+                                                <div class="col-lg-12">
+                                                    <div class="border-bottom rounded my-4">
+                                                        <?= $form->field($avaliacoes, 'comentario')->textarea([
+
+                                                            'class' => 'form-control border-0',
+                                                            'cols' => '30',
+                                                            'rows' => '8',
+                                                            'placeholder' => 'Tua Avaliação *',
+                                                            'spellcheck' => 'false'
+                                                        ]) ?>
+                                                        <?php if (Yii::$app->session->hasFlash('success')): ?>
+                                                            <div class="alert alert-success">
+                                                                <?= Yii::$app->session->getFlash('success') ?>
                                                             </div>
-                                                            <a href="#"
-                                                               class="btn border border-secondary text-primary rounded-pill px-4 py-3">
-                                                                Post Comment</a>
-                                                        </div>
+                                                        <?php endif; ?>
+                                                        <?= $form->field($avaliacoes, 'produto_id')->hiddenInput(['value' => $model->id])->label(false) ?>
+
                                                     </div>
                                                 </div>
-                                            </form>
+                                                <div class="col-lg-12">
+                                                    <div class="d-flex justify-content-between py-3 mb-5">
+                                                        <div class="d-flex align-items-center">
+                                                            <p class="mb-0 me-3">Please rate:</p>
+                                                            <div class="d-flex align-items-center"
+                                                                 style="font-size: 12px;">
+                                                                <!-- Include your rating logic here -->
+                                                                <!-- For simplicity, let's use Font Awesome icons as in the original HTML -->
+                                                                <?= Html::tag('i', '', ['class' => 'fa fa-star text-muted']) ?>
+                                                                <?= Html::tag('i', '', ['class' => 'fa fa-star']) ?>
+                                                                <?= Html::tag('i', '', ['class' => 'fa fa-star']) ?>
+                                                                <?= Html::tag('i', '', ['class' => 'fa fa-star']) ?>
+                                                                <?= Html::tag('i', '', ['class' => 'fa fa-star']) ?>
+                                                            </div>
+                                                        </div>
+                                                        <?= Html::submitButton('Postar Avaliação', [
+                                                            'class' => 'btn border border-secondary text-primary rounded-pill px-4 py-3',
+                                                            'name' => 'post-comment-button',
+                                                        ]) ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php ActiveForm::end(); ?>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-xl-3">
-                                        <div class="row g-4 fruite">
+                                        <div class="row g-2 cake">
                                             <div class="col-lg-12">
-                                                <div class="input-group w-100 mx-auto d-flex mb-4">
-                                                    <input type="search" class="form-control p-3" placeholder="keywords"
-                                                           aria-describedby="search-icon-1">
-                                                    <span id="search-icon-1" class="input-group-text p-3"><i
-                                                                class="fa fa-search"></i></span>
-                                                </div>
-                                                <div class="mb-4">
-                                                    <h4>Categories</h4>
-                                                    <ul class="list-unstyled fruite-categorie">
-                                                        <li>
-                                                            <div class="d-flex justify-content-between fruite-name">
-                                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Apples</a>
-                                                                <span>(3)</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="d-flex justify-content-between fruite-name">
-                                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Oranges</a>
-                                                                <span>(5)</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="d-flex justify-content-between fruite-name">
-                                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Strawbery</a>
-                                                                <span>(2)</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="d-flex justify-content-between fruite-name">
-                                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Banana</a>
-                                                                <span>(8)</span>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="d-flex justify-content-between fruite-name">
-                                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Pumpkin</a>
-                                                                <span>(5)</span>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <div class="position-relative">
-                                                    <img src="img/cakes_banner.jpg" class="img-fluid w-100 rounded"
-                                                         alt="">
-                                                    <div class="position-absolute"
-                                                         style="top: 50%; right: 90px; transform: translateY(-50%);">
-                                                        <h3 class="text-secondary fw-bold">Fresh <br> cakes
-                                                        </h3>
+                                                <?php $form = ActiveForm::begin([
+                                                    'action' => ['site/shop'],
+                                                    'method' => 'get',
+                                                    'options' => ['class' => 'w-100', 'id' => 'search-form'],
+                                                ]); ?>
+                                                <div class="input-group">
+                                                    <?= $form->field($searchModel, 'search', [
+                                                        'template' => "{input}",
+                                                        'options' => ['class' => 'm-0'], // Adjusted the field options
+                                                        'inputOptions' => [
+                                                            'placeholder' => 'Pesquisar...',
+                                                            'class' => 'form-control p-3 rounded-start',
+                                                            'style' => 'border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 0; border-bottom-right-radius: 0;',
+                                                        ],
+                                                    ])->label(false)->textInput(['aria-describedby' => 'search-icon-1', 'id' => 'search-input']) ?>
+
+                                                    <div class="input-group-append">
+                                                        <?= Html::submitButton('<i class="fa fa-search" style="color: #6c757d;"></i>', [
+                                                            'class' => 'btn btn-outline p-3 rounded-end', // Combined rounded classes
+                                                            'style' => 'border-color: #ced4da; background-color: #e9ecef;',
+                                                            'name' => 'search-button',
+                                                        ]) ?>
                                                     </div>
+                                                </div>
+                                                <?php ActiveForm::end(); ?>
+                                            </div>
+                                            <div class="mb-4">
+                                                <h4 class="mt-4">Categorias</h4>
+                                                <ul class="list-unstyled cake-categorie">
+                                                    <?php foreach ($categorias as $categoria) : ?>
+                                                        <li>
+                                                            <div class="d-flex justify-content-between cake-name">
+                                                                <?= Html::a(
+                                                                    '<i class="fas fa-cookie"></i>' . Html::encode($categoria->nome),
+                                                                    ['site/shop', 'categoria' => $categoria->id],
+                                                                    ['encode' => false] // Allow HTML encoding
+                                                                ) ?>
+                                                                <span>(<?= $categoria->getProdutos()->count() ?>)</span>
+                                                            </div>
+                                                        </li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="position-relative">
+                                                <?= Html::img('img/cakes_banner.jpg', ['class' => 'img-fluid w-100 rounded', 'alt' => '']) ?>
+                                                <div class="position-absolute"
+                                                     style="top: 50%; right: 109px; transform: translateY(-50%);">
+                                                    <h3 class="text-secondary fw-bold">Fresh <br> cakes</h3>
                                                 </div>
                                             </div>
                                         </div>
@@ -331,3 +278,4 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+

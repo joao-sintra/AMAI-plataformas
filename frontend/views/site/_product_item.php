@@ -39,15 +39,14 @@ use yii\widgets\ListView;
                 <p class="text-obs" style="height: 50px"><?= $model->obs ?></p>
 
                 <div class="mt-auto">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <p class="text-dark fs-5 fw-bold mb-0"><?= Yii::$app->formatter->asCurrency($model->preco, 'EUR') ?>
+                    <div class="d-flex justify-content-between ms-auto align-items-center">
+                        <p class="text-dark fs-5  fw-bold mb-0"><?= Yii::$app->formatter->asCurrency($model->preco, 'EUR') ?>
                             / kg</p>
-
                         <?= Html::a(
-                            '<i class="fa fa-shopping-bag me-2 text-primary"></i> Add to Cart',
+                            '<i class="fa fa-shopping-bag text-primary"></i> Add to Cart',
                             ['produtos-carrinhos/create', 'produto_id' => $model->id],
                             [
-                                'class' => 'btn border border-secondary rounded-pill px-2 py-2 text-primary align-self-start',
+                                'class' => 'btn border border-secondary rounded-pill  px-2 py-2 text-primary align-self-start',
                                 'data' => [
                                     'method' => 'post',
                                 ],
@@ -56,7 +55,6 @@ use yii\widgets\ListView;
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

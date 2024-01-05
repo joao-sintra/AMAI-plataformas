@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
@@ -30,9 +31,10 @@ use yii\widgets\LinkPager;
                             'placeholder' => 'Pesquisar...',
                             'class' => 'form-control p-3',
                             'style' => 'border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 0; border-bottom-right-radius: 0;',
-                        ]])                            ->label(false)
+                        ]])->label(false)
                             ->textInput(['aria-describedby' => 'search-icon-1', 'name' => 'ProdutosSearch[search]', 'id' => 'search-input']); ?>
-                        <button type="submit" class="btn btn-outline p-3" style="border-color: #ced4da; background-color: #e9ecef;">
+                        <button type="submit" class="btn btn-outline p-3"
+                                style="border-color: #ced4da; background-color: #e9ecef;">
                             <i class="fa fa-search" style="color: #6c757d;"></i>
                         </button>
                     </div>
@@ -83,4 +85,5 @@ use yii\widgets\LinkPager;
 
 
 <!-- Back to Top -->
-<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
+            class="fa fa-arrow-up"></i></a>
