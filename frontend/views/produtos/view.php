@@ -169,22 +169,20 @@ $this->params['breadcrumbs'][] = $this->title;
                                             <h4 class="mb-5 fw-bold">Deixa a tua Avaliação</h4>
                                             <div class="row g-4">
                                                 <div class="col-lg-12">
-                                                    <div class="border-bottom rounded my-4">
+                                                    <div class="border-bottom rounded my-4 with-border">
                                                         <?= $form->field($avaliacoes, 'comentario')->textarea([
-
-                                                            'class' => 'form-control border-0',
+                                                            'class' => 'form-control border-0 with-shadow',
                                                             'cols' => '30',
                                                             'rows' => '8',
                                                             'placeholder' => 'Tua Avaliação *',
                                                             'spellcheck' => 'false'
-                                                        ]) ?>
+                                                        ])->label('Comentário') ?>
                                                         <?php if (Yii::$app->session->hasFlash('success')): ?>
                                                             <div class="alert alert-success">
                                                                 <?= Yii::$app->session->getFlash('success') ?>
                                                             </div>
                                                         <?php endif; ?>
                                                         <?= $form->field($avaliacoes, 'produto_id')->hiddenInput(['value' => $model->id])->label(false) ?>
-
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12">

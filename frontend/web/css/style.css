@@ -31,6 +31,7 @@
 /*** Perfil End ***/
 
 /*** Detalhes do produto start***/
+
 .product-item {
     margin-bottom: 20px;
     border: 1px solid #ccc;
@@ -44,6 +45,15 @@
 .product-item img {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+}
+
+.with-shadow {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
+}
+
+.with-border {
+    border: 1px solid #ddd; /* Add your desired border styling */
+    padding: 10px; /* Optional: Add padding for better appearance */
 }
 
 /*** Detalhes do produto end ***/
