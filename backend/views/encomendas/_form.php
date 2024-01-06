@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'status')->label('Estado')->dropDownList([
-        "Em processamneto" => 'Em processamento',
+        "Em processamento" => 'Em processamento',
         "A entregar" => 'A entregar',
         "Entregue" => "Entregue"
     ],

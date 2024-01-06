@@ -100,7 +100,7 @@ class AvaliacoesController extends Controller
                     return $this->redirect(['produtos/view', 'id' => $model->produto_id]);
 
                 } else {
-                    Yii::$app->session->setFlash('error', 'Failed to save Avaliacoes.');
+                    Yii::$app->session->setFlash('error', 'Ocorreu um erro ao adicionar a avaliação');
                 }
             }
         } else {
