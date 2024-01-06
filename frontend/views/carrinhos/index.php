@@ -126,21 +126,28 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <?=
                                     Html::a(' Finalizar compra', ['carrinhos/checkout', 'id' => $carrinho->id, 'user_id' => $carrinho->user_id], ['class' => 'disabled']) ?>
 
-
-                                    <?php } else { ?>
+                                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4 "
+                                            type="button">
+                                        <?= Html::a('Voltar para a loja', ['site/shop'], ['class' => 'text-decoration-none']) ?>
+                                    </button>
+                                <?php } else { ?>
                                         <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4 "
                                                 type="button">
                                             <?=
                                             Html::a(' Finalizar compra', ['carrinhos/checkout', 'id' => $carrinho->id, 'user_id' => $carrinho->user_id]) ?>
                                         </button>
-                                    <?php } ?>
+
+                                        <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4 "
+                                                type="button">
+                                            <?= Html::a(' Continuar a comprar', ['site/shop'], ['class' => 'text-decoration-none']) ?>
+                                        </button>
+                                <?php } ?>
                             </div>
                         </div>
-
                     </div>
             </div>
         </div>
-        <?= Html::a(' Continuar a comprar', ['site/shop'], ['class' => 'btn btn-success']) ?>
+<!--        --><?php /*= Html::a('Continuar a comprar', ['site/shop'], ['class' => 'btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4']) */?>
     </div>
 
 </div>

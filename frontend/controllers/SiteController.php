@@ -51,7 +51,6 @@ class SiteController extends Controller
                 ],
                 'denyCallback' => function ($rule, $action) {
                     if (Yii::$app->user->isGuest) {
-                        // Redirect unauthenticated users to the login page
                         Yii::$app->getResponse()->redirect(['site/login'])->send();
                         Yii::$app->end();
                     } else {

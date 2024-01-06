@@ -21,8 +21,6 @@ use Carbon\Carbon;
 /** @var common\models\ProdutosCarrinhos $produtosCarrinhos */
 
 
-
-
 $this->title = 'Fatura ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Registo de Faturas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -33,16 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <!--<h1><?php /*= Html::encode($this->title) */ ?></h1>-->
 
 
-
     <!-- title row -->
 
     <!-- info row -->
     <div class="row invoice-info">
         <div class="col-sm-4 invoice-col">
 
-            <?= '<p>De: <strong>' . $empresa->designacaosocial . '</strong><br>'. $empresa->email
+            <?= '<p>De: <strong>' . $empresa->designacaosocial . '</strong><br>' . $empresa->email
             . '<br>' . $empresa->rua . '<br>' . $empresa->codigopostal . ' ' . $empresa->localidade .
-            '<br>'.$empresa->nif . '<br></p>'?>
+            '<br>' . $empresa->nif . '<br></p>' ?>
 
 
         </div>
@@ -60,7 +57,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-sm-4 invoice-col">
             <?= '<strong>FATURA ' . $model->id . '</strong><br>' . number_format((float)$model->valortotal, 2, '.', ',') . ' EUR<br>Data de emissão ' .
 
-            Carbon::parse($model->data)->format('Y/m/d') ?>
+            Carbon::parse($model->data)->format('Y/m/d') .
+            '<strong><br> Estado da fatura: </strong>' . $model->status ?>
 
 
         </div>
@@ -90,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'iva',
                             'label' => 'Impostos (%)',
                             'value' => function ($model) {
-                                return $model->produtosCarrinhos->produto->iva->percentagem. '%';
+                                return $model->produtosCarrinhos->produto->iva->percentagem . '%';
                             },
                         ],
                         [
@@ -141,7 +139,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <tr>
                         <th style="width:50%">Subtotal:</th>
                         <?php
-                        $subtotal=0;
+                        $subtotal = 0;
                         foreach ($linhasFaturas as $linhaFatura)
                             $subtotal+=$linhaFatura->produtosCarrinhos->preco_venda*$linhaFatura->produtosCarrinhos->quantidade;;
 
@@ -151,7 +149,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <tr>
                         <th>IVA</th>
                         <?php
-                        $iva=0;
+                        $iva = 0;
                         foreach ($linhasFaturas as $linhaFatura)
                             $iva+=$linhaFatura->produtosCarrinhos->valor_iva*$linhaFatura->produtosCarrinhos->quantidade;
 
@@ -174,19 +172,20 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row no-print">
 
         <div class="col-12">
-            <button type="button" onclick="window.print()" class="btn btn-primary float-right" style="margin-right: 5px;">
+            <button type="button" onclick="window.print()" class="btn btn-primary float-right"
+                    style="margin-right: 5px;">
                 <i class="fas fa-print"></i> Imprimir
             </button>
         </div>
-</div>
+    </div>
 </div>
 <p>
-    <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+    <?= Html::a('Update', ['update', 'id' => $model->id, 'user_id' => $model->user_id], ['class' => 'btn btn-primary']) ?>
     <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-success']) ?>
 </p>
-    <!-- /.row -->
+<!-- /.row -->
 
-    <!-- this row will not appear when printing -->
+<!-- this row will not appear when printing -->
 
 
 

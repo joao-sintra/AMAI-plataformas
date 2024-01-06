@@ -54,8 +54,6 @@ AppAsset::register($this);
             $menuItems = [
                 ['label' => 'Home', 'url' => ['/site/index'],],
                 ['label' => 'Loja', 'url' => ['/site/shop'],],
-                ['label' => 'Sobre', 'url' => ['/site/about']],
-                ['label' => 'Contactos', 'url' => ['/site/contact']],
                 ['label' => 'Carrinho', 'url' => ['/carrinhos/index']],
             ];
 
@@ -82,7 +80,6 @@ AppAsset::register($this);
             }
             NavBar::end();
             ?>
-
         </div>
     </div>
 </header>

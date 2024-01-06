@@ -31,6 +31,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'imageFile')->fileInput() ?>
 
     <div class="form-group">
+<!--        --><?php /*= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['view', 'id' => $model->id, 'produto_id' => $model->produto_id], ['class' => 'btn btn-info']) */?>
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 

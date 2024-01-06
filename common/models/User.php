@@ -303,7 +303,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getClientes()
     {
-        return $this->hasMany(ClientesForm::class, ['id' => 'user_id']);
+        return $this->hasMany(ClientesForm::class, ['user_id' => 'id']);
     }
 
     public function getAuth()

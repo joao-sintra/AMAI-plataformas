@@ -41,17 +41,9 @@ class CarrinhosSearch extends Carrinhos
      */
     public function search($params)
     {
-        //$query = Carrinhos::find();
-        //make a query that gets the user id of the carrinho with status ativo
+        $query = Carrinhos::find();
 
-        //$query = Carrinhos::find()->where(['user_id' => $this->user_id]);
-        $query = Carrinhos::find()->where(['user_id' => $this->user_id, 'status' => 'Ativo']);
-        //$query = Carrinhos::find()->where(['user_id' => $this->user_id && 'status' => 'Ativo']);
-
-
-
-        // adicionar uma cena de que se nao existir um carrinho Criar um novo
-
+        // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -64,7 +56,6 @@ class CarrinhosSearch extends Carrinhos
             // $query->where('0=1');
             return $dataProvider;
         }
-
 
         // grid filtering conditions
         $query->andFilterWhere([

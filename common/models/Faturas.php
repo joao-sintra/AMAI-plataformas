@@ -52,7 +52,7 @@ class Faturas extends \yii\db\ActiveRecord
             'data' => 'Data',
             'valortotal' => 'Valortotal',
             'status' => 'Status',
-            'user_id' => 'User ID',
+            'user_id' => 'Cliente:',
         ];
     }
 

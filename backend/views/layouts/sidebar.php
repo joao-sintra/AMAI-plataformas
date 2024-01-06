@@ -37,35 +37,43 @@ AppAsset::register($this);
     <div class="sidebar">
         <!-- Sidebar Menu -->
         <nav class="mt-2">
+
             <?php
+            $userRole = Yii::$app->user->can('admin') ? 'admin' : (Yii::$app->user->can('gestor') ? 'gestor' : 'funcionario');
+
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
                     ['label' => 'Dashboard', 'header' => true],
                     ['label' => 'Dashboard', 'icon' => 'tachometer-alt', 'url' => ['/site/index']],
-                    ['label' => 'Faturas', 'header' => true],
-                    ['label' => 'Faturas', 'icon' => 'fas fa-file-invoice-dollar', 'url' => ['/faturas/index']],
-                    ['label' => 'Gestão de Dados', 'header' => true],
+
+                    ['label' => 'Faturas', 'header' => true, 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
+                    ['label' => 'Faturas', 'icon' => 'fas fa-file-invoice-dollar', 'url' => ['/faturas/index'], 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
+
+                    ['label' => 'Gestão de Dados', 'header' => true, 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
                     [
                         'label' => 'Gestão de Dados', 'icon' => 'fas fa-file',
                         'items' => [
-                            ['label' => 'Gerir Trabalhadores', 'icon' => 'users', 'url' => ['/user/index']],
-                            ['label' => 'Gerir Clientes', 'icon' => 'user', 'url' => ['clientes/index']],
-                            ['label' => 'IVAS', 'icon' => 'fa-solid fa-percent', 'url' => ['iva/index']],
-                            ['label' => 'Empresa', 'icon' => 'fa-solid fa-building', 'url' => ['empresas/index']],
-                            ['label' => 'Avaliações', 'icon' => 'fa-solid fa-star', 'url' => ['avaliacoes/index']],
+                            ['label' => 'Gerir Trabalhadores', 'icon' => 'users', 'url' => ['/user/index'], 'visible' => ($userRole == 'admin')],
+                            ['label' => 'Gerir Clientes', 'icon' => 'user', 'url' => ['clientes/index'], 'visible' => ($userRole == 'admin')],
+                            ['label' => 'IVAS', 'icon' => 'fa-solid fa-percent', 'url' => ['iva/index'], 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
+                            ['label' => 'Empresa', 'icon' => 'fa-solid fa-building', 'url' => ['empresas/index'], 'visible' => ($userRole == 'admin')],
+                            ['label' => 'Avaliações', 'icon' => 'fa-solid fa-star', 'url' => ['avaliacoes/index'], 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
                         ],
                     ],
-                    ['label' => 'Produtos', 'header' => true],
-                    ['label' => 'Cat. dos Produtos', 'icon' => 'fa-solid fa-tag', 'url' => ['/categorias-produtos/index']],
-                    ['label' => 'Criação dos Produtos', 'icon' => 'fa-solid fa-box', 'url' => ['/produtos/index']],
-                    ['label'=> 'Encomendas','icon'=>'fas  fa-boxes','url'=>['/produtos-carrinhos/index']],
-                    ['label'=>'Imagens','icon'=>'fa-regular fa-image', 'url'=>['imagem/index']],
-                    ['label' => 'Debug Tools', 'header' => true],
-                    ['label' => 'Gii', 'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],
-                    ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
+                    ['label' => 'Produtos', 'header' => true, 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
+                    ['label' => 'Cat. dos Produtos', 'icon' => 'fa-solid fa-tag', 'url' => ['/categorias-produtos/index'], 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
+                    ['label' => 'Criação dos Produtos', 'icon' => 'fa-solid fa-box', 'url' => ['/produtos/index'] , 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
 
-                    ['label' => 'Sobre Nós', 'header' => true],
-                    ['label' => 'Contactos', 'icon' => 'address-book', 'url' => ['/site/contactos']],
+                    ['label' => 'Imagens', 'header' => true, 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
+                    ['label'=>'Imagens','icon'=>'fa-regular fa-image', 'url'=>['imagem/index'], 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
+
+                    ['label' => 'Encomendas', 'header' => true],
+                    ['label'=> 'Encomendas','icon'=>'fas  fa-boxes','url'=>['/encomendas/index','visible' => ($userRole == 'admin' || $userRole == 'funcionario')]],
+
+                    ['label' => 'Debug Tools', 'header' => true, 'visible' => ($userRole == 'admin')],
+                    ['label' => 'Gii', 'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank', 'visible' => ($userRole == 'admin')],
+                    ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank', 'visible' => ($userRole == 'admin')],
+
                     ['label' => 'Perfil', 'header' => true],
                     ['label' => 'Perfil', 'icon' => 'fas fa-user', 'url' => ['/perfil/index']],
                 ],

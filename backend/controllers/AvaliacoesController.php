@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-use backend\models\AvaliacoesSearch;
+use common\models\AvaliacoesSearch;
 use common\models\Avaliacoes;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;

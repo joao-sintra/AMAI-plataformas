@@ -12,11 +12,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'data')->textInput() ?>
-
-    <?= $form->field($model, 'valortotal')->textInput() ?>
-
-    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'status')->label('Estado')->dropDownList([
+        "Paga" => 'Paga',
+        "Anulada" => 'Anulada',
+    ],
+        ['prompt' => 'Atualize o estado da fatura']
+    );
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

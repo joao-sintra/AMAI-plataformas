@@ -15,7 +15,6 @@ use common\models\Produtos;
  * @property int $rating
  * @property int $user_id
  * @property int $produto_id
- *
  * @property Produtos $produtos
  * @property User $user
  */
@@ -35,9 +34,9 @@ class Avaliacoes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['comentario', 'dtarating', 'rating', 'user_id', 'produtos_id'], 'required'],
-            [['dtarating'], 'safe'],
-            [['rating', 'user_id', 'produtos_id'], 'integer'],
+            [['comentario', 'user_id', 'produto_id'], 'required'],
+            [['dtarating', 'rating'], 'safe'],
+            [['rating', 'user_id', 'produto_id'], 'integer'],
             [['comentario'], 'string', 'max' => 200],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
             [['produto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Produtos::class, 'targetAttribute' => ['produto_id' => 'id']],
