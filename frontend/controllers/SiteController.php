@@ -233,10 +233,12 @@ class SiteController extends Controller
         $userMoradaDataEditMode = Yii::$app->request->get('editUserMoradaData') === 'true';
         $passwordEditMode = Yii::$app->request->get('editPassword') === 'true';
 
+
         $passwordModel = new User(['scenario' => User::SCENARIO_PASSWORD]);
 
         // Check if the form is submitted
         if (Yii::$app->request->isPost) {
+
             // Check if the form is for password change
             if ($passwordEditMode && $passwordModel->load(Yii::$app->request->post())) {
                 if ($passwordModel->validate()) {
@@ -255,10 +257,11 @@ class SiteController extends Controller
                         Yii::$app->session->setFlash('error', 'Erro ao alterar a password.');
                     }
                 }
-            } elseif ($userDataEditMode || $userMoradaDataEditMode) {
+            } elseif ($userDataEditMode || $userMoradaDataEditMode ) {
                 // The user data update form was submitted, handle it
                 $userData->load(Yii::$app->request->post());
                 $userDataAdditional->load(Yii::$app->request->post());
+
 
                 // Validate and save the user data models
                 if ($userData->save() && $userDataAdditional->save()) {

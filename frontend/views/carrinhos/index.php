@@ -124,14 +124,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4 disabled"
                                         type="button">
                                     <?=
-                                    Html::a(' Finalizar compra', ['carrinhos/update', 'id' => $carrinho->id, 'user_id' => $carrinho->user_id], ['class' => 'disabled']) ?>
+                                    Html::a(' Finalizar compra', ['carrinhos/checkout', 'id' => $carrinho->id, 'user_id' => $carrinho->user_id], ['class' => 'disabled']) ?>
 
 
                                     <?php } else { ?>
                                         <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4 "
                                                 type="button">
                                             <?=
-                                            Html::a(' Finalizar compra', ['carrinhos/update', 'id' => $carrinho->id, 'user_id' => $carrinho->user_id]) ?>
+                                            Html::a(' Finalizar compra', ['carrinhos/checkout', 'id' => $carrinho->id, 'user_id' => $carrinho->user_id]) ?>
                                         </button>
                                     <?php } ?>
                             </div>

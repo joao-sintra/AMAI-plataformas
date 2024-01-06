@@ -59,7 +59,7 @@ $imageUrl = $baseUrl . $imageFilename;
                                         ?>
                                         <?= $form->field($userData, 'username')->textInput(['value' => $userData->username, 'placeholder' => 'Introduza o seu username'])->label('Username') ?>
                                         <br>
-                                        <?= $form->field($userDataAdditional, 'nome')->textInput(['value' => $userDataAdditional->primeironome, 'placeholder' => 'Introduza o seu nome'])->label('Nome') ?>
+                                        <?= $form->field($userDataAdditional, 'primeironome')->textInput(['value' => $userDataAdditional->primeironome, 'placeholder' => 'Introduza o seu nome'])->label('Nome') ?>
                                         <br>
                                         <?= $form->field($userDataAdditional, 'apelido')->textInput(['value' => $userDataAdditional->apelido, 'placeholder' => 'Introduza o seu apelido'])->label('Apelido') ?>
                                         <br>

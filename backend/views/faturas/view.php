@@ -97,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'iva',
                             'label' => 'Impostos (valor)',
                             'value' => function ($model) {
-                                return number_format((float)$model->produtosCarrinhos->valor_iva, 2, ',', ',');
+                                return number_format((float)$model->produtosCarrinhos->valor_iva*$model->produtosCarrinhos->quantidade, 2, ',', ',');
                             },
                         ],
                         [
@@ -143,7 +143,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php
                         $subtotal=0;
                         foreach ($linhasFaturas as $linhaFatura)
-                            $subtotal+=$linhaFatura->produtosCarrinhos->preco_venda;
+                            $subtotal+=$linhaFatura->produtosCarrinhos->preco_venda*$linhaFatura->produtosCarrinhos->quantidade;;
 
                         echo '<td>' . number_format((float)$subtotal, 2, ',', ',') . ' €' . '</td>'
                         ?>
@@ -153,7 +153,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php
                         $iva=0;
                         foreach ($linhasFaturas as $linhaFatura)
-                          $iva+=$linhaFatura->produtosCarrinhos->valor_iva;
+                            $iva+=$linhaFatura->produtosCarrinhos->valor_iva*$linhaFatura->produtosCarrinhos->quantidade;
 
                         echo '<td>' . number_format((float)$iva, 2, ',', ',') . ' €' . '</td>'
                         ?>
