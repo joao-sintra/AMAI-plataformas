@@ -28,16 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div id="faturas-view">
 
-    <!--<h1><?php /*= Html::encode($this->title) */ ?></h1>-->
-
-
-    <!-- title row -->
-
-    <!-- info row -->
     <div class="row invoice-info">
         <div class="col-sm-4 invoice-col">
 
-            <?= '<p>De: <strong>' . $empresa->designacaosocial . '</strong><br>' . $empresa->email
+            <?= '<p>De: <br><strong>' . $empresa->designacaosocial . '</strong><br>' . $empresa->email
             . '<br>' . $empresa->rua . '<br>' . $empresa->codigopostal . ' ' . $empresa->localidade .
             '<br>' . $empresa->nif . '<br></p>' ?>
 
@@ -45,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
-            To
+            Para:
             <address>
                 <?=
                 '<strong>' . $cliente->primeironome . ' ' . $cliente->apelido . '</strong><br>' . $model->user->email . '<br>' . $cliente->rua . '<br>' . $cliente->codigopostal . ' ' . $cliente->localidade . '<br>' . $cliente->nif
@@ -55,9 +49,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
-            <?= '<strong>ENCOMENDA ' . $model->id . '</strong><br>' . number_format((float)$model->valortotal, 2, '.', ',') . ' EUR<br>Data de emissão ' .
-
-            Carbon::parse($model->data)->format('Y/m/d') ?>
+            <?= '<strong>ENCOMENDA ' . $model->id . '</strong><br>' . '<b>Total pago: </b>' . number_format((float)$model->valortotal, 2, '.', ',') .
+            ' EUR<br><b>Data de emissão: </b>' . Carbon::parse($model->data)->format('Y/m/d') ?>
 
 
         </div>
@@ -108,7 +101,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'total',
                             'label' => 'Total',
                             'value' => function ($model) {
-                                return number_format((float)$model->produtosCarrinhos->subtotal, 2, '.', ',');;
+                                return number_format((float)$model->produtosCarrinhos->subtotal, 2, '.', ',');
                             },
                         ],
 
@@ -126,7 +119,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <!-- /.col -->
         <div class="col-6">
-            <?= '<p><strong>Metodo de Pagamento: </strong> ' . $model->pagamentos[0]->metodopag . '<strong><br>Data: </strong> ' . $model->pagamentos[0]->data . '<strong><br>Estado da Encomenda: </strong>' . $model->status ?>
+            <?= '<p><strong>Método de pagamento: </strong> ' . $model->pagamentos[0]->metodopag . '<strong>
+                <br>Data: </strong> ' . $model->pagamentos[0]->data . '<strong>
+                <br>Estado da encomenda: </strong>' . $model->status ?>
 
 
         </div>
@@ -146,7 +141,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ?>
                     </tr>
                     <tr>
-                        <th>IVA</th>
+                        <th>IVA:</th>
                         <?php
                         $iva = 0;
                         foreach ($linhasFaturas as $linhaFatura)
@@ -154,8 +149,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         echo '<td>' . number_format((float)$iva, 2, ',', ',') . ' €' . '</td>'
                         ?>
-
-                        <td></td>
                     </tr>
 
                     <tr>
@@ -168,20 +161,20 @@ $this->params['breadcrumbs'][] = $this->title;
         <!-- /.col -->
 
     </div>
-    <div class="row no-print">
-
-        <div class="col-12">
-            <button type="button" onclick="window.print()" class="btn btn-primary float-right"
-                    style="margin-right: 5px;">
+    <div class="row offset-6">
+        <div class="col-3">
+            <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-success btn-block']) ?>
+        </div>
+        <div class="col-3">
+            <?= Html::a('Update', ['update', 'id' => $model->id, 'user_id' => $model->user_id], ['class' => 'btn btn-primary btn-block']) ?>
+        </div>
+        <div class="col-3">
+            <button type="button" onclick="window.print()" class="btn btn-secondary btn-block">
                 <i class="fas fa-print"></i> Imprimir
             </button>
         </div>
     </div>
 </div>
-<p>
-    <?= Html::a('Update', ['update', 'id' => $model->id, 'user_id' => $model->user_id], ['class' => 'btn btn-primary']) ?>
-    <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-success']) ?>
-</p>
 <!-- /.row -->
 
 <!-- this row will not appear when printing -->

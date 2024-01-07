@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Registo de Faturas', 'url' => ['in
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-    <div class="container-fluid faturas-view ">
+<div id="faturas-view">
     <div class="row invoice-info">
         <div class="col-sm-4 invoice-col">
             <?= '<p>De: <br><strong>' . $empresa->designacaosocial . '</strong><br>' . $empresa->email
@@ -149,7 +149,9 @@ $this->params['breadcrumbs'][] = $this->title;
             </button>
         </div>
     </div>
-    </div>
+</div>
+
+<!-- this row will not appear when printing -->
 
 <!-- this row will not appear when printing -->
 
