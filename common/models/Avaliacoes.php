@@ -34,7 +34,7 @@ class Avaliacoes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'produto_id'], 'required'],
+            [['user_id', 'produto_id','comentario'], 'required'],
             [['dtarating', 'rating'], 'safe'],
             [['rating', 'user_id', 'produto_id'], 'integer'],
             [['comentario'], 'string', 'max' => 200],
