@@ -22,7 +22,9 @@ $imageFilename = "user.png";
 // Generating the complete image URL
 $imageUrl = $baseUrl . $imageFilename;
 ?>
-
+<br>
+<br>
+<br>
 <div class="container-fluid profile py-4">
     <div class="container py-5">
         <?php if (Yii::$app->session->hasFlash('success')): ?>

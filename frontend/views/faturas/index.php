@@ -14,34 +14,31 @@ $this->title = 'Faturas';
 $this->params['breadcrumbs'][] = $this->title;
 ?><br><br><br>
 <div class="faturas-index">
+    <div class="container-fluid">
+        <h1>Faturas</h1>
 
-    <h1>Faturas</h1>
+        <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
+                'id',
+                'data:text:Data de Emissão',
+                'valortotal:text:Valor Total',
+                'status',
+                'user_id:text:Cliente',
+                [
+                    'class' => ActionColumn::className(),
+                    'template' => '{view}', // Keep only the "view" button
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'data',
-            'valortotal',
-            'status',
-            'user_id',
-            [
-                'class' => ActionColumn::className(),
-                'template' => '{view}', // Keep only the "view" button
-
-                'urlCreator' => function ($action, Faturas $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id, 'user_id' => $model->user_id]);
-                 }
+                    'urlCreator' => function ($action, Faturas $model, $key, $index, $column) {
+                        return Url::toRoute([$action, 'id' => $model->id, 'user_id' => $model->user_id]);
+                     }
+                ],
             ],
-        ],
-    ]); ?>
-
-
+        ]); ?>
+    </div>
 </div>
