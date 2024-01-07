@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 
+
 /**
  * This is the model class for table "faturas".
  *
@@ -19,6 +20,7 @@ use Yii;
  */
 class Faturas extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -84,6 +86,5 @@ class Faturas extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }
-
 
 }

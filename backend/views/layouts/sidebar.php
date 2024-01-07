@@ -49,6 +49,9 @@ AppAsset::register($this);
                     ['label' => 'Faturas', 'header' => true, 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
                     ['label' => 'Faturas', 'icon' => 'fas fa-file-invoice-dollar', 'url' => ['/faturas/index'], 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
 
+                    ['label' => 'Encomendas', 'header' => true],
+                    ['label'=> 'Encomendas','icon'=>'fas  fa-boxes','url'=>['/encomendas/index']],
+
                     ['label' => 'Gestão de Dados', 'header' => true, 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
                     [
                         'label' => 'Gestão de Dados', 'icon' => 'fas fa-file',
@@ -67,15 +70,12 @@ AppAsset::register($this);
                     ['label' => 'Imagens', 'header' => true, 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
                     ['label'=>'Imagens','icon'=>'fa-regular fa-image', 'url'=>['imagem/index'], 'visible' => ($userRole == 'admin' || $userRole == 'gestor')],
 
-                    ['label' => 'Encomendas', 'header' => true],
-                    ['label'=> 'Encomendas','icon'=>'fas  fa-boxes','url'=>['/encomendas/index','visible' => ($userRole == 'admin' || $userRole == 'funcionario')]],
-
-                    ['label' => 'Debug Tools', 'header' => true, 'visible' => ($userRole == 'admin')],
-                    ['label' => 'Gii', 'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank', 'visible' => ($userRole == 'admin')],
-                    ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank', 'visible' => ($userRole == 'admin')],
-
                     ['label' => 'Perfil', 'header' => true],
                     ['label' => 'Perfil', 'icon' => 'fas fa-user', 'url' => ['/perfil/index']],
+
+                    /*['label' => 'Debug Tools', 'header' => true, 'visible' => ($userRole == 'admin')],
+                    ['label' => 'Gii', 'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank', 'visible' => ($userRole == 'admin')],
+                    ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank', 'visible' => ($userRole == 'admin')],*/
                 ],
             ]);
             ?>

@@ -2,12 +2,18 @@
 
 namespace backend\controllers;
 
+use backend\models\AuthAssignment;
+use common\models\LinhasFaturas;
 use common\models\LoginForm;
+use common\models\ProdutosCarrinhos;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
+use common\models\Faturas;
+use common\models\Produtos;
+use common\models\User;
 
 
 /**
@@ -74,7 +80,23 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $totalGanho = Faturas::find()->where(['status' => 'Paga'])->sum('valortotal');
+        $totalPedidos = Faturas::find()->where(['status' => 'Paga'])->count();
+        $totalProdutos = ProdutosCarrinhos::find()->sum('quantidade');
+
+        $totalClientes = AuthAssignment::find()->andWhere(['item_name' => 'cliente'])->count();
+
+        if ($totalGanho == null || $totalProdutos == null) {
+            $totalGanho = 0;
+            $totalProdutos = 0;
+        }
+
+        return $this->render('index', [
+            'totalGanho' => $totalGanho,
+            'totalPedidos' => $totalPedidos,
+            'totalProdutos' => $totalProdutos,
+            'totalClientes' => $totalClientes,
+        ]);
     }
 
     /**
