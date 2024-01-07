@@ -10,9 +10,9 @@ use yii\widgets\ListView;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 ?>
-<div class="mb-4">
+<div class="mb-4" >
     <div class="rounded position-relative fruite-item d-flex flex-column">
-        <div class="product-img" onclick="window.location='<?= Url::to(['produtos/view', 'id' => $model->id]) ?>'">
+        <div class="product-img hover-pointer" onclick="window.location='<?= Url::to(['produtos/view', 'id' => $model->id]) ?>'">
             <?php if (!empty($model->imagens)) : ?>
                 <td>
                     <?= Html::img(

@@ -171,7 +171,7 @@ $imageFilenames = array("bolos.jpg", "sobremesas.jpg");
                     ?>
                     <div class="col-md-6 col-lg-4 col-xl-3"
                          onclick="window.location='<?= Url::to(['produtos/view', 'id' => $produto->id]) ?>';">
-                        <div class="rounded position-relative fruite-item">
+                        <div class="rounded position-relative fruite-item hover-pointer">
                             <?php if (!empty($model->imagens)) : ?>
                                 <td>
                                     <?= Html::img(
