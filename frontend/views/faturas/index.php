@@ -27,9 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 'id',
                 'data:text:Data de Emissão',
-                'valortotal:text:Valor Total',
+                'valortotal:text:Valor Total (€)',
                 'status',
-                'user_id:text:Cliente',
                 [
                     'class' => ActionColumn::className(),
                     'template' => '{view}', // Keep only the "view" button
