@@ -90,3 +90,27 @@ a.desc:after {
     outline: none;
 }
 
+
+.pagination {
+    display: flex;
+    margin:20px 0;
+
+}
+
+.pagination a {
+    color: black;
+    padding: 8px 11px;
+    text-decoration: none;
+    transition: 0.5s;
+    border: 1px solid orange;
+    margin: 0 4px;
+}
+
+.pagination a.active {
+    background-color: blue;
+    color: white;
+    border: 1px solid orange;
+}
+
+.pagination a:hover:not(.active) {background-color: var(--bs-primary)}
+
