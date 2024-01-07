@@ -26,11 +26,12 @@ class AvaliacoesController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
+                'only'=> ['create','delete','update','view','index'],
                 'rules' => [
                     [
-                        'actions' => ['create'],
+                        'actions' => ['create','delete','update','view','index'],
                         'allow' => true,
-                        'roles' => ['@'], // allow only authenticated users
+                        'roles' => ['cliente'], // allow only authenticated users
                     ],
                 ],
                 'denyCallback' => function ($rule, $action) {
@@ -43,7 +44,6 @@ class AvaliacoesController extends Controller
             'verbs' => [
                 'class' => VerbFilter::class,
                 'actions' => [
-                    'delete' => ['POST'],
                 ],
             ],
         ];
@@ -85,27 +85,29 @@ class AvaliacoesController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Avaliacoes();
+        $avaliacoesModel = new Avaliacoes();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post())) {
+            if ($avaliacoesModel->load($this->request->post())) {
 
-                $model->produto_id = Yii::$app->request->post('Avaliacoes')['produto_id'];
-                $model->user_id = Yii::$app->user->id;
-                $model->dtarating = carbon::now();
 
-                if ($model->save()) {
+                $avaliacoesModel->produto_id = Yii::$app->request->post('Avaliacoes')['produto_id'];
+                $avaliacoesModel->user_id = Yii::$app->user->id;
+                $avaliacoesModel->dtarating = Carbon::now();
+
+                if ($avaliacoesModel->save()) {
 
                     Yii::$app->session->setFlash('success', 'Avaliação adicionada com sucesso.');
-                    return $this->redirect(['produtos/view', 'id' => $model->produto_id]);
-
+                    return $this->redirect(['produtos/view', 'id' => $avaliacoesModel->produto_id]);
                 } else {
-                    Yii::$app->session->setFlash('error', 'Ocorreu um erro ao adicionar a avaliação');
+                    Yii::$app->session->setFlash('error', 'Erro ao adicionar a avaliação.');
                 }
             }
-        } else {
-            $model->loadDefaultValues();
         }
+
+        return $this->render('view', [
+            'avaliacoesModel' => $avaliacoesModel,
+        ]);
     }
 
     /**
@@ -137,9 +139,15 @@ class AvaliacoesController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        $modelo = $this->findModel($id);
+
+        if ($modelo->user_id !== Yii::$app->user->id) {
+            throw new ForbiddenHttpException('You are not allowed to perform this action.');
+        }
+        $modelo->delete();
+
+        return $this->redirect(['produtos/view', 'id' => $modelo->produto_id]);
     }
 
     /**

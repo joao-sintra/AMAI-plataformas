@@ -11,7 +11,16 @@
 }
 
 /*** Layouts Main End ***/
+/*** star ***/
+.star {
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s;
+}
 
+.star.selected {
+    color: gold;
+}
 
 /*** Perfil Start ***/
 

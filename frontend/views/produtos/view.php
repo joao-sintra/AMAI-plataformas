@@ -5,6 +5,8 @@
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\bootstrap5\Carousel;
+use yii\web\View;
 
 
 /** @var $this yii\web\View */
@@ -16,6 +18,15 @@ use yii\helpers\Url;
 /** @var common\models\ProdutosSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
+
+$this->registerJs("
+    $('.star').on('click', function() {
+        var rating = $(this).data('value');
+        $('#avaliacoes').val(rating);
+        $('.star').removeClass('selected');
+        $(this).prevAll().addBack().addClass('selected');
+    });
+", View::POS_READY);
 
 $this->title = $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
@@ -30,13 +41,24 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="border rounded">
                             <?php if (!empty($model->imagens)) : ?>
                                 <td>
-                                    <?= Html::img(
-                                        Url::to('@web/public/imagens/produtos/' . $model->imagens[0]->fileName),
-                                        [
-                                            'class' => 'img-fluid rounded-top',
-                                            'style' => 'height: 300px;'
-                                        ],
-                                    ) ?>
+                                    <?php $items = [];
+                                    foreach ($model->imagens as $imagem) {
+                                        $items[] = [
+                                            'content' => Html::img(
+                                                Url::to('@web/public/imagens/produtos/' . $imagem->fileName),
+                                                [
+                                                    'class' => 'd-block w-100',
+                                                    'style' => 'height: 300px;'
+                                                ]
+                                            ),
+                                        ];
+                                    }
+
+                                    echo Carousel::widget([
+                                        'items' => $items,
+                                        'options' => ['class' => 'carousel slide', 'data-ride' => 'carousel'],
+                                        'controls' => ['<span class="carousel-control-prev-icon" aria-hidden="true"></span>', '<span class="carousel-control-next-icon" aria-hidden="true"></span>'],
+                                    ]); ?>
                                 </td>
                             <?php else : ?>
                                 <td>
@@ -54,11 +76,21 @@ $this->params['breadcrumbs'][] = $this->title;
                         <p class="mb-3"><?= '<strong>Categoria: </strong>' . $model->categoriaProduto->nome ?></p>
                         <h5 class="fw-bold mb-3"><?= $model->preco . '€' ?></h5>
                         <div class="d-flex mb-4">
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star"></i>
+                            <?php
+                            $media = 0;
+                            $soma = 0;
+                            foreach ($avaliacoes as $avaliacao):
+                                $soma++;
+                                $media += $avaliacao->rating;
+
+                            endforeach;
+                            $media = $media / $soma;
+                            ?>
+
+                            <?php for ($i = 1; $i <= 5; $i++): ?>
+                                <i class="fa fa-star<?= ($i <= $media) ? ' text-secondary' : '' ?>"></i>
+                            <?php endfor; ?>
+
                         </div>
                         <p class="mb-4"><?= $model->descricao ?></p>
                         <?= Html::a(
@@ -98,50 +130,37 @@ $this->params['breadcrumbs'][] = $this->title;
                             </div>
                             <div class="tab-pane" id="nav-mission" role="tabpanel"
                                  aria-labelledby="nav-mission-tab">
-                                <div class="d-flex">
-                                    <img src="img/avatar.jpg"
-                                         class="img-fluid rounded-circle p-3"
-                                         style="width: 100px; height: 100px;" alt="">
-                                    <div class="">
-                                        <p class="mb-2" style="font-size: 14px;">April 12,
-                                            2024</p>
+                                <?php foreach ($avaliacoes as $avaliacao): ?>
+                                    <div class="avaliacao-item">
+                                        <p><?= Html::encode($avaliacao->dtarating) ?></p>
                                         <div class="d-flex justify-content-between">
-                                            <h5>Meter Username do Cliente</h5>
+                                            <h5><?= Html::encode($avaliacao->user->username) ?></h5>
                                             <div class="d-flex mb-3">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
+                                                <!-- Star ratings (adjust this part as needed) -->
+                                                <?php for ($i = 1; $i <= 5; $i++): ?>
+                                                    <i class="fa fa-star<?= ($i <= $avaliacao->rating) ? ' text-secondary' : '' ?>"></i>
+                                                <?php endfor; ?>
                                             </div>
                                         </div>
-                                        <p class="text-dark"> meter comentario da avaliação </p>
+                                        <p><?= Html::encode($avaliacao->comentario) ?></p>
+
+                                        <?php if (!Yii::$app->user->isGuest && $avaliacao->user_id == Yii::$app->user->id): ?>
+                                            <!-- Display "Remove" and "Edit" links only for the author -->
+                                            <?= Html::a(
+                                                'Remove',
+                                                ['avaliacoes/delete', 'id' => $avaliacao->id],
+                                                [
+                                                    'class' => 'btn btn-danger',
+                                                    'data' => [
+                                                        'confirm' => 'Are you sure you want to delete this item?',
+                                                        'method' => 'post',
+                                                    ],
+                                                ]
+                                            ) ?>
+                                        <?php endif; ?>
                                     </div>
-                                </div>
-                                <div class="d-flex">
-                                    <img src="img/avatar.jpg"
-                                         class="img-fluid rounded-circle p-3"
-                                         style="width: 100px; height: 100px;" alt="">
-                                    <div class="">
-                                        <p class="mb-2" style="font-size: 14px;">April 12,
-                                            2024</p>
-                                        <div class="d-flex justify-content-between">
-                                            <h5>Sam Peters</h5>
-                                            <div class="d-flex mb-3">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <p class="text-dark">The generated Lorem Ipsum is
-                                            therefore always free from repetition injected
-                                            humour, or non-characteristic
-                                            words etc. Susp endisse ultricies nisi vel quam
-                                            suscipit </p>
-                                    </div>
-                                </div>
+                                    <hr>
+                                <?php endforeach; ?>
                             </div>
                             <div class="tab-pane" id="nav-vision" role="tabpanel">
                                 <p class="text-dark">Tempor erat elitr rebum at clita. Diam
@@ -154,7 +173,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     </div>
                     <?php $form = ActiveForm::begin(['action' => [
-                        'produtos/createavaliacoes'],
+                        'avaliacoes/create'],
                         'method' => 'post'
                     ]); ?>
                     <h4 class="mb-5 fw-bold">Deixa a tua Avaliação</h4>
@@ -162,39 +181,37 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="col-lg-12">
                             <div class="border-bottom rounded my-4">
                                 <?= $form->field($avaliacoesModel, 'comentario')->textarea([
-                                    'class' => 'form-control border-0',
+                                    'class' => 'form-control border border-dark rounded-0',
                                     'cols' => '30',
                                     'rows' => '8',
                                     'placeholder' => 'Tua Avaliação *',
                                     'spellcheck' => 'false'
                                 ]) ?>
+                                <div class="form-group">
+                                    <label>Rating</label>
+                                    <div class="rating">
+                                        <?php
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            echo Html::tag('span', '★', [
+                                                'class' => 'h3 star',
+                                                'data-value' => $i,
+                                            ]);
+                                        }
+                                        ?>
+                                    </div>
+                                    <?= $form->field($avaliacoesModel, 'rating')->hiddenInput(['id' => 'avaliacoes'])->label(false) ?>
+                                    <?= Html::submitButton('Postar Avaliação', [
+                                        'class' => 'btn border border-secondary text-primary rounded-pill px-4 py-3',
+                                        'name' => 'post-comment-button',
+                                    ]) ?>
+                                    <br>
+                                </div>
                                 <?php if (Yii::$app->session->hasFlash('success')): ?>
                                     <div class="alert alert-success">
                                         <?= Yii::$app->session->getFlash('success') ?>
                                     </div>
                                 <?php endif; ?>
                                 <?= $form->field($avaliacoesModel, 'produto_id')->hiddenInput(['value' => $model->id])->label(false) ?>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="d-flex justify-content-between py-3 mb-5">
-                                <div class="d-flex align-items-center">
-                                    <p class="mb-0 me-3">Please rate:</p>
-                                    <div class="d-flex align-items-center"
-                                         style="font-size: 12px;">
-                                        <!-- Include your rating logic here -->
-                                        <!-- For simplicity, let's use Font Awesome icons as in the original HTML -->
-                                        <?= Html::tag('i', '', ['class' => 'fa fa-star text-muted']) ?>
-                                        <?= Html::tag('i', '', ['class' => 'fa fa-star']) ?>
-                                        <?= Html::tag('i', '', ['class' => 'fa fa-star']) ?>
-                                        <?= Html::tag('i', '', ['class' => 'fa fa-star']) ?>
-                                        <?= Html::tag('i', '', ['class' => 'fa fa-star']) ?>
-                                    </div>
-                                </div>
-                                <?= Html::submitButton('Postar Avaliação', [
-                                    'class' => 'btn border border-secondary text-primary rounded-pill px-4 py-3',
-                                    'name' => 'post-comment-button',
-                                ]) ?>
                             </div>
                         </div>
                     </div>
