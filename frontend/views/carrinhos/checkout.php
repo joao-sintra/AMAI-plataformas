@@ -27,10 +27,19 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <div class="container-fluid py-5">
         <div class="container py-5">
+            <?php if (Yii::$app->session->hasFlash('success')): ?>
+                <div class="alert alert-success">
+                    <?= Yii::$app->session->getFlash('success') ?>
+                </div>
+            <?php elseif (Yii::$app->session->hasFlash('error')): ?>
+                <div class="alert alert-danger">
+                    <?= Yii::$app->session->getFlash('error') ?>
+                </div>
+            <?php endif; ?>
             <h1 class="mb-4">Billing details</h1>
 
-            <div class="row g-5">
-                <div class="col-md-12 col-lg-6 col-xl-7">
+            <div class="row g-4">
+                <div class="col-md-12 col-lg-6 col-xl-6">
                     <?php
                     $form = ActiveForm::begin([
                         'id' => 'profile-form-user-data',
@@ -46,38 +55,46 @@ $this->params['breadcrumbs'][] = 'Update';
                                 <?= $form->field($userDataAdditional, 'primeironome')->textInput(['value' => $userDataAdditional->primeironome, 'placeholder' => 'Introduza o seu nome'])->label('Nome') ?>
                             </div>
                         </div>
+
                         <div class="col-md-12 col-lg-6">
                             <div class="form-item w-100">
                                 <?= $form->field($userDataAdditional, 'apelido')->textInput(['value' => $userDataAdditional->apelido, 'placeholder' => 'Introduza o seu apelido'])->label('Apelido') ?>
 
                             </div>
                         </div>
+
                     </div>
+                    <br>
                     <div class="form-item">
                         <?= $form->field($userDataAdditional, 'rua')->textInput(['value' => $userDataAdditional->rua, 'placeholder' => 'Introduza a sua Morada'])->label('Morada') ?>
 
                     </div>
+                    <br>
                     <div class="form-item">
                         <?= $form->field($userDataAdditional, 'codigopostal')->textInput(['value' => $userDataAdditional->codigopostal, 'placeholder' => 'Introduza o Código Postal'])->label('Código Postal') ?>
 
                     </div>
+                    <br>
                     <div class="form-item">
                         <?= $form->field($userDataAdditional, 'localidade')->textInput(['value' => $userDataAdditional->localidade, 'placeholder' => 'Introduza o sua Localidade'])->label('Localidade') ?>
 
                     </div>
+                    <br>
                     <div class="form-item">
                         <?= $form->field($userDataAdditional, 'telefone')->textInput(['value' => $userDataAdditional->telefone, 'placeholder' => 'Introduza o seu número de telemóvel'])->label('Telemóvel') ?>
 
                     </div>
+                    <br>
                     <div class="form-item">
                         <?= $form->field($userDataAdditional, 'nif')->textInput(['value' => $userDataAdditional->nif, 'placeholder' => 'Introduza o seu NIF'])->label('NIF') ?>
                     </div>
+                    <br>
                     <div class="form-item mt-3">
                         <?= Html::submitButton('Atualizar', ['class' => 'btn btn-primary']) ?>
                     </div>
                     <?php ActiveForm::end(); ?>
                 </div>
-                <div class="col-md-12 col-lg-6 col-xl-5">
+                <div class="col-md-12 col-lg-6 col-xl-6">
                     <div class="table-responsive">
                         <table class="table">
                             <thead>

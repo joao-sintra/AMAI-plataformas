@@ -24,6 +24,7 @@ use Carbon\Carbon;
         ['prompt' => 'Selecione o Método de Envio']
     );
     ?>
+    <br>
     <?= $form->field($pagamento, 'metodopag')->label('Método de Pagamento')->dropDownList([
         "Cobrança" => 'Cobrança',
         'Multibanco' => 'Multibanco',

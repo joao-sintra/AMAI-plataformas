@@ -35,10 +35,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         <tr>
 
                             <th scope="col" colspan="2">Produto</th>
-                            <th scope="col">Descição</th>
+                            <th scope="col">Descrição</th>
                             <th scope="col">IVA (%)</th>
                             <th scope="col">Preço c/IVA</th>
-                            <th scope="col">Quatidade</th>
+                            <th scope="col">Quantidade</th>
                             <th scope="col">Total</th>
                             <th scope="col">Handle</th>
                         </tr>
@@ -95,6 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <!-- Add more cells for other columns -->
                         </tr>
                         <?php endforeach; ?>
+                        <?php endforeach; ?>
 
 
                         </tbody>
@@ -147,11 +148,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
             </div>
         </div>
-<!--        --><?php /*= Html::a('Continuar a comprar', ['site/shop'], ['class' => 'btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4']) */?>
     </div>
 
 </div>
 
 
 
-<?php endforeach; ?>
+

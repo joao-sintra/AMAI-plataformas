@@ -95,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'attribute' => 'iva',
                             'label' => 'Impostos (valor)',
                             'value' => function ($model) {
-                                return number_format((float)$model->produtosCarrinhos->valor_iva*$model->produtosCarrinhos->quantidade, 2, ',', ',');
+                                return number_format((float)$model->produtosCarrinhos->valor_iva * $model->produtosCarrinhos->quantidade, 2, ',', ',');
                             },
                         ],
                         [
@@ -141,7 +141,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php
                         $subtotal = 0;
                         foreach ($linhasFaturas as $linhaFatura)
-                            $subtotal+=$linhaFatura->produtosCarrinhos->preco_venda*$linhaFatura->produtosCarrinhos->quantidade;;
+                            $subtotal += $linhaFatura->produtosCarrinhos->preco_venda * $linhaFatura->produtosCarrinhos->quantidade;;
 
                         echo '<td>' . number_format((float)$subtotal, 2, ',', ',') . ' €' . '</td>'
                         ?>
@@ -151,7 +151,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php
                         $iva = 0;
                         foreach ($linhasFaturas as $linhaFatura)
-                            $iva+=$linhaFatura->produtosCarrinhos->valor_iva*$linhaFatura->produtosCarrinhos->quantidade;
+                            $iva += $linhaFatura->produtosCarrinhos->valor_iva * $linhaFatura->produtosCarrinhos->quantidade;
 
                         echo '<td>' . number_format((float)$iva, 2, ',', ',') . ' €' . '</td>'
                         ?>
@@ -178,11 +178,13 @@ $this->params['breadcrumbs'][] = $this->title;
             </button>
         </div>
     </div>
-</div>
-<p>
-    <?= Html::a('Update', ['update', 'id' => $model->id, 'user_id' => $model->user_id], ['class' => 'btn btn-primary']) ?>
-    <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-success']) ?>
-</p>
+    <p>
+        <?= Html::a('Update', ['update', 'id' => $model->id, 'user_id' => $model->user_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Voltar', ['index'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+
+
 <!-- /.row -->
 
 <!-- this row will not appear when printing -->

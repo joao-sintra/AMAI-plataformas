@@ -41,8 +41,7 @@ class CarrinhosSearch extends Carrinhos
      */
     public function search($params)
     {
-        $query = Carrinhos::find();
-
+        $query = Carrinhos::find()->where(['user_id' => $this->user_id, 'status' => 'Ativo']);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

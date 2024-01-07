@@ -16,8 +16,6 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
 use Carbon\Carbon;
-
-
 /**
  * CarrinhosController implements the CRUD actions for Carrinhos model.
  */
@@ -187,11 +185,23 @@ class CarrinhosController extends Controller
     {
         $model = $this->findModel($id, $user_id);
         $userDataAdditional = ClientesForm::findOne(['user_id' => Yii::$app->user->id]);
+        $userDataAdditional?->setScenario(ClientesForm::SCENARIO_USERDATA);
         $pagamento = new Pagamentos();
         $fatura = new Faturas();
         $produtoCarrinhoProduto = ProdutosCarrinhos::find()->where(['carrinho_id' => $model->id])->all();
 
         if ($this->request->isPost) {
+            if(!$userDataAdditional->validate()){
+                $errorMessages = '';
+                foreach ($userDataAdditional->errors as $attributeErrors) {
+                    foreach ($attributeErrors as $errorMessage) {
+                        $errorMessages .= $errorMessage . '<br>';
+                    }
+                }
+
+                Yii::$app->session->setFlash('error', 'Erro nos dados do utilizador: <br>' . $errorMessages);
+            }
+
 
             $fatura->data = Carbon::now();
             $fatura->valortotal = $model->valortotal;

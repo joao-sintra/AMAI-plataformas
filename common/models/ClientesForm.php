@@ -26,6 +26,9 @@ use backend\models\AuthAssignment;
  */
 class ClientesForm extends \yii\db\ActiveRecord
 {
+
+    const SCENARIO_USERDATA = 'userdata';
+
     /**
      * {@inheritdoc}
      */
@@ -46,7 +49,7 @@ class ClientesForm extends \yii\db\ActiveRecord
             [['genero'], 'string'],
             [['codigopostal'], 'string', 'max' => 8],
             [['localidade', 'rua'], 'string', 'max' => 100],
-            [['nif'], 'string', 'max' => 10,'min' => 9, 'tooShort' => 'Precisa no mínimo 9 digitos', 'tooLong' => 'Não pode ter mais de 9 digitos'],
+            [['nif'], 'string', 'max' => 10, 'min' => 9, 'tooShort' => 'Precisa no mínimo 9 digitos', 'tooLong' => 'Não pode ter mais de 9 digitos'],
             [['nif'], 'unique'],
             [['nif'], 'match', 'pattern' => '/^\d+$/i', 'message' => 'Só são aceites números.'],
             [['telefone'], 'string', 'max' => 9, 'min' => 9, 'tooShort' => 'Precisa no mínimo 9 digitos', 'tooLong' => 'Não pode ter mais de 9 digitos'],
@@ -54,6 +57,8 @@ class ClientesForm extends \yii\db\ActiveRecord
             [['telefone'], 'match', 'pattern' => '/^\d+$/i', 'message' => 'Só são aceites números .'],
             [['user_id'], 'integer'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['rua', 'codigopostal', 'localidade', 'telefone', 'nif','primeironome','apelido'], 'required', 'on' => self::SCENARIO_USERDATA],
+
         ];
     }
 
@@ -77,6 +82,14 @@ class ClientesForm extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'email' => 'Email',
         ];
+    }
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        // Define a scenario for the password-related actions
+        $scenarios[self::SCENARIO_USERDATA] = ['rua', 'codigopostal', 'localidade', 'telefone', 'nif','primeironome','apelido'];
+        return $scenarios;
     }
 
 
