@@ -32,7 +32,7 @@ $this->title = $model->nome;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?><br><br><br>
-<div class="container-fluid py-5 mt-5">
+<div class="container-fluid py-5">
     <div class="container py-5">
         <div class="row g-4 mb-5">
             <div class="col-lg-8 col-xl-9">
@@ -113,14 +113,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                         id="nav-about-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-about"
                                         aria-controls="nav-about" aria-selected="true">
-                                    Description
+                                    Descrição
                                 </button>
                                 <button class="nav-link border-white border-bottom-0"
                                         type="button" role="tab"
                                         id="nav-mission-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-mission"
                                         aria-controls="nav-mission" aria-selected="false">
-                                    Reviews
+                                    Avaliações
                                 </button>
                             </div>
                         </nav>
@@ -177,7 +177,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'avaliacoes/create'],
                         'method' => 'post'
                     ]); ?>
-                    <h4 class="mb-5 fw-bold">Deixa a tua Avaliação</h4>
+                    <h4 class="mb-2 fw-bold">Deixa a tua Avaliação</h4>
                     <div class="row g-4">
                         <div class="col-lg-12">
                             <div class="border-bottom rounded my-4">
@@ -187,9 +187,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'rows' => '8',
                                     'placeholder' => 'Tua Avaliação *',
                                     'spellcheck' => 'false'
-                                ]) ?>
+                                ])->label('Comentário') ?>
                                 <div class="form-group">
-                                    <label>Rating</label>
+                                    <label class="mt-2">Rating</label>
                                     <div class="rating">
                                         <?php
                                         for ($i = 1; $i <= 5; $i++) {
@@ -241,7 +241,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             <div class="input-group-append">
                                 <?= Html::submitButton('<i class="fa fa-search" style="color: #6c757d;"></i>', [
                                     'class' => 'btn btn-outline p-3 rounded-end', // Combined rounded classes
-                                    'style' => 'border-color: #ced4da; background-color: #e9ecef;',
+                                    'style' => 'border-color: #ced4da; background-color: #e9ecef; border-top-left-radius: 0;
+                                                border-bottom-left-radius: 0; border-top-right-radius: 10px;
+                                                border-bottom-right-radius: 10px;',
                                     'name' => 'search-button',
                                 ]) ?>
                             </div>
