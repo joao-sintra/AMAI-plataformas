@@ -10,6 +10,7 @@ use yii\widgets\LinkPager;
 /** @var common\models\Produtos $produtos */
 /** @var common\models\ProdutosSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
+$this->title = 'Home';
 
 if ($warning = Yii::$app->session->getFlash('warning')) {
     echo '<div class="alert alert-warning">' . Html::encode($warning) . '</div>';

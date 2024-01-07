@@ -9,9 +9,12 @@ use common\models\FaturasSearch;
 use common\models\LinhasFaturas;
 use common\models\LinhasFaturasSearch;
 use common\models\Pagamentos;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Carbon\Carbon;
+
 
 /**
  * FaturasController implements the CRUD actions for Faturas model.
@@ -44,7 +47,8 @@ class FaturasController extends Controller
     public function actionIndex()
     {
         $searchModel = new FaturasSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $searchModel->user_id = Yii::$app->user->id;
+        $dataProvider = $searchModel->searchByUser($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -82,7 +86,29 @@ class FaturasController extends Controller
 
         ]);
     }
+    public function actionViewfatura($id, $user_id)
+    {
 
+        $searchModel = new LinhasFaturasSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams, $id);
+        $faturas = Faturas::find()->where(['id' => $id])->one();
+        $pagamento = Pagamentos::find()->where(['fatura_id' => $id])->one();
+        $empresa = Empresa::find()->one();
+        $cliente = ClientesForm::find()->where(['user_id' => $user_id])->one();
+        $linhasFaturas = LinhasFaturas::find()->where(['fatura_id' => $id])->all();
+
+        return $this->render('viewfatura', [
+            'empresa' => $empresa,
+            'model' => $this->findModel($id, $user_id),
+            'faturas' => $faturas,
+            'cliente' => $cliente,
+            'pagamento' => $pagamento,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'linhasFaturas' => $linhasFaturas,
+
+        ]);
+    }
     /**
      * Creates a new Faturas model.
      * If creation is successful, the browser will be redirected to the 'view' page.

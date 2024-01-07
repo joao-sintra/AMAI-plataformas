@@ -70,5 +70,34 @@ class FaturasSearch extends Faturas
         return $dataProvider;
     }
 
+    public function searchByUser($params)
+    {
+        $query = Faturas::find()->where(['user_id' => $this->user_id]);
+
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'data' => $this->data,
+            'valortotal' => $this->valortotal,
+            'user_id' => $this->user_id,
+        ]);
+
+        $query->andFilterWhere(['like', 'status', $this->status]);
+
+        return $dataProvider;
+    }
 
 }

@@ -12,14 +12,12 @@ use yii\grid\GridView;
 
 $this->title = 'Faturas';
 $this->params['breadcrumbs'][] = $this->title;
-?>
+?><br><br><br>
 <div class="faturas-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>Faturas</h1>
 
-    <p>
-        <?= Html::a('Create Faturas', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -36,6 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_id',
             [
                 'class' => ActionColumn::className(),
+                'template' => '{view}', // Keep only the "view" button
+
                 'urlCreator' => function ($action, Faturas $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id, 'user_id' => $model->user_id]);
                  }

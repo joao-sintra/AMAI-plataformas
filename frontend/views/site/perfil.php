@@ -12,6 +12,7 @@ use yii\jui\DatePicker;
 /** @var bool $userDataEditMode */
 /** @var bool $userMoradaDataEditMode */
 
+$this->title = 'Perfil';
 
 $baseUrl = "../img/";
 
@@ -217,10 +218,14 @@ $imageUrl = $baseUrl . $imageFilename;
                                     <?php else: ?>
                                         <?= Html::a('Alterar Password', ['site/perfil', 'editPassword' => 'true'], ['class' => 'btn btn-primary']) ?>
                                     <?php endif; ?>
+
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
+                    <?= Html::a('Ver Faturas', ['faturas/index'], ['class' => 'btn btn-secondary']) ?>
                     <!-- End of Password Section -->
                 </div>
             </div>

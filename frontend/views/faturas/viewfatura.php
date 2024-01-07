@@ -192,7 +192,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <p>
 
-    <?= Html::a('Voltar', ['faturas/index'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a('Voltar', ['site/index'], ['class' => 'btn btn-success']) ?>
 </p>
 </div>
 <!-- /.row -->

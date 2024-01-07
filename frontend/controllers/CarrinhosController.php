@@ -227,7 +227,7 @@ class CarrinhosController extends Controller
             $model->metodo_envio = $this->request->post('Carrinhos')['metodo_envio'];
             $model->save();
 
-            return $this->redirect(['faturas/view', 'id' => $pagamento->fatura_id, 'user_id' => Yii::$app->user->id]);
+            return $this->redirect(['faturas/viewfatura', 'id' => $pagamento->fatura_id, 'user_id' => Yii::$app->user->id]);
 
         }
 

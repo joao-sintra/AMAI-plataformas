@@ -10,6 +10,8 @@ use yii\widgets\LinkPager;
 /** @var common\models\Produtos $produtos */
 /** @var common\models\ProdutosSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
+$this->title = 'Loja';
+
 ?>
 
 <!-- Fruits Shop Start-->
