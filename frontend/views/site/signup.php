@@ -2,12 +2,14 @@
 
 /** @var yii\web\View $this */
 /** @var yii\bootstrap5\ActiveForm $form */
+
 /** @var frontend\models\SignupForm $model */
 
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use yii\jui\DatePicker;
 use yii\web\JqueryAsset;
+use yii\web\JsExpression;
 use yii\web\YiiAsset;
 use yii\jui\JuiAsset;
 
@@ -37,12 +39,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <?= $form->field($model, 'apelido')->label('Apelido')->textInput() ?>
 
+                        <?php $dataAtual = date('Y-m-d'); ?>
+
                         <?= $form->field($model, 'dtanasc')->label('Data de Nascimento')->widget(DatePicker::class, [
                             'language' => 'pt',
                             'dateFormat' => 'yyyy-MM-dd',
                             'options' => ['class' => 'form-control'],
-                        ])  ?>
-
+                            'clientOptions' => [
+                                'minDate' => new JsExpression('new Date("1924-01-01")'), // Start date
+                                'maxDate' => new JsExpression("new Date('$dataAtual')"), // End date
+                            ],
+                        ]) ?>
                         <?= $form->field($model, 'email') ?>
 
                         <?= $form->field($model, 'password')->passwordInput() ?>

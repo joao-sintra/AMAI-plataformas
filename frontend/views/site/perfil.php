@@ -1,5 +1,6 @@
 <?php
 
+use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\jui\DatePicker;
@@ -41,7 +42,8 @@ $imageUrl = $baseUrl . $imageFilename;
                         <div class="card">
                             <div class="card-body d-flex align-items-center position-relative">
                                 <div class="col-md-5">
-                                    <img src="<?php echo $imageUrl; ?>" alt="Profile Image" class="img-fluid rounded-circle mb-3 mb-md-0">
+                                    <img src="<?php echo $imageUrl; ?>" alt="Profile Image"
+                                         class="img-fluid rounded-circle mb-3 mb-md-0">
                                 </div>
                                 <div class="vertical-bar"></div>
                                 <div class="col-md-7 ps-md-4">
@@ -77,6 +79,7 @@ $imageUrl = $baseUrl . $imageFilename;
                                         ['prompt' => 'Selecione o seu género']
                                     )->label('Género') ?>
                                         <br>
+                                        <?php $dataAtual = date('Y-m-d'); ?>
                                         <?= $form->field($userDataAdditional, 'dtanasc')->widget(DatePicker::class, [
                                         'language' => 'pt',
                                         'dateFormat' => 'yyyy-MM-dd',
@@ -86,10 +89,13 @@ $imageUrl = $baseUrl . $imageFilename;
                                         ],
                                         'clientOptions' => [
                                             'beforeShow' => new \yii\web\JsExpression('
+                                            
                                                 function(input, inst) {
                                                     $(input).attr("placeholder", "Introduza a sua data de nascimento");
                                                 }
                                             '),
+                                            'minDate' => new JsExpression('new Date("1924-01-01")'), // Start date
+                                            'maxDate' => new JsExpression("new Date('$dataAtual')"), // End date
                                         ],
                                     ])->label('Data de Nascimento') ?>
                                         <br>
@@ -109,7 +115,8 @@ $imageUrl = $baseUrl . $imageFilename;
                                         $generoLabel = ($userDataAdditional->genero === 'M') ? 'Masculino' : 'Feminino';
                                         ?>
                                         <p><b>Género:</b> <?= Html::encode($generoLabel) ?></p>
-                                        <p><b>Data de Nascimento:</b> <?= Html::encode($userDataAdditional->dtanasc) ?></p>
+                                        <p><b>Data de Nascimento:</b> <?= Html::encode($userDataAdditional->dtanasc) ?>
+                                        </p>
                                         <?php if (!$userDataEditMode): ?>
                                             <?= Html::a('Editar Dados', ['site/perfil', 'editUserData' => 'true'], ['class' => 'btn btn-primary']) ?>
                                         <?php endif; ?>
@@ -157,7 +164,8 @@ $imageUrl = $baseUrl . $imageFilename;
                                     <?php else: ?>
                                         <p><b>Rua:</b> <?= Html::encode($userDataAdditional->rua) ?></p>
                                         <p><b>Localidade:</b> <?= Html::encode($userDataAdditional->localidade) ?></p>
-                                        <p><b>Código Postal:</b> <?= Html::encode($userDataAdditional->codigopostal) ?></p>
+                                        <p><b>Código Postal:</b> <?= Html::encode($userDataAdditional->codigopostal) ?>
+                                        </p>
                                         <?php if (!$userMoradaDataEditMode): ?>
                                             <?= Html::a('Editar Dados', ['site/perfil', 'editUserMoradaData' => 'true'], ['class' => 'btn btn-primary']) ?>
                                         <?php endif; ?>

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use Carbon\Carbon;
 use common\models\Avaliacoes;
 use common\models\CategoriasProdutos;
 use common\models\Produtos;
@@ -21,7 +22,9 @@ class ProdutosController extends \yii\web\Controller
         $categorias = CategoriasProdutos::find()->all();
         $searchModel = new ProdutosSearch();
         $searchModel->search = $search;
-        $avaliacoes = new Avaliacoes();
+
+        $avaliacoesModel = new Avaliacoes();
+        $avaliacoes = Avaliacoes::find()->where(['produto_id' => $id])->all();
 
 
         //Encontrar os produtos com o id recebido
@@ -45,6 +48,7 @@ class ProdutosController extends \yii\web\Controller
             'searchModel' => $searchModel,
             'categorias' => $categorias,
             'avaliacoes' => $avaliacoes,
+            'avaliacoesModel' => $avaliacoesModel,
         ]);
     }
 
@@ -56,5 +60,31 @@ class ProdutosController extends \yii\web\Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function actionCreateavaliacoes()
+    {
+        $avaliacoesModel = new Avaliacoes();
+
+        if ($this->request->isPost) {
+            if ($avaliacoesModel->load($this->request->post())) {
+
+
+                $avaliacoesModel->produto_id = Yii::$app->request->post('Avaliacoes')['produto_id'];
+                $avaliacoesModel->user_id = Yii::$app->user->id;
+                $avaliacoesModel->dtarating = Carbon::now();
+
+                if ($avaliacoesModel->save()) {
+
+                    Yii::$app->session->setFlash('success', 'Avaliação adicionada com sucesso.');
+                    return $this->redirect(['produtos/view', 'id' => $avaliacoesModel->produto_id]);
+                } else {
+                    Yii::$app->session->setFlash('error', 'Erro ao adicionar a avaliação.');
+                }
+            }
+        }
+
+        return $this->render('view', [
+            'avaliacoesModel' => $avaliacoesModel,
+        ]);
     }
 }
