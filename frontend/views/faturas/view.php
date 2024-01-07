@@ -51,9 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <!-- /.col -->
             <div class="col-sm-4 invoice-col">
-                <?= '<strong>FATURA ' . $model->id . '</strong><br>' . number_format((float)$model->valortotal, 2, '.', ',') . ' EUR<br>Data de emissão ' .
-
-                Carbon::parse($model->data)->format('Y/m/d') ?>
+                <?= '<strong>FATURA ' . $model->id . '</strong><br>' . '<b>Total pago: </b>' .number_format((float)$model->valortotal, 2, '.', ',') .
+                ' EUR<br><b>Data de emissão: </b>' . Carbon::parse($model->data)->format('Y/m/d') ?>
 
 
             </div>

@@ -1,12 +1,7 @@
 <?php
 
-use common\models\ClientesForm;
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 use yii\grid\GridView;
-use yii\helpers\Url;
-use common\models\Faturas;
-use yii\grid\ActionColumn;
 use Carbon\Carbon;
 
 
@@ -51,11 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <!-- /.col -->
             <div class="col-sm-4 invoice-col">
-                <?= '<strong>FATURA ' . $model->id . '</strong><br>' . number_format((float)$model->valortotal, 2, '.', ',') . ' EUR<br>Data de emissão ' .
-
-                Carbon::parse($model->data)->format('Y/m/d') ?>
-
-
+                <?= '<strong>FATURA ' . $model->id . '</strong><br>' . '<b>Total pago: </b>' .number_format((float)$model->valortotal, 2, '.', ',') .
+                ' EUR<br><b>Data de emissão: </b>' . Carbon::parse($model->data)->format('Y/m/d') ?>
             </div>
             <!-- /.col -->
         </div>
@@ -111,7 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'attribute' => 'total',
                                 'label' => 'Total',
                                 'value' => function ($model) {
-                                    return number_format((float)$model->produtosCarrinhos->subtotal, 2, '.', ',');;
+                                    return number_format((float)$model->produtosCarrinhos->subtotal, 2, '.', ',');
                                 },
                             ],
 
