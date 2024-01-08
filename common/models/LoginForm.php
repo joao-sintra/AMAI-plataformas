@@ -26,6 +26,10 @@ class LoginForm extends Model
             // username and password are both required
             [['username'], 'required', 'message' => 'O Username é obrigatório.'],
             [['password'], 'required', 'message' => 'A Password é obrigatória.'],
+
+            [['username'], 'required', 'message'=>'O Username é obrigatório.'],
+            [['password'], 'required', 'message'=>'A Password é obrigatória.'],
+
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
