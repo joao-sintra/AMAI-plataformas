@@ -142,7 +142,7 @@ $imageFilenames = array("bolos.jpg", "sobremesas.jpg");
                         </li>
                         <li class="nav-item">
                             <a class="d-flex py-2 m-2 bg-light rounded-pill"
-                               href="<?= Url::to(['site/index', 'categoria' => 'Bolo']) ?>">
+                               href="<?= Url::to(['site/index', 'categoria' => 'Bolos']) ?>">
                                 <span class="text-dark" style="width: 130px;">Bolos</span>
                             </a>
                         </li>
@@ -172,10 +172,10 @@ $imageFilenames = array("bolos.jpg", "sobremesas.jpg");
                     <div class="col-md-6 col-lg-4 col-xl-3"
                          onclick="window.location='<?= Url::to(['produtos/view', 'id' => $produto->id]) ?>';">
                         <div class="rounded position-relative fruite-item hover-pointer">
-                            <?php if (!empty($model->imagens)) : ?>
+                            <?php if (!empty($produto->imagens)) : ?>
                                 <td>
                                     <?= Html::img(
-                                        Url::to('@web/public/imagens/produtos/' . $model->imagens[0]->fileName),
+                                        Url::to('@web/public/imagens/produtos/' . $produto->imagens[0]->fileName),
                                         ['class' => 'img-fluid w-100 rounded-top']
                                     ) ?>
                                 </td>
