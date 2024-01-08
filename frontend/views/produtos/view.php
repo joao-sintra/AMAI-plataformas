@@ -84,8 +84,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 $media += $avaliacao->rating;
 
                             endforeach;
-                            if($avaliacoes != null)
-                            $media = $media / $soma;
+                            if ($avaliacoes != null)
+                                $media = $media / $soma;
                             ?>
 
                             <?php for ($i = 1; $i <= 5; $i++): ?>
