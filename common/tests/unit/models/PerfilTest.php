@@ -30,7 +30,7 @@ class PerfilTest extends \Codeception\Test\Unit
 
     public function testCreatePerfilUnsuccessfully()
     {
-        $user1 = $this->tester->grabFixture('user', 'user1');
+        $user1 = $this->tester->grabFixture('user', 'admin');
         $model = new ClientesForm();
         $model->user_id = $user1->id;
         $model->telefone = '123456789999';
@@ -62,7 +62,7 @@ class PerfilTest extends \Codeception\Test\Unit
     }
     public function testCreatePerfilSuccessfully()
     {
-        $user1 = $this->tester->grabFixture('user', 'user1');
+        $user1 = $this->tester->grabFixture('user', 'admin');
         $model = new ClientesForm();
         $model->user_id = $user1->id;
         $this->assertTrue($model->validate(['user_id']));
@@ -93,7 +93,7 @@ class PerfilTest extends \Codeception\Test\Unit
 
     public function testUpdatePerfil()
     {
-        $user1 = $this->tester->grabFixture('user', 'user1');
+        $user1 = $this->tester->grabFixture('user', 'admin');
 
         $model = new ClientesForm();
         $model->user_id = $user1->id;
@@ -122,7 +122,7 @@ class PerfilTest extends \Codeception\Test\Unit
 
     public function testDeletePerfil()
     {
-        $user1 = $this->tester->grabFixture('user', 'user1');
+        $user1 = $this->tester->grabFixture('user', 'admin');
 
         $model = new ClientesForm();
         $model->user_id = $user1->id;
