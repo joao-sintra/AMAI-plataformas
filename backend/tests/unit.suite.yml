@@ -1,2 +1,7 @@
 suite_namespace: backend\tests\unit
+suite_class: UnitTester
 actor: UnitTester
+modules:
+  enabled:
+    - Yii2:
+        part: [orm, email, fixtures]
