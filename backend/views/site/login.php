@@ -20,6 +20,7 @@ use yii\helpers\Html;
                     <?php $form = \yii\bootstrap4\ActiveForm::begin(['id' => 'login-form']) ?>
 
                     <?= $form->field($model, 'username', [
+
                         'options' => ['class' => 'form-group has-feedback'],
                         'inputTemplate' => '{input}<div class="input-group-append"><div class="py-2"><span class="fas fa-envelope"></span></div></div>',
                         'template' => '{beginWrapper}{input}{error}{endWrapper}',
@@ -40,7 +41,10 @@ use yii\helpers\Html;
                     <div class="row py-5">
 
                         <div class="col-12">
-                            <?= Html::submitButton('Login', ['class' => 'btn btn-primary w-100']) ?>
+                            <?= Html::submitButton('Login', [
+                                'class' => 'btn btn-primary w-100',
+                                'id' => 'login-button'
+                            ]) ?>
                         </div>
                     </div>
 

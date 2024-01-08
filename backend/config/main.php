@@ -39,11 +39,12 @@ return [
             'errorAction' => 'site/error',
         ],
 
-
-      /* 'urlManager' => [
-            'enablePrettyUrl' => false,
+        /*'urlManager' => [
+            'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'site/login' => 'site/login',
+                'produtos/_form' => 'produtos'// This defines the named route for login
             ],
         ],*/
         'urlManagerFrontend' => [
