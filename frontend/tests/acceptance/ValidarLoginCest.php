@@ -9,17 +9,17 @@ class ValidarLoginCest
 {
     public function _before(AcceptanceTester $I)
     {
-        $I->amOnPage('/amai/frontend/web/index.php?r=site%2Flogin');
+        $I->amOnPage('/AMAI-plataformas/frontend/web/index.php?r=site%2Flogin');
     }
 
     // Test login with valid credentials
     public function loginWithValidCredentials(AcceptanceTester $I)
     {
-        $I->fillField('input[name="LoginForm[username]"]', 'tiago');
-        $I->fillField('input[name="LoginForm[password]"]', 'tiago123');
+        $I->fillField('input[name="LoginForm[username]"]', 'pauloDV');
+        $I->fillField('input[name="LoginForm[password]"]', '123123123');
         $I->click('Login', '#login-button');
 
-        $I->see('Logout (tiago)'); // Change this to the expected greeting message after successful login
+        $I->see('Logout (pauloDV)'); // Change this to the expected greeting message after successful login
     }
 
     // Test login with invalid credentials
@@ -29,6 +29,6 @@ class ValidarLoginCest
         $I->fillField('input[name="LoginForm[password]"]', 'wrong_password');
         $I->click('Login', '#login-button');
 
-        $I->see('Dados Incorretos.'); // Change this to the expected error message for invalid credentials
+        $I->see('Username ou password incorretos.'); // Change this to the expected error message for invalid credentials
     }
 }
