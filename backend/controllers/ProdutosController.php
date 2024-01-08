@@ -2,7 +2,6 @@
 
 namespace backend\controllers;
 
-use app\models\UploadForm;
 use common\models\Produtos;
 use common\models\ProdutosSearch;
 use Yii;

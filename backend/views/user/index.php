@@ -18,13 +18,14 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-index">
 
     <p>
-        <?= Html::a('Criar Trabalhador <i class="fas fa-plus"></i>', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Trabalhador <i class="fas fa-plus"></i>', ['create'], ['id' => 'criar-trabalhador', 'class' => 'btn btn-success']) ?>
     </p>
 
         <?php /*$this->render('_search', ['model' => $searchModel]); */?>
 
     <?=
      GridView::widget([
+        'id' => 'trabalhadores-grid',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
 
@@ -58,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, User $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                 },
             ],
         ],
 
