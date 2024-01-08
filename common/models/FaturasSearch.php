@@ -11,6 +11,7 @@ use yii\data\ActiveDataProvider;
  */
 class FaturasSearch extends Faturas
 {
+    public $nomeCliente;
     /**
      * {@inheritdoc}
      */
@@ -18,7 +19,7 @@ class FaturasSearch extends Faturas
     {
         return [
             [['id', 'user_id'], 'integer'],
-            [['data', 'status'], 'safe'],
+            [['data', 'status', 'nomeCliente'], 'safe'],
             [['valortotal'], 'number'],
 
         ];
@@ -42,7 +43,7 @@ class FaturasSearch extends Faturas
      */
     public function search($params)
     {
-        $query = Faturas::find();
+        $query = Faturas::find()->joinWith('user');
 
 
         $dataProvider = new ActiveDataProvider([
@@ -65,8 +66,8 @@ class FaturasSearch extends Faturas
             'user_id' => $this->user_id,
         ]);
 
-        $query->andFilterWhere(['like', 'status', $this->status]);
-
+        //$query->andFilterWhere(['like', 'status', $this->status]);
+        $query->andFilterWhere(['like', 'user.username', $this->nomeCliente]);
         return $dataProvider;
     }
 

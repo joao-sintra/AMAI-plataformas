@@ -56,6 +56,7 @@ class FaturasController extends Controller
     public function actionIndex()
     {
         $searchModel = new FaturasSearch();
+
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [

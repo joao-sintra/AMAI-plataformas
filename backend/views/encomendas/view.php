@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Encomendas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div id="faturas-view">
+<div id="faturas-view" class="container-fluid">
 
     <div class="row invoice-info">
         <div class="col-sm-4 invoice-col">
@@ -135,7 +135,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php
                         $subtotal = 0;
                         foreach ($linhasFaturas as $linhaFatura)
-                            $subtotal += $linhaFatura->produtosCarrinhos->preco_venda;
+                            $subtotal += $linhaFatura->produtosCarrinhos->preco_venda*$linhaFatura->produtosCarrinhos->quantidade;
 
                         echo '<td>' . number_format((float)$subtotal, 2, ',', ',') . ' €' . '</td>'
                         ?>
@@ -145,7 +145,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php
                         $iva = 0;
                         foreach ($linhasFaturas as $linhaFatura)
-                            $iva += $linhaFatura->produtosCarrinhos->valor_iva;
+                            $iva += $linhaFatura->produtosCarrinhos->valor_iva*$linhaFatura->produtosCarrinhos->quantidade;
 
                         echo '<td>' . number_format((float)$iva, 2, ',', ',') . ' €' . '</td>'
                         ?>
@@ -175,6 +175,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+
 <!-- /.row -->
 
 <!-- this row will not appear when printing -->

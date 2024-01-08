@@ -40,10 +40,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
             /*'user_id',*/
             [
+
                     'label' => 'Cliente',
-                'attribute' => 'user_id',
+                'attribute' => 'nomeCliente',
                 'value' => 'user.username',
             ],
+
             [
                 'class' => ActionColumn::className(),
                 'template' => '{view} {update}',

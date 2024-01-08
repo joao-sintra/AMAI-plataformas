@@ -5,11 +5,14 @@ namespace backend\controllers;
 use backend\models\UserForm;
 use common\models\ClientesForm;
 use common\models\ClientesFormSearch;
+use common\models\Faturas;
 use common\models\User;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
+
 
 /**
  * ClientesController implements the CRUD actions for ClientesForm model.
@@ -122,7 +125,18 @@ class ClientesController extends Controller
      */
     public function actionDelete($id, $user_id)
     {
-        $this->findModel($id, $user_id)->delete();
+        $modelo = $this->findModel($id, $user_id);
+        $faturas = Faturas::findOne(['user_id' => $user_id]);
+
+        if (!empty($faturas)) {
+            // User has faturas
+            Yii::$app->session->setFlash('error', 'Erro ao eliminar o cliente, tem faturas associadas.');
+        } else {
+            // User does not have faturas
+            echo "User does not have faturas.";
+            $modelo->delete();
+        }
+
 
         return $this->redirect(['index']);
     }
