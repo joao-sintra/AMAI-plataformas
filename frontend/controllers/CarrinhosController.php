@@ -16,6 +16,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
 use Carbon\Carbon;
+
 /**
  * CarrinhosController implements the CRUD actions for Carrinhos model.
  */
@@ -191,7 +192,7 @@ class CarrinhosController extends Controller
         $produtoCarrinhoProduto = ProdutosCarrinhos::find()->where(['carrinho_id' => $model->id])->all();
 
         if ($this->request->isPost) {
-            if(!$userDataAdditional->validate()){
+            if (!$userDataAdditional->validate()) {
                 $errorMessages = '';
                 foreach ($userDataAdditional->errors as $attributeErrors) {
                     foreach ($attributeErrors as $errorMessage) {
@@ -200,36 +201,44 @@ class CarrinhosController extends Controller
                 }
 
                 Yii::$app->session->setFlash('error', 'Erro nos dados do utilizador: <br>' . $errorMessages);
+
+                return $this->render('checkout', [
+                    'model' => $model,
+                    'userDataAdditional' => $userDataAdditional,
+                    'pagamento' => $pagamento,
+
+
+                ]);
+            }
+                $fatura->data = Carbon::now();
+                $fatura->valortotal = $model->valortotal;
+                $fatura->status = 'Paga';
+                $fatura->user_id = Yii::$app->user->id;
+                $fatura->save();
+
+                $pagamento->valor = $model->valortotal;
+                $pagamento->data = Carbon::now();
+                $pagamento->fatura_id = $fatura->id;
+                $pagamento->metodopag = $this->request->post('Pagamentos')['metodopag'];
+                $pagamento->save();
+
+                foreach ($produtoCarrinhoProduto as $produtoCarrinho) {
+                    $linhaFatura = new LinhasFaturas();
+                    $linhaFatura->fatura_id = $fatura->id;
+                    $linhaFatura->produtos_carrinhos_id = $produtoCarrinho->id;
+                    $linhaFatura->save();
+                }
+
+                $model->status = 'Pago';
+                $model->dtapedido = Carbon::now();
+                $model->metodo_envio = $this->request->post('Carrinhos')['metodo_envio'];
+                $model->save();
+
+                return $this->redirect(['faturas/viewfatura', 'id' => $pagamento->fatura_id, 'user_id' => Yii::$app->user->id]);
             }
 
 
-            $fatura->data = Carbon::now();
-            $fatura->valortotal = $model->valortotal;
-            $fatura->status = 'Paga';
-            $fatura->user_id = Yii::$app->user->id;
-            $fatura->save();
 
-            $pagamento->valor = $model->valortotal;
-            $pagamento->data = Carbon::now();
-            $pagamento->fatura_id = $fatura->id;
-            $pagamento->metodopag = $this->request->post('Pagamentos')['metodopag'];
-            $pagamento->save();
-
-            foreach ($produtoCarrinhoProduto as $produtoCarrinho) {
-                $linhaFatura = new LinhasFaturas();
-                $linhaFatura->fatura_id = $fatura->id;
-                $linhaFatura->produtos_carrinhos_id = $produtoCarrinho->id;
-                $linhaFatura->save();
-            }
-
-            $model->status = 'Pago';
-            $model->dtapedido = Carbon::now();
-            $model->metodo_envio = $this->request->post('Carrinhos')['metodo_envio'];
-            $model->save();
-
-            return $this->redirect(['faturas/viewfatura', 'id' => $pagamento->fatura_id, 'user_id' => Yii::$app->user->id]);
-
-        }
 
         return $this->render('checkout', [
             'model' => $model,
@@ -254,13 +263,11 @@ class CarrinhosController extends Controller
 
             if ($userDataAdditional->save()) {
                 Yii::$app->session->setFlash('success', 'Dados atualizados com sucesso!');
-                return $this->render('checkout', [
 
-                    'userDataAdditional' => $userDataAdditional,
-                    'model' => $model,
-                    'pagamento' => $pagamento,
-
-                ]);
+                return $this->redirect(['checkout',
+                    'id' => $model->id,
+                    'user_id' => $model->user_id,]
+                );
             } else {
                 Yii::$app->session->setFlash('error', 'Erro ao atualizar os dados.');
             }
