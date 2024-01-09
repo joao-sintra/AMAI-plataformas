@@ -43,7 +43,7 @@ class ClientesForm extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['primeironome', 'apelido', /*'codigopostal', 'localidade', 'rua', 'nif',*/ 'dtanasc', 'dtaregisto', /*'telefone',*/ 'genero', 'user_id'], 'required'
+            [['primeironome', 'apelido','dtanasc', 'dtaregisto','genero', 'user_id'], 'required'
                 ,'message'=>'Este campo é obrigatório'],
             [['primeironome', 'apelido'], 'string', 'max' => 50],
             [['dtanasc', 'dtaregisto'], 'safe'],
@@ -58,7 +58,7 @@ class ClientesForm extends \yii\db\ActiveRecord
             [['telefone'], 'match', 'pattern' => '/^\d+$/i', 'message' => 'Só são aceites números .'],
             [['user_id'], 'integer'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
-            [['rua', 'codigopostal', 'localidade', 'telefone', 'nif','primeironome','apelido'], 'required', 'on' => self::SCENARIO_USERDATA],
+            [['rua', 'codigopostal', 'localidade', 'telefone', 'nif','primeironome','apelido'], 'required', 'message'=> 'Este campo é obrigatorio', 'on' => self::SCENARIO_USERDATA],
 
 
 

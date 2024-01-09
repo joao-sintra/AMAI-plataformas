@@ -31,7 +31,7 @@ class Pagamentos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['metodopag', 'valor', 'data', 'fatura_id'], 'required'],
+            [['metodopag', 'valor', 'data', 'fatura_id'], 'required', 'message' => 'Este campo é obrigatório!'],
             [['valor'], 'number'],
             [['data'], 'safe'],
             [['fatura_id'], 'integer'],
