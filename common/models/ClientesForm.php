@@ -60,6 +60,13 @@ class ClientesForm extends \yii\db\ActiveRecord
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
             [['rua', 'codigopostal', 'localidade', 'telefone', 'nif','primeironome','apelido'], 'required', 'on' => self::SCENARIO_USERDATA],
 
+
+
+
+
+
+
+
         ];
     }
 

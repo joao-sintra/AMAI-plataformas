@@ -40,7 +40,7 @@ class FaturasController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index', 'view', 'update',],
-                            'roles' => ['admin'],
+                            'roles' => ['admin','gestor'],
                         ],
                     ],
                 ],

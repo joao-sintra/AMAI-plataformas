@@ -80,8 +80,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $totalGanho = Faturas::find()->where(['status' => 'Paga'])->sum('valortotal');
-        $totalPedidos = Faturas::find()->where(['status' => 'Paga'])->count();
+        $totalGanho = Faturas::find()->andWhere(['!=', 'status', 'Anulada'])
+            ->sum('valortotal');
+        $totalPedidos = Faturas::find()->andWhere(['!=', 'status', 'Anulada'])->count();
         $totalProdutos = ProdutosCarrinhos::find()->sum('quantidade');
 
         $totalClientes = AuthAssignment::find()->andWhere(['item_name' => 'cliente'])->count();
