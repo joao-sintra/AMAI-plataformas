@@ -33,11 +33,10 @@ class Carrinhos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['dtapedido', 'status', 'valortotal', 'user_id'], 'required'],
+            [['dtapedido', 'status', 'valortotal', 'user_id','metodo_envio'], 'required'],
             [['dtapedido'], 'safe'],
             [['valortotal'], 'number'],
             [['user_id'], 'integer'],
-            [['metodo_envio'], 'required','message' => 'Este campo é obrigatório!'],
             [['metodo_envio'], 'string', 'max' => 45],
             [['status'], 'string', 'max' => 50],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],

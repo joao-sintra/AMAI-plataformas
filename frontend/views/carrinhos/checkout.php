@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 /** @var common\models\Pagamentos $pagamento */
 
 
-$this->title = 'Update Carrinhos: ' . $model->id;
+$this->title = 'Checkout';
 $this->params['breadcrumbs'][] = ['label' => 'Carrinhos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id, 'user_id' => $model->user_id]];
 $this->params['breadcrumbs'][] = 'Update';
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = 'Update';
                     <?= Yii::$app->session->getFlash('error') ?>
                 </div>
             <?php endif; ?>
-            <h1 class="mb-4">Billing details</h1>
+            <h1 class="mb-4">Detalhes de Faturação</h1>
 
             <div class="row g-4">
                 <div class="col-md-12 col-lg-6 col-xl-6">
