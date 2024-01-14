@@ -4,4 +4,8 @@ bootstrap: false
 modules:
     enabled:
         - Yii2:
-            part: fixtures
+              part: [orm, fixtures]
+        - Db:
+              dsn: 'mysql:host=localhost;dbname=projetoamai_testes'
+              user: root
+              password: ''

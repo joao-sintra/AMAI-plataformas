@@ -1,15 +1,10 @@
 <?php
 
 
-namespace common\tests\Unit\models;
+namespace common\tests\unit;
 
-use backend\tests\UnitTester;
-use Codeception\Test\Unit;
 use common\fixtures\UserFixture;
 use common\models\ClientesForm;
-use common\models\LoginForm;
-use common\models\User;
-use Yii;
 
 class PerfilTest extends \Codeception\Test\Unit
 {
