@@ -12,10 +12,17 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => ['api' => [
+        'class' => 'backend\modules\api\ModuleAPI',
+        
+    ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -39,14 +46,133 @@ return [
             'errorAction' => 'site/error',
         ],
 
-        /*'urlManager' => [
+        'urlManager' => [
             'enablePrettyUrl' => true,
+            'enableStrictParsing' => false,
             'showScriptName' => false,
             'rules' => [
-                'site/login' => 'site/login',
-                'produtos/_form' => 'produtos'// This defines the named route for login
+                //USERS
+                ['class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/users',
+                    'extraPatterns' => [
+                        'GET {username}/dados' => 'dados',
+                        'GET {id}' => 'getuserbyid',
+
+                        'POST {id}/criar' => 'criarperfildados',
+                    
+
+
+                    ],
+                    'tokens' => [
+                        '{id}' => '<id:\\d+>',
+                        '{username}' => '<username:\\w+>',
+                    ],
+                ],
+                //AVALIACOES
+                ['class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/avaliacoes',
+                    'extraPatterns' => [
+                        'GET {id}/produto' => 'avaliacoesbyprodutos',
+                        'GET {id}/user' => 'avaliacoesbyuser',
+                        'GET {id}/dados' => 'avaliacaobyid',
+
+                        'POST criar' => 'postavaliacao',
+                        'DELETE {id}/delete' => 'deleteavaliacao',
+                        'PUT {id}/update' => 'updateavaliacao',
+
+
+                    ],
+                    'tokens' => [
+                        '{id}' => '<id:\\d+>',
+                    ],
+                ],
+                //PRODUTOS
+                ['class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/produtos',
+                    'extraPatterns' => [
+                        'GET {id}/dados' => 'dados',
+                        'GET all' => 'allprodutos',
+
+                    ],
+                    'tokens' => [
+                        '{id}' => '<id:\\d+>',
+                    ],
+                ],
+                //CARRINHOS
+                ['class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/carrinhos',
+                    'extraPatterns' => [
+
+                        'GET {user_id}/dados' => 'dados',
+                        'POST criar' => 'postcarrinho',
+                        'PUT {id}/update' => 'updatecarrinho',
+
+
+                    ],
+                    'tokens' => [
+                        '{user_id}' => '<user_id:\\d+>',
+                        '{nome}' => '<nome:\\w+>',
+                        '{nome_categoria}' => '<nome_categoria:\\w+>',
+                        '{id}' => '<id:\\d+>',
+
+                    ],
+                ],
+                //PRODUTOS CARRINHOS
+                ['class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/produtoscarrinhos',
+                    'extraPatterns' => [
+
+                        'GET {carrinho_id}/dados' => 'dados',
+                        'POST criar' => 'postprodutocarrinho',
+                        'PUT {id}/update' => 'updateprodutocarrinho',
+                        'DELETE {id}/delete' => 'deleteprodutocarrinho',
+
+                    ],
+                    'tokens' => [
+                        '{id}' => '<id:\\d+>',
+                        '{carrinho_id}' => '<carrinho_id:\\d+>',
+                    ],
+                ],
+                //FATURAS
+                ['class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/faturas',
+                    'extraPatterns' => [
+
+                        'GET {id}/dados' => 'dados',
+                        'GET {user_id}/user' => 'dadosbyuser',
+                        'POST criar' => 'criar',
+
+
+                    ],
+                    'tokens' => [
+                        '{id}' => '<id:\\d+>',
+                        '{user_id}' => '<user_id:\\d+>',
+                    ],
+                ],
+                //AUTH
+                ['class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/auth',
+                    'extraPatterns' => [
+                        'POST login' => 'login',
+                        'POST register' => 'register',
+
+                    ],
+                ],
+                ['class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/pagamentos',
+                    'extraPatterns' => [
+
+                        'GET {id}/dados' => 'dados',
+                        'POST criar' => 'criar',
+
+                    ],
+                    'tokens' => [
+                        '{id}' => '<id:\\d+>',
+                    ],
+                ],
+
             ],
-        ],*/
+        ],
         'urlManagerFrontend' => [
             'class' => 'yii\web\urlManager',
             'baseUrl' => 'http://localhost/amai/frontend/web/',

@@ -117,4 +117,13 @@ class Produtos extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ProdutosCarrinhos::class, ['produto_id' => 'id']);
     }
+    public $ivaModelClass = 'common\models\Ivas';
+    public function getPrecoComIva($produto)
+    {
+        $ivaModel = new $this->ivaModelClass;
+        $iva = $ivaModel::find()->where(['id' => $produto->iva_id])->one();
+
+        return $produto->preco * ($iva->percentagem / 100) + $produto->preco;
+    }
+
 }
