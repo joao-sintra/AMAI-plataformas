@@ -1,10 +1,10 @@
 <?php
 
-namespace common\tests\unit\models;
+namespace common\tests\unit;
 
-use Yii;
-use common\models\LoginForm;
 use common\fixtures\UserFixture;
+use common\models\LoginForm;
+use Yii;
 
 /**
  * AcceptanceTester form test
