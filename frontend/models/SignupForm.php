@@ -91,7 +91,7 @@ class SignupForm extends Model
             return null;
         }
 
-// Add validation for date of birth not exceeding current date
+        // Add validation for date of birth not exceeding current date
         $currentDate = date('Y-m-d'); // Get current date
         if (strtotime($this->dtanasc) > strtotime($currentDate)) {
             $this->addError('dtanasc', 'Data de nascimento não pode ser superior à data atual.');

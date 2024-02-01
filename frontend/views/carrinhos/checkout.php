@@ -52,13 +52,13 @@ $this->params['breadcrumbs'][] = 'Update';
                     <div class="row">
                         <div class="col-md-12 col-lg-6">
                             <div class="form-item w-100">
-                                <?= $form->field($userDataAdditional, 'primeironome')->textInput(['value' => $userDataAdditional->primeironome, 'placeholder' => 'Introduza o seu nome'])->label('Nome') ?>
+                                <?= $form->field($userDataAdditional, 'primeironome')->textInput(['value' => $userDataAdditional->primeironome, 'placeholder' => 'Insira o seu nome'])->label('Nome') ?>
                             </div>
                         </div>
 
                         <div class="col-md-12 col-lg-6">
                             <div class="form-item w-100">
-                                <?= $form->field($userDataAdditional, 'apelido')->textInput(['value' => $userDataAdditional->apelido, 'placeholder' => 'Introduza o seu apelido'])->label('Apelido') ?>
+                                <?= $form->field($userDataAdditional, 'apelido')->textInput(['value' => $userDataAdditional->apelido, 'placeholder' => 'Insira o seu apelido'])->label('Apelido') ?>
 
                             </div>
                         </div>
@@ -66,27 +66,27 @@ $this->params['breadcrumbs'][] = 'Update';
                     </div>
                     <br>
                     <div class="form-item">
-                        <?= $form->field($userDataAdditional, 'rua')->textInput(['value' => $userDataAdditional->rua, 'placeholder' => 'Introduza a sua Morada'])->label('Morada') ?>
+                        <?= $form->field($userDataAdditional, 'rua')->textInput(['value' => $userDataAdditional->rua, 'placeholder' => 'Insira a sua Morada'])->label('Morada') ?>
 
                     </div>
                     <br>
                     <div class="form-item">
-                        <?= $form->field($userDataAdditional, 'codigopostal')->textInput(['value' => $userDataAdditional->codigopostal, 'placeholder' => 'Introduza o Código Postal'])->label('Código Postal') ?>
+                        <?= $form->field($userDataAdditional, 'codigopostal')->textInput(['value' => $userDataAdditional->codigopostal, 'placeholder' => 'Insira o Código Postal'])->label('Código Postal') ?>
 
                     </div>
                     <br>
                     <div class="form-item">
-                        <?= $form->field($userDataAdditional, 'localidade')->textInput(['value' => $userDataAdditional->localidade, 'placeholder' => 'Introduza o sua Localidade'])->label('Localidade') ?>
+                        <?= $form->field($userDataAdditional, 'localidade')->textInput(['value' => $userDataAdditional->localidade, 'placeholder' => 'Insira o sua Localidade'])->label('Localidade') ?>
 
                     </div>
                     <br>
                     <div class="form-item">
-                        <?= $form->field($userDataAdditional, 'telefone')->textInput(['value' => $userDataAdditional->telefone, 'placeholder' => 'Introduza o seu número de telemóvel'])->label('Telemóvel') ?>
+                        <?= $form->field($userDataAdditional, 'telefone')->textInput(['value' => $userDataAdditional->telefone, 'placeholder' => 'Insira o seu número de telemóvel'])->label('Telemóvel') ?>
 
                     </div>
                     <br>
                     <div class="form-item">
-                        <?= $form->field($userDataAdditional, 'nif')->textInput(['value' => $userDataAdditional->nif, 'placeholder' => 'Introduza o seu NIF'])->label('NIF') ?>
+                        <?= $form->field($userDataAdditional, 'nif')->textInput(['value' => $userDataAdditional->nif, 'placeholder' => 'Insira o seu NIF'])->label('NIF') ?>
                     </div>
                     <br>
                     <div class="form-item mt-3">

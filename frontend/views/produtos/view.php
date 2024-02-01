@@ -95,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                         <p class="mb-4"><?= $model->descricao ?></p>
                         <?= Html::a(
-                            '<i class="fa fa-shopping-bag me-2 text-primary"></i> Add to Cart',
+                            '<i class="fas fa-shopping-cart me-2 text-primary"></i> ADICIONAR',
                             ['produtos-carrinhos/create', 'produto_id' => $model->id],
                             [
                                 'class' => 'btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary',
@@ -163,14 +163,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <hr>
                                 <?php endforeach; ?>
                             </div>
-                            <div class="tab-pane" id="nav-vision" role="tabpanel">
-                                <p class="text-dark">Tempor erat elitr rebum at clita. Diam
-                                    dolor diam ipsum et tempor sit. Aliqu diam
-                                    amet diam et eos labore. 3</p>
-                                <p class="mb-0">Diam dolor diam ipsum et tempor sit. Aliqu diam
-                                    amet diam et eos labore.
-                                    Clita erat ipsum et lorem et sit</p>
-                            </div>
                         </div>
                     </div>
                     <?php $form = ActiveForm::begin(['action' => [
@@ -201,7 +193,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         ?>
                                     </div>
                                     <?= $form->field($avaliacoesModel, 'rating')->hiddenInput(['id' => 'avaliacoes'])->label(false) ?>
-                                    <?= Html::submitButton('Postar Avaliação', [
+                                    <?= Html::submitButton('Avaliar', [
                                         'class' => 'btn border border-secondary text-primary rounded-pill px-4 py-3',
                                         'name' => 'post-comment-button',
                                     ]) ?>
@@ -255,12 +247,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         <ul class="list-unstyled fruite-categorie">
                             <?php foreach ($categorias as $categoria) : ?>
                                 <li>
-                                    <div class="d-flex justify-content-between cake-name">
+                                    <div class="d-flex justify-content-between fruite-name">
                                         <?= Html::a(
 
                                             '<i class="fas fa-cookie me-1"></i>' . Html::encode($categoria->nome),
                                             ['site/shop', 'categoria' => $categoria->id],
-                                            ['encode' => false] // Allow HTML encoding
+                                            ['encode' => false]
                                         ) ?>
                                         <span>(<?= $categoria->getProdutos()->count() ?>)</span>
                                     </div>

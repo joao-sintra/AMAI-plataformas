@@ -52,13 +52,13 @@ AppAsset::register($this);
             echo '</a>';
 
             $menuItems = [
-                ['label' => 'Home', 'url' => ['/site/index'],],
+                ['label' => 'Início', 'url' => ['/site/index'],],
                 ['label' => 'Loja', 'url' => ['/site/shop'],],
                 ['label' => 'Carrinho', 'url' => ['/carrinhos/index']],
             ];
 
             if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
+                $menuItems[] = ['label' => 'Registar', 'url' => ['/site/signup']];
             } else {
                 $menuItems[] = ['label' => 'Perfil', 'url' => ['/site/perfil']];
             }
@@ -68,12 +68,12 @@ AppAsset::register($this);
                 'items' => $menuItems,
             ]);
             if (Yii::$app->user->isGuest) {
-                echo Html::tag('div', Html::a('Login', ['/site/login'], ['class' => ['btn btn-link text-decoration-none custom-bg-color']]), ['class' => ['d-flex']]);
+                echo Html::tag('div', Html::a('Iniciar Sessão', ['/site/login'], ['class' => ['btn btn-link text-decoration-none custom-bg-color']]), ['class' => ['d-flex']]);
             } else {
 
                 echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
                     . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        'Terminar Sessão (' . Yii::$app->user->identity->username . ')',
                         ['class' => 'btn btn-link text-decoration-none custom-bg-color'] // Use the custom class here
                     )
                     . Html::endForm();

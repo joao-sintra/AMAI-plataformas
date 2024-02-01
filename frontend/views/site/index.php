@@ -10,7 +10,7 @@ use yii\widgets\LinkPager;
 /** @var common\models\Produtos $produtos */
 /** @var common\models\ProdutosSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
-$this->title = 'Home';
+$this->title = 'Início';
 
 if ($warning = Yii::$app->session->getFlash('warning')) {
     echo '<div class="alert alert-warning">' . Html::encode($warning) . '</div>';
@@ -22,20 +22,22 @@ $baseUrl = "../img/";
 $imageFilenames = array("bolos.jpg", "sobremesas.jpg");
 
 ?>
-
 <!-- Hero Start -->
 <div class="container-fluid py-5 mb-5 hero-header">
+    <?php if (Yii::$app->session->hasFlash('success')): ?>
+        <div class="alert alert-success">
+            <?= Yii::$app->session->getFlash('success') ?>
+        </div>
+    <?php elseif (Yii::$app->session->hasFlash('error')): ?>
+        <div class="alert alert-danger">
+            <?= Yii::$app->session->getFlash('error') ?>
+        </div>
+    <?php endif; ?>
     <div class="container py-5">
         <div class="row g-5 align-items-center">
             <div class="col-md-12 col-lg-7">
                 <h4 class="mb-3 text-secondary">Bolos e Sobremesas 100% Caseiros</h4>
                 <h1 class="mb-5 display-3 text-primary">Bolos & Sobremesas que surpreendem.</h1>
-                <!--<div class="position-relative mx-auto">
-                    <form action="<?php /*= Yii::$app->urlManager->createUrl(['index/shop']) */ ?>" method="get">
-                        <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="text" name="search" placeholder="Pesquisar...">
-                        <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100" style="top: 0; right: 25%;">Procurar</button>
-                    </form>
-                </div>-->
             </div>
             <div class="col-md-12 col-lg-5">
                 <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
@@ -127,7 +129,7 @@ $imageFilenames = array("bolos.jpg", "sobremesas.jpg");
 <!-- Fruits Shop Start-->
 <div class="container-fluid fruite py-5">
     <div class="container py-5">
-        <div class="tab-class text-center">
+        <div class="tab-class">
             <div class="row g-4">
                 <div class="col-lg-4 text-start">
                     <h1>Nossos Produtos</h1>
@@ -198,11 +200,10 @@ $imageFilenames = array("bolos.jpg", "sobremesas.jpg");
 
                                 <div class="mt-auto">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <p class="text-dark fs-5 fw-bold mb-0"><?= Yii::$app->formatter->asCurrency($produto->preco, 'EUR') ?>
-                                            / kg</p>
+                                        <p class="text-dark fs-5 fw-bold mb-0"><?= Yii::$app->formatter->asCurrency($produto->preco, 'EUR') ?></p>
 
                                         <?= Html::a(
-                                            '<i class="fa fa-shopping-bag me-2 text-primary"></i> Add to Cart',
+                                            '<i class="fas fa-shopping-cart me-2 text-primary"></i> ADICIONAR',
                                             ['produtos-carrinhos/create', 'produto_id' => $produto->id],
                                             [
                                                 'class' => 'btn border border-secondary rounded-pill px-2 py-2 text-primary align-self-start',

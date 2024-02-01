@@ -232,7 +232,6 @@ class SiteController extends Controller
         $userMoradaDataEditMode = Yii::$app->request->get('editUserMoradaData') === 'true';
         $passwordEditMode = Yii::$app->request->get('editPassword') === 'true';
 
-
         $passwordModel = new User(['scenario' => User::SCENARIO_PASSWORD]);
 
         // Check if the form is submitted

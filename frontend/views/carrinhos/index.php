@@ -30,17 +30,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     <table class="table">
                         <thead>
                         <?php if (empty($carrinho->produtosCarrinhos)) { ?>
-                            <h2>Carinho Vazio</h2>
+                            <h2>Carrinho Vazio</h2>
                         <?php } ?>
                         <tr>
-
                             <th scope="col" colspan="2">Produto</th>
                             <th scope="col">Descrição</th>
                             <th scope="col">IVA (%)</th>
                             <th scope="col">Preço c/IVA</th>
                             <th scope="col">Quantidade</th>
                             <th scope="col">Total</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -105,7 +104,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
                             <div class="bg-light rounded">
                                 <div class="p-4">
-                                    <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
+                                    <h1 class="display-6 mb-4">Carrinho <span class="fw-normal">Total</span></h1>
                                     <div class="d-flex justify-content-between mb-4">
                                         <h5 class="mb-0 me-4">Subtotal:</h5>
                                         <p class="mb-0"><?= Html::encode($carrinho->valortotal - $iva) . '€' ?></p>

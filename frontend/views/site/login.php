@@ -8,7 +8,7 @@
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Login';
+$this->title = 'Iniciar Sessão';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container-fluid fruite py-5">
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="site-login">
                 <h1><?= Html::encode($this->title) ?></h1>
 
-                <p>Please fill out the following fields to login:</p>
+                <p>Por favor, preencha os seguintes campos para iniciar sessão:</p>
 
                 <div class="row">
                     <div class="col-lg-5">
@@ -29,14 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
                         ?>
                         <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
-                        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                        <?= $form->field($model, 'username')->label('Nome de Utilizador')->textInput([
+                            'autofocus' => true,
+                            'placeholder' => 'Insira o seu nome de utilizador'
+                        ]) ?>
 
-                        <?= $form->field($model, 'password')->passwordInput() ?>
+                        <?= $form->field($model, 'password')->passwordInput()->label('Password')->textInput(['placeholder' => 'Insira a sua password']); ?>
 
                         <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
                         <div class="form-group">
-                            <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button',
+                            <?= Html::submitButton('Iniciar Sessão', ['class' => 'btn btn-primary', 'name' => 'login-button',
                                 'id' => 'login-button'
                             ]) ?>
                         </div>

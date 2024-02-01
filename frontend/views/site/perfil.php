@@ -36,7 +36,10 @@ $imageUrl = $baseUrl . $imageFilename;
                 <?= Yii::$app->session->getFlash('error') ?>
             </div>
         <?php endif; ?>
-        <h1 class="mb-4 mt-5">Perfil</h1>
+        <div style="display: flex; align-items: center;">
+            <h1 class="mb-4 mt-5" style="flex: 1;">Perfil</h1>
+            <?= Html::a('Ver Faturas', ['faturas/index'], ['class' => 'btn btn-success']) ?>
+        </div>
         <div class="row g-4">
             <div class="col-lg-12">
                 <div class="row g-4 justify-content-center">
@@ -62,17 +65,17 @@ $imageUrl = $baseUrl . $imageFilename;
                                             'method' => 'post', // Set the method to post
                                         ]);
                                         ?>
-                                        <?= $form->field($userData, 'username')->textInput(['value' => $userData->username, 'placeholder' => 'Introduza o seu username'])->label('Username') ?>
+                                        <?= $form->field($userData, 'username')->textInput(['value' => $userData->username, 'placeholder' => 'Insira o seu nome de utilizador'])->label('Nome de Utilizador') ?>
                                         <br>
-                                        <?= $form->field($userDataAdditional, 'primeironome')->textInput(['value' => $userDataAdditional->primeironome, 'placeholder' => 'Introduza o seu nome'])->label('Nome') ?>
+                                        <?= $form->field($userDataAdditional, 'primeironome')->textInput(['value' => $userDataAdditional->primeironome, 'placeholder' => 'Insira o seu primeiro nome'])->label('Nome') ?>
                                         <br>
-                                        <?= $form->field($userDataAdditional, 'apelido')->textInput(['value' => $userDataAdditional->apelido, 'placeholder' => 'Introduza o seu apelido'])->label('Apelido') ?>
+                                        <?= $form->field($userDataAdditional, 'apelido')->textInput(['value' => $userDataAdditional->apelido, 'placeholder' => 'Insira o seu apelido'])->label('Apelido') ?>
                                         <br>
-                                        <?= $form->field($userData, 'email')->textInput(['value' => $userData->email, 'placeholder' => 'Introduza o seu email'])->label('Email') ?>
+                                        <?= $form->field($userData, 'email')->textInput(['value' => $userData->email, 'placeholder' => 'Insira o seu email'])->label('Email') ?>
                                         <br>
-                                        <?= $form->field($userDataAdditional, 'telefone')->textInput(['value' => $userDataAdditional->telefone, 'placeholder' => 'Introduza o seu número de telemóvel'])->label('Telemóvel') ?>
+                                        <?= $form->field($userDataAdditional, 'telefone')->textInput(['value' => $userDataAdditional->telefone, 'placeholder' => 'Insira o seu número de telemóvel'])->label('Telemóvel') ?>
                                         <br>
-                                        <?= $form->field($userDataAdditional, 'nif')->textInput(['value' => $userDataAdditional->nif, 'placeholder' => 'Introduza o seu NIF'])->label('NIF') ?>
+                                        <?= $form->field($userDataAdditional, 'nif')->textInput(['value' => $userDataAdditional->nif, 'placeholder' => 'Insira o seu NIF'])->label('NIF') ?>
                                         <br>
                                         <?= $form->field($userDataAdditional, 'genero')->dropDownList(
                                         [
@@ -82,25 +85,28 @@ $imageUrl = $baseUrl . $imageFilename;
                                         ['prompt' => 'Selecione o seu género']
                                     )->label('Género') ?>
                                         <br>
-                                        <?php $dataAtual = date('Y-m-d'); ?>
-                                        <?= $form->field($userDataAdditional, 'dtanasc')->widget(DatePicker::class, [
-                                        'language' => 'pt',
-                                        'dateFormat' => 'yyyy-MM-dd',
-                                        'options' => [
-                                            'class' => 'form-control',
-                                            'placeholder' => 'Introduza a sua data de nascimento',
-                                        ],
-                                        'clientOptions' => [
-                                            'beforeShow' => new \yii\web\JsExpression('
-                                            
-                                                function(input, inst) {
-                                                    $(input).attr("placeholder", "Introduza a sua data de nascimento");
-                                                }
-                                            '),
-                                            'minDate' => new JsExpression('new Date("1924-01-01")'), // Start date
-                                            'maxDate' => new JsExpression("new Date('$dataAtual')"), // End date
-                                        ],
-                                    ])->label('Data de Nascimento') ?>
+                                        <?php
+                                        $minDate = '1920-01-01';
+                                        $maxDate = date('Y-m-d', strtotime('-16 years'));
+
+                                        echo $form->field($userDataAdditional, 'dtanasc')->widget(DatePicker::class, [
+                                            'language' => 'pt',
+                                            'dateFormat' => 'yyyy-MM-dd',
+                                            'options' => [
+                                                'class' => 'form-control',
+                                                'placeholder' => 'Insira a sua data de nascimento',
+                                            ],
+                                            'clientOptions' => [
+                                                'beforeShow' => new \yii\web\JsExpression('
+                                                    function(input, inst) {
+                                                        $(input).attr("placeholder", "Insira a sua data de nascimento");
+                                                    }
+                                                '),
+                                                'minDate' => new JsExpression("new Date('$minDate')"), // Minimum date (fixed)
+                                                'maxDate' => new JsExpression("new Date('$maxDate')"), // Maximum date (16 years ago)
+                                            ],
+                                        ])->label('Data de Nascimento');
+                                        ?>
                                         <br>
                                         <?= Html::submitButton('Atualizar', ['class' => 'btn btn-primary']) ?>
                                         <?php if ($userDataEditMode): ?>
@@ -108,7 +114,7 @@ $imageUrl = $baseUrl . $imageFilename;
                                         <?php endif; ?>
                                         <?php ActiveForm::end(); ?>
                                     <?php else: ?>
-                                        <p><b>Username:</b> <?= Html::encode($userData->username) ?></p>
+                                        <p><b>Nome de Utilizador:</b> <?= Html::encode($userData->username) ?></p>
                                         <p><b>Nome:</b> <?= Html::encode($userDataAdditional->primeironome) ?></p>
                                         <p><b>Apelido:</b> <?= Html::encode($userDataAdditional->apelido) ?></p>
                                         <p><b>Email:</b> <?= Html::encode($userData->email) ?></p>
@@ -153,11 +159,11 @@ $imageUrl = $baseUrl . $imageFilename;
                                             'method' => 'post', // Set the method to post
                                         ]);
                                         ?>
-                                        <?= $form->field($userDataAdditional, 'rua')->textInput(['value' => $userDataAdditional->rua, 'placeholder' => 'Introduza a sua rua'])->label('Rua') ?>
+                                        <?= $form->field($userDataAdditional, 'rua')->textInput(['value' => $userDataAdditional->rua, 'placeholder' => 'Insira a sua rua'])->label('Rua') ?>
                                         <br>
-                                        <?= $form->field($userDataAdditional, 'localidade')->textInput(['value' => $userDataAdditional->localidade, 'placeholder' => 'Introduza a sua localidade'])->label('Localidade') ?>
+                                        <?= $form->field($userDataAdditional, 'localidade')->textInput(['value' => $userDataAdditional->localidade, 'placeholder' => 'Insira a sua localidade'])->label('Localidade') ?>
                                         <br>
-                                        <?= $form->field($userDataAdditional, 'codigopostal')->textInput(['value' => $userDataAdditional->codigopostal, 'placeholder' => 'Introduza o seu código postal'])->label('Código Postal') ?>
+                                        <?= $form->field($userDataAdditional, 'codigopostal')->textInput(['value' => $userDataAdditional->codigopostal, 'placeholder' => 'Insira o seu código postal'])->label('Código Postal') ?>
                                         <br>
                                         <?= Html::submitButton('Atualizar', ['class' => 'btn btn-primary']) ?>
                                         <?php if ($userMoradaDataEditMode): ?>
@@ -227,7 +233,6 @@ $imageUrl = $baseUrl . $imageFilename;
 
                         </div>
                     </div>
-                    <?= Html::a('Ver Faturas', ['faturas/index'], ['class' => 'btn btn-secondary']) ?>
                     <!-- End of Password Section -->
                 </div>
             </div>
