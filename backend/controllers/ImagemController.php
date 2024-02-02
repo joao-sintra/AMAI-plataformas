@@ -6,6 +6,7 @@ use app\models\UploadForm;
 use backend\models\Produto;
 use common\models\Imagens;
 use backend\models\ImagensSearch;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -80,30 +81,38 @@ class ImagemController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($produto_id = null)
     {
         $model = new Imagens();
 
+        // If $produto_id is provided, set it in the model
+        if ($produto_id != null) {
+            $model->produto_id = $produto_id;
+        }
+
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-
                 $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
 
                 if ($uploadPaths = $model->upload()) {
-
                     foreach ($uploadPaths as $file) {
                         $newModel = new Imagens();
-
                         $newModel->imageFiles = UploadedFile::getInstances($newModel, 'imageFiles');
 
                         $fileImagem = pathinfo($file);
 
                         $newModel->fileName = $fileImagem['basename'];
                         $newModel->produto_id = $model->produto_id;
-                        $newModel->save();
+                        // If $produto_id is provided, set it in the new model
+                        if ($produto_id != null) {
+                            $newModel->produto_id = $produto_id;
+                        }
 
+                        $newModel->save();
                     }
-                    return $this->redirect(['index', 'id' => $model->id, 'produto_id' => $model->produto_id]);
+
+                    // Redirect to the index action with or without produto_id
+                    return $this->redirect(['index', 'produto_id' => $produto_id]);
                 }
             }
         } else {

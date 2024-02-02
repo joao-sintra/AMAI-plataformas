@@ -11,6 +11,8 @@ use common\models\Avaliacoes;
  */
 class AvaliacoesSearch extends Avaliacoes
 {
+    public $nomeCliente;
+
     /**
      * {@inheritdoc}
      */
@@ -18,7 +20,7 @@ class AvaliacoesSearch extends Avaliacoes
     {
         return [
             [['id', 'rating', 'user_id', 'produto_id'], 'integer'],
-            [['comentario', 'dtarating'], 'safe'],
+            [['comentario', 'dtarating', 'nomeCliente'], 'safe'],
         ];
     }
 
@@ -40,9 +42,7 @@ class AvaliacoesSearch extends Avaliacoes
      */
     public function search($params)
     {
-        $query = Avaliacoes::find();
-
-        // add conditions that should always apply here
+        $query = Avaliacoes::find()->joinWith('user');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -51,8 +51,6 @@ class AvaliacoesSearch extends Avaliacoes
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
@@ -66,6 +64,8 @@ class AvaliacoesSearch extends Avaliacoes
         ]);
 
         $query->andFilterWhere(['like', 'comentario', $this->comentario]);
+
+        $query->andFilterWhere(['like', 'user.username', $this->nomeCliente]);
 
         return $dataProvider;
     }

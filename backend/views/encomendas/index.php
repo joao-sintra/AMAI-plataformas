@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             /*'user_id',*/
             [
                 'label' => 'Cliente',
-                'attribute' => 'user_id',
+                'attribute' => 'nomeCliente',
                 'value' => 'user.username',
             ],
             [

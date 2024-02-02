@@ -34,6 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?><br><br><br>
 <div class="container-fluid py-5">
     <div class="container py-5">
+        <?php if (Yii::$app->session->hasFlash('success')): ?>
+            <div class="alert alert-success">
+                <?= Yii::$app->session->getFlash('success') ?>
+            </div>
+        <?php endif; ?>
         <div class="row g-4 mb-5">
             <div class="col-lg-8 col-xl-9">
                 <div class="row g-4">
@@ -148,7 +153,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?php if (!Yii::$app->user->isGuest && $avaliacao->user_id == Yii::$app->user->id): ?>
                                             <!-- Display "Remove" and "Edit" links only for the author -->
                                             <?= Html::a(
-                                                'Remove',
+                                                'Remover',
                                                 ['avaliacoes/delete', 'id' => $avaliacao->id],
                                                 [
                                                     'class' => 'btn btn-danger',
@@ -199,11 +204,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ]) ?>
                                     <br>
                                 </div>
-                                <?php if (Yii::$app->session->hasFlash('success')): ?>
-                                    <div class="alert alert-success">
-                                        <?= Yii::$app->session->getFlash('success') ?>
-                                    </div>
-                                <?php endif; ?>
                                 <?= $form->field($avaliacoesModel, 'produto_id')->hiddenInput(['value' => $model->id])->label(false) ?>
                             </div>
                         </div>

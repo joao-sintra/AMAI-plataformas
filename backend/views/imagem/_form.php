@@ -22,7 +22,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'imageFiles[]')->label('Selecionar Imagem')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
     <div class="form-group">
-<!--        --><?php /*= Html::a('<i class="fas fa-arrow-left"></i> Voltar', ['index', 'id' => $model->id], ['class' => 'btn btn-info']) */?>
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 

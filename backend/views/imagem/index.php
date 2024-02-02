@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <p>
-        <?= Html::a('Criar Imagens <i class="fas fa-image"></i>', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Imagens <i class="fas fa-image"></i>', ['create', 'produto_id' => null], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-
             [
                 'label' => 'Imagens',
                 'format' => 'raw',
@@ -36,10 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                    $imagePath = '@web/public/imagens/produtos/' . $model->fileName;
 
-
-
-
-                    return Html::img($imagePath, ['alt' => 'Imagens', 'style' => 'max-width:100px;']);
+                   return Html::img($imagePath, ['alt' => 'Imagens', 'style' => 'max-width:100px;']);
                 },
             ],
             [

@@ -10,8 +10,9 @@ use yii\data\ActiveDataProvider;
  */
 class ProdutosSearch extends Produtos
 {
-
     public $search;
+    public $categoria;
+    public $iva;
 
     /**
      * {@inheritdoc}
@@ -23,6 +24,8 @@ class ProdutosSearch extends Produtos
             [['nome', 'descricao', 'obs'], 'safe'],
             [['preco'], 'number'],
             [['search'], 'safe'],
+            [['categoria'], 'safe'],
+            [['iva'], 'safe'],
         ];
     }
 
@@ -44,8 +47,11 @@ class ProdutosSearch extends Produtos
      */
     public function search($params)
     {
-        $query = \common\models\Produtos::find();
-
+        $query = Produtos::find()->joinWith(['categoriaProduto' => function ($query) {
+            $query->alias('categoriaProduto');
+        }, 'iva' => function ($query) {
+            $query->alias('iva');
+        }]);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -62,7 +68,7 @@ class ProdutosSearch extends Produtos
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            'produtos.id' => $this->id,
             'preco' => $this->preco,
             'categoria_produto_id' => $this->categoria_produto_id,
             'iva_id' => $this->iva_id,
@@ -70,7 +76,9 @@ class ProdutosSearch extends Produtos
 
         $query->andFilterWhere(['like', 'nome', $this->nome])
             ->andFilterWhere(['like', 'descricao', $this->descricao])
-            ->andFilterWhere(['like', 'obs', $this->obs]);
+            ->andFilterWhere(['like', 'obs', $this->obs])
+            ->andFilterWhere(['like', 'categoriaProduto.nome', $this->categoria])
+            ->andFilterWhere(['like', 'iva.percentagem', $this->iva]);
 
         return $dataProvider;
     }

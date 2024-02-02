@@ -43,8 +43,6 @@ class UserForm extends Model
 
             ['role', 'required'],
             ['role', 'string', 'max' => 255],
-
-
         ];
     }
 

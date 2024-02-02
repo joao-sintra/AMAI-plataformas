@@ -11,14 +11,16 @@ use common\models\Ivas;
  */
 class IvasSearch extends Ivas
 {
+    public $vigor;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'percentagem', 'vigor'], 'integer'],
-            [['descricao'], 'safe'],
+            [['id', 'percentagem'], 'integer'],
+            [['descricao', 'vigor'], 'safe'],
         ];
     }
 
@@ -56,11 +58,20 @@ class IvasSearch extends Ivas
             return $dataProvider;
         }
 
+        // Custom filter for 'vigor' with case-insensitive comparison
+        if ($this->vigor !== null) {
+            $this->vigor = strtolower($this->vigor); // Convert to lowercase
+            if ($this->vigor === 'sim') {
+                $query->andFilterWhere(['vigor' => 1]);
+            } elseif ($this->vigor === 'não') {
+                $query->andFilterWhere(['vigor' => 0]);
+            }
+        }
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'percentagem' => $this->percentagem,
-            'vigor' => $this->vigor,
         ]);
 
         $query->andFilterWhere(['like', 'descricao', $this->descricao]);

@@ -35,14 +35,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'preco:text:Preço(€)',
             'obs',
             [
-                'attribute' => 'categoria_produto_id',
+                'attribute' => 'categoria',
                 'label' => 'Categoria',
                 'value' => function ($model) {
                     return $model->categoriaProduto->nome;
                 },
             ],
             [
-                'attribute' => 'iva_id',
+                'attribute' => 'iva',
                 'label' => 'IVA(%)',
                 'value' => function ($model) {
                     return $model->iva->percentagem;

@@ -7,23 +7,13 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
-/** @var backend\models\AvaliacoesSearch $searchModel */
+/** @var common\models\AvaliacoesSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Registo das Avaliações';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="avaliacoes-index">
-
-   <!-- <h1><?php /*= Html::encode($this->title) */?></h1>-->
-
-    <!--<p>
-        <?php /*= Html::a('Criar Avaliações', ['create'], ['class' => 'btn btn-success']) */?>
-    </p>-->
-
-
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -43,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'dtarating:text:Data de Avaliação',
             'rating:text:Avaliação',
             [
-                'attribute' => 'user_id',
+                'attribute' => 'nomeCliente',
                 'label' => 'Cliente',
                 'value' => function ($model) {
                     return $model->user->username; // Access the username through the relationship

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Avaliacoes;
 use common\models\Produtos;
 use common\models\ProdutosSearch;
 use Yii;
@@ -71,8 +72,16 @@ class ProdutosController extends Controller
      */
     public function actionView($id, $categoria_produto_id, $iva_id)
     {
+        $model = $this->findModel($id, $categoria_produto_id, $iva_id);
+
+        // Fetch evaluations for the current product
+        $evaluationDataProvider = new \yii\data\ActiveDataProvider([
+            'query' => Avaliacoes::find()->where(['produto_id' => $model->id]),
+        ]);
+
         return $this->render('view', [
-            'model' => $this->findModel($id, $categoria_produto_id, $iva_id),
+            'model' => $model,
+            'evaluationDataProvider' => $evaluationDataProvider,
         ]);
     }
 

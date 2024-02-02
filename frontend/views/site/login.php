@@ -34,7 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             'placeholder' => 'Insira o seu nome de utilizador'
                         ]) ?>
 
-                        <?= $form->field($model, 'password')->passwordInput()->label('Password')->textInput(['placeholder' => 'Insira a sua password']); ?>
+                        <?= $form->field($model, 'password')
+                            ->textInput(['type' => 'password', 'placeholder' => 'Insira a sua password'])
+                            ->label('Password'); ?>
 
                         <?= $form->field($model, 'rememberMe')->checkbox() ?>
 

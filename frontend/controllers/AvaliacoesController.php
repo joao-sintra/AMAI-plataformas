@@ -96,7 +96,6 @@ class AvaliacoesController extends Controller
                 $avaliacoesModel->dtarating = Carbon::now();
 
                 if ($avaliacoesModel->save()) {
-
                     Yii::$app->session->setFlash('success', 'Avaliação adicionada com sucesso.');
                     return $this->redirect(['produtos/view', 'id' => $avaliacoesModel->produto_id]);
                 } else {

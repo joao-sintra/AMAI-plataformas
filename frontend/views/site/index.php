@@ -28,10 +28,6 @@ $imageFilenames = array("bolos.jpg", "sobremesas.jpg");
         <div class="alert alert-success">
             <?= Yii::$app->session->getFlash('success') ?>
         </div>
-    <?php elseif (Yii::$app->session->hasFlash('error')): ?>
-        <div class="alert alert-danger">
-            <?= Yii::$app->session->getFlash('error') ?>
-        </div>
     <?php endif; ?>
     <div class="container py-5">
         <div class="row g-5 align-items-center">
@@ -173,7 +169,7 @@ $imageFilenames = array("bolos.jpg", "sobremesas.jpg");
                     ?>
                     <div class="col-md-6 col-lg-4 col-xl-3"
                          onclick="window.location='<?= Url::to(['produtos/view', 'id' => $produto->id]) ?>';">
-                        <div class="rounded position-relative fruite-item hover-pointer">
+                        <div class="rounded position-relative fruite-item d-flex flex-column">
                             <?php if (!empty($produto->imagens)) : ?>
                                 <td>
                                     <?= Html::img(

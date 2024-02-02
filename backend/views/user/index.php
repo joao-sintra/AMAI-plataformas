@@ -31,13 +31,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
         'columns' => [
             /*['class' => 'yii\grid\SerialColumn'],*/
-
             /*'id',*/
             'username',
             'email',
             [
-
-                'attribute' => 'auth.item_name',
+                'attribute' => 'role',
                 'label' => 'Role',
                 'value' => function ($model) {
                     switch ($model->auth['item_name']) {
