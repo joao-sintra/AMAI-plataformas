@@ -14,12 +14,13 @@ use yii\grid\GridView;
 
 $this->title = 'Registo das imagens';
 $this->params['breadcrumbs'][] = $this->title;
+
+//         Html::a('Criar Imagens <i class="fas fa-image"></i>', ['create', 'produto_id' => null], ['class' => 'btn btn-success'])
 ?>
 <div class="imagem-index">
 
 
     <p>
-        <?= Html::a('Criar Imagens <i class="fas fa-image"></i>', ['create', 'produto_id' => null], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

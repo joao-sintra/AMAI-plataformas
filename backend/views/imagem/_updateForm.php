@@ -15,9 +15,12 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
-    <?= $form->field($model, 'produto_id')->label('Produtos')->dropDownList(
+    <?= $form->field($model, 'produto_id')->label('Produto')->dropDownList(
         ArrayHelper::map(Produtos::find()->all(), 'id', 'nome'),
-        ['prompt' => 'Selecione o produto para associar à imagem']
+        [
+            'prompt' => 'Selecione o produto para associar à imagem',
+            'disabled' => true, // Add this line to disable the dropdown
+        ]
     ) ?>
 
 
