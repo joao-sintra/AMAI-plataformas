@@ -33,7 +33,7 @@ class IvaController extends Controller
                     'rules' => [
                         [
                             'allow' => true,
-                            'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                            'actions' => ['index', 'view', 'create', 'update', 'delete','toggle-vigor'],
                             'roles' => ['gestor'],
                         ],
                     ],
@@ -134,6 +134,20 @@ class IvaController extends Controller
      * @return Ivas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+
+    public function actionToggleVigor($id)
+    {
+        $model = $this->findModel($id);
+
+        // Toggle the 'vigor' attribute
+        $model->vigor = $model->vigor == 1 ? 0 : 1;
+
+        // Save the model
+        $model->save();
+
+        // You can return some JSON response if needed
+        return $this->redirect(['index']);
+    }
     protected function findModel($id)
     {
         if (($model = Ivas::findOne(['id' => $id])) !== null) {

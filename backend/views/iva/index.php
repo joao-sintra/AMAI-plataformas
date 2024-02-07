@@ -30,11 +30,25 @@ $this->params['breadcrumbs'][] = $this->title;
             /*'id',*/
             'percentagem:text:Percentagem(%)',
             'descricao:text:Descrição',
+
             [
-                'attribute' => 'vigor',
-                'value' => function ($model) {
-                    return $model->vigor == 1 ? 'SIM' : 'NÃO';
-                },
+                'class' => ActionColumn::className(),
+                'template' => '{toggle}',
+                'buttons' => [
+                    'toggle' => function ($url, $model) {
+                        $url = Url::to(['toggle-vigor', 'id' => $model->id]);
+                        $options = [
+                            'title' => $model->vigor == 1 ? 'Disable' : 'Enable',
+                            'aria-label' => $model->vigor == 1 ? 'Disable' : 'Enable',
+                            'data-pjax' => '0',
+                        ];
+                        return Html::a(
+                            $model->vigor == 1 ? '<span class="fas fa-toggle-on"></span>' : '<span class="fas fa-toggle-off"></span>',
+                            $url,
+                            $options
+                        );
+                    },
+                ],
             ],
             [
                 'class' => ActionColumn::className(),

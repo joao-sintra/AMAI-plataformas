@@ -14,6 +14,7 @@ use yii\web\Response;
 use common\models\Faturas;
 use common\models\Produtos;
 use common\models\User;
+use yii\db\Expression;
 
 
 /**
@@ -84,6 +85,20 @@ class SiteController extends Controller
             ->sum('valortotal');
         $totalPedidos = Faturas::find()->andWhere(['!=', 'status', 'Anulada'])->count();
         $totalProdutos = ProdutosCarrinhos::find()->sum('quantidade');
+        $currentYear = date('Y');
+
+        $faturas = Faturas::find()
+            ->select([
+                'MONTHNAME(data) as mes',
+                'MONTH(data) as mesNum',
+                'ROUND(SUM(valortotal),2) as total'
+            ])
+            ->where(['YEAR(data)' => $currentYear])
+            ->groupBy(['mes'])
+            ->orderBy(['mesNum' => SORT_ASC])
+            ->asArray() // Optionally, if you want to fetch the results as an array
+            ->all();
+
 
         $totalClientes = AuthAssignment::find()->andWhere(['item_name' => 'cliente'])->count();
 
@@ -97,6 +112,7 @@ class SiteController extends Controller
             'totalPedidos' => $totalPedidos,
             'totalProdutos' => $totalProdutos,
             'totalClientes' => $totalClientes,
+            'faturas' => $faturas,
         ]);
     }
 
