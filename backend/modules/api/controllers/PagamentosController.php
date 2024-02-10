@@ -80,7 +80,10 @@ class PagamentosController extends ActiveController
         $user_id = $requestPostPagamento['user_id'];
 
         $user = $user::find()->where(['id' => $user_id])->one();
-        $fatura = $fatura::find()->where(['user_id' => $user->id])->one();
+        $fatura = $fatura::find()
+        ->where(['user_id' => $user->id])
+        ->orderBy(['id' => SORT_DESC])
+        ->one();
         $linhaFatura = $linhaFatura::find()->where(['fatura_id' => $fatura->id])->one();
         $produtoCarrinho = $produtoCarrinho::find()->where(['id' => $linhaFatura->produtos_carrinhos_id])->one();
         $carrinho = $carrinhoMo::find()->where(['user_id' => $user->id, 'status'=>'Ativo'])->one();

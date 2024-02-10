@@ -45,9 +45,11 @@ AppAsset::register($this);
                 // Brand image at the beginning
                 echo '<a class="navbar-brand" href="' . Yii::$app->homeUrl . '">';
                 echo Html::img(Yii::getAlias('@web') . '../img/logo.jpg', [
-                    'alt' => 'Your Brand Alt Text',
+                    'src'=> '/site/index',
+                    'alt' => 'Logo Site',
                     'class' => 'img-responsive', // Add any additional classes if needed
                     'style' => 'width: 100px; height: auto;', // Adjust width and height as needed
+
                 ]);
                 echo '</a>';
 
